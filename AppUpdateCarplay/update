@@ -1,0 +1,18 @@
+#!/bin/sh
+
+
+
+
+
+
+sync
+sync
+sync
+sync
+reboot
+reboot
+reboot
+reboot
+
+exit 0
+

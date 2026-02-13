@@ -1,0 +1,400 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <pthread.h>
+#include <fcntl.h>
+
+#include "libzlink.h"
+
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
+
+extern void app_queue_create();
+extern void init_wifi_name(void);
+
+
+
+
+struct ZLINK_DATA{
+	LIBZLINK_HANDLE libzlink_handle;
+	enum LIBZLINK_SESSION_STATE session_state;
+	enum PHONE_TYPE phone_type;
+};
+
+
+
+/*********************************************************/
+/* 初始化仪表连接信息以及连接类型            		   */
+/* 收到libzlink_session_state回调SESSION_WAIT_INIT时触发  */
+/* 						           */
+/*********************************************************/
+static void session_init()
+{
+	struct SESSION_DATA *session_data = malloc(sizeof(struct SESSION_DATA));
+	memset(session_data, 0, sizeof(struct SESSION_DATA));
+	session_data->width = 1440;				//width request to phone, it can be send after HU got phone link
+	session_data->height = 720; 			//height request to phone, it can be send after HU got phone link
+	session_data->width_margin = 0;			//width_margin request to phone,only Android Auto used
+	session_data->height_margin = 0;		//height_margin request to phone,only Android Auto used
+	session_data->fps = 30; 				//frame rate request to phone, it can be send after HU got phone link
+	session_data->density = 120;				//density request to phone,The layout can be changed（0 is default,120-240）
+	session_data->is_right_hand = 0;			//if HU use right hand mode, must set, only work on carplay and Android Auto
+	session_data->is_night_mode = 0;			//if use the dark mode, must set, only word on carplay and Android Auto and IP link
+	session_data->apple_wired = APPLE_WIRED_LINK_NONE; 		//wired link for iPhone, must set
+	session_data->apple_wireless = CARPLAY_WIRELESS_MODE;	//wireless link for iPhone, must set 
+	session_data->android_wired = ANDROID_WIRED_LINK_NONE;		//wired link for Android Phone, must set
+	session_data->android_wireless = AA_WIRELESS_MODE;	//wireless link for Android Phone, must set
+	session_data->cp_icon_path = "/mnt/SDCARD/app/carplay/icon/icon_120x120.png";			//carplay back_to_HU icon, optional, only for carplay
+//	session_data->cp_icon_label = "car";			//carplay back_to_HU label, optional, only for carplay
+//	session_data->cp_show_name = "zlink";			//carplay name of show, optional, only for carplay
+	session_data->is_use_phone_audio = 0;	//disable the carplay audio output of HU, use the phone audio
+	session_data->platform_id = "zlink";			//cpu platform id, must set
+	session_data->vendor_name = "zlink-test";			//vendor name of your company, must set
+//	session_data->hu_bt_addr = "11:22:33:44:55:66"; 		//optional
+	session_data->is_force_usb_host = 1;		//for carplay force switch otg host
+//	session_data->aoa_app_url = NULL;
+	session_data->mfi_bus_num = 3; 		//mfi i2c bus number, '-1' for auto 
+	session_data->otg_bus_num = -1; 	//usb otg bus number, '-1' for auto 
+	session_data->otg_switch_host = "echo \"host\" > /sys/devices/platform/usb0/dwc3_mode"; //cmd of usb otg switch to host
+	session_data->otg_switch_device = "echo \"peripheral\" > /sys/devices/platform/usb0/dwc3_mode";  //cmd of usb otg switch to device
+//	session_data->print_save_path = "/data/logout/";  //save log of path(fliename-1~9)
+	
+	libzlink_init_session_2(session_data);
+	return;
+}
+/********************************************************/
+/* 回调zlink的状态，根据zlink的状态进行初始化等处理   		   */
+/* zlink启动后会通过libzlink_session_state_cb_init回调状态	*/
+/*										                 */
+/********************************************************/
+static int libzlink_session_state(enum LIBZLINK_SESSION_STATE session_state, enum PHONE_TYPE phone_type, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+	
+	printf("libzlink_session_state: session_state = %d, phone_type = %d\n", session_state, phone_type);
+	zlink_data->session_state = session_state;
+	zlink_data->phone_type = phone_type;
+
+	if(session_state == SESSION_WAIT_INIT)//开始初始化仪表信息
+		{
+			printf("libzlink_session_state: SESSION_WAIT_INIT\n");
+			session_init();
+		}
+	else if(session_state == SESSION_WAITING_AUTH)//开始激活认证
+		{
+			printf("\nlibzlink_session_state: the HU libzlink need active first !!\n\n");
+		}
+	else if(session_state == SESSION_WAITING_DEVICE)//等待手机连接
+		{
+			printf("libzlink_session_state: waiting phone link\n");
+		}
+	else if(session_state == SESSION_STARTING)//手机连接中
+		{
+			printf("libzlink_session_state: SESSION_STARTING\n");
+			if(phone_type == CARPLAY_WIRED)
+				{
+					printf("libzlink_session_state: Got a usb carplay link\n");
+				}
+			else if(phone_type == CARPLAY_WIRELESS)
+				{
+					printf("libzlink_session_state: Got a wireless carplay link\n");
+				}
+			else if(phone_type == AA_WIRELESS)
+				{
+					printf("libzlink_session_state: Got a wireless Android Auto link\n");
+				}
+		}
+	else if(session_state == SESSION_STARTED)//连接成功
+		{
+			printf("libzlink_session_state: SESSION_STARTED\n");
+			if(phone_type == CARPLAY_WIRED)
+				{
+					printf("libzlink_session_state: usb carplay link ok\n");
+				}
+			else if(phone_type == CARPLAY_WIRELESS)
+				{
+					printf("libzlink_session_state: wireless carplay link ok\n");
+				}
+			else if(phone_type == AA_WIRELESS)
+				{
+					printf("libzlink_session_state: wireless Android Auto link ok\n");
+				}
+			libzlink_video_focus(0);//请求投屏显示的视频焦点，0为请求显示投屏，1为退出投屏显示				
+		}
+	else if(session_state == SESSION_END)//连接失败/连接断开
+		{
+			printf("libzlink_session_state: SESSION_END\n");
+		}
+	return 0;
+}
+/***************************************/
+/* 等待zlink启动                         */
+/* 										*/
+/*										*/
+/***************************************/
+static void wait_libzlink_ready(struct ZLINK_DATA *zlink_data)
+{
+	while(1)
+		{
+			if(libzlink_check_ready(zlink_data->libzlink_handle))
+				break;
+			else
+				{
+					printf("wait_libzlink_ready: the libzlink is NOT ready!\n");
+					sleep(1);
+				}
+		}
+
+	printf("wait_libzlink_ready: the libzlink is ready!\n");
+}
+/***************************************/
+/* 手机发送视频数据回调 ，H264裸流           */
+/* 										*/
+/*										*/
+/***************************************/
+static int video_data(char *data, int len, struct VIDEO_SCREEN_INFO *info, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+	
+	printf("video_data: len = %d\n", len);
+	printf("video_data: width = %d\n", info->width);
+	printf("video_data: height = %d\n", info->height);
+	printf("video_data: available_width = %d\n", info->available_width);
+	printf("video_data: available_height = %d\n", info->available_height);
+	printf("video_data: available_pixel_x = %d\n", info->available_pixel_x);
+	printf("video_data: available_pixel_y = %d\n", info->available_pixel_y);
+	printf("video_data: rotation_angle = %d\n\n", info->rotation_angle);	
+	return;
+}
+/***************************************/
+/* 手机发送音频数据开始回调                 */
+/* 										*/
+/*										*/
+/***************************************/
+static int main_audio_start(enum ZLINK_MEDIA_TYPE media_type, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+	
+	printf("main_audio_start: media_type = %d\n", media_type);
+
+	return 0;
+}
+/***************************************/
+/* 手机发送音频数据回调 ，类型为PCM          */
+/* 										*/
+/*										*/
+/***************************************/
+static int main_audio_data(char *data, int len, enum ZLINK_MEDIA_TYPE media_type, int sample, int channels, int bits, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+	
+	printf("main_audio_data: len = %d\n", len);
+	printf("main_audio_data: media_type = %d\n", media_type);
+	printf("main_audio_data: sample = %d\n", sample);
+	printf("main_audio_data: channels = %d\n", channels);
+	printf("main_audio_data: bits = %d\n", bits);
+
+	return ;
+}
+
+/***************************************/
+/* 手机发送音频数据结束回调                 */
+/* 										*/
+/*										*/
+/***************************************/
+static int main_audio_stop(enum ZLINK_MEDIA_TYPE media_type, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+
+	printf("main_audio_stop: media_type = %d\n", media_type);
+
+	return 0;
+}
+/*****************************************************************/
+/*libzlink_video_focus_request_cb_init回调触发手机视频焦点请求       */
+/* is_hu_focus_on =1 仪表端占有视频焦点			   					*/
+/* is_hu_focus_on =0 link投屏占有视频焦点						    */
+/*****************************************************************/
+static int video_focus_request(int is_hu_focus_on, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+
+	if(is_hu_focus_on)
+		printf("video_focus_request: request back to HU HMI\n");
+	else
+		printf("video_focus_request: request back to phone HMI\n");
+
+	return 0;
+}
+/*****************************************************************/
+/*libzlink_audio_focus_request_cb_init回调触发手机视频焦点请求       */
+/* is_hu_focus_on =1 仪表端占有音频焦点	   							*/
+/* is_hu_focus_on =0 link投屏占有音频焦点						    */
+/*****************************************************************/
+static int audio_focus_request(int is_hu_focus_on, void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+
+	if(is_hu_focus_on)
+		printf("audio_focus_request: phone release audio focus to HU\n");
+	else
+		printf("audio_focus_request: phone release audio focus from HU\n");	
+
+	return 0;
+}
+/********************************************************/
+/* Carlife和miracast会使用p2p的连接方式                     */
+/* 收到libzlink_request_p2p_start_cb_init后需要获取手机的ip */
+/* zlink会阻塞等待仪表获取手机ip	超时时间为60s			  */
+/*										                 */
+/*******************************************************/
+static int request_p2p_start(void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+	printf("phone request_p2p_start\n");
+
+	// 1. open p2p
+	printf("request_p2p_start: HU open the p2p\n");
+	// 2. read the p2p_name and p2p_mac_address
+	printf("request_p2p_start: read the p2p info\n");
+
+	char *p2p_name = "p2p-name";
+	char *p2p_mac_address = "192.168.1.100";
+	// 3. send the p2p info to phone
+	printf("request_p2p_start: send the p2p info\n");
+	//libzlink_p2p_info_send(p2p_name, p2p_mac_address);
+	libzlink_station_info_send(p2p_mac_address);
+}
+/**************************************************************/
+/* 连接蓝牙后或通过 libzlink_request_wifi_info_cb_init请求wifi信息 */
+/* 	zlink会阻塞等待仪表获取wifi信息	超时时间为60s					*/
+/*										                       */
+/**************************************************************/
+
+char g_str_name[32] = "CarPlayBox_";
+char g_str_pwd[32] = "88888888";
+
+static int request_wifi_info(void *user_data)
+{
+	struct ZLINK_DATA *zlink_data = (struct ZLINK_DATA *)user_data;
+	printf("phone request_wifi_info\n");
+
+	// 1. open wifi AP
+	printf("request_wifi_info: HU open the AP\n");
+	// 2. read the ssid and passwd and channel
+	printf("request_wifi_info: HU read the AP info\n");
+
+	//char *wifi_name = "carplay-ssid";
+	//char *wifi_passwd = "12345678";
+	char *ip_addr = "192.168.1.100";
+	char *netcard_name="wlan0";
+	int wifi_channel = 149;
+	// 3. send the AP info to phone
+	printf("request_wifi_info: send the AP info\n");	
+	libzlink_wifi_info2(g_str_name, g_str_pwd, ip_addr, wifi_channel,netcard_name);
+
+	return 0;
+}
+/***********************************************/
+/* 在会使用mic的场景会通知mic录音开始               */
+/* mic录音的数据通过libzlink_mic_data2向zlink发送 */
+/*										       */
+/***********************************************/
+static int mic_start(enum ZLINK_MEDIA_TYPE media_type, int sample, int channels, int bits, void *user_data)
+{
+	printf("mic_start: phone request HU mic data, sample = %d, channels = %d, bits = %d\n", sample, channels, bits);
+
+	// 1. open mic
+	//2. read mic data send to phone: libzlink_mic_data2(char *data, int len, int sample, int channels, int bits);
+	return 0;
+}
+/***************************************/
+/*  mic录音结束                          */
+/* 										*/
+/*										*/
+/***************************************/
+static int mic_stop(enum ZLINK_MEDIA_TYPE media_type, void *user_data)
+{
+	printf("mic_stop\n");
+
+	// 1. stop send the mic data to phone
+	// 2. close mic
+	return 0;
+}
+/****************************************/
+/* 根据需求注册回调函数                     */
+/* 以下为调试所需能满足基本功能的回调         */
+/*										*/
+/****************************************/
+static void libzlink_callback_register()
+{
+	printf("libzlink_callback_register\n");
+	libzlink_session_state_cb_init(libzlink_session_state);
+	libzlink_video_data_cb_init(video_data);
+	libzlink_main_audio_start_cb_init(main_audio_start);
+	libzlink_main_data_cb_init(main_audio_data);
+	libzlink_main_audio_stop_cb_init(main_audio_stop);
+	libzlink_video_focus_request_cb_init(video_focus_request);
+	libzlink_audio_focus_request_cb_init(audio_focus_request);
+	libzlink_request_p2p_start_cb_init(request_p2p_start);
+	libzlink_request_wifi_info_cb_init(request_wifi_info);
+	libzlink_mic_start_cb_init(mic_start);
+	libzlink_mic_stop_cb_init(mic_stop);
+}
+
+/******************************************/
+/* 触屏功能坐标点发送函数 ，注意压下抬起成对发送  */
+/* 	is_touch_down=1 压下				   */
+/*	is_touch_down=0 抬起				   */
+/******************************************/
+//send the touch event to phone
+void touch_event_send(int x, int y, int is_touch_down)
+{
+	libzlink_touch_event(x, y, is_touch_down);
+}
+
+
+
+
+int carplayMain()
+{
+	app_queue_create();
+	init_wifi_name();
+
+	
+	struct ZLINK_DATA *zlink_data = malloc(sizeof(struct ZLINK_DATA));
+	libzlink_callback_register();
+
+	printf("libzlink_init\n");
+	zlink_data->libzlink_handle = libzlink_init((void *)zlink_data);
+	if(zlink_data->libzlink_handle == NULL)
+		{
+			printf("libzlink_init fail..\n");
+			return -1;
+		}
+
+	printf("wait_libzlink_ready\n");
+	wait_libzlink_ready(zlink_data);
+
+	printf("libzlink_request_state\n");
+	libzlink_request_state();
+
+	while(1){
+		sleep(88);
+	}
+}
+
+
+#ifdef __cplusplus
+}
+#endif
+
+
+/* End of file */
+
