@@ -1061,21 +1061,24 @@ static void on_image_touch(lv_event_t *e) {
                 int dx = data.point.x - pl.last_x;
                 int dy = data.point.y - pl.last_y;
 
-                /* 更新图片位置（竖屏适配） */
-                pl.pv.offset_x = pl.pv.offset_x - dy;
-                pl.pv.offset_y = pl.pv.offset_y + dx;
+                int distance_sq = dx*dx + dy*dy;
+                if (distance_sq > 100) {  // 10的平方 = 100
+                    /* 更新图片位置（竖屏适配） */
+                    pl.pv.offset_x = pl.pv.offset_x - dy;
+                    pl.pv.offset_y = pl.pv.offset_y + dx;
 
-                printf("[PhotoLibrary] Dragging: dx=%d dy=%d pos=(%d,%d)\n", 
-                    dx, dy, pl.pv.offset_x, pl.pv.offset_y);
+                    printf("[PhotoLibrary] Dragging: dx=%d dy=%d pos=(%d,%d)\n", 
+                        dx, dy, pl.pv.offset_x, pl.pv.offset_y);
 
-                /* 应用变换 */
-                if (pl.pv.img) {
-                    canvas_move(pl.pv.img, pl.pv.offset_x, pl.pv.offset_y);
+                    /* 应用变换 */
+                    if (pl.pv.img) {
+                        canvas_move(pl.pv.img, pl.pv.offset_x, pl.pv.offset_y);
+                    }
+
+                    /* 更新最后位置 */
+                    pl.last_x = data.point.x;
+                    pl.last_y = data.point.y;
                 }
-
-                /* 更新最后位置 */
-                pl.last_x = data.point.x;
-                pl.last_y = data.point.y;
             }
         }
         break;    

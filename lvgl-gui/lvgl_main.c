@@ -150,7 +150,7 @@ static void bt_status_check_timer(lv_timer_t *timer) {
                 clearRecorderStatu();
             }
             if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_img_rec)){
-                ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del, &guider_ui.screen_DVR_del, setup_scr_screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
+//                ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del, &guider_ui.screen_DVR_del, setup_scr_screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
                 stopPreview(&g_sys_Data.vipp0_config);
                 stopPreview(&g_sys_Data.vipp8_config);		
                 g_sys_Data.previewMode = PREVIEW_NONE; 
@@ -183,31 +183,71 @@ static void bt_status_check_timer(lv_timer_t *timer) {
 }
 #endif
 
+// 添加静态变量跟踪触摸状态
+static bool touch_pressed = false;
+static int last_x = -1, last_y = -1;
+
+// 定义触摸阈值（可根据实际体验调整）
+#define TOUCH_MOVE_THRESHOLD 10  // 移动阈值（像素）
+#define TOUCH_MOVE_THRESHOLD_SQ (TOUCH_MOVE_THRESHOLD * TOUCH_MOVE_THRESHOLD)
+
 void lv_touch_feedback_cb(lv_indev_drv_t * drv, uint8_t event){
-    // printf("-----%s--------%d-----\n",__func__,__LINE__);
     lv_point_t point;
     lv_obj_t* current_screen = lv_scr_act();
     LinkType type;
+    
+    // 获取当前屏幕类型
     if(current_screen == guider_ui.screen_androidAuto){
         type = LINK_TYPE_ANDROIDAUTO;
     }else if(current_screen == guider_ui.screen_carPlay){
         type = LINK_TYPE_CARPLAY;
     }else{
-        return;
+        return;  // 不是投屏界面，不处理触摸事件
     }
+    
+    // 获取当前触摸点坐标
+    lv_indev_get_point(lv_indev_get_act(), &point);
+    
     switch (event){
     case LV_EVENT_PRESSED:    
+        /* 首次按下 - 发送按下事件 */
+        if (!touch_pressed) {
+            request_link_touchevent(type, true, point.x, point.y);
+            touch_pressed = true;
+            last_x = point.x;
+            last_y = point.y;
+            printf("###### DOWN - screen touch point: x=%d, y=%d\n", point.x, point.y);
+        }
+        break;
+        
     case LV_EVENT_PRESSING:
-        /* code */
-	    lv_indev_get_point(lv_indev_get_act(), &point);
-    	request_link_touchevent(type,true,point.x,point.y);
-	    printf("###### down-------screen touch point---x:%d----y:%d\n",point.x,point.y);
+        /* 滑动过程中 - 发送移动事件（带阈值优化） */
+        if (touch_pressed) {
+            int dx = point.x - last_x;
+            int dy = point.y - last_y;
+            
+            // 使用平方距离判断是否超过移动阈值（避免频繁更新）
+            int distance_sq = dx*dx + dy*dy;
+            
+            if (distance_sq > TOUCH_MOVE_THRESHOLD_SQ) {
+                request_link_touchevent(type, true, point.x, point.y);
+                last_x = point.x;
+                last_y = point.y;
+                printf("###### MOVE - screen touch point: x=%d, y=%d (dx=%d, dy=%d, dist=%.1f)\n", 
+                    point.x, point.y, dx, dy, sqrt((float)distance_sq));
+            }
+        }
         break;
+        
     case LV_EVENT_RELEASED:
-    	lv_indev_get_point(lv_indev_get_act(), &point);
-        request_link_touchevent(type,false,point.x,point.y);
-        printf("######  up-------screen touch point---x:%d----y:%d\n",point.x,point.y);	    
+        /* 手指抬起 - 发送抬起事件 */
+        if (touch_pressed) {
+            request_link_touchevent(type, false, point.x, point.y);
+            touch_pressed = false;
+            printf("###### UP - screen touch point: x=%d, y=%d\n", point.x, point.y);
+        }
         break;
+        
     default:
         break;
     }
@@ -330,7 +370,7 @@ int lvgl_main(int w, int h)
     AW_MPI_VDEC_SetVEFreq(MM_INVALID_CHN, 0);
 
     
-#if 1
+#if 0
     InitMppCameraData(&g_sys_Data.vipp0_config);
     setConfigPara(&g_sys_Data.vipp0_config);
     createViChn(&g_sys_Data.vipp0_config, 0, 0);

@@ -70,10 +70,10 @@ static void screen_btn_DVR_event_handler (lv_event_t *e)
 			return;
 		}	
 		
-		if(!g_sys_Data.frontCamera && !g_sys_Data.rearCamera){
-			labelTimer_once(screen_timer_popupLabel, "dvr_txt_detectCamera");
-			break;
-		}		
+		// if(!g_sys_Data.frontCamera && !g_sys_Data.rearCamera){
+		// 	labelTimer_once(screen_timer_popupLabel, "dvr_txt_detectCamera");
+		// 	break;
+		// }		
 
 		ui_load_scr_animation(&guider_ui, &guider_ui.screen_DVR, guider_ui.screen_DVR_del, &guider_ui.screen_del, setup_scr_screen_DVR, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
 		break;
