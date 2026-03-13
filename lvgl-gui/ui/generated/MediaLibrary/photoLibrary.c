@@ -333,7 +333,6 @@ static void create_ui_components(lv_obj_t *parent) {
     lv_obj_set_style_pad_top(pl.pv.zoom_label, 10, 0);
     lv_obj_set_flex_grow(pl.pv.zoom_label, 1);
 
-    printf("\n\n\n\nlanguageSetting = %d\n\n\n\n\n", languageSetting);
 }
 
 static int canvas_move(lv_obj_t *canvas, lv_coord_t x, lv_coord_t y) {
@@ -353,66 +352,66 @@ static int canvas_display_image(lv_obj_t *canvas, const char *img_path) {
         return -1;
     }
 
-    /* 清理上一张图片的缓存 */
+    /* 清理上一张图片的缓存：必须先 invalidate（遍历时需要旧指针有效），再 free */
     if (pl.old_img_path) {
         printf("[PhotoLibrary] Releasing %s\n", pl.old_img_path);
         lv_img_cache_invalidate_src(pl.old_img_path);
+        free((void *)pl.old_img_path);
         pl.old_img_path = NULL;
     }
 
-    /* 步骤2: 获取当前canvas的缓冲区（如果有的话） */
-    lv_img_dsc_t *current_img = lv_canvas_get_img(canvas);
-    void *old_buf = NULL;
-    if (current_img && current_img->data) {
-        old_buf = (void *)current_img->data;  // 保存旧缓冲区的指针
-        if (old_buf) {
-            printf("old_img free %zu\n", sizeof(&old_buf));
-            lv_mem_free(old_buf);
-        }
+    /*
+     * 关键：LVGL 图片缓存会保留传给 lv_canvas_draw_img / lv_img_decoder 的 src 指针，
+     * 不做字符串复制。因此必须用堆上长生命周期的字符串，不能用栈上局部变量。
+     * 先 strdup 到 pl.old_img_path，后续所有 LVGL 接口均使用该指针。
+     */
+    pl.old_img_path = strdup(img_path);
+    if (!pl.old_img_path) {
+        printf("canvas_display_image: strdup failed\n");
+        return -1;
     }
 
-    /* 步骤1: 获取图片信息 */
+    /* 获取图片信息 */
     lv_img_header_t header;
-    lv_res_t res = lv_img_decoder_get_info(img_path, &header);
+    lv_res_t res = lv_img_decoder_get_info(pl.old_img_path, &header);
     if (res != LV_RES_OK) {
         printf("canvas_display_image: failed to get image info\n");
+        free((void *)pl.old_img_path);
+        pl.old_img_path = NULL;
         return -1;
     }
-    /* 步骤2: 设置canvas缓冲区为图片原始大小，强制使用ARGB8888格式 */
-    /* 使用LV_IMG_CF_TRUE_COLOR_ALPHA格式（ARGB8888） */
-    lv_img_cf_t canvas_cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
 
-    /* 计算缓冲区大小：宽 × 高 × 4字节（ARGB8888） */
+    lv_img_cf_t canvas_cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
     uint32_t buf_size = header.w * header.h * 4;
 
-    /* 分配canvas缓冲区 */
     void *orig_buf = lv_mem_alloc(buf_size);
     if (!orig_buf) {
-        printf("canvas_display_image: failed to allocate buffer\n");
+        printf("canvas_display_image: failed to allocate buffer (%u bytes)\n", buf_size);
+        free((void *)pl.old_img_path);
+        pl.old_img_path = NULL;
         return -1;
     }
 
-    /* 设置canvas为原始图片大小，使用ARGB8888格式 */
+    /* 先设置新缓冲区，再释放旧缓冲区，避免 LVGL 访问已释放内存 */
+    void *old_buf = pl.pv.current_canvas_buf;
     lv_canvas_set_buffer(canvas, orig_buf, header.w, header.h, canvas_cf);
     lv_obj_set_size(canvas, header.w, header.h);
+    if (old_buf) {
+        lv_mem_free(old_buf);
+    }
+    pl.pv.current_canvas_buf = orig_buf;
+    pl.pv.current_buf_size = buf_size;
 
-    // if (old_buf) {
-    //     lv_mem_free(old_buf);
-    // }
-
-    /* 清除canvas背景为黑色 */
     lv_canvas_fill_bg(canvas, lv_color_make(0xff, 0, 0), LV_OPA_COVER);
 
     lv_draw_img_dsc_t draw_dsc;
     lv_draw_img_dsc_init(&draw_dsc);
     draw_dsc.opa = LV_OPA_COVER;
-    lv_canvas_draw_img(canvas, 0, 0, img_path, &draw_dsc);
+    lv_canvas_draw_img(canvas, 0, 0, pl.old_img_path, &draw_dsc);
 
-    /* 步骤4: 获取canvas层的图片数据 */
     lv_img_dsc_t *canvas_img = lv_canvas_get_img(canvas);
     if (!canvas_img || !canvas_img->data) {
         printf("canvas_display_image: failed to get canvas image data\n");
-        lv_mem_free(orig_buf);
         return -1;
     }
 
@@ -420,36 +419,28 @@ static int canvas_display_image(lv_obj_t *canvas, const char *img_path) {
                 canvas_img->header.w, canvas_img->header.h, 
                 canvas_img->header.cf, canvas_img->header.cf);
 
-    /* 步骤5: 根据lv_canvas_get_img获取的数据，通过双线性插值法生成960*540大小的canvas并显示 */
     const uint32_t target_w = 960;
     const uint32_t target_h = 540;
-
-    /* 分配目标缓冲区（ARGB8888格式） */
     uint32_t target_buf_size = target_w * target_h * 4;
     void *target_buf = lv_mem_alloc(target_buf_size);
     if (!target_buf) {
-        printf("canvas_display_image: failed to allocate target buffer\n");
-        lv_mem_free(orig_buf);
+        printf("canvas_display_image: failed to allocate target buffer (%u bytes)\n", target_buf_size);
         return -1;
     }
 
-    /* 执行双线性插值缩放（使用 photo_view 纯缓冲接口） */
     photo_view_bilinear_scale_argb8888((const unsigned char *)canvas_img->data,
                                       (unsigned int)canvas_img->header.w, (unsigned int)canvas_img->header.h,
                                       (unsigned char *)target_buf, target_w, target_h);
 
-    // /* 重新设置canvas为960x540大小，使用ARGB8888格式 */
+    /* 先设置新缓冲区，再释放原始缓冲区 */
     lv_canvas_set_buffer(canvas, target_buf, target_w, target_h, LV_IMG_CF_TRUE_COLOR_ALPHA);
     lv_obj_set_size(canvas, target_w, target_h);
-    if (orig_buf) {
-        printf("orig_buf free %zu\n", sizeof(&orig_buf));
-        lv_mem_free(orig_buf);
-    }
+    lv_mem_free(orig_buf);
+    pl.pv.current_canvas_buf = target_buf;
+    pl.pv.current_buf_size = target_buf_size;
 
     printf("canvas_display_image: success - scaled from %dx%d to %dx%d\n", 
                 header.w, header.h, target_w, target_h);
-
-    pl.old_img_path = img_path;
 
     return 0;
 }
@@ -459,19 +450,13 @@ static int canvas_zoom(lv_obj_t *canvas, float scale) {
         return -1;
     }
 
-    /* 获取当前Canvas图像数据 */
-    void *old_buf = NULL;
     lv_img_dsc_t *canvas_dsc = lv_canvas_get_img(canvas);
     if (!canvas_dsc || !canvas_dsc->data) {
         return -1;
-    } else {
-        old_buf = (void *)canvas_dsc->data;  // 保存旧缓冲区的指针
     }
 
     uint32_t src_w = canvas_dsc->header.w;
     uint32_t src_h = canvas_dsc->header.h;
-
-    /* 计算新尺寸 */
     uint32_t dst_w = (uint32_t)(src_w * scale);
     uint32_t dst_h = (uint32_t)(src_h * scale);
 
@@ -479,24 +464,24 @@ static int canvas_zoom(lv_obj_t *canvas, float scale) {
         return -1;
     }
 
-    /* 分配新缓冲区 */
-    uint8_t *dst_buf = (uint8_t *)lv_mem_alloc(dst_w * dst_h * 4);
+    uint32_t dst_buf_size = dst_w * dst_h * 4;
+    uint8_t *dst_buf = (uint8_t *)lv_mem_alloc(dst_buf_size);
     if (!dst_buf) {
         return -1;
     }
 
-    /* 执行双线性插值缩放（使用 photo_view 纯缓冲接口） */
     photo_view_bilinear_scale_argb8888((const unsigned char *)canvas_dsc->data, src_w, src_h,
                                        dst_buf, dst_w, dst_h);
 
-    /* 重新设置Canvas缓冲区 */
+    void *old_buf = pl.pv.current_canvas_buf;
     lv_canvas_set_buffer(canvas, dst_buf, dst_w, dst_h, LV_IMG_CF_TRUE_COLOR_ALPHA);
     lv_obj_set_size(canvas, dst_w, dst_h);
-    printf("w = %d, h = %d\n", dst_w, dst_h);
-
     if (old_buf) {
         lv_mem_free(old_buf);
     }
+    pl.pv.current_canvas_buf = dst_buf;
+    pl.pv.current_buf_size = dst_buf_size;
+
     return 0;
 }
 
@@ -507,14 +492,16 @@ static bool rotate_canvas_90_clockwise_argb8888(lv_obj_t *canvas) {
     if (current_img->header.cf != LV_IMG_CF_TRUE_COLOR_ALPHA) return false;
     unsigned int src_w = (unsigned int)current_img->header.w;
     unsigned int src_h = (unsigned int)current_img->header.h;
-    void *old_buf = (void *)current_img->data;
     uint32_t buf_size = src_h * src_w * 4u;
     unsigned char *rotated_data = (unsigned char *)lv_mem_alloc(buf_size);
     if (!rotated_data) return false;
     photo_view_rotate_90_cw_argb8888((const unsigned char *)current_img->data, src_w, src_h, rotated_data);
+    void *old_buf = pl.pv.current_canvas_buf;
     lv_canvas_set_buffer(canvas, rotated_data, (lv_coord_t)src_h, (lv_coord_t)src_w, LV_IMG_CF_TRUE_COLOR_ALPHA);
     lv_obj_set_size(canvas, (lv_coord_t)src_h, (lv_coord_t)src_w);
     if (old_buf) lv_mem_free(old_buf);
+    pl.pv.current_canvas_buf = rotated_data;
+    pl.pv.current_buf_size = buf_size;
     return true;
 }
 
@@ -798,25 +785,26 @@ static void close_format_dialog() {
 }
 
 static void ask_dialog_yes_event_cb(lv_event_t *e) {
-    int index = (int)(intptr_t)lv_event_get_user_data(e);
+    intptr_t packed = (intptr_t)lv_event_get_user_data(e);
+    int tab_index = (int)((packed >> 16) & 0xFFFF);
+    int index = (int)(packed & 0xFFFF);
 
-    if (index < 0 || index >= pl.pm.photo_count) {
-        return;
-    }
+    if (tab_index < 0 || tab_index >= PHOTO_TAB_COUNT) return;
+    photo_tab_data_t *t = &pl.pm.tab_data[tab_index];
+    if (index < 0 || index >= t->photo_count) return;
 
-    const char *full_path = pl.pm.photo_paths[index];
+    const char *full_path = t->photo_paths[index];
     if (full_path) {
-        // 删除文件
         if (remove(full_path) == 0) {
-            printf("Deleted file: %s\n", full_path);
+            printf("[PhotoLibrary] Deleted file: %s\n", full_path);
         } else {
-            printf("Failed to delete file: %s\n", full_path);
+            printf("[PhotoLibrary] Failed to delete file: %s\n", full_path);
             return;
         }
     }
 
-    scan_photo_files(pl.pm.current_photo_tab);
-    populate_photo_list(pl.pm.current_photo_tab);
+    scan_photo_files(tab_index);
+    populate_photo_list(tab_index);
     close_format_dialog();
 }
 
@@ -825,7 +813,8 @@ static void ask_dialog_no_event_cb(lv_event_t *e) {
     close_format_dialog();
 }
 
-static void create_ask_dialog(lv_obj_t *parent, int index) {
+static void create_ask_dialog(lv_obj_t *parent, int tab_index, int index) {
+    intptr_t packed = ((intptr_t)tab_index << 16) | (intptr_t)(index & 0xFFFF);
     /* 照片库 - 删除确认对话框背景 */
     lv_obj_t *dialog_bg = lv_obj_create(parent);
     lv_obj_set_size(dialog_bg, LV_PCT(40), LV_PCT(40));
@@ -852,7 +841,7 @@ static void create_ask_dialog(lv_obj_t *parent, int index) {
     lv_obj_align(yes_btn, LV_ALIGN_BOTTOM_LEFT, 20, -20);
     lv_obj_set_style_bg_color(yes_btn, TM_SUCCESS, 0);                    /* 确认按钮背景(绿色) */
     lv_obj_set_style_radius(yes_btn, 8, 0);
-    lv_obj_add_event_cb(yes_btn, ask_dialog_yes_event_cb, LV_EVENT_CLICKED, (void*)(intptr_t)index);
+    lv_obj_add_event_cb(yes_btn, ask_dialog_yes_event_cb, LV_EVENT_CLICKED, (void*)packed);
     lv_obj_t *yes_label = lv_label_create(yes_btn);
     lv_label_set_text(yes_label, get_string_for_language(languageSetting, "Yes"));
     lv_obj_set_style_text_font(yes_label, &v853Font_hyby_30, 0);
@@ -873,42 +862,42 @@ static void create_ask_dialog(lv_obj_t *parent, int index) {
     lv_obj_center(no_label);
 }
 
-static void show_format_sd_dialog(lv_obj_t *parent, int index) {
-    // 如果已经存在对话框，先关闭
+static void show_format_sd_dialog(lv_obj_t *parent, int tab_index, int index) {
     close_format_dialog();
 
-    /* 照片库 - 删除对话框遮罩层 */
     pl.pm.mask_layer_del_dialog = lv_obj_create(parent);
     lv_obj_set_size(pl.pm.mask_layer_del_dialog, LV_PCT(100), LV_PCT(100));
     lv_obj_set_style_bg_color(pl.pm.mask_layer_del_dialog, TM_BG_PRIMARY, 0);
-    lv_obj_set_style_bg_opa(pl.pm.mask_layer_del_dialog, LV_OPA_50, 0);   /* 半透明遮罩 */
+    lv_obj_set_style_bg_opa(pl.pm.mask_layer_del_dialog, LV_OPA_50, 0);
     lv_obj_set_style_radius(pl.pm.mask_layer_del_dialog, 0, 0);
     lv_obj_set_style_border_width(pl.pm.mask_layer_del_dialog, 0, 0);
     lv_obj_clear_flag(pl.pm.mask_layer_del_dialog, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_move_foreground(pl.pm.mask_layer_del_dialog);
 
-    // 创建询问对话框
-    create_ask_dialog(pl.pm.mask_layer_del_dialog, index);
+    create_ask_dialog(pl.pm.mask_layer_del_dialog, tab_index, index);
 }
 
 static void load_and_display_image(const char *path) {
-    if (!path || !pl.pv.img) return;
+    if (!path || path[0] == '\0' || !pl.pv.img) return;
 
     char full_path[512];
     memset(full_path, 0, sizeof(full_path));
     snprintf(full_path, sizeof(full_path), "S:%s", path);
     printf("Loading image: %s\n", full_path);
 
-    // 从路径中提取相对路径
-    const char *relative_path = path + strlen(pl.pm.photo_dir);
-    if (*relative_path == '/') {
-        relative_path++;  // 跳过开头的'/'
+    /* 安全计算相对路径：path 必须以 photo_dir 为前缀，否则避免越界 */
+    const char *relative_path = path;
+    size_t dir_len = strlen(pl.pm.photo_dir);
+    if (dir_len > 0 && strncmp(path, pl.pm.photo_dir, dir_len) == 0) {
+        relative_path = path + dir_len;
+        if (*relative_path == '/') relative_path++;
     }
+    if (*relative_path == '\0') relative_path = path; /* 回退为完整 path 的尾部或 path */
 
-    canvas_display_image(pl.pv.img, full_path);
+    if (canvas_display_image(pl.pv.img, full_path) != 0) return;
+
     pl.pv.has_photo_cache = 1;
 
-    // 更新文件名标签
     if (pl.pv.file_label) {
         lv_label_set_text_fmt(pl.pv.file_label, "%s", relative_path);
     }
@@ -941,8 +930,15 @@ static void update_zoom_label(void) {
 }
 
 static void show_photo_viewer(int index) {
+    /* 始终从当前 tab 同步路径指针，避免 media_poll 触发 apply_scan_result 后 pl.pm.photo_paths 悬空 */
+    pl.pm.photo_paths = pl.pm.tab_data[pl.pm.current_photo_tab].photo_paths;
+    pl.pm.photo_count = pl.pm.tab_data[pl.pm.current_photo_tab].photo_count;
+
     if (index < 0 || index >= pl.pm.photo_count) return;
     if (!pl.pv.img) return;
+
+    const char *path = pl.pm.photo_paths[index];
+    if (!path || path[0] == '\0') return;
 
     pl.pm.current_index = index;
     strncpy(pl.pm.photo_dir, pl.pm.current_photo_tab == PHOTO_TAB_FRONT ? PHOTO_DIR_FRONT : PHOTO_DIR_REAR,
@@ -955,7 +951,7 @@ static void show_photo_viewer(int index) {
 
     pl.pv.offset_x = IMGORIGINX;
     pl.pv.offset_y = IMGORIGINY;
-    load_and_display_image(pl.pm.photo_paths[pl.pm.current_index]);
+    load_and_display_image(path);
     // 新图片移动到初始位置
     canvas_move(pl.pv.img, IMGORIGINX, IMGORIGINY);
     // 更新底部栏的标签
@@ -984,11 +980,27 @@ static void del_btn_event_handler(lv_event_t *e) {
     pl.pm.photo_paths = pl.pm.tab_data[tab].photo_paths;
     pl.pm.photo_count = pl.pm.tab_data[tab].photo_count;
     if (index < 0 || index >= pl.pm.photo_count) return;
-    show_format_sd_dialog(lv_scr_act(), index);
+    show_format_sd_dialog(lv_scr_act(), tab, index);
 }
 
 static void back_btn_event_handler(lv_event_t *e) {
     LV_UNUSED(e);
+
+    /* 释放 canvas 缓冲区以回收内存 */
+    if (pl.pv.img && pl.pv.current_canvas_buf) {
+        static uint8_t dummy_buf[4] = {0};
+        lv_canvas_set_buffer(pl.pv.img, dummy_buf, 1, 1, LV_IMG_CF_TRUE_COLOR_ALPHA);
+        lv_mem_free(pl.pv.current_canvas_buf);
+        pl.pv.current_canvas_buf = NULL;
+        pl.pv.current_buf_size = 0;
+    }
+    if (pl.old_img_path) {
+        lv_img_cache_invalidate_src(pl.old_img_path);
+        free((void *)pl.old_img_path);
+        pl.old_img_path = NULL;
+    }
+    pl.pv.has_photo_cache = 0;
+
     if (pl.pv.cont) {
         lv_obj_add_flag(pl.pv.cont, LV_OBJ_FLAG_HIDDEN);
     }
@@ -1012,7 +1024,8 @@ static void refresh_btn_event_handler(lv_event_t *e) {
 
 static void prev_btn_event_handler(lv_event_t *e) {
     LV_UNUSED(e);
-    // if (pl.is_initialized && pl.pm.current_index > 0) {
+    pl.pm.photo_paths = pl.pm.tab_data[pl.pm.current_photo_tab].photo_paths;
+    pl.pm.photo_count = pl.pm.tab_data[pl.pm.current_photo_tab].photo_count;
     if (pl.pm.current_index > 0) {
         show_photo_viewer(pl.pm.current_index - 1);
     }
@@ -1020,7 +1033,8 @@ static void prev_btn_event_handler(lv_event_t *e) {
 
 static void next_btn_event_handler(lv_event_t *e) {
     LV_UNUSED(e);
-    // if (pl.is_initialized && pl.pm.current_index >= 0 && 
+    pl.pm.photo_paths = pl.pm.tab_data[pl.pm.current_photo_tab].photo_paths;
+    pl.pm.photo_count = pl.pm.tab_data[pl.pm.current_photo_tab].photo_count;
     if (pl.pm.current_index >= 0 && pl.pm.current_index < pl.pm.photo_count - 1) {
         show_photo_viewer(pl.pm.current_index + 1);
     }
@@ -1063,12 +1077,8 @@ static void on_image_touch(lv_event_t *e) {
 
                 int distance_sq = dx*dx + dy*dy;
                 if (distance_sq > 100) {  // 10的平方 = 100
-                    /* 更新图片位置（竖屏适配） */
                     pl.pv.offset_x = pl.pv.offset_x - dy;
                     pl.pv.offset_y = pl.pv.offset_y + dx;
-
-                    printf("[PhotoLibrary] Dragging: dx=%d dy=%d pos=(%d,%d)\n", 
-                        dx, dy, pl.pv.offset_x, pl.pv.offset_y);
 
                     /* 应用变换 */
                     if (pl.pv.img) {
@@ -1308,43 +1318,25 @@ void create_photo_select_ui(lv_obj_t *parent) {
 void cleanup_photo_library(void) {
     printf("[PhotoLibrary] Starting cleanup...\n");
 
-    /* 1. 清理图片缓存 */
+    /* 1. 清理图片缓存：仅使用 pl.old_img_path 这一条权威记录，避免访问已被扫描线程更新的 photo_paths */
     if (pl.old_img_path) {
         printf("[PhotoLibrary] Invalidating old image cache: %s\n", pl.old_img_path);
         lv_img_cache_invalidate_src(pl.old_img_path);
+        free((void *)pl.old_img_path);
         pl.old_img_path = NULL;
     }
-    
-    // 2. 如果当前有加载的图片，也清理其缓存
-    if (pl.pv.has_photo_cache && pl.pm.photo_paths && 
-        pl.pm.current_index >= 0 && pl.pm.current_index < pl.pm.photo_count) {
-        char full_path[512];
-        snprintf(full_path, sizeof(full_path), "S:%s", 
-                pl.pm.photo_paths[pl.pm.current_index]);
-        printf("Invalidating current image cache: %s\n", full_path);
-        lv_img_cache_invalidate_src(full_path);
-    }
+    pl.pv.has_photo_cache = 0;
 
-    // 3. 安全释放canvas缓冲区（如果存在）
+    /* 3. 安全释放canvas缓冲区 */
     if (pl.pv.img) {
-        lv_img_dsc_t *canvas_dsc = lv_canvas_get_img(pl.pv.img);
-        if (canvas_dsc && canvas_dsc->data) {
-            void *buf_to_free = (void *)canvas_dsc->data;
-            if (buf_to_free) {
-                printf("buf_to_free %zu\n", sizeof(&buf_to_free));
-                lv_mem_free(buf_to_free);
-            }
-            
-            // 设置一个最小缓冲区，防止LVGL访问已释放内存
+        if (pl.pv.current_canvas_buf) {
             static uint8_t dummy_buf[4] = {0};
             lv_canvas_set_buffer(pl.pv.img, dummy_buf, 1, 1, LV_IMG_CF_TRUE_COLOR_ALPHA);
-            // lv_canvas_set_buffer(pl.pv.img, NULL, 0, 0, LV_IMG_CF_TRUE_COLOR_ALPHA);
-
-
-            printf("Freed canvas buffer\n");
+            lv_mem_free(pl.pv.current_canvas_buf);
+            pl.pv.current_canvas_buf = NULL;
+            pl.pv.current_buf_size = 0;
+            printf("[PhotoLibrary] Freed canvas buffer\n");
         }
-        
-        // 移除所有事件回调
         lv_obj_remove_event_cb(pl.pv.img, on_image_touch);
     }
 
@@ -1377,16 +1369,16 @@ void cleanup_photo_library(void) {
         free_photo_paths_tab(i);
     }
 
-    // 6. 删除UI容器及其所有子对象
-    if (pl.pm.cont) {
-        lv_obj_del(pl.pm.cont);
-        printf("Deleted UI container\n");
-    }
+    /* 释放样式资源 */
+    lv_style_reset(&pl.pm.style_btn);
 
-    // 7. 重新初始化所有结构体和静态变量
+    /* 不在此处删除 pl.pm.cont —— 它是 photoPage 的子对象，
+     * 由 cleanup_playbackInterface 统一通过 UI_SAFE_DELETE(pb.tab_contents[1]) 删除，
+     * 避免对象树重复析构导致 use-after-free。 */
+
     pl_init();
 
-    printf("Photo library cleanup completed.\n");
+    printf("[PhotoLibrary] Cleanup completed.\n");
 }
 
 void reflush_photo_library(void) {
