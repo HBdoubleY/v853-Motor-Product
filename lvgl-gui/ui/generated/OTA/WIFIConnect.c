@@ -16,6 +16,13 @@
 #include <unistd.h>
 
 /*============================================================================
+ * 常量与宏定义
+ *============================================================================*/
+
+/* 统一 WiFi 接口与配置路径，改为使用 wlan1 做 STA 连接 */
+#define WIFI_IFACE          "wlan1"
+
+/*============================================================================
  * 全局变量定义
  *============================================================================*/
 
@@ -31,6 +38,7 @@ static bool prepare_wifi_env(void);
 static bool close_wifi_connection(void);
 static char **scan_networks(int *count);
 static void connect_sync(struct connect_arg *ca);
+static bool wifi_query_status(char *ssid_buf, size_t len);
 static void refresh_add_list_internal(void);
 
 /* 事件回调函数 */
@@ -95,33 +103,12 @@ static char *run_cmd(const char *cmd) {
  */
 static bool prepare_wifi_env(void) {
     printf("[WiFi] Preparing WiFi environment...\n");
-    
-    system("killall wpa_supplicant 2>/dev/null || true");
-    system("killall udhcpc 2>/dev/null || true");
-    system("rm -rf /var/run/wpa_supplicant");
-    system("mkdir -p /var/run/wpa_supplicant");
-    system("ifconfig wlan0 down 2>/dev/null || true");
-    system("ifconfig wlan0 up 2>/dev/null || true");
-    
-    /* 创建wpa_supplicant配置文件 */
-    FILE *f = fopen("/tmp/wpa_optimized.conf", "w");
-    if (f) { 
-        fprintf(f, "ctrl_interface=/var/run/wpa_supplicant\n"
-                   "update_config=1\n"
-                   "ap_scan=1\n"
-                   "fast_reauth=1\n"
-                   "country=CN\n"); 
-        fclose(f); 
-    }
-    
-    /* 启动wpa_supplicant */
-    if (system("wpa_supplicant -B -i wlan0 -D nl80211 -c /tmp/wpa_optimized.conf >/dev/null 2>&1") != 0) {
-        system("wpa_supplicant -B -i wlan0 -D wext -c /tmp/wpa_optimized.conf >/dev/null 2>&1");
-    }
-    
-    system("wpa_cli -i wlan0 scan >/dev/null 2>&1");
-    
-    printf("[WiFi] WiFi environment prepared\n");
+
+    /* 不再干预全局 wpa_supplicant，仅确保 wlan1 处于 up 状态并触发一次扫描 */
+    system("ifconfig " WIFI_IFACE " up 2>/dev/null || true");
+    system("wpa_cli -i " WIFI_IFACE " scan >/dev/null 2>&1");
+
+    printf("[WiFi] WiFi environment prepared for " WIFI_IFACE "\n");
     return true;
 }
 
@@ -131,15 +118,12 @@ static bool prepare_wifi_env(void) {
  */
 static bool close_wifi_connection(void) {
     printf("[WiFi] Closing WiFi connection...\n");
-    
-    system("rm -f /tmp/wpa_optimized.conf");
-    system("ifconfig wlan0 down 2>/dev/null || true");
-    system("rm -rf /var/run/wpa_supplicant");
-    system("killall udhcpc 2>/dev/null || true");
-    system("killall wpa_supplicant 2>/dev/null || true");
-    system("sync");
-    
-    printf("[WiFi] WiFi connection closed\n");
+
+    /* 仅断开当前 wlan1 连接，不停止全局 wpa_supplicant 服务 */
+    system("wpa_cli -i " WIFI_IFACE " disconnect >/dev/null 2>&1");
+    system("wpa_cli -i " WIFI_IFACE " remove_network all >/dev/null 2>&1");
+
+    printf("[WiFi] WiFi connection on " WIFI_IFACE " closed\n");
     return true;
 }
 
@@ -152,45 +136,22 @@ static bool close_wifi_connection(void) {
 
 /**
  * @brief 将 wlan0 切到 CarPlay 热点模式（AP）
- * 按 libzlink 文档与开发板 hostapd.conf/udhcpd.conf 配置：先停 STA/AP 进程，
- * 起 wlan0 并配置 192.168.1.2，再起 hostapd 与 udhcpd。
+ * 说明：CarPlay AP 由启动脚本负责配置；WiFi 页面不再切换 wlan0 模式，保留此函数避免外部链接错误。
  */
 void wlan0_switch_to_carplay_ap(void) {
-    printf("[WiFi] Switching wlan0 to CarPlay AP mode (using " HOSTAPD_CONF_PATH " / " UDHCPD_CONF_PATH ")...\n");
-    
-    system("killall wpa_supplicant 2>/dev/null || true");
-    system("killall udhcpc 2>/dev/null || true");
-    system("killall hostapd 2>/dev/null || true");
-    system("killall udhcpd 2>/dev/null || true");
-    usleep(300000);
-    
-    system("ifconfig wlan0 down 2>/dev/null || true");
-    system("ifconfig wlan0 up 2>/dev/null || true");
-    usleep(100000);
-    
-    system("ifconfig wlan0 " CARPLAY_AP_IP " netmask 255.255.255.0 up");
-    
-    system("mkdir -p /var/run/hostapd");
-    system("hostapd -B " HOSTAPD_CONF_PATH " >/dev/null 2>&1");
-    usleep(200000);
-    
-    system("touch " UDHCPD_LEASES_PATH);
-    system("udhcpd -f " UDHCPD_CONF_PATH " wlan0 >/dev/null 2>&1 &");
-    
-    printf("[WiFi] CarPlay AP started (wlan0 " CARPLAY_AP_IP ")\n");
+    (void)CARPLAY_AP_IP;
+    (void)HOSTAPD_CONF_PATH;
+    (void)UDHCPD_CONF_PATH;
+    (void)UDHCPD_LEASES_PATH;
+    printf("[WiFi] wlan0_switch_to_carplay_ap() is deprecated in WiFi UI, handled by run.config\n");
 }
 
 /**
  * @brief 将 wlan0 切到 STA 模式供 OTA WiFi 使用
+ * 说明：OTA WiFi 已改为使用 wlan1，保留空实现以兼容旧接口。
  */
 void wlan0_ensure_sta_for_ota(void) {
-    printf("[WiFi] Switching wlan0 to STA mode for OTA...\n");
-    
-    system("killall hostapd 2>/dev/null || true");
-    system("killall udhcpd 2>/dev/null || true");
-    usleep(200000);
-    
-    prepare_wifi_env();
+    printf("[WiFi] wlan0_ensure_sta_for_ota() is deprecated, OTA WiFi now uses " WIFI_IFACE "\n");
 }
 
 /**
@@ -200,9 +161,9 @@ void wlan0_ensure_sta_for_ota(void) {
  */
 static char **scan_networks(int *count) {
     *count = 0;
-    
-    system("wpa_cli -i wlan0 scan >/dev/null 2>&1");
-    char *out = run_cmd("wpa_cli -i wlan0 scan_results 2>/dev/null");
+
+    system("wpa_cli -i " WIFI_IFACE " scan >/dev/null 2>&1");
+    char *out = run_cmd("wpa_cli -i " WIFI_IFACE " scan_results 2>/dev/null");
     if (!out) return NULL;
     
     char *save = NULL;
@@ -443,11 +404,11 @@ static void connect_sync(struct connect_arg *ca) {
     printf("[WiFi] Connecting to SSID: %s\n", ca->ssid);
     
     /* 移除已有网络配置 */
-    system("wpa_cli -i wlan0 remove_network all >/dev/null 2>&1");
+    system("wpa_cli -i " WIFI_IFACE " remove_network all >/dev/null 2>&1");
     
     /* 添加新网络 */
     char cmd[512];
-    char *id_out = run_cmd("wpa_cli -i wlan0 add_network 2>/dev/null | tail -n1");
+    char *id_out = run_cmd("wpa_cli -i " WIFI_IFACE " add_network 2>/dev/null | tail -n1");
     int netid = -1;
     if (id_out) { 
         netid = atoi(id_out); 
@@ -455,15 +416,15 @@ static void connect_sync(struct connect_arg *ca) {
     }
     if (netid < 0) netid = 0;
     
-    snprintf(cmd, sizeof(cmd), "wpa_cli -i wlan0 set_network %d ssid '\"%s\"' >/dev/null 2>&1", netid, ca->ssid);
+    snprintf(cmd, sizeof(cmd), "wpa_cli -i " WIFI_IFACE " set_network %d ssid '\"%s\"' >/dev/null 2>&1", netid, ca->ssid);
     system(cmd);
-    snprintf(cmd, sizeof(cmd), "wpa_cli -i wlan0 set_network %d psk '\"%s\"' >/dev/null 2>&1", netid, ca->psk);
+    snprintf(cmd, sizeof(cmd), "wpa_cli -i " WIFI_IFACE " set_network %d psk '\"%s\"' >/dev/null 2>&1", netid, ca->psk);
     system(cmd);
-    snprintf(cmd, sizeof(cmd), "wpa_cli -i wlan0 set_network %d key_mgmt WPA-PSK >/dev/null 2>&1", netid);
+    snprintf(cmd, sizeof(cmd), "wpa_cli -i " WIFI_IFACE " set_network %d key_mgmt WPA-PSK >/dev/null 2>&1", netid);
     system(cmd);
-    snprintf(cmd, sizeof(cmd), "wpa_cli -i wlan0 enable_network %d >/dev/null 2>&1", netid);
+    snprintf(cmd, sizeof(cmd), "wpa_cli -i " WIFI_IFACE " enable_network %d >/dev/null 2>&1", netid);
     system(cmd);
-    snprintf(cmd, sizeof(cmd), "wpa_cli -i wlan0 select_network %d >/dev/null 2>&1", netid);
+    snprintf(cmd, sizeof(cmd), "wpa_cli -i " WIFI_IFACE " select_network %d >/dev/null 2>&1", netid);
     system(cmd);
 
     /* 创建状态弹窗 */
@@ -476,7 +437,7 @@ static void connect_sync(struct connect_arg *ca) {
     /* 轮询连接状态 */
     int connected = 0;
     for (int i = 0; i < 20; i++) {
-        char *st = run_cmd("wpa_cli -i wlan0 status 2>/dev/null | grep \"wpa_state\" | cut -d= -f2");
+        char *st = run_cmd("wpa_cli -i " WIFI_IFACE " status 2>/dev/null | grep \"wpa_state\" | cut -d= -f2");
         if (st) {
             /* 去除换行符 */
             char *s = st;
@@ -510,8 +471,8 @@ static void connect_sync(struct connect_arg *ca) {
         lv_bar_set_value(progress_bar, 20, LV_ANIM_ON);
         lv_task_handler();
         
-        system("udhcpc -i wlan0 -n -q -t 5 >/dev/null 2>&1 || true");
-        printf("[WiFi] DHCP completed\n");
+        system("udhcpc -i " WIFI_IFACE " -n -q -t 5 >/dev/null 2>&1 || true");
+        printf("[WiFi] DHCP completed on " WIFI_IFACE "\n");
     }
 
     /* 删除状态弹窗 */
@@ -524,6 +485,47 @@ static void connect_sync(struct connect_arg *ca) {
     free(ca->ssid);
     free(ca->psk);
     free(ca);
+}
+
+/**
+ * @brief 查询当前 WiFi 连接状态
+ * @param ssid_buf 输出 SSID 缓冲区（可为 NULL）
+ * @param len 缓冲区长度
+ * @return 已连接返回 true，否则返回 false
+ */
+static bool wifi_query_status(char *ssid_buf, size_t len) {
+    bool connected = false;
+
+    if (ssid_buf && len > 0) {
+        ssid_buf[0] = '\0';
+    }
+
+    char *status = run_cmd("wpa_cli -i " WIFI_IFACE " status 2>/dev/null");
+    if (!status) {
+        return false;
+    }
+
+    char *save = NULL;
+    char *line = strtok_r(status, "\n", &save);
+    while (line) {
+        while (*line == ' ' || *line == '\t') line++;
+
+        if (strncmp(line, "wpa_state=", 10) == 0) {
+            if (strstr(line + 10, "COMPLETED") != NULL) {
+                connected = true;
+            }
+        } else if (strncmp(line, "ssid=", 5) == 0) {
+            if (ssid_buf && len > 0) {
+                strncpy(ssid_buf, line + 5, len - 1);
+                ssid_buf[len - 1] = '\0';
+            }
+        }
+
+        line = strtok_r(NULL, "\n", &save);
+    }
+
+    free(status);
+    return connected;
 }
 
 /*============================================================================
@@ -788,27 +790,44 @@ static void refresh_add_list_internal(void) {
  */
 static void wifi_connect_event_cb(lv_event_t *e) {
     if (!g_wifi_ui.currently_connected) {
-        printf("[WiFi] Enabling WiFi...\n");
-        
+        printf("[WiFi] Enabling WiFi list on " WIFI_IFACE "...\n");
+
+        /* 开关从关 → 开：仅控制列表显示与扫描，不关闭底层 wpa_supplicant */
         lv_obj_clear_flag(g_wifi_ui.connect_btn_yes, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(g_wifi_ui.connect_btn_no, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(g_wifi_ui.list_cont, LV_OBJ_FLAG_HIDDEN);
-        
+
         if (g_wifi_ui.list) lv_obj_clean(g_wifi_ui.list);
 
-        wlan0_ensure_sta_for_ota();
+        prepare_wifi_env();
         refresh_add_list_internal();
+
+        char ssid[128] = {0};
+        bool linked = wifi_query_status(ssid, sizeof(ssid));
+        if (g_wifi_ui.current_ssid_label) {
+            if (linked && ssid[0] != '\0') {
+                lv_label_set_text(g_wifi_ui.current_ssid_label, ssid);
+            } else {
+                lv_label_set_text(g_wifi_ui.current_ssid_label, "未连接");
+            }
+        }
+
         g_wifi_ui.currently_connected = true;
     } else {
-        printf("[WiFi] Disabling WiFi...\n");
-        
+        printf("[WiFi] Disabling WiFi list and disconnecting " WIFI_IFACE "...\n");
+
         lv_obj_clear_flag(g_wifi_ui.connect_btn_no, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(g_wifi_ui.connect_btn_yes, LV_OBJ_FLAG_HIDDEN);
-        
+
         if (g_wifi_ui.list) lv_obj_clean(g_wifi_ui.list);
         lv_obj_add_flag(g_wifi_ui.list_cont, LV_OBJ_FLAG_HIDDEN);
 
         close_wifi_connection();
+
+        if (g_wifi_ui.current_ssid_label) {
+            lv_label_set_text(g_wifi_ui.current_ssid_label, "未连接");
+        }
+
         g_wifi_ui.currently_connected = false;
     }
 }
@@ -823,6 +842,17 @@ static void refresh_btn_event_cb(lv_event_t *e) {
     
     if (g_wifi_ui.list) lv_obj_clean(g_wifi_ui.list);
     refresh_add_list_internal();
+
+    /* 同步当前连接状态显示 */
+    char ssid[128] = {0};
+    bool linked = wifi_query_status(ssid, sizeof(ssid));
+    if (g_wifi_ui.current_ssid_label) {
+        if (linked && ssid[0] != '\0') {
+            lv_label_set_text(g_wifi_ui.current_ssid_label, ssid);
+        } else {
+            lv_label_set_text(g_wifi_ui.current_ssid_label, "未连接");
+        }
+    }
 }
 
 /*============================================================================
@@ -859,6 +889,12 @@ void WIFIConnect_init(lv_obj_t *parent) {
     lv_obj_set_style_text_color(connect_label, TH_TEXT_PRIMARY, 0);
     lv_obj_align(connect_label, LV_ALIGN_TOP_LEFT, PADDING_LG, 18);
 
+    /* 当前已连接 WiFi 名称（位于标题与开关之间） */
+    g_wifi_ui.current_ssid_label = lv_label_create(g_wifi_ui.card);
+    lv_obj_set_style_text_font(g_wifi_ui.current_ssid_label, &v853Font_WIFI_18, 0);
+    lv_obj_set_style_text_color(g_wifi_ui.current_ssid_label, TH_TEXT_SECONDARY, 0);
+    lv_obj_align(g_wifi_ui.current_ssid_label, LV_ALIGN_TOP_LEFT, PADDING_LG, 70);
+
     /* WiFi开关按钮 */
     g_wifi_ui.connect_btn = lv_btn_create(g_wifi_ui.card);
     lv_obj_set_size(g_wifi_ui.connect_btn, 110, 56);
@@ -872,10 +908,29 @@ void WIFIConnect_init(lv_obj_t *parent) {
     g_wifi_ui.connect_btn_no = lv_img_create(g_wifi_ui.connect_btn);
     lv_img_set_src(g_wifi_ui.connect_btn_no, &wifi_sw_off);
     lv_obj_center(g_wifi_ui.connect_btn_no);
-    
-    lv_obj_clear_flag(g_wifi_ui.connect_btn_no, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(g_wifi_ui.connect_btn_yes, LV_OBJ_FLAG_HIDDEN);
-    g_wifi_ui.currently_connected = false;
+
+    /* 根据持久化的“开关”状态和当前实际连接状态初始化 UI */
+    char ssid[128] = {0};
+    bool linked = wifi_query_status(ssid, sizeof(ssid));
+    if (linked) {
+        g_wifi_ui.currently_connected = true;
+    }
+
+    if (g_wifi_ui.currently_connected) {
+        lv_obj_clear_flag(g_wifi_ui.connect_btn_yes, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(g_wifi_ui.connect_btn_no, LV_OBJ_FLAG_HIDDEN);
+    } else {
+        lv_obj_clear_flag(g_wifi_ui.connect_btn_no, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(g_wifi_ui.connect_btn_yes, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    if (g_wifi_ui.current_ssid_label) {
+        if (linked && ssid[0] != '\0') {
+            lv_label_set_text(g_wifi_ui.current_ssid_label, ssid);
+        } else {
+            lv_label_set_text(g_wifi_ui.current_ssid_label, "未连接");
+        }
+    }
     lv_obj_add_event_cb(g_wifi_ui.connect_btn, wifi_connect_event_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_set_style_bg_color(g_wifi_ui.connect_btn, TH_BTN_PRESSED, LV_STATE_PRESSED);
     lv_obj_set_style_bg_opa(g_wifi_ui.connect_btn, LV_OPA_40, LV_STATE_PRESSED);
@@ -925,7 +980,15 @@ void WIFIConnect_init(lv_obj_t *parent) {
     lv_obj_set_style_bg_color(g_wifi_ui.list, TH_BORDER, LV_PART_SCROLLBAR);
 
     /* 初始隐藏列表 */
-    lv_obj_add_flag(g_wifi_ui.list_cont, LV_OBJ_FLAG_HIDDEN);
+    if (g_wifi_ui.currently_connected) {
+        lv_obj_clear_flag(g_wifi_ui.list_cont, LV_OBJ_FLAG_HIDDEN);
+        if (g_wifi_ui.list) {
+            lv_obj_clean(g_wifi_ui.list);
+        }
+        refresh_add_list_internal();
+    } else {
+        lv_obj_add_flag(g_wifi_ui.list_cont, LV_OBJ_FLAG_HIDDEN);
+    }
     
     g_wifi_ui.is_initialized = true;
     printf("[WiFi] WiFi page initialized\n");
@@ -1017,14 +1080,14 @@ void WIFIConnect_deinit(void) {
         g_wifi_ui.card = NULL;
     }
     
-    /* 重置其他指针 */
+    /* 重置其他指针（保持 currently_connected 以便下次进入时恢复“开关”状态） */
     g_wifi_ui.connect_btn_yes = NULL;
     g_wifi_ui.connect_btn_no = NULL;
     g_wifi_ui.refresh_img = NULL;
     g_wifi_ui.dialog_bg = NULL;
     g_wifi_ui.ssid_label = NULL;
     g_wifi_ui.password_ta = NULL;
-    g_wifi_ui.currently_connected = false;
+    g_wifi_ui.current_ssid_label = NULL;
     g_wifi_ui.is_initialized = false;
     
     printf("[WiFi] WiFi page deinitialized\n");

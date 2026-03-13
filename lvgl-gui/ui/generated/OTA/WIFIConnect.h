@@ -48,7 +48,10 @@ typedef struct {
     lv_obj_t *connect_btn;                  // WiFi开关按钮
     lv_obj_t *connect_btn_yes;              // 开启状态图标
     lv_obj_t *connect_btn_no;               // 关闭状态图标
-    bool currently_connected;               // 当前WiFi是否开启
+    bool currently_connected;               // WiFi“开关”是否为开启状态（控制列表与连接）
+
+    /* 当前连接状态显示 */
+    lv_obj_t *current_ssid_label;           // 当前已连接 WiFi 名称（或“未连接”）
 
     /* 刷新按钮 */
     lv_obj_t *refresh_btn;                  // 刷新网络列表按钮
@@ -101,18 +104,6 @@ void WIFIConnect_refresh_list(void);
  * @brief 刷新WiFi页面主题
  */
 void WIFIConnect_refresh_theme(void);
-
-/**
- * @brief 将 wlan0 切到 CarPlay 热点模式（AP）
- * 停止 STA 相关进程后启动 hostapd/udhcpd，与 libzlink_wifi_info2 上报的热点一致。
- */
-void wlan0_switch_to_carplay_ap(void);
-
-/**
- * @brief 将 wlan0 切到 STA 模式以供 OTA WiFi 使用
- * 停止 AP 相关进程后调用 prepare_wifi_env，可扫描/连接路由器。
- */
-void wlan0_ensure_sta_for_ota(void);
 
 #ifdef __cplusplus
 }

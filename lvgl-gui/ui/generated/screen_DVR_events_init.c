@@ -214,10 +214,10 @@ static void screen_DVR_btn_playback_event_handler(lv_event_t *e){
 		/* code */
 		if(!lv_obj_has_flag(guider_ui.screen_DVR_label_Popup, LV_OBJ_FLAG_HIDDEN)) break;
 
-		if(!checkTFCardMountProc()){
-			labelTimer_once(screen_DVR_timer_Label, "dvr_set_txt_tfDetected");
-			break;
-		} else {
+		// if(!checkTFCardMountProc()){
+		// 	labelTimer_once(screen_DVR_timer_Label, "dvr_set_txt_tfDetected");
+		// 	break;
+		// } else {
 			lv_label_set_text(guider_ui.screen_DVR_label_Popup, get_string_for_language(g_sys_Data.current_language,"dvr_txt_stopRecorder"));
 			lv_obj_clear_flag(guider_ui.screen_DVR_label_Popup, LV_OBJ_FLAG_HIDDEN);
 			/* 先切屏再停预览：立即加载媒体库画面，避免在回调内同步 stopPreview 导致黑屏 */
@@ -229,7 +229,7 @@ static void screen_DVR_btn_playback_event_handler(lv_event_t *e){
 			lv_timer_t *t = lv_timer_create(playback_stop_preview_timer_cb, 0, NULL);
 			if (t)
 				lv_timer_set_repeat_count(t, 1);
-		}
+		// }
 		break;
 	
 	default:

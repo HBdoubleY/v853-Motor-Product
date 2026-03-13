@@ -24,17 +24,21 @@
 #include <errno.h>
 #include <sys/time.h>
 #include <ctype.h>
+#include <sys/reboot.h>
+#include <sys/stat.h>
 
 /*============================================================================
  * 常量定义
  *============================================================================*/
 
-#define BUFFER_SIZE         8192
-#define OTA_SERVER_HOST     "43.132.151.53"
-#define OTA_VERSION_PATH    "/V853/Version"
-#define OTA_FIRMWARE_PATH   "/V853/runcarplay"
-#define LOCAL_VERSION_PATH  "/opt/work/app/Version"
-#define LOCAL_FIRMWARE_PATH "/mnt/extsd/runcarplay_ota"
+#define BUFFER_SIZE               8192
+#define OTA_SERVER_HOST           "43.132.151.53"
+#define OTA_VERSION_PATH          "/V853/Version"
+#define OTA_FIRMWARE_PATH         "/V853/runcarplay"
+#define LOCAL_VERSION_PATH        "/opt/work/app/Version"
+#define OTA_VERSION_TEMP_PATH     "/opt/work/app/Version-ota"
+#define OTA_FIRMWARE_TEMP_PATH    "/opt/work/app/carplay/runcarplay-ota"
+#define OTA_FIRMWARE_FINAL_PATH   "/opt/work/app/carplay/runcarplay"
 
 /*============================================================================
  * 全局变量定义
@@ -70,6 +74,7 @@ static void read_version_info(char *ver_out, size_t ver_len, char *date_out, siz
 /* 定时器回调 */
 static void overlay_del_cb(lv_timer_t *t);
 static void download_progress_cb(lv_timer_t *t);
+static void delayed_upgrade_cb(lv_timer_t *t);
 
 /* UI辅助函数 */
 static void show_timed_modal(const char *title_text, const char *sub_text, uint32_t border_hex,
@@ -349,14 +354,26 @@ static void download_progress_cb(lv_timer_t *t) {
             show_timed_modal(get_string_for_language(ota_language_setting, "ota_download_completed"),
                             get_string_for_language(ota_language_setting, "ota_system_upgrade"),
                             g_theme->success, &v853Font_OTA_36, &v853Font_OTA_28);
-            /* 等待提示显示后触发升级 */
-            chufa_upgrade();
+            /* 3 秒后触发升级，避免立刻重启看不到提示 */
+            lv_timer_t *upgrade_timer = lv_timer_create(delayed_upgrade_cb, 3000, NULL);
+            if (!upgrade_timer) {
+                /* 如果创建定时器失败，则直接触发升级（兜底） */
+                chufa_upgrade();
+            }
         } else {
             show_timed_modal(get_string_for_language(ota_language_setting, "ota_download_failed"),
                             get_string_for_language(ota_language_setting, "ota_file_download_err"),
                             g_theme->error, &v853Font_OTA_36, &v853Font_OTA_28);
         }
     }
+}
+
+/**
+ * @brief 升级延时定时器回调（在 LVGL 上下文中安全调用）
+ */
+static void delayed_upgrade_cb(lv_timer_t *t) {
+    (void)t;
+    chufa_upgrade();
 }
 
 /*============================================================================
@@ -368,14 +385,36 @@ static void download_progress_cb(lv_timer_t *t) {
  * @return 成功返回true
  */
 static bool chufa_upgrade(void) {
-    printf("[OTA] Triggering upgrade...\n");
-    
-    if (0 != system("mv /mnt/extsd/runcarplay_ota /mnt/extsd/runcarplay")) {
-        printf("[OTA] Failed to replace firmware\n");
+    printf("[OTA] Triggering upgrade with new paths...\n");
+
+    /* 确保临时固件具有可执行权限 */
+    if (chmod(OTA_FIRMWARE_TEMP_PATH, 0755) != 0) {
+        perror("[OTA] Failed to chmod firmware temp file");
         return false;
     }
-    
-    printf("[OTA] Firmware replaced successfully\n");
+
+    /* 先替换固件文件 */
+    if (rename(OTA_FIRMWARE_TEMP_PATH, OTA_FIRMWARE_FINAL_PATH) != 0) {
+        perror("[OTA] Failed to replace firmware (rename runcarplay-ota)");
+        return false;
+    }
+    printf("[OTA] Firmware replaced successfully: %s -> %s\n",
+           OTA_FIRMWARE_TEMP_PATH, OTA_FIRMWARE_FINAL_PATH);
+
+    /* 再替换版本文件 */
+    if (rename(OTA_VERSION_TEMP_PATH, LOCAL_VERSION_PATH) != 0) {
+        perror("[OTA] Failed to update Version file (rename Version-ota)");
+        /* 固件已更新但版本文件未同步，避免继续自动重启 */
+        return false;
+    }
+    printf("[OTA] Version file updated successfully: %s -> %s\n",
+           OTA_VERSION_TEMP_PATH, LOCAL_VERSION_PATH);
+
+    /* 同步磁盘并通过 C 接口重启 */
+    sync();
+    printf("[OTA] Rebooting system via reboot(RB_AUTOBOOT)...\n");
+    reboot(RB_AUTOBOOT);
+
     return true;
 }
 
@@ -762,8 +801,8 @@ static void confirm_yes_cb(lv_event_t *e) {
                         g_theme->error, &v853Font_OTA_36, &v853Font_OTA_28);
     } else {
         arg->remote_path = OTA_FIRMWARE_PATH;
-        arg->local_path = LOCAL_FIRMWARE_PATH;
-        
+        arg->local_path  = OTA_FIRMWARE_TEMP_PATH;
+
         if (pthread_create(&th, NULL, download_thread_func, arg) == 0) {
             pthread_detach(th);
         } else {
@@ -902,8 +941,12 @@ static void check_btn_event_cb(lv_event_t *e) {
     /* 下载远程版本文件 */
     char url[256];
     snprintf(url, sizeof(url), "http://%s%s", OTA_SERVER_HOST, OTA_VERSION_PATH);
-    
-    if (http_download(url, "/tmp/Version") != 0) {
+
+    /* 进入版本比较前清理旧的临时文件 */
+    remove(OTA_VERSION_TEMP_PATH);
+    remove(OTA_FIRMWARE_TEMP_PATH);
+
+    if (http_download(url, OTA_VERSION_TEMP_PATH) != 0) {
         show_timed_modal(get_string_for_language(ota_language_setting, "ota_download_failed"),
                         get_string_for_language(ota_language_setting, "ota_download_version_file_failed"),
                         g_theme->error, &v853Font_OTA_36, &v853Font_OTA_28);
@@ -912,7 +955,7 @@ static void check_btn_event_cb(lv_event_t *e) {
 
     /* 解析远程版本号 */
     int rmaj, rmin, rp;
-    if (parse_version_triplet("/tmp/Version", &rmaj, &rmin, &rp) != 0) {
+    if (parse_version_triplet(OTA_VERSION_TEMP_PATH, &rmaj, &rmin, &rp) != 0) {
         show_timed_modal(get_string_for_language(ota_language_setting, "ota_download_failed"),
                         get_string_for_language(ota_language_setting, "ota_invalid_version"),
                         g_theme->error, &v853Font_OTA_36, &v853Font_OTA_28);
@@ -939,6 +982,8 @@ static void check_btn_event_cb(lv_event_t *e) {
         show_timed_modal(get_string_for_language(ota_language_setting, "ota_no_need_upgrade"),
                         get_string_for_language(ota_language_setting, "ota_up_to_date"),
                         g_theme->success, &v853Font_OTA_36, &v853Font_OTA_28);
+        /* 可选：保持环境整洁，删除未使用的 Version-ota */
+        remove(OTA_VERSION_TEMP_PATH);
         return;
     }
 

@@ -1,0 +1,3297 @@
+﻿^C
+root@(none):/# sh /opt/work/app/run2.config&
+root@(none):/# killall: runcarplay: no process killed
+VLAN: vlan_set_name_type: SET_VLAN_NAME_TYPE_CMD name_type=2 failed: No error information
+wlan0: interface state UNINITIALIZED->ENABLED
+wlan0: AP-ENABLED 
+udhcpd: started, v1.27.2
+udhcpd: max_leases=235 is too big, setting to 145
+udhcpd: can't open '': No such file or directory
+-------------run------------
+hyby upgrade version 2026/02/05 (inotify mode)
+SD Upgrade Monitor started, PID: 978
+==========================================
+SD Upgrade Monitor Started (inotify mode)
+Monitor PID: 978
+Process Name: XbsHyUpgrade
+==========================================
+Inotify monitor initialized successfully
+Waiting for upgrade file events...
+
+
+
+
+
+
+
+
+xaaaaaaaaaaaxx\n
+
+\n
+24063519 rtc:2026-02-24 06:35:19.
+[GOC-D] gocsdk main start,module:RTL8733BS
+[GOC-E] slave name is /dev/pts/0
+[GOC-D] link /dev/pts/0 to /dev/goc_serial succeed
+[GOC-E] open_ptms
+[GOC-E] sharemem_init
+[GOC-E] gocsdk main fail to sched_setscheduler
+[GOC-D] main_init arch
+[GOC-E] argc0 :/opt/work/app/carplay/gocsdk 
+[GOC-D] === 429 ===
+[GOC-D] === 433 ===
+[GOC-D] === 435 ===
+[GOC-D] === 439 ===
+[GOC-D] === 443 ===
+[GOC-D] === 445 ===
+[GOC-D] === 456 ===
+[GOC-D] === 509 ===
+[GOC-E] main_init 
+[GOC-D] app cb count:1
+[GOC-D] ----->drvier_init<------
+[GOC-E] driver so not found
+[GOC-D] write_to_file /tmp/libGbtsDriver.so:402200
+[GOCT-D-976] ----------------goodocom driver soLoad ------------------
+[GOCT-D-976] version:Aug 15 2024 10:24:14
+[GOC-D] deamon:0,version:DL4.SD
+[GOC-D] wait start
+[GOC-D] gocsdk_main start date:Mar  7 2026
+[GOC-D] config_init
+[GOC-D] goc_socket_start
+[GOC-D] Created socket '/dev/socket/goc_serial' with mode '666'
+[GOC-D] api serial socket created
+[GOC-D] Created socket '/dev/socket/goc_spp' with mode '666'
+[GOC-D] socket_listener thread tid=984
+[GOC-D] socket_listener thread tid=983
+[GOC-D] --->spp socket created:5
+[GOC-D] gocmain_init arch
+[GOC-D] write_uuid_to_tmp or_key: 786e7573 
+[GOC-D] write_uuid_to_tmp data:141e2a1a 
+[GOC-D] write_uuid_to_tmp data:17080112 
+[GOC-D] write_uuid_to_tmp data:584e1801 
+[GOC-D] write_uuid_to_tmp data:58545553 
+[GOC-D] write_uuid_to_tmp uuid:141E2A1A17080112584E180158545553 
+[GOC-D] write_uuid_to_tmp-->/tmp/uuid:141E2A1A17080112584E180158545553
+[GOC-D] dingchuang goc_socket_start
+[GOC-D] Created socket '/dev/socket/bt_mic_socket' with mode '666'
+[GOC-D] DINGCHUANG control hfp socket created
+[GOCT-D-982] set path:/opt/work/btgoc Aug 15 2024
+[GOCT-E-982] set_enc_pwdtype:0x451
+[GOC-D] socket_listener server_fd=8 thread tid=986
+[GOC-E] default setting init open /opt/work/btgoc/btDefSetting.json err:No such file or directory
+[GOC-E] init default seting err
+[GOC-D] default_setting_parse over
+[GOC-D] set_send_streaming_by_sbc
+[GOC-E] cannot open config file:/opt/work/btgoc/config.ini
+[GOC-D] send_bt_stat:2
+[GOC-D] Goc bluetooth version : GBTSDL4.SDG4.126039
+[GOC-D] command_reader thread tid=987
+[GOC-D] send_ind: [MWGBTSDL4.SDG4.126039]
+[GOC-D] send_ind: [IS2]
+[GOC-E] bt_power**** 0 ******************
+[GOC-E] bt_power**** 1 ******************
+[GOC-D] transport h5
+[GOC-E] support hci
+[GOC-D] BASE_ADDRESS:0x7f5a5000
+[GOC-E] BCSP: Using COM port: /dev/ttyS2 and baud rate: 1500000,romBaud:115200
+[GOCT-D-982] uart drvinit
+[GOCT-D-982] test GocUartDrvOpen instInUse:0,baud:115200,dataBits:8,parity:2,stopBits:1,flowControl:0
+[GOCT-D-982] CsrUartDrvOpen status instInUse:1,band:4098,instUseToken:1
+[GOCT-D-982] uart drvinit is null
+[GOC-D] HciTransportCreate
+[GOC-E] GocAmIssueBcAmCmd 0x281a
+[GOC-D] SEC_MODE4_SSP
+[GOC-D] BtLeBrowserAppInit suc
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-E] config_read key:localname not found
+[GOC-D] set local default name:RTL8733BS
+[GOC-E] config_read key:passkey not found
+[GOC-D] passkey:0000
+[GOC-E] watchdog not start
+[GOC-D] SEC_MODE4_SSP
+[GOC-D] pmalloc count:205 size:20024
+[GOC-D] hfp activate req
+[GOC-D] Activating AV profile for sink streaming...
+[GOCT-D-992] bcsp start
+[GOCT-D-992] goc AbcspInit module:820c,type:1105
+[GOCT-D-992] GocAbcspStartTshyTimer:250000
+[GOCT-D-992] xxx UARTDRIVER START /dev/ttyS2,reset:0 ,instBaud:115200,instResetBaud:115200,Aug 15 2024 10:24:17
+[GOCT-D-992] mod tranport
+[GOCT-D-992] open serial xxx
+[GOCT-D-992] curBaud:115200 xxx
+[GOCT-D-992] open /dev/ttyS2 115200 bps
+[GOCT-D-992] uartDeviceConfigure speed:0x1002,instParity:0x2,instFlowControl:0x0,instStopBits:0x1
+[GOCT-D-992] disable flow control
+[GOCT-D-994] THREAD START
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOCT-D-992] lemsgid_sync_resp
+[GOCT-D-992] state_curious lemsgid_sync
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOCT-D-992] state_curious lemsgid_sync
+[GOCT-D-992] state_curious lemsgid_conf
+[GOC-D] le browser app registered
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] mapc instance[0] srmpon
+[GOC-D] mapc get instance ids cfm, count=1
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOCT-E-992] state_curious lemsgid_tconf_timeout
+[GOCT-D-992] state_curious lemsgid_conf_resp
+[GOCT-D-992] -->hand over
+[GOCT-D-992] h5 patch
+[GOC-D] on_bcsp_le_done
+[GOCT-E-992] download_patch_rtl:820c
+[GOCT-E-992] get pcm from ap
+[GOCT-D-992] download for 8733bs
+[GOCT-D-992] fw_len:55580 config_len:33
+[GOC-D] pre config:55 AB 23 87 1B 00 0C 00 10 02 80 92 04 50 C5 EA 19 E1 1B FD AF 5F 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-D-992] uart_config:0xb6b7d885 config:0xb6b7d87c
+[GOCT-D-992] protocol_h5:1
+[GOCT-D-992] baudrate:0x8002=1500000
+[GOCT-D-992] flow_control:0
+[GOCT-D-992] parity_enabled:1
+[GOCT-D-992] parity_even:1
+[GOCT-E-992] not find pcm if setting
+[GOCT-D-992] cur_index=-1 MAX_INDEX=0
+[GOCT-D-992] is goc 725/6 :f
+[GOCT-E-992] conig_file_name:/opt/work/btgoc/rtl8723ft_config
+[GOC-D] config:55 AB 23 87 1B 00 0C 00 10 02 80 00 00 50 C5 EA 19 E1 1B FD AF 5B 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-E-992] file_name:/opt/work/btgoc/rtl8723ft_fw
+[GOCT-D-992] cur_index=-5 MAX_INDEX=0
+[GOCT-D-992] addr:4ca38ff995b6
+[GOCT-E-992] not goodocom dev:7
+[GOCT-E-992] hex:4ca38ff995b6
+[GOCT-D-992] first check fail 1
+[GOCT-D-992] Pwd_mcu_inter time:21
+[GOCT-D-992] generate_addr
+[GOCT-D-992] +++++++++++machineid++++++++++:0x451
+[GOCT-D-992] cm 4:5
+[GOCT-D-992] read first uuid
+[GOCT-D-992] --->tmp id:
+[GOCT-D-992] addr sn local address :02 0d 58 54 55 53 0d 00 
+[GOCT-D-995] start i 190918....
+[GOC-D] send_register eresault=1[e_registering]..
+[GOCT-D-992] use efuse addr
+[GOCT-D-992] rtl_set_config_addr
+[GOCT-D-992] rtl_set_config_addr 1
+[GOCT-E-992] rtl_set_config_addr error:cannot find btaddr config
+[GOCT-D-992] rtl_set_config_addr over
+[GOC-D] gap_set_local_address
+[GOC-D] send_ind: [DB4CA38FF995B6]
+[GOCT-D-992] cur_index=-6 MAX_INDEX=0
+[GOC-D] register err..
+[GOC-D] send_ind: [VS1]
+[GOCT-D-995] set id :XinBS_ZKSW_V853_RTL8733BS_Linux
+[GOCT-D-995] path:/opt/work/btgoc
+[GOCT-D-995] auth start:0
+[GOCT-D-995] +++++++++++machineid++++++++++:0x451
+[GOCT-D-995] cm 4:5
+[GOCT-D-995] read first uuid
+[GOCT-D-992] cur_index=-2 MAX_INDEX=0
+[GOCT-E-992] bcsp_timed_evt
+[GOCT-D-992] new_txseq:3,_this->txmsg.txseq:4
+[GOCT-D-992] lastTxseqTime:0
+[GOCT-D-992] driver_change_baudrate_by_bandrate_parity
+[GOCT-D-992] change ex bp open:/dev/ttyS2,band:1500000
+[GOCT-D-992] parity even
+[GOCT-E-992] change_baudrate ex to:1500000 over
+[GOCT-D-995] --->tmp id:141E2A1A17080112584E180158545553
+[GOCT-D-995] ----------hardware------------:
+[GOCT-D-995] cmb 4:5:1
+[GOCT-D-995] rtl start..
+[GOCT-D-995] rtladdr:[4ca38ff995b6]
+[GOCT-D-995] hardware id:4ca38ff995b6
+[GOCT-D-995] auth init over
+[GOCT-D-995] auth get imei over
+[GOCT-D-995] step 1
+[GOCT-E-995] goodocom device 20220429
+[GOCT-D-995] +file_access_check
+[GOCT-D-995] find auth data step 2
+[GOCT-D-995] goodocom device
+[GOCT-E-995] i strcmp err:/opt/work/btgoc/.goc_database,/opt/work/btgoc
+[GOCT-D-995] exit read
+[GOC-D] send_register eresault=0[e_register_success]..
+[GOC-D] send_register g_bBtInitFlag= 0
+[GOC-D] send_ind: [VS0]
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOCT-D-995] exit thread1
+[GOCT-D-997] heart handle 4,time:3
+[GOCT-E-992] bcsp_timed_evt
+[GOCT-D-992] new_txseq:3,_this->txmsg.txseq:4
+[GOCT-D-992] lastTxseqTime:1
+[GOCT-D-992] prepare_patch eversion=02
+[GOCT-D-992] i:1,chipID:0x3,number_of_total_patch:2
+[GOCT-D-992] start_offset:30c0 patch_len:a815
+[GOCT-D-992] config_len:33,fw_len:43029
+[GOC-D] snd config:55 AB 23 87 1B 00 0C 00 10 02 80 00 00 50 C5 EA 19 E1 1B FD AF 5B 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-D-992] cur_index=0 MAX_INDEX=172
+[GOCT-D-992] cur_index=1 MAX_INDEX=172
+[GOCT-D-992] cur_index=2 MAX_INDEX=172
+[GOCT-D-992] cur_index=3 MAX_INDEX=172
+[GOCT-D-992] cur_index=4 MAX_INDEX=172
+[GOCT-D-992] cur_index=5 MAX_INDEX=172
+[GOCT-D-992] cur_index=6 MAX_INDEX=172
+[GOCT-D-992] cur_index=7 MAX_INDEX=172
+[GOCT-D-992] cur_index=8 MAX_INDEX=172
+[GOCT-D-992] cur_index=9 MAX_INDEX=172
+[GOCT-D-992] cur_index=10 MAX_INDEX=172
+[GOCT-D-992] cur_index=11 MAX_INDEX=172
+[GOCT-D-992] cur_index=12 MAX_INDEX=172
+[GOCT-D-992] cur_index=13 MAX_INDEX=172
+[GOCT-D-992] cur_index=14 MAX_INDEX=172
+[GOCT-D-992] cur_index=15 MAX_INDEX=172
+[GOCT-D-992] cur_index=16 MAX_INDEX=172
+[GOCT-D-992] cur_index=17 MAX_INDEX=172
+[GOCT-D-992] cur_index=18 MAX_INDEX=172
+[GOCT-D-992] cur_index=19 MAX_INDEX=172
+[GOCT-D-992] cur_index=20 MAX_INDEX=172
+[GOCT-D-992] cur_index=21 MAX_INDEX=172
+[GOCT-D-992] cur_index=22 MAX_INDEX=172
+[GOCT-D-992] cur_index=23 MAX_INDEX=172
+[GOCT-D-992] cur_index=24 MAX_INDEX=172
+[GOCT-D-992] cur_index=25 MAX_INDEX=172
+[GOCT-D-992] cur_index=26 MAX_INDEX=172
+[GOCT-D-992] cur_index=27 MAX_INDEX=172
+[GOCT-D-992] cur_index=28 MAX_INDEX=172
+[GOCT-D-992] cur_index=29 MAX_INDEX=172
+[GOCT-D-992] cur_index=30 MAX_INDEX=172
+[GOCT-D-992] cur_index=31 MAX_INDEX=172
+[GOCT-D-992] cur_index=32 MAX_INDEX=172
+[GOCT-D-992] cur_index=33 MAX_INDEX=172
+[GOCT-D-992] cur_index=34 MAX_INDEX=172
+[GOCT-D-992] cur_index=35 MAX_INDEX=172
+[GOCT-D-992] cur_index=36 MAX_INDEX=172
+[GOCT-D-992] cur_index=37 MAX_INDEX=172
+[GOCT-D-992] cur_index=38 MAX_INDEX=172
+[GOCT-D-992] cur_index=39 MAX_INDEX=172
+[GOCT-D-992] cur_index=40 MAX_INDEX=172
+[GOCT-D-992] cur_index=41 MAX_INDEX=172
+[GOCT-D-992] cur_index=42 MAX_INDEX=172
+[GOCT-D-992] cur_index=43 MAX_INDEX=172
+[GOCT-D-992] cur_index=44 MAX_INDEX=172
+[GOCT-D-992] cur_index=45 MAX_INDEX=172
+[GOCT-D-992] cur_index=46 MAX_INDEX=172
+[GOCT-D-992] cur_index=47 MAX_INDEX=172
+[GOCT-D-992] cur_index=48 MAX_INDEX=172
+[GOCT-D-992] cur_index=49 MAX_INDEX=172
+[GOCT-D-992] cur_index=50 MAX_INDEX=172
+[GOCT-D-992] cur_index=51 MAX_INDEX=172
+[GOCT-D-992] cur_index=52 MAX_INDEX=172
+[GOCT-D-992] cur_index=53 MAX_INDEX=172
+[GOCT-D-992] cur_index=54 MAX_INDEX=172
+[GOCT-D-992] cur_index=55 MAX_INDEX=172
+[GOCT-D-992] cur_index=56 MAX_INDEX=172
+[GOCT-D-992] cur_index=57 MAX_INDEX=172
+[GOCT-D-992] cur_index=58 MAX_INDEX=172
+[GOCT-D-992] cur_index=59 MAX_INDEX=172
+[GOCT-D-992] cur_index=60 MAX_INDEX=172
+[GOCT-D-992] cur_index=61 MAX_INDEX=172
+[GOCT-D-992] cur_index=62 MAX_INDEX=172
+[GOCT-D-992] cur_index=63 MAX_INDEX=172
+[GOCT-D-992] cur_index=64 MAX_INDEX=172
+[GOCT-D-992] cur_index=65 MAX_INDEX=172
+[GOCT-D-992] cur_index=66 MAX_INDEX=172
+[GOCT-D-992] cur_index=67 MAX_INDEX=172
+[GOCT-D-992] cur_index=68 MAX_INDEX=172
+[GOCT-D-992] cur_index=69 MAX_INDEX=172
+[GOCT-D-992] cur_index=70 MAX_INDEX=172
+[GOCT-D-992] cur_index=71 MAX_INDEX=172
+[GOCT-D-992] cur_index=72 MAX_INDEX=172
+[GOCT-D-992] cur_index=73 MAX_INDEX=172
+[GOCT-D-992] cur_index=74 MAX_INDEX=172
+[GOCT-D-992] cur_index=75 MAX_INDEX=172
+[GOCT-D-992] cur_index=76 MAX_INDEX=172
+[GOCT-D-992] cur_index=77 MAX_INDEX=172
+[GOCT-D-992] cur_index=78 MAX_INDEX=172
+[GOCT-D-992] cur_index=79 MAX_INDEX=172
+[GOCT-D-992] cur_index=80 MAX_INDEX=172
+[GOCT-D-992] cur_index=81 MAX_INDEX=172
+[GOCT-D-992] cur_index=82 MAX_INDEX=172
+[GOCT-D-992] cur_index=83 MAX_INDEX=172
+[GOCT-D-992] cur_index=84 MAX_INDEX=172
+[GOCT-D-992] cur_index=85 MAX_INDEX=172
+[GOCT-D-992] cur_index=86 MAX_INDEX=172
+[GOCT-D-992] cur_index=87 MAX_INDEX=172
+[GOCT-D-992] cur_index=88 MAX_INDEX=172
+[GOCT-D-992] cur_index=89 MAX_INDEX=172
+[GOCT-D-992] cur_index=90 MAX_INDEX=172
+[GOCT-D-992] cur_index=91 MAX_INDEX=172
+[GOCT-D-992] cur_index=92 MAX_INDEX=172
+[GOCT-D-992] cur_index=93 MAX_INDEX=172
+[GOCT-D-992] cur_index=94 MAX_INDEX=172
+[GOCT-D-992] cur_index=95 MAX_INDEX=172
+[GOCT-D-992] cur_index=96 MAX_INDEX=172
+[GOCT-D-992] cur_index=97 MAX_INDEX=172
+[GOCT-D-992] cur_index=98 MAX_INDEX=172
+[GOCT-D-992] cur_index=99 MAX_INDEX=172
+[GOCT-D-992] cur_index=100 MAX_INDEX=172
+[GOCT-D-992] cur_index=101 MAX_INDEX=172
+[GOCT-D-992] cur_index=102 MAX_INDEX=172
+[GOCT-D-992] cur_index=103 MAX_INDEX=172
+[GOCT-D-992] cur_index=104 MAX_INDEX=172
+[GOCT-D-992] cur_index=105 MAX_INDEX=172
+[GOCT-D-992] cur_index=106 MAX_INDEX=172
+[GOCT-D-992] cur_index=107 MAX_INDEX=172
+[GOCT-D-992] cur_index=108 MAX_INDEX=172
+[GOCT-D-992] cur_index=109 MAX_INDEX=172
+[GOCT-D-992] cur_index=110 MAX_INDEX=172
+[GOCT-D-992] cur_index=111 MAX_INDEX=172
+[GOCT-D-992] cur_index=112 MAX_INDEX=172
+[GOCT-D-992] cur_index=113 MAX_INDEX=172
+[GOCT-D-992] cur_index=114 MAX_INDEX=172
+[GOCT-D-992] cur_index=115 MAX_INDEX=172
+[GOCT-D-992] cur_index=116 MAX_INDEX=172
+[GOCT-D-992] cur_index=117 MAX_INDEX=172
+[GOCT-D-992] cur_index=118 MAX_INDEX=172
+[GOCT-D-992] cur_index=119 MAX_INDEX=172
+[GOCT-D-992] cur_index=120 MAX_INDEX=172
+[GOCT-D-992] cur_index=121 MAX_INDEX=172
+[GOCT-D-992] cur_index=122 MAX_INDEX=172
+[GOCT-D-992] cur_index=123 MAX_INDEX=172
+[GOCT-D-992] cur_index=124 MAX_INDEX=172
+[GOCT-D-992] cur_index=125 MAX_INDEX=172
+[GOCT-D-992] cur_index=126 MAX_INDEX=172
+[GOCT-D-992] cur_index=127 MAX_INDEX=172
+[GOCT-D-992] cur_index=128 MAX_INDEX=172
+[GOCT-D-992] cur_index=129 MAX_INDEX=172
+[GOCT-D-992] cur_index=130 MAX_INDEX=172
+[GOCT-D-992] cur_index=131 MAX_INDEX=172
+[GOCT-D-992] cur_index=132 MAX_INDEX=172
+[GOCT-D-992] cur_index=133 MAX_INDEX=172
+[GOCT-D-992] cur_index=134 MAX_INDEX=172
+[GOCT-D-992] cur_index=135 MAX_INDEX=172
+[GOCT-D-992] cur_index=136 MAX_INDEX=172
+[GOCT-D-992] cur_index=137 MAX_INDEX=172
+[GOCT-D-992] cur_index=138 MAX_INDEX=172
+[GOCT-D-992] cur_index=139 MAX_INDEX=172
+[GOCT-D-992] cur_index=140 MAX_INDEX=172
+[GOCT-D-992] cur_index=141 MAX_INDEX=172
+[GOCT-D-992] cur_index=142 MAX_INDEX=172
+[GOCT-D-992] cur_index=143 MAX_INDEX=172
+[GOCT-D-992] cur_index=144 MAX_INDEX=172
+[GOCT-D-992] cur_index=145 MAX_INDEX=172
+[GOCT-D-992] cur_index=146 MAX_INDEX=172
+[GOCT-D-992] cur_index=147 MAX_INDEX=172
+[GOCT-D-992] cur_index=148 MAX_INDEX=172
+[GOCT-D-992] cur_index=149 MAX_INDEX=172
+[GOCT-D-992] cur_index=150 MAX_INDEX=172
+[GOCT-D-992] cur_index=151 MAX_INDEX=172
+[GOCT-D-992] cur_index=152 MAX_INDEX=172
+[GOCT-D-992] cur_index=153 MAX_INDEX=172
+[GOCT-D-992] cur_index=154 MAX_INDEX=172
+[GOCT-D-992] cur_index=155 MAX_INDEX=172
+[GOCT-D-992] cur_index=156 MAX_INDEX=172
+[GOCT-D-992] cur_index=157 MAX_INDEX=172
+[GOCT-D-992] cur_index=158 MAX_INDEX=172
+[GOCT-D-992] cur_index=159 MAX_INDEX=172
+[GOCT-D-992] cur_index=160 MAX_INDEX=172
+[GOCT-D-992] cur_index=161 MAX_INDEX=172
+[GOCT-D-992] cur_index=162 MAX_INDEX=172
+[GOCT-D-992] cur_index=163 MAX_INDEX=172
+[GOCT-D-992] cur_index=164 MAX_INDEX=172
+[GOCT-D-992] cur_index=165 MAX_INDEX=172
+[GOCT-D-992] cur_index=166 MAX_INDEX=172
+[GOCT-D-992] cur_index=167 MAX_INDEX=172
+[GOCT-D-992] cur_index=168 MAX_INDEX=172
+[GOCT-D-992] cur_index=169 MAX_INDEX=172
+[GOCT-D-992] cur_index=170 MAX_INDEX=172
+[GOCT-D-992] cur_index=171 MAX_INDEX=172
+[GOCT-D-992] cur_index=172 MAX_INDEX=172
+[GOCT-D-992] last index:ad
+[GOCT-D-992] cur_index=173 MAX_INDEX=172
+[GOCT-D-992] patch done:lmp version=5cab hci_rev:68b1
+[GOC-D] LYMCB.flags:0x62
+[GOC-D] layer start
+[GOC-D] store local support feature:fffffffadbbf7b87
+[GOC-D] version:6,      LYMCB.BT_Version:1,     LYMCB.BT_Versions_Supported:31
+[GOC-D] GocBtScCmGetSecurityConfIndNullS securityMode:4
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-E] @@@@@@pchange->config = 24
+[GOC-D] HCI_WRITE_SECURE_CONNECTIONS_HOST_SUPPORT failed. Can't enter Security Mode 4 encryption mode
+[GOC-D] GocBtScLeUpdateLocalDbKeys init
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] GocBtScDbWrite
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] HCI Version: 008 HCI Revision: 026801 Local LMP Version: 008 Manuf Name: 000093 LMP Subversion: 023723
+[GOC-D] SPP_GET_INSTANCES_QID_CFM numberOfSppInstances:8
+[GOC-D] instance 0 queueid=23 handle=24
+[GOC-D] instance 1 queueid=25 handle=26
+[GOC-D] instance 2 queueid=27 handle=28
+[GOC-D] instance 3 queueid=29 handle=30
+[GOC-D] instance 4 queueid=31 handle=32
+[GOC-D] instance 5 queueid=33 handle=34
+[GOC-D] instance 6 queueid=35 handle=36
+[GOC-D] instance 7 queueid=37 handle=38
+[GOC-D] GOC_BT_SPP_GET_INSTANCES_QID_CFM
+[GOC-D] gatt register succeed gattid:131089
+[GOC-D] setting gatt connection param
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 12 00 09 00 05 35 03 19 10 02 09 02 00 09 01 03 09 02 01 09 00 5D 09 02 02 09 82 0C 09 02 03 09 01 00 09 02 04 28 01 09 02 05 09 00 01 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] csrBtSdRegisterServiceRecordCfmHanlder result:0x0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 06 19 11 0E 19 11 0F 09 00 04 35 10 35 06 19 01 00 09 00 17 35 06 19 00 17 09 01 04 09 00 0D 35 12 35 10 35 06 19 01 00 09 00 1B 35 06 19 00 17 09 01 04 09 00 09 35 08 35 06 19 11 0E 09 01 06 09 03 11 09 03 CF 09 00 05 35 03 19 10 02 09 01 02 25 04 47 42 54 53 09 01 00 25 08 41 56 52 43 50 20 43 54 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 0B 09 00 04 35 10 35 06 19 01 00 09 00 19 35 06 19 00 19 09 01 03 09 00 09 35 08 35 06 19 11 0D 09 01 03 09 03 11 09 00 00 09 00 05 35 03 19 10 02 09 01 02 25 04 47 42 54 53 09 01 00 25 13 41 75 64 69 6F 2F 56 69 64 65 6F 20 53 65 72 76 69 63 65 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] av activate succeed count:1
+[GOC-D] Selecting sink filters setup...
+[GOC-D] Installing filter index 0: 'csr_sbc_decoder'
+[GOC-D] Installing filter index 1: 'csr_sink_terminator'
+[GOC-D] Filter check: Index 0: csr_sbc_decoder : 
+[GOC-D] decoder 
+[GOC-D] pass-through 
+[GOC-D] 
+[GOC-D] Filter check: Index 1: csr_sink_terminator : 
+[GOC-D] pass-through 
+[GOC-D] 
+[GOC-D] Filter combinations seems to be good
+[GOC-D] RTL8733BS
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 18 01 09 00 04 35 13 35 06 19 01 00 09 00 1F 35 09 19 00 07 09 00 08 09 00 0B 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] send sco err report
+[GOC-D] COD set to Carkit
+[GOC-D] ####### default in gatt prim handler 0x802a,
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 33 09 00 04 35 11 35 03 19 01 00 35 05 19 00 03 08 09 35 03 19 00 08 09 00 05 35 03 19 10 02 09 00 09 35 08 35 06 19 11 34 09 01 03 09 02 00 09 FE FF 09 03 17 0A 00 37 FF FF 09 01 00 25 0C 4D 41 50 20 4D 4E 53 2D 6E 61 6D 65 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+Loaded 3 variables from JSON file: /opt/work/storage_data.txt
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] sc house cleaning
+storage data: backlight:80,
+     splitScreenDisp:0,
+,    language:0,
+    recorderTime:2
+,    recorderUrgentTime:1
+,    carTripSwitch:0
+#######--------------SetBackLight---241---------------------
+[GOC-D] RTL8733BS
+sh: cd: line 1: can't cd to /sys/kernel/debug/dispdbg
+cd /sys/kernel/debug/dispdbg; echo lcd0 > name; echo setbl > command; echo 51 > param; echo 1 > start
+CheckDiskInfoDeleteVideoFile:403
+deleteEarliestFile:304
+[DEBUG] 寰幆缁撴潫锛宔arliestPath=, len=0
+[DEBUG] 寰幆缁撴潫锛宔arliestPath=, len=0
+-------lvgl_main:302-----------------
+[GOC-D] GocBtScLeUpdateLocalDbKeys init
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] GocBtScDbWrite
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] handleSetSecurityModeCfm:4
+[GOC-D] send_init_succeed:1,0
+[GOC-D] send_bt_stat:1
+[GOC-D] Goc bluetooth version : GBTSDL4.SDG4.126039
+[GOC-D] send_ind: [MWGBTSDL4.SDG4.126039]
+[GOC-D] send_ind: [IS1]
+[GOC-D] BT_autoconnect_Init
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-E] strt hfp_connect_auto 
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] hfp_established_auto ,g_connect_times = 1,auto:1
+[GOC-D] hfp_established_delay,delay[1] get_connected_carplay_rfcomm_state:0
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] is_apple_device phone_addr:DCA4CA1967EC
+[GOC-D] read_device_info_by_addr addr:DCA4CA1967EC
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] addr1:DCA4CA1967EC
+[GOC-D] config_read key:info1 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOC-E] time_set_link_policy_start acl_connect_state:0
+[GOC-D] gap_set_link_policy visible:0 connectable:1
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOC-D] send_ind: [MMRTL8733BS]
+[GOC-D] send_ind: [DB4CA38FF995B6]
+[GOC-E] config_read key:passkey not found
+[GOC-D] send_ind: [MN0000]
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-E] send_hf_disconnected,addr null
+[06:35:22.120]libzlink_session_state_cb_init
+wh=720x1440, vwh=720x2880, bpp=32, rotated=1
+Turn on double buffering.
+Turn on 2d hardware acceleration.
+[GOC-E] send_hf_disconnected,addr null
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-E] addr is null
+[GOC-E] hfp_get_hf_status addr is null
+[GOC-D] send_ind: [MG1]
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] total:2
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-E] cod:7a020c
+[GOC-D] send_ind: [MX1DCA4CA1967ECCar]
+[GOC-D] config_read key:addr0 value:38892C9B7EF8
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :38892C9B7EF8
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:FB 86 66 B6 2A F7 62 10 EB DB 9F 79 13 21 9C E1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-E] cod:7a020c
+[GOC-D] send_ind: [MX238892C9B7EF8iPhone]
+[GOC-D] config_write key:pairlisttotal value:2
+[GOC-D] config_write same key and value
+[GOC-D] send_ind: [PO2]
+[GOC-D] sppactive spp callback
+[GOC-D] GocBtSppAppStartActivate index:0
+[GOC-D] GocBtSppAppStartActivate queueId:23,phandle:24
+[GOC-D] register_uuid_android_auto
+[GOC-D] 4de17a00-52cb-11e6-bdf4-0800200c9a66
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-D] GocBtSppAppStartActivateExt index:1 queueId:25 handle:26 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] carplay_init
+[GOC-D] carplay_init carplay_vendor:1
+[06:35:22.461]libzlink_video_data_cb_init
+[06:35:22.462]libzlink_main_audio_start_cb_init
+[06:35:22.462]libzlink_main_data_cb_init
+[06:35:22.462]libzlink_main_audio_stop_cb_init
+[06:35:22.462]libzlink_video_focus_request_cb_init
+[06:35:22.462]libzlink_audio_focus_request_cb_init
+[06:35:22.462]libzlink_request_p2p_start_cb_init
+[06:35:22.462]libzlink_request_wifi_info_cb_init
+[06:35:22.463]libzlink_mic_start_cb_init
+[06:35:22.463]libzlink_mic_stop_cb_init
+[06:35:22.463]libzlink_init in
+[GOC-D] zlink_register_android_auto_uuid
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-E] spp state 1:1
+[GOC-D] GocBtSppAppStartActivateExt index:2 queueId:27 handle:28 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 06 19 11 1E 19 12 03 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 0A 09 00 09 35 08 35 06 19 11 1E 09 01 07 09 01 00 25 0F 48 61 6E 64 73 2D 46 72 65 65 20 75 6E 69 74 09 03 11 09 00 17 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 01 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 01 09 00 05 35 03 19 10 02 09 00 09 35 08 35 06 19 11 01 09 01 02 09 01 00 25 00 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+#################--------------sunxi :5------------
+Turn on 2d hardware acceleration fill.
+Turn on 2d hardware acceleration blit.
+Turn on 2d hardware acceleration blend.[GOC-D] handleSppActivateCfm serverChannel:01,queueId:17,uuid:00 00 11 01 00 00 10 00 80 00 00 80 5F 9B 34 FB 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 02 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] handleSppActivateCfm serverChannel:02,queueId:19,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+
+Turn on 2d hardware acceleration scale.
+[GOC-E] active_callback 
+[GOC-D] send_ind: [SR4de17a0052cb11e6bdf40800200c9a662]
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 03 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] handleSppActivateCfm serverChannel:03,queueId:1b,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 09 19 11 08 19 12 03 19 11 31 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 0B 09 00 09 35 08 35 06 19 11 08 09 01 02 09 01 00 25 07 48 65 61 64 73 65 74 09 03 02 28 01 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] zlink_carplay_init_thread : e5f7a68d-sda3-4305-984b-asdasd7a1001
+[GOC-D] HF Activated Successfully!!
+[GOC-D] hfp activated, write scan enable
+[GOC-D] hf deregister time cfm result:0xFFFF
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+libzbt_init
+
+open_libzbt_so: open 'libzbt-main.so' ok
+libzbt_init: all interface open ok
+libzbt-main: libzbt_init
+
+libzbt-main: libzbt_init out
+
+libzbt_init out
+
+[GOC-D] zlink_carplay_init_thread libzbt_request_bt_enable_CB_init
+libzbt_request_bt_enable_CB_init
+libzbt-main: libzbt_request_bt_enable_CB_init
+libzbt_request_bt_enable_CB_init out
+[GOC-D] zlink_carplay_init_thread libzbt_rfcomm_data_recv_CB_init
+libzbt_rfcomm_data_recv_CB_init
+libzlink audio_main_loop: connecting server(zlink)
+[06:35:22.469]libzlink_init out
+[06:35:22.829]libzlink_check_ready
+[06:35:22.829]libzlink_check_ready: is_socket_link = 0
+libzlink video_main_loop: connecting server(zlink)
+[06:35:22.467]libzlink: zlink_ready_cb
+[06:35:22.830]libzlink: zlink_ready_cb: no callback
+[06:35:22.830]libzlink control_main_loop: connecting server(zlink)
+libzlink AA_bypath_main_loop: connecting server(zlink)
+Turn on 2d hardware acceleration rotate.
+[06:35:22.829]libzlink_request_state in
+[06:35:22.831]libzlink_request_state out
+libzbt-main: libzbt_rfcomm_data_recv_CB_init
+libzbt_rfcomm_data_recv_CB_init out
+[GOC-D] libzbt_carlink_StartAdvertise_CB_init
+libzbt_carlink_StartAdvertise_CB_init
+libzbt-main: libzbt_carlink_StartAdvertise_CB_init
+libzbt-main: libzbt_carlink_StartAdvertise_CB_init out
+[GOC-D] libzbt_carlink_StopAdvertise_CB_init
+libzbt_carlink_StopAdvertise_CB_init
+libzbt-main: libzbt_carlink_StopAdvertise_CB_init
+libzbt-main: libzbt_carlink_StopAdvertise_CB_init out
+[GOC-D] libzbt_carlink_BleGattSend_CB_init
+libzbt_carlink_BleGattSend_CB_init
+libzbt-main: libzbt_carlink_BleGattSend_CB_init
+libzbt-main: libzbt_carlink_BleGattSend_CB_init out
+[GOC-D] libzbt_hicar_ble_start_CB_init
+libzbt_hicar_ble_start_CB_init
+libzbt-main: libzbt_request_hicar_ble_start_CB_init
+libzbt-main: libzbt_request_hicar_ble_start_CB_init out
+libzbt_hicar_ble_start_CB_init out
+libzbt_hicar_ble_stop_CB_init
+libzbt-main: libzbt_hicar_ble_stop_CB_init
+libzbt-main: libzbt_hicar_ble_stop_CB_init out
+libzbt_hicar_ble_stop_CB_init out
+[GOC-D] libzbt_hicar_service_register_CB_init
+libzbt_hicar_service_register_CB_init
+libzbt-main: libzbt_request_hicar_service_register_CB_init
+libzbt-main: libzbt_request_hicar_service_register_CB_init out
+libzbt_hicar_service_register_CB_init out
+[GOC-D] libzbt_hicar_service_handle_CB_init
+libzbt_hicar_service_handle_CB_init
+libzbt-main: libzbt_hicar_service_handle_CB_init
+libzbt-main: libzbt_hicar_service_handle_CB_init out
+libzbt_hicar_service_handle_CB_init out
+[GOC-D] libzbt_hicar_service_data_recv_CB_init
+libzbt_hicar_service_data_recv_CB_init
+libzbt-main: libzbt_hicar_service_data_recv_CB_init
+libzbt-main: libzbt_hicar_service_data_recv_CB_init out
+libzbt_hicar_service_data_recv_CB_init out
+[GOC-D] zlink_carplay_init_thread over!!!
+libzbt-main server2 create
+libzbt-main serveR2 wait client
+open i2c fd:10 success!!!
+libzbt-main server create
+libzbt-main server wait client
+[GOC-D] spp_connect_last
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] spp_connect_last: DCA4:CA:1967EC
+[GOC-D] spp_connect_by_uuid DCA4CA1967EC
+[GOC-E]  sppAppInstData[0]->state = 1   sppAppInstData[0]->serverOrClient =0 
+[GOC-E]  sppAppInstData[1]->state = 1   sppAppInstData[1]->serverOrClient =0 
+[GOC-E]  sppAppInstData[2]->state = 1   sppAppInstData[2]->serverOrClient =0 
+[GOC-E]  sppAppInstData[3]->state = 0   sppAppInstData[3]->serverOrClient =1 
+[GOC-D] rfcomm connect...
+open i2c fd:11 success!!!
+#######--------------MPI_init---16---------------------
+IniParserInitload conf file /etc/cedarx.conf ok!
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0224 06:35:23.272352  1000 isp_version.h:39] <isp_version_info> [ISP]>>>>>>>>>>>>>>>>>>>> ISP VERSION INFO <<<<<<<<<<<<<<<<<<<
+IPCORE: ISP600
+branch: libisp-dev
+commit: 3c5cc7c79d0501024de5c73984b64105534cdc17
+date  : Fri Jul 25 15:52:07 2025 +0800
+author: <mayifei@allwinnertech.com>
+--------------------------------------------------------
+
+I0224 06:35:23.278098  1000 hwdisplay.c:84] <hw_display_init> 
+I0224 06:35:23.279366  1000 hwdisplay.c:1015] <hwd_init> (hwd_init 1015)
+I0224 06:35:23.280221  1000 hwdisplay.c:1069] <hwd_init> ret[0][2,0]ch[0]lyl[0] init: enable[0], screenwin[0,0, 0x0], zorder[0], alpha[mode:0, value:0]
+[GOC-D] dm_ev_connect_complete type:01,DCA4CA1967EC,status:0
+[GOC-E] acl_connect_state:1 lylink_connect_state:0 addr:DCA4CA1967EC
+[GOC-D] DM_SM_KEY_REQUEST_IND 1
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] GocBtScDmSmLinkKeyRequestIndIdleS readResult:1,linkkeyvalid:1
+[GOC-D] DCA4CA1967EC
+[GOC-D] GocBtCmScDmSspLinkKeyRequestRes linkkeyType:5
+[GOC-D] dm_ev_encryption_change
+[GOC-E] dm_sm_hci_enc_complete 0
+[GOC-D] GocBtScDmPrimHandler DM_SM_ENCRYPTION_CHANGE_IND
+[GOC-D] dm_ev_refresh_encryption_key_complete
+[GOC-D] dm_sm_hci_encryption_key_refresh_complete acl flags:0x4200
+[GOC-D] Send_DM_Refresh_Encryption_Key_Ind status:0
+[GOC-D] sc main CsrBtScIgnoreAnyS
+[GOC-D] sc main CsrBtScIgnoreAnyS
+[GOC-D] Successfully Connected with: DCA4:CA:1967EC
+[GOC-D] handleSppConnectInd DCA4CA1967EC result:0x0
+[GOC-D] send_spp_connect 3
+[GOC-E] channel = 4
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [DRDCA4CA1967EC]
+[GOC-D] send_ind: [SACar]
+[GOC-E] hex_uuid :00000000decafadedecadeafdecacafe
+[GOC-E] HFP is not connected delay auto connect devices!
+[GOC-D] hfp_connect DCA4CA1967EC
+[GOC-E] gap_stop_search error not searching
+[GOC-D] send_ind: [IV]
+[GOC-E] addr is differen!
+[GOC-D] ********** zlink_handle_rfcomm_connect_state is_connect:1, connection:3
+[GOC-D] ********* UUID :00 00 00 00 DE CA FA DE DE CA DE AF DE CA CA FE 
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+libzbt_phonelink_state
+libzbt-main: libzbt_phonelink_state
+libzbt-main: local_mac_address = '4CA38FF995B6'
+libzbt-main: libzbt_phonelink_state:
+phone_type: 0(carplay)
+libzbt-main: phone connected
+libzbt-main: bluetooth pair
+libzbt-main: libzbt_phonelink_state pid = [982] socket_fd = -1
+libzbt-main: libzbt_phonelink_state: client_fd = -1 fail..
+[GOC-D] sm_af_access_success
+[GOC-D] hf sdc result handler
+[GOC-D] SND:AT+BRSF=375
+[GOC-D] HF[180225] REV:
++BRSF:3567
+
+[GOC-D] REV AT:0D 0A 2B 42 52 53 46 3A 33 35 36 37 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND=?
+[GOC-D] HF[180225] REV:
++CIND: ("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 28 22 73 65 72 76 69 63 65 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 73 65 74 75 70 22 2C 28 30 2D 33 29 29 2C 28 22 62 61 74 74 63 68 67 22 2C 28 30 2D 35 29 29 2C 28 22 73 69 67 6E 61 6C 22 2C 28 30 2D 35 29 29 2C 28 22 72 6F 61 6D 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 68 65 6C 64 22 2C 28 30 2D 32 29 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND?
+[GOC-D] HF[180225] REV:
++CIND: 1,0,0,2,4,0,0
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 31 2C 30 2C 30 2C 32 2C 34 2C 30 2C 30 0D 0A 
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CMER=3,0,0,1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CHLD=?
+[GOC-D] HF[180225] REV:
++CHLD: (0,1,1x,2,2x,3)
+
+[GOC-D] REV AT:0D 0A 2B 43 48 4C 44 3A 20 28 30 2C 31 2C 31 78 2C 32 2C 32 78 2C 33 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND=1,2
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND=?
+[GOC-D] HF[180225] REV:
++BIND:(1,2)
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 28 31 2C 32 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND?
+[GOC-D] HF[180225] REV:
++BIND:1,1
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 31 2C 31 0D 0A 
+[GOC-D] HF[180225] REV:
++BIND:2,1
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 32 2C 31 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SLC established to: Handsfree Gateway Remote HFP version supported: 0x107 
+[GOC-D] Remote indicators supported: ("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+[GOC-D] Actual indicator values: 1,0,0,2,4,0,0 
+[GOC-D] Call hold supported string: (0,1,1x,2,2x,3)
+[GOC-D] handleHfConnectInd DCA4CA1967EC result:0
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [IV]
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] write pairlist old total:2
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] update dev name is 0x20
+[GOC-D] join_int_arr find 0 -1
+[GOC-D] config_write key:pairlistindex value:1,0,
+[GOC-D] config_write same key and value
+[GOC-D] config_write key:pairlisttotal value:2
+[GOC-D] config_write same key and value
+[GOC-D] chld find 0
+[GOC-D] chld find 1
+[GOC-D] chld find 1x
+[GOC-D] chld find 2
+[GOC-D] chld find 2x
+[GOC-D] chld find 3
+[GOC-D] send_ind: [FA3567,63]
+[GOC-D] send_ind: [IBDCA4CA1967EC]
+[GOC-D] mapc_connect addr:DCA4CA1967EC
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [JHDCA4CA1967EC]
+[GOC-D] send_ind: [SACar]
+[GOC-D] send_ind: [MX0DCA4CA1967ECCar]
+[GOC-E] set_cmd_current_addr[dca4ca1967ec]
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] send_ind: [SC7A020C]
+[GOC-D] --|connecting a2dp..
+[GOC-D] a2dp_connect DCA4CA1967EC
+[GOC-D] Connecting a2dp 0 - please wait...
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-E] send  car play info 
+[GOC-D] register_uuid phone_addr:DCA4CA1967EC
+[GOC-D] read_device_info_by_addr addr:DCA4CA1967EC
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] addr1:DCA4CA1967EC
+[GOC-D] config_read key:info1 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] gap_read_service
+[GOC-E] ++++++++++++++++phone type: iphone+++++++++++++++++++
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] -->!!!link key:30 01 10 ec 17 03 36 ec 59 e4 af 35 6d b9 7c 4d
+[GOC-D] read_device_info_by_addr addr:DCA4CA1967EC
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] addr1:DCA4CA1967EC
+[GOC-D] config_read key:info1 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] spp_connect_by_uuid DCA4CA1967EC
+[GOC-D] send_spp_connect 3
+[GOC-E] channel = 4
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SACar]
+[GOC-E] hex_uuid :00000000decafadedecadeafdecacafe
+[GOC-E] addr is differen!
+[GOC-D] connect carplay rfcomm addr:DCA4CA1967EC
+[GOC-D] zlink_connect_rfcomm_by_cgmi
+[GOC-D] indicatorSupported:("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+[GOC-D] indicatorValue:1,0,0,2,4,0,0
+[GOC-D] type_ind:service,value_ind:1
+[GOC-D] type_ind:call,value_ind:0
+[GOC-D] type_ind:callsetup,value_ind:0
+[GOC-D] type_ind:battchg,value_ind:2
+[GOC-D] send_ind: [PS0002]
+[GOC-D] type_ind:signal,value_ind:4
+[GOC-D] send_ind: [PS0402]
+[GOC-D] type_ind:roam,value_ind:0
+[GOC-D] send_ind: [PS0402]
+[GOC-D] type_ind:callheld,value_ind:0
+[GOC-D] ring from phone
+[GOC-D] send_ind: [RE0]
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] last addr is same
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-D] GocBtSdRestartServiceSearchFull
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-D] SND:AT+CLIP=1
+Mount state changed: 0 -> 1
+Re-monitored upgrade file
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CCWA=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CMEE=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CNUM
+[GOC-D] HF[180225] REV:
++CNUM: ,"8618025430075",145,,4
+
+[GOC-D] REV AT:0D 0A 2B 43 4E 55 4D 3A 20 2C 22 38 36 31 38 30 32 35 34 33 30 30 37 35 22 2C 31 34 35 2C 2C 34 0D 0A 
+[GOC-D] hf slc establish
+[GOC-D] send_ind: [CN8618025430075]
+[GOC-D] Subscriber number information received:,"8618025430075",145,,4
+
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] GocBtHfXStateHfCopsReqHandler state:1,linktype:1,forceResendingFormat:0
+[GOC-D] SND:AT+COPS?
+[GOC-D] The CNUM command completed successfully
+[GOC-D] HF[180225] REV:
++COPS: 0,0,"    "
+
+[GOC-D] REV AT:0D 0A 2B 43 4F 50 53 3A 20 30 2C 30 2C 22 20 20 20 20 22 0D 0A 
+[GOC-D] Network operator name:0,0,"    "
+
+[GOC-D] send_ind: [OP    ]
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+NREC=0
+[GOC-D] COPS query operation completed successfully
+[GOC-E] prim->copsString is null
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND?
+[GOC-D] AT+NREC operation completed successfully
+[GOC-D] HF[180225] REV:
++CIND: 1,0,0,2,4,0,0
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 31 2C 30 2C 30 2C 32 2C 34 2C 30 2C 30 0D 0A 
+[GOC-D] handleCievInd addr:DCA4CA1967EC service=1
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC call=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC callsetup=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC battchg=2
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC signal=4
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] handleCievInd addr:DCA4CA1967EC roam=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC callheld=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] GOC_BT_SD_READ_SERVICES_REQ
+[GOC-D] attrCount:13
+[GOC-D] --->uuid count:13
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-D] sm_af_access_success
+[GOC-D] Filter init:0 Index 0: csr_sbc_decoder
+[GOC-D] Filter init:0 Index 1: csr_sink_terminator
+[GOC-D] handleA2dpConnectCfm addr:DCA4CA1967EC result:0x8000
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SACar]
+[GOC-D] send_ind: [MH]
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] send_ind: [MU2]
+[GOC-D] --|connecting avrcp..
+[GOC-D] avrcp_connect DCA4CA1967EC
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-E] Entry: 0, Service name: MAP MAS-iOS, MASInstanceId: 0, supportedMessages: 0x0A
+[GOC-E] selecting Entry number 0 MAS instance to connect
+[GOC-D] sm_af_access_success
+[GOC-D] sm_af_access_success
+[GOC-D] rfc_af_local_disconnect_confirm
+[GOC-D] rfc_dlc_destroy
+[GOC-E] Could not connect, resultCode = 0x0043, resultSupplier = 0x000D
+[GOC-D] handleMapcConnectCfm addr:DCA4CA1967EC result:0x43
+[GOC-D] send_ind: [YE]
+[GOC-D] sm_af_access_success
+[GOC-D] sm_af_access_success
+[GOC-D] handleAvrcpConnectCfm addr:DCA4CA1967EC
+[GOC-D] Controller (not supported)
+[GOC-D]   Target (supported)
+[GOC-D]     Versions: 0106, features: 0x01D1, service: AVRCP Device, provider: (null)
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SACar]
+[GOC-D] send_ind: [ML2]
+[GOC-D] GOC_BT_AVRCP_CT_NOTI_PLAYBACK_STATUS_IND (status: 0x00)
+[GOC-D] avrcp_get_music_info DCA4CA1967EC
+[GOC-D] send_ind: [FUFFFFFFFFFFFFFFFF]
+[GOC-D] *****************song info*************************
+[GOC-D] scope:254 uid:0000000000000000
+[GOC-D] coverart        :
+[GOC-D] musci info not contain cover art
+[GOC-D] send_ind: [FW]
+[GOC-D] same as last ignore
+[GOC-D] playing time    : 0 ms
+[GOC-D] genre           : 
+[GOC-D] total of media  : 0
+[GOC-D] number of media : 0
+[GOC-D] album           : 
+[GOC-D] artist          : 
+[GOC-D] name            : 
+[GOC-D] *****************song info over********************
+[GOC-D] send_ind: [MI]
+[GOC-D] *****************song info*************************
+[GOC-D] scope:254 uid:0000000000000000
+[GOC-D] coverart        :
+[GOC-D] musci info not contain cover art
+[GOC-D] send_ind: [FW]
+[GOC-D] same as last ignore
+[GOC-D] playing time    : 0 ms
+[GOC-D] genre           : 
+[GOC-D] total of media  : 0
+[GOC-D] number of media : 0
+[GOC-D] album           : 
+[GOC-D] artist          : 
+[GOC-D] name            : 
+[GOC-D] *****************song info over********************
+[GOC-D] send_ind: [MI]
+[GOC-D] startup_mic_gain
+[GOC-D] SND:AT+VGM=07
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] Microphone gain operation completed successfully
+[GOC-D] SND:AT+VGS=07
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] Speaker gain operation completed successfully
+[GOC-D] handleA2dpSetConfigurationInd connection:0 addr:DCA4CA1967EC shandle:0x0
+[GOC-D] filter_sbc: set_config
+[GOC-D] sbc_store_config sampleRate:44100 minBitpool:2 maxBitpool:32
+[GOC-D] filter_sbc: subbands..............8
+[GOC-D] filter_sbc: blocks................16
+[GOC-D] filter_sbc: sample_freq...........44100
+[GOC-D] filter_sbc: chan_mode.............3 (J)
+[GOC-D] filter_sbc: alloc_method..........0 (L)
+[GOC-D] filter_sbc: bitPool...............0
+[GOC-D] filter_sbc: channels..............2
+[GOC-D] filter_sbc: ........................
+[GOC-D] filter_sbc: minBitpool............2
+[GOC-D] filter_sbc: maxBitpool............32
+[GOC-D] filter_sbc: framesize.............0
+[GOC-D] filter_sbc: frames_per_payload....59
+[GOC-D] filter_sbc: bytes_per_encoding....0
+[GOC-D] filter_sbc: remoteMinBitpool......2
+[GOC-D] filter_sbc: remoteMaxBitpool......32
+[GOC-D] handleA2dpOpenInd addr:DCA4CA1967EC
+[GOC-D] handleA2dpOpenInd connection:0 addr:DCA4CA1967EC shandle:0x0
+[GOC-D] GocBtAvDelayReportCfm result:0x8000
+[GOC-D] GocBtScDmSmAuthoriseIndIdleS
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] sm_af_access_success
+[GOC-D] L2caAutoConnectInd psm:0x19 addr:DCA4CA1967EC
+[GOC-D] handleA2dpStreamMtuSizeInd addr:DCA4CA1967EC
+=== STARTING sdcard_upfile_upgrade() PROCESS ===
+SDCARD UPGRADE FILE FOUND - STARTING UPGRADE
+sh: can't create /sys/kernel/debug/dispdbg/command: nonexistent directory
+sh: can't create /sys/kernel/debug/dispdbg/name: nonexistent directory
+sh: can't create /sys/kernel/debug/dispdbg/param: nonexistent directory
+sh: can't create /sys/kernel/debug/dispdbg/start: nonexistent directory
+Stopping related processes...
+Attempting to kill process: /opt/work/app/run.config
+No running process found: /opt/work/app/run.config
+Attempting to kill process: /opt/work/app/carplay/gocsdk
+Killing /opt/work/app/carplay/gocsdk (PID: 976)
+Sent SIGKILL to PID 976
+Process 976 terminated gracefully
+Killing /opt/work/app/carplay/gocsdk (PID: 982)
+Sent SIGKILL to PID 982
+Process 982 terminated gracefully
+Attempting to kill process: zlink.sh
+No running process found: zlink.sh
+Attempting to kill process: z-link
+No running process found: z-link
+Attempting to kill process: mdnsd
+No running process found: mdnsd
+Attempting to kill process: runcarplay
+Killing runcarplay (PID: 979)
+Sent SIGKILL to PID 979
+Killed
+------------- SDUpgrade requested no reboot -------------------
+Process 979 terminated gracefully
+wh=720x1440, vwh=720x2880, bpp=32, rotated=1
+Turn on double buffering.
+Turn on 2d hardware acceleration.
+--------------sunxi :5------------
+Turn on 2d hardware acceleration fill.
+Turn on 2d hardware acceleration blit.
+Turn on 2d hardware acceleration blend.
+Turn on 2d hardware acceleration scale.
+Turn on 2d hardware acceleration rotate.
+[UpgradeUI] Creating progress window...
+Progress: 0% - Start upgrade process...
+sh: can't create /sys/kernel/debug/dispdbg/command: nonexistent directory
+sh: can't create /sys/kernel/debug/dispdbg/name: nonexistent directory
+sh: can't create /sys/kernel/debug/dispdbg/param: nonexistent directory
+sh: can't create /sys/kernel/debug/dispdbg/start: nonexistent directory
+Progress: 0% - Delet old file...
+Removing old file: /opt/work/app/carplay/runcarplay
+Old file removed successfully
+Progress: 0% - The upgrade files are being copied...
+Copying from /mnt/extsd/runcarplay to /opt/work/app/carplay/runcarplay
+Progress: 0% - Preparing to copy file...
+File size: 16580268 bytes
+Progress: 0% - Start copying files...
+Progress: 0% - The file is being upgrade...
+Progress: 1% - The file is being upgrade...
+Progress: 2% - The file is being upgrade...
+Progress: 3% - The file is being upgrade...
+Progress: 4% - The file is being upgrade...
+Progress: 5% - The file is being upgrade...
+Progress: 6% - The file is being upgrade...
+Progress: 7% - The file is being upgrade...
+Progress: 8% - The file is being upgrade...
+Progress: 9% - The file is being upgrade...
+Progress: 10% - The file is being upgrade...
+Progress: 11% - The file is being upgrade...
+Progress: 12% - The file is being upgrade...
+Progress: 13% - The file is being upgrade...
+Progress: 14% - The file is being upgrade...
+Progress: 15% - The file is being upgrade...
+Progress: 16% - The file is being upgrade...
+Progress: 17% - The file is being upgrade...
+Progress: 18% - The file is being upgrade...
+Progress: 19% - The file is being upgrade...
+Progress: 20% - The file is being upgrade...
+Progress: 21% - The file is being upgrade...
+Progress: 22% - The file is being upgrade...
+Progress: 23% - The file is being upgrade...
+Progress: 24% - The file is being upgrade...
+Progress: 25% - The file is being upgrade...
+Progress: 26% - The file is being upgrade...
+Progress: 27% - The file is being upgrade...
+Progress: 28% - The file is being upgrade...
+Progress: 29% - The file is being upgrade...
+Progress: 30% - The file is being upgrade...
+Progress: 31% - The file is being upgrade...
+Progress: 32% - The file is being upgrade...
+Progress: 33% - The file is being upgrade...
+Progress: 34% - The file is being upgrade...
+Progress: 35% - The file is being upgrade...
+Progress: 36% - The file is being upgrade...
+Progress: 37% - The file is being upgrade...
+Progress: 38% - The file is being upgrade...
+Progress: 39% - The file is being upgrade...
+Progress: 40% - The file is being upgrade...
+Progress: 41% - The file is being upgrade...
+Progress: 42% - The file is being upgrade...
+Progress: 43% - The file is being upgrade...
+Progress: 44% - The file is being upgrade...
+Progress: 45% - The file is being upgrade...
+Progress: 46% - The file is being upgrade...
+Progress: 47% - The file is being upgrade...
+Progress: 48% - The file is being upgrade...
+Progress: 49% - The file is being upgrade...
+Progress: 50% - The file is being upgrade...
+Progress: 51% - The file is being upgrade...
+Progress: 52% - The file is being upgrade...
+Progress: 53% - The file is being upgrade...
+Progress: 54% - The file is being upgrade...
+Progress: 55% - The file is being upgrade...
+Progress: 56% - The file is being upgrade...
+Progress: 57% - The file is being upgrade...
+Progress: 58% - The file is being upgrade...
+Progress: 59% - The file is being upgrade...
+Progress: 60% - The file is being upgrade...
+Progress: 61% - The file is being upgrade...
+Progress: 62% - The file is being upgrade...
+Progress: 63% - The file is being upgrade...
+Progress: 64% - The file is being upgrade...
+Progress: 65% - The file is being upgrade...
+Progress: 66% - The file is being upgrade...
+Progress: 67% - The file is being upgrade...
+Progress: 68% - The file is being upgrade...
+Progress: 69% - The file is being upgrade...
+Progress: 70% - The file is being upgrade...
+Progress: 71% - The file is being upgrade...
+Progress: 72% - The file is being upgrade...
+Progress: 73% - The file is being upgrade...
+Progress: 74% - The file is being upgrade...
+Progress: 75% - The file is being upgrade...
+Progress: 76% - The file is being upgrade...
+Progress: 77% - The file is being upgrade...
+Progress: 78% - The file is being upgrade...
+Progress: 79% - The file is being upgrade...
+[      56.594585]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 IEEE 802.11: associated
+[      56.601419]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 RADIUS: starting accounting session 13A712029AC03F35
+[      56.601784]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 WPA: pairwise key handshake completed (RSN)
+Progress: 80% - The file is being upgrade...
+Progress: 81% - The file is being upgrade...
+Progress: 82% - The file is being upgrade...
+Progress: 83% - The file is being upgrade...
+Progress: 84% - The file is being upgrade...
+Progress: 85% - The file is being upgrade...
+Progress: 86% - The file is being upgrade...
+Progress: 87% - The file is being upgrade...
+Progress: 88% - The file is being upgrade...
+Progress: 89% - The file is being upgrade...
+Progress: 90% - The file is being upgrade...
+Progress: 91% - The file is being upgrade...
+udhcpd: sending OFFER of 192.168.1.110
+udhcpd: sending OFFER of 192.168.1.110
+Progress: 92% - The file is being upgrade...
+Progress: 93% - The file is being upgrade...
+Progress: 94% - The file is being upgrade...
+Progress: 95% - The file is being upgrade...
+Progress: 96% - The file is being upgrade...
+Progress: 97% - The file is being upgrade...
+Progress: 98% - The file is being upgrade...
+udhcpd: sending ACK to 192.168.1.110
+udhcpd: can't open '': No such file or directory
+Progress: 99% - The file is being upgrade...
+Progress: 100% - The file is being upgrade...
+File copied successfully, size verified
+Progress: 100% - File copy completed
+Progress: 100% - File copy completed, verifying now...
+=== UPGRADE SUCCESSFULLY ===
+Progress: 100% - Upgrade successful
+udhcpd: sending ACK to 192.168.1.110
+udhcpd: can't open '': No such file or directory
+Upgrade successful: Upgrade completed, please wait for the device to restart
+[UpgradeUI] Showing message: Upgrade successful - Upgrade completed, please wait for the device to restart
+[UpgradeUI] Progress window closed
+[UpgradeUI] Message displayed
+REBOOTING SYSTEM...
+[      63.303284]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 IEEE 802.11: disassociated
+[10]HELLO! BOOT0 is starting!
+[13]BOOT0 commit : 7cbc2fc77e
+[98][pmu]: bus read error
+[100]set pll start
+[102]periph0 has been enabled
+[105]set pll end
+[107]board init ok
+[109]rtc[0] value = 0x80000002
+[112]DRAM use external ZQ!!
+[115]chip id check OK
+[117]POWER SETTING ERROR!
+[119]DRAM BOOT DRIVE INFO: V0.19
+[122]DRAM CLK = 792 MHz
+[124]DRAM Type = 3 (2:DDR2,3:DDR3)
+[128]DRAMC ZQ value: 0x7b7bfb
+[131]DRAM ODT value: 0x42.
+[134]DRAM SIZE =512 M
+[136]dram_tpr4:0x0
+[143]DRAM simple test OK.
+[146]rtc standby flag is 0x0, super standby flag is 0x0
+[151]dram size =512
+[153]audio:avcc calibration
+[158]spi sample_mode:1 sample_delay:1d
+[163]spinor id is: 68 40 19, read cmd: 6c
+[167]Succeed in reading toc file head.
+[170]The size of toc is b0000.
+[202]Entry_name        = optee
+[205]Entry_name        = u-boot
+[211]Entry_name        = dtb
+[214]Jump to second Boot.
+M/TC: OP-TEE version: 2c52b317-dirty (gcc version 5.3.1 20160412 (Linaro GCC 5.3-2016.05)) #3 Fri Aug 12 11:46:59 UTC 2022 arm
+
+
+U-Boot 2018.07 (Mar 07 2026 - 02:44:55 +0000) Allwinner Technology
+
+[00.397]CPU:   Allwinner Family
+[00.400]Model: sun8iw21
+[00.402]DRAM:  512 MiB
+[00.405]Relocation Offset is: 1cf41000
+[00.422]secure enable bit: 0
+E/TC:0   fdt_getprop_u32:343 prop trace_level not found
+[00.437]CPU=900 MHz,PLL6=600 Mhz,AHB=200 Mhz, APB1=24Mhz  MBus=300Mhz
+[00.443]gic: sec monitor mode
+sunxi flash map init
+SPI ALL:   ready
+[00.450]line:724 init_clocks
+[00.453]flash init start
+[00.455]workmode = 0,storage type = 3
+[00.461]spi sample_mode:1 sample_delay:1d
+[00.466]spi sunxi_slave->max_hz:100000000 
+SF: Detected BY25FQ256ES( ) with page size 256 Bytes, erase size 64 KiB, total 32 MiB
+[00.478]sunxi flash init ok
+[00.481]drv_disp_init
+[00.488]handle_num : 4 
+partno erro : can't find partition bootloader
+** Unable to read file lcd_compatible_index.txt **
+[00.502]disp_fat_load for lcd config failed
+[00.511]drv_disp_init finish
+[00.515]Loading Environment from SUNXI_FLASH... OK
+CACHE: Misaligned operation at range [5bf4a8b6, 5c0c20e6]
+root_partition is rootfs
+set root to /dev/mtdblock2
+[00.914]update part info
+[00.916]update bootcmd
+[00.919]change working_fdt 0x5bf00e70 to 0x5bee0e70
+disable nand error: FDT_ERR_NOTFOUND
+[00.935]## error: update_fdt_dram_para : FDT_ERR_NOTFOUND
+[00.942]update dts
+Hit any key to stop autoboot:  0 
+[01.013]no vendor_boot partition is found
+Android's image name: v853-sc1718v_nor
+ERROR: reserving fdt memory region failed (addr=47bc0000 size=40000)
+ERROR: reserving fdt memory region failed (addr=47bbe000 size=2000)
+ERROR: reserving fdt memory region failed (addr=47bbc000 size=2000)
+[01.094]Starting kernel ...
+
+mount: mounting none on /dev failed: Resource busy
+starting pid 867, tty '': '/bin/mount -t proc proc /proc 2>/dev/null || true'
+starting pid 868, tty '': '/bin/mount -t tmpfs tmpfs /run 2>/dev/null || true'
+starting pid 869, tty '': '/bin/mount -o remount,rw / 2>/dev/null || true'
+starting pid 870, tty '': '/bin/mkdir -p /dev/pts 2>/dev/null || true'
+starting pid 871, tty '': '/bin/mkdir -p /dev/shm 2>/dev/null || true'
+starting pid 872, tty '': '/bin/mount -a 2>/dev/null || true'
+starting pid 873, tty '': '/etc/init.d/rcS boot'
+------run rc.preboot file-----
+------run rc.final file-----
+Load mpp modules
+------  insmod sunxi_gpadc modules start --------
+Starting logging: /etc/init.d/S01logging: line 42: can't create /var/run/syslogd.pid: nonexistent directory
+/etc/init.d/S01logging: line 42: can't create /var/run/klogd.pid: nonexistent directory
+OK
+/etc/init.d/S01logging: line 42: /sbin/klogd: not found
+[       1.933774]  (none) syslog.info syslogd started: BusyBox v1.27.2
+mkdir: can't create directory '/dev/pts': File exists
+mkdir: can't create directory '/dev/shm': File exists
+Initializing random number generator... done.
+Starting network: Failed to connect to ubus
+/sbin/ifup: line 51: /sbin/wifi: not found
+FAIL
+ifconfig: SIOCSIFHWADDR: No such device
+Starting telnetd: OK
+udhcpc: SIOCGIFINDEX: No such device
+enable android usb
+starting pid 934, tty '': '/etc/init.d/rc.local'
+======run Kwx3D360App=======
+starting pid 935, tty '/dev/console': '-/bin/sh'
+
+
+BusyBox v1.27.2 () built-in shell (ash)
+
+------run profile file-----
+ _____  _              __     _
+|_   _||_| ___  _ _   |  |   |_| ___  _ _  _ _
+  | |   _ |   ||   |  |  |__ | ||   || | ||_'_|
+  | |  | || | || _ |  |_____||_||_|_||___||_,_|
+  |_|  |_||_|_||_|_|  Tina is Based on OpenWrt!
+ ----------------------------------------------
+ Tina Linux (Neptune, 5C1C9C53)
+ ----------------------------------------------
+root@(none):/# sh /opt/work/app/run2.config&
+root@(none):/# killall: runcarplay: no process killed
+VLAN: vlan_set_name_type: SET_VLAN_NAME_TYPE_CMD name_type=2 failed: No error information
+wlan0: interface state UNINITIALIZED->ENABLED
+wlan0: AP-ENABLED 
+udhcpd: started, v1.27.2
+udhcpd: max_leases=235 is too big, setting to 145
+udhcpd: can't open '': No such file or directory
+-------------run------------
+hyby upgrade version 2026/02/05 (inotify mode)
+SD Upgrade Monitor started, PID: 986
+==========================================
+SD Upgrade Monitor Started (inotify mode)
+Monitor PID: 986
+Process Name: XbsHyUpgrade
+==========================================
+Initial check: Upgrade file exists at startup
+[GOC-D] gocsdk main start,module:RTL8733BS
+[GOC-E] slave name is /dev/pts/0
+[GOC-D] link /dev/pts/0 to /dev/goc_serial succeed
+[GOC-E] open_ptms
+[GOC-E] sharemem_init
+[GOC-E] gocsdk main fail to sched_setscheduler
+[GOC-D] main_init arch
+[GOC-E] argc0 :/opt/work/app/carplay/gocsdk 
+[GOC-D] === 429 ===
+
+
+
+
+
+
+
+
+xaaaaaaaaaaaxx\n
+
+\n
+24063625 rtc:2026-02-24 06:36:25.
+[GOC-D] === 433 ===
+[GOC-D] === 435 ===
+[GOC-D] === 439 ===
+[GOC-D] === 443 ===
+[GOC-D] === 445 ===
+[GOC-D] === 456 ===
+[GOC-D] === 509 ===
+[GOC-E] main_init 
+[GOC-D] app cb count:1
+[GOC-D] ----->drvier_init<------
+[GOC-E] driver so not found
+[GOC-D] write_to_file /tmp/libGbtsDriver.so:402200
+[GOCT-D-984] ----------------goodocom driver soLoad ------------------
+[GOCT-D-984] version:Aug 15 2024 10:24:14
+[GOC-D] deamon:0,version:DL4.SD
+[GOC-D] wait start
+[GOC-D] gocsdk_main start date:Mar  7 2026
+[GOC-D] config_init
+[GOC-D] goc_socket_start
+[GOC-D] Created socket '/dev/socket/goc_serial' with mode '666'
+[GOC-D] api serial socket created
+[GOC-D] Created socket '/dev/socket/goc_spp' with mode '666'
+[GOC-D] socket_listener thread tid=1003
+[GOC-D] socket_listener thread tid=1002
+[GOC-D] --->spp socket created:5
+[GOC-D] gocmain_init arch
+[GOC-D] write_uuid_to_tmp or_key: 786e7573 
+[GOC-D] write_uuid_to_tmp data:141e2a1a 
+[GOC-D] write_uuid_to_tmp data:17080112 
+[GOC-D] write_uuid_to_tmp data:584e1801 
+[GOC-D] write_uuid_to_tmp data:58545553 
+[GOC-D] write_uuid_to_tmp uuid:141E2A1A17080112584E180158545553 
+[GOC-D] write_uuid_to_tmp-->/tmp/uuid:141E2A1A17080112584E180158545553
+[GOC-D] dingchuang goc_socket_start
+[GOC-D] Created socket '/dev/socket/bt_mic_socket' with mode '666'
+[GOC-D] DINGCHUANG control hfp socket created
+[GOCT-D-1001] set path:/opt/work/btgoc Aug 15 2024
+[GOCT-E-1001] set_enc_pwdtype:0x451
+[GOC-D] socket_listener server_fd=8 thread tid=1005
+[GOC-E] default setting init open /opt/work/btgoc/btDefSetting.json err:No such file or directory
+[GOC-E] init default seting err
+[GOC-D] default_setting_parse over
+[GOC-D] set_send_streaming_by_sbc
+[GOC-E] cannot open config file:/opt/work/btgoc/config.ini
+[GOC-D] send_bt_stat:2
+[GOC-D] Goc bluetooth version : GBTSDL4.SDG4.126039
+[GOC-D] command_reader thread tid=1006
+[GOC-D] send_ind: [MWGBTSDL4.SDG4.126039]
+[GOC-D] send_ind: [IS2]
+[GOC-E] bt_power**** 0 ******************
+[GOC-E] bt_power**** 1 ******************
+[GOC-D] transport h5
+[GOC-E] support hci
+[GOC-D] BASE_ADDRESS:0x7f61e000
+[GOC-E] BCSP: Using COM port: /dev/ttyS2 and baud rate: 1500000,romBaud:115200
+[GOCT-D-1001] uart drvinit
+[GOCT-D-1001] test GocUartDrvOpen instInUse:0,baud:115200,dataBits:8,parity:2,stopBits:1,flowControl:0
+[GOCT-D-1001] CsrUartDrvOpen status instInUse:1,band:4098,instUseToken:1
+[GOCT-D-1001] uart drvinit is null
+[GOC-D] HciTransportCreate
+[GOC-E] GocAmIssueBcAmCmd 0x281a
+[GOC-D] SEC_MODE4_SSP
+[GOC-D] BtLeBrowserAppInit suc
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-E] config_read key:localname not found
+[GOC-D] set local default name:RTL8733BS
+[GOC-E] config_read key:passkey not found
+[GOC-D] passkey:0000
+[GOC-E] watchdog not start
+[GOC-D] SEC_MODE4_SSP
+[GOC-D] pmalloc count:205 size:20024
+[GOC-D] hfp activate req
+[GOC-D] Activating AV profile for sink streaming...
+[GOCT-D-1011] bcsp start
+[GOCT-D-1011] goc AbcspInit module:820c,type:1105
+[GOCT-D-1011] GocAbcspStartTshyTimer:250000
+[GOCT-D-1011] xxx UARTDRIVER START /dev/ttyS2,reset:0 ,instBaud:115200,instResetBaud:115200,Aug 15 2024 10:24:17
+[GOCT-D-1011] mod tranport
+[GOCT-D-1011] open serial xxx
+[GOCT-D-1011] curBaud:115200 xxx
+[GOCT-D-1011] open /dev/ttyS2 115200 bps
+[GOCT-D-1011] uartDeviceConfigure speed:0x1002,instParity:0x2,instFlowControl:0x0,instStopBits:0x1
+[GOCT-D-1011] disable flow control
+[GOCT-D-1013] THREAD START
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOCT-D-1011] lemsgid_sync_resp
+[GOCT-D-1011] state_curious lemsgid_sync
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOCT-D-1011] state_curious lemsgid_sync
+[GOCT-D-1011] state_curious lemsgid_conf
+[GOC-D] le browser app registered
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] mapc instance[0] srmpon
+[GOC-D] mapc get instance ids cfm, count=1
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOCT-E-1011] state_curious lemsgid_tconf_timeout
+[GOCT-D-1011] state_curious lemsgid_conf_resp
+[GOCT-D-1011] -->hand over
+[GOCT-D-1011] h5 patch
+[GOC-D] on_bcsp_le_done
+[GOCT-E-1011] download_patch_rtl:820c
+[GOCT-E-1011] get pcm from ap
+[GOCT-D-1011] download for 8733bs
+[GOCT-D-1011] fw_len:55580 config_len:33
+[GOC-D] pre config:55 AB 23 87 1B 00 0C 00 10 02 80 92 04 50 C5 EA 19 E1 1B FD AF 5F 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-D-1011] uart_config:0xb6b26885 config:0xb6b2687c
+[GOCT-D-1011] protocol_h5:1
+[GOCT-D-1011] baudrate:0x8002=1500000
+[GOCT-D-1011] flow_control:0
+[GOCT-D-1011] parity_enabled:1
+[GOCT-D-1011] parity_even:1
+[GOCT-E-1011] not find pcm if setting
+[GOCT-D-1011] cur_index=-1 MAX_INDEX=0
+[GOCT-D-1011] is goc 725/6 :f
+[GOCT-E-1011] conig_file_name:/opt/work/btgoc/rtl8723ft_config
+[GOC-D] config:55 AB 23 87 1B 00 0C 00 10 02 80 00 00 50 C5 EA 19 E1 1B FD AF 5B 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-E-1011] file_name:/opt/work/btgoc/rtl8723ft_fw
+[GOCT-D-1011] cur_index=-5 MAX_INDEX=0
+[GOCT-D-1011] addr:4ca38ff995b6
+[GOCT-E-1011] not goodocom dev:7
+[GOCT-E-1011] hex:4ca38ff995b6
+[GOCT-D-1011] first check fail 1
+[GOCT-D-1011] Pwd_mcu_inter time:13
+[GOCT-D-1011] generate_addr
+[GOCT-D-1011] +++++++++++machineid++++++++++:0x451
+[GOCT-D-1011] cm 4:5
+[GOCT-D-1011] read first uuid
+Loaded 3 variables from JSON file: /opt/work/storage_data.txt
+storage data: backlight:80,
+     splitScreenDisp:0,
+,    language:0,
+    recorderTime:2
+,    recorderUrgentTime:1
+,    carTripSwitch:0
+#######--------------SetBackLight---241---------------------
+sh: cd: line 1: can't cd to /sys/kernel/debug/dispdbg
+cd /sys/kernel/debug/dispdbg; echo lcd0 > name; echo setbl > command; echo 51 > param; echo 1 > start
+CheckDiskInfoDeleteVideoFile:403
+[GOCT-D-1011] --->tmp id:
+[GOCT-D-1011] addr sn local address :02 0d 58 54 55 53 0d 00 
+[GOCT-D-1011] use efuse addr
+[GOCT-D-1011] rtl_set_config_addr
+[GOCT-D-1011] rtl_set_config_addr 1
+[GOCT-E-1011] rtl_set_config_addr error:cannot find btaddr config
+[GOCT-D-1011] rtl_set_config_addr over
+[GOC-D] gap_set_local_address
+[GOC-D] send_ind: [DB4CA38FF995B6]
+[GOCT-D-1011] cur_index=-6 MAX_INDEX=0
+[GOCT-D-1015] start i 190918....
+[GOC-D] send_register eresault=1[e_registering]..
+[GOC-D] register err..
+[GOC-D] send_ind: [VS1]
+[GOCT-D-1015] set id :XinBS_ZKSW_V853_RTL8733BS_Linux
+[GOCT-D-1015] path:/opt/work/btgoc
+[GOCT-D-1015] auth start:0
+[GOCT-D-1015] +++++++++++machineid++++++++++:0x451
+[GOCT-D-1015] cm 4:5
+[GOCT-D-1015] read first uuid
+[GOCT-D-1011] cur_index=-2 MAX_INDEX=0
+[GOCT-E-1011] bcsp_timed_evt
+[GOCT-D-1011] new_txseq:3,_this->txmsg.txseq:4
+[GOCT-D-1011] lastTxseqTime:0
+[GOCT-D-1011] driver_change_baudrate_by_bandrate_parity
+[GOCT-D-1011] change ex bp open:/dev/ttyS2,band:1500000
+[GOCT-D-1011] parity even
+[GOCT-E-1011] change_baudrate ex to:1500000 over
+[GOCT-D-1015] --->tmp id:141E2A1A17080112584E180158545553
+[GOCT-D-1015] ----------hardware------------:
+[GOCT-D-1015] cmb 4:5:1
+[GOCT-D-1015] rtl start..
+[GOCT-D-1015] rtladdr:[4ca38ff995b6]
+[GOCT-D-1015] hardware id:4ca38ff995b6
+[GOCT-D-1015] auth init over
+[GOCT-D-1015] auth get imei over
+[GOCT-D-1015] step 1
+[GOCT-E-1015] goodocom device 20220429
+[GOCT-D-1015] +file_access_check
+[GOCT-D-1015] find auth data step 2
+[GOCT-D-1015] goodocom device
+[GOCT-E-1015] i strcmp err:/opt/work/btgoc/.goc_database,/opt/work/btgoc
+[GOCT-D-1015] exit read
+[GOC-D] send_register eresault=0[e_register_success]..
+[GOC-D] send_register g_bBtInitFlag= 0
+[GOC-D] send_ind: [VS0]
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOCT-D-1015] exit thread1
+[GOCT-D-1019] heart handle 4,time:3
+[GOCT-E-1011] bcsp_timed_evt
+[GOCT-D-1011] new_txseq:3,_this->txmsg.txseq:4
+[GOCT-D-1011] lastTxseqTime:1
+[GOCT-D-1011] prepare_patch eversion=02
+[GOCT-D-1011] i:1,chipID:0x3,number_of_total_patch:2
+[GOCT-D-1011] start_offset:30c0 patch_len:a815
+[GOCT-D-1011] config_len:33,fw_len:43029
+[GOC-D] snd config:55 AB 23 87 1B 00 0C 00 10 02 80 00 00 50 C5 EA 19 E1 1B FD AF 5B 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-D-1011] cur_index=0 MAX_INDEX=172
+[GOCT-D-1011] cur_index=1 MAX_INDEX=172
+[GOCT-D-1011] cur_index=2 MAX_INDEX=172
+[GOCT-D-1011] cur_index=3 MAX_INDEX=172
+[GOCT-D-1011] cur_index=4 MAX_INDEX=172
+[GOCT-D-1011] cur_index=5 MAX_INDEX=172
+[GOCT-D-1011] cur_index=6 MAX_INDEX=172
+[GOCT-D-1011] cur_index=7 MAX_INDEX=172
+[GOCT-D-1011] cur_index=8 MAX_INDEX=172
+[GOCT-D-1011] cur_index=9 MAX_INDEX=172
+[GOCT-D-1011] cur_index=10 MAX_INDEX=172
+[GOCT-D-1011] cur_index=11 MAX_INDEX=172
+[GOCT-D-1011] cur_index=12 MAX_INDEX=172
+[GOCT-D-1011] cur_index=13 MAX_INDEX=172
+[GOCT-D-1011] cur_index=14 MAX_INDEX=172
+[GOCT-D-1011] cur_index=15 MAX_INDEX=172
+[GOCT-D-1011] cur_index=16 MAX_INDEX=172
+[GOCT-D-1011] cur_index=17 MAX_INDEX=172
+[GOCT-D-1011] cur_index=18 MAX_INDEX=172
+[GOCT-D-1011] cur_index=19 MAX_INDEX=172
+[GOCT-D-1011] cur_index=20 MAX_INDEX=172
+[GOCT-D-1011] cur_index=21 MAX_INDEX=172
+[GOCT-D-1011] cur_index=22 MAX_INDEX=172
+[GOCT-D-1011] cur_index=23 MAX_INDEX=172
+[GOCT-D-1011] cur_index=24 MAX_INDEX=172
+[GOCT-D-1011] cur_index=25 MAX_INDEX=172
+[GOCT-D-1011] cur_index=26 MAX_INDEX=172
+[GOCT-D-1011] cur_index=27 MAX_INDEX=172
+[GOCT-D-1011] cur_index=28 MAX_INDEX=172
+[GOCT-D-1011] cur_index=29 MAX_INDEX=172
+[GOCT-D-1011] cur_index=30 MAX_INDEX=172
+[GOCT-D-1011] cur_index=31 MAX_INDEX=172
+[GOCT-D-1011] cur_index=32 MAX_INDEX=172
+[GOCT-D-1011] cur_index=33 MAX_INDEX=172
+[GOCT-D-1011] cur_index=34 MAX_INDEX=172
+[GOCT-D-1011] cur_index=35 MAX_INDEX=172
+[GOCT-D-1011] cur_index=36 MAX_INDEX=172
+[GOCT-D-1011] cur_index=37 MAX_INDEX=172
+[GOCT-D-1011] cur_index=38 MAX_INDEX=172
+[GOCT-D-1011] cur_index=39 MAX_INDEX=172
+[GOCT-D-1011] cur_index=40 MAX_INDEX=172
+[GOCT-D-1011] cur_index=41 MAX_INDEX=172
+[GOCT-D-1011] cur_index=42 MAX_INDEX=172
+[GOCT-D-1011] cur_index=43 MAX_INDEX=172
+[GOCT-D-1011] cur_index=44 MAX_INDEX=172
+[GOCT-D-1011] cur_index=45 MAX_INDEX=172
+[GOCT-D-1011] cur_index=46 MAX_INDEX=172
+[GOCT-D-1011] cur_index=47 MAX_INDEX=172
+[GOCT-D-1011] cur_index=48 MAX_INDEX=172
+[GOCT-D-1011] cur_index=49 MAX_INDEX=172
+[GOCT-D-1011] cur_index=50 MAX_INDEX=172
+[GOCT-D-1011] cur_index=51 MAX_INDEX=172
+[GOCT-D-1011] cur_index=52 MAX_INDEX=172
+[GOCT-D-1011] cur_index=53 MAX_INDEX=172
+[GOCT-D-1011] cur_index=54 MAX_INDEX=172
+[GOCT-D-1011] cur_index=55 MAX_INDEX=172
+[GOCT-D-1011] cur_index=56 MAX_INDEX=172
+[GOCT-D-1011] cur_index=57 MAX_INDEX=172
+[GOCT-D-1011] cur_index=58 MAX_INDEX=172
+[GOCT-D-1011] cur_index=59 MAX_INDEX=172
+[GOCT-D-1011] cur_index=60 MAX_INDEX=172
+[GOCT-D-1011] cur_index=61 MAX_INDEX=172
+[GOCT-D-1011] cur_index=62 MAX_INDEX=172
+[GOCT-D-1011] cur_index=63 MAX_INDEX=172
+[GOCT-D-1011] cur_index=64 MAX_INDEX=172
+[GOCT-D-1011] cur_index=65 MAX_INDEX=172
+[GOCT-D-1011] cur_index=66 MAX_INDEX=172
+[GOCT-D-1011] cur_index=67 MAX_INDEX=172
+[GOCT-D-1011] cur_index=68 MAX_INDEX=172
+[GOCT-D-1011] cur_index=69 MAX_INDEX=172
+[GOCT-D-1011] cur_index=70 MAX_INDEX=172
+[GOCT-D-1011] cur_index=71 MAX_INDEX=172
+[GOCT-D-1011] cur_index=72 MAX_INDEX=172
+[GOCT-D-1011] cur_index=73 MAX_INDEX=172
+[GOCT-D-1011] cur_index=74 MAX_INDEX=172
+[GOCT-D-1011] cur_index=75 MAX_INDEX=172
+[GOCT-D-1011] cur_index=76 MAX_INDEX=172
+[GOCT-D-1011] cur_index=77 MAX_INDEX=172
+[GOCT-D-1011] cur_index=78 MAX_INDEX=172
+[GOCT-D-1011] cur_index=79 MAX_INDEX=172
+[GOCT-D-1011] cur_index=80 MAX_INDEX=172
+[GOCT-D-1011] cur_index=81 MAX_INDEX=172
+[GOCT-D-1011] cur_index=82 MAX_INDEX=172
+[GOCT-D-1011] cur_index=83 MAX_INDEX=172
+[GOCT-D-1011] cur_index=84 MAX_INDEX=172
+[GOCT-D-1011] cur_index=85 MAX_INDEX=172
+[GOCT-D-1011] cur_index=86 MAX_INDEX=172
+[GOCT-D-1011] cur_index=87 MAX_INDEX=172
+[GOCT-D-1011] cur_index=88 MAX_INDEX=172
+[GOCT-D-1011] cur_index=89 MAX_INDEX=172
+[GOCT-D-1011] cur_index=90 MAX_INDEX=172
+[GOCT-D-1011] cur_index=91 MAX_INDEX=172
+[GOCT-D-1011] cur_index=92 MAX_INDEX=172
+[GOCT-D-1011] cur_index=93 MAX_INDEX=172
+[GOCT-D-1011] cur_index=94 MAX_INDEX=172
+[GOCT-D-1011] cur_index=95 MAX_INDEX=172
+[GOCT-D-1011] cur_index=96 MAX_INDEX=172
+[GOCT-D-1011] cur_index=97 MAX_INDEX=172
+[GOCT-D-1011] cur_index=98 MAX_INDEX=172
+[GOCT-D-1011] cur_index=99 MAX_INDEX=172
+[GOCT-D-1011] cur_index=100 MAX_INDEX=172
+[GOCT-D-1011] cur_index=101 MAX_INDEX=172
+[GOCT-D-1011] cur_index=102 MAX_INDEX=172
+[GOCT-D-1011] cur_index=103 MAX_INDEX=172
+[GOCT-D-1011] cur_index=104 MAX_INDEX=172
+[GOCT-D-1011] cur_index=105 MAX_INDEX=172
+[GOCT-D-1011] cur_index=106 MAX_INDEX=172
+[GOCT-D-1011] cur_index=107 MAX_INDEX=172
+[GOCT-D-1011] cur_index=108 MAX_INDEX=172
+[GOCT-D-1011] cur_index=109 MAX_INDEX=172
+[GOCT-D-1011] cur_index=110 MAX_INDEX=172
+[GOCT-D-1011] cur_index=111 MAX_INDEX=172
+[GOCT-D-1011] cur_index=112 MAX_INDEX=172
+[GOCT-D-1011] cur_index=113 MAX_INDEX=172
+[GOCT-D-1011] cur_index=114 MAX_INDEX=172
+[GOCT-D-1011] cur_index=115 MAX_INDEX=172
+[GOCT-D-1011] cur_index=116 MAX_INDEX=172
+[GOCT-D-1011] cur_index=117 MAX_INDEX=172
+[GOCT-D-1011] cur_index=118 MAX_INDEX=172
+[GOCT-D-1011] cur_index=119 MAX_INDEX=172
+[GOCT-D-1011] cur_index=120 MAX_INDEX=172
+[GOCT-D-1011] cur_index=121 MAX_INDEX=172
+[GOCT-D-1011] cur_index=122 MAX_INDEX=172
+[GOCT-D-1011] cur_index=123 MAX_INDEX=172
+[GOCT-D-1011] cur_index=124 MAX_INDEX=172
+[GOCT-D-1011] cur_index=125 MAX_INDEX=172
+[GOCT-D-1011] cur_index=126 MAX_INDEX=172
+[GOCT-D-1011] cur_index=127 MAX_INDEX=172
+[GOCT-D-1011] cur_index=128 MAX_INDEX=172
+[GOCT-D-1011] cur_index=129 MAX_INDEX=172
+[GOCT-D-1011] cur_index=130 MAX_INDEX=172
+[GOCT-D-1011] cur_index=131 MAX_INDEX=172
+[GOCT-D-1011] cur_index=132 MAX_INDEX=172
+[GOCT-D-1011] cur_index=133 MAX_INDEX=172
+[GOCT-D-1011] cur_index=134 MAX_INDEX=172
+[GOCT-D-1011] cur_index=135 MAX_INDEX=172
+[GOCT-D-1011] cur_index=136 MAX_INDEX=172
+[GOCT-D-1011] cur_index=137 MAX_INDEX=172
+[GOCT-D-1011] cur_index=138 MAX_INDEX=172
+[GOCT-D-1011] cur_index=139 MAX_INDEX=172
+[GOCT-D-1011] cur_index=140 MAX_INDEX=172
+[GOCT-D-1011] cur_index=141 MAX_INDEX=172
+[GOCT-D-1011] cur_index=142 MAX_INDEX=172
+[GOCT-D-1011] cur_index=143 MAX_INDEX=172
+[GOCT-D-1011] cur_index=144 MAX_INDEX=172
+[GOCT-D-1011] cur_index=145 MAX_INDEX=172
+[GOCT-D-1011] cur_index=146 MAX_INDEX=172
+[GOCT-D-1011] cur_index=147 MAX_INDEX=172
+[GOCT-D-1011] cur_index=148 MAX_INDEX=172
+[GOCT-D-1011] cur_index=149 MAX_INDEX=172
+[GOCT-D-1011] cur_index=150 MAX_INDEX=172
+[GOCT-D-1011] cur_index=151 MAX_INDEX=172
+[GOCT-D-1011] cur_index=152 MAX_INDEX=172
+[GOCT-D-1011] cur_index=153 MAX_INDEX=172
+[GOCT-D-1011] cur_index=154 MAX_INDEX=172
+Monitoring upgrade file: /mnt/extsd/runcarplay
+Inotify monitor initialized successfully
+Waiting for upgrade file events...
+[GOCT-D-1011] cur_index=155 MAX_INDEX=172
+[GOCT-D-1011] cur_index=156 MAX_INDEX=172
+[GOCT-D-1011] cur_index=157 MAX_INDEX=172
+[GOCT-D-1011] cur_index=158 MAX_INDEX=172
+[GOCT-D-1011] cur_index=159 MAX_INDEX=172
+[GOCT-D-1011] cur_index=160 MAX_INDEX=172
+[GOCT-D-1011] cur_index=161 MAX_INDEX=172
+[GOCT-D-1011] cur_index=162 MAX_INDEX=172
+[GOCT-D-1011] cur_index=163 MAX_INDEX=172
+[GOCT-D-1011] cur_index=164 MAX_INDEX=172
+[GOCT-D-1011] cur_index=165 MAX_INDEX=172
+[GOCT-D-1011] cur_index=166 MAX_INDEX=172
+[GOCT-D-1011] cur_index=167 MAX_INDEX=172
+[GOCT-D-1011] cur_index=168 MAX_INDEX=172
+[GOCT-D-1011] cur_index=169 MAX_INDEX=172
+[GOCT-D-1011] cur_index=170 MAX_INDEX=172
+[GOCT-D-1011] cur_index=171 MAX_INDEX=172
+[GOCT-D-1011] cur_index=172 MAX_INDEX=172
+[GOCT-D-1011] last index:ad
+-------lvgl_main:302-----------------
+wh=720x1440, vwh=720x2880, bpp=32, rotated=1
+[06:36:29.541]libzlink_session_state_cb_init
+Turn on double buffering.
+Turn on 2d hardware acceleration.
+[06:36:29.542]libzlink_video_data_cb_init
+[06:36:29.543]libzlink_main_audio_start_cb_init
+[06:36:29.543]libzlink_main_data_cb_init
+[06:36:29.543]libzlink_main_audio_stop_cb_init
+[06:36:29.543]libzlink_video_focus_request_cb_init
+[06:36:29.543]libzlink_audio_focus_request_cb_init
+[06:36:29.543]libzlink_request_p2p_start_cb_init
+[06:36:29.543]libzlink_request_wifi_info_cb_init
+[06:36:29.543]libzlink_mic_start_cb_init
+[06:36:29.543]libzlink_mic_stop_cb_init
+#################--------------sunxi :4------------
+Turn on 2d hardware acceleration fill.
+Turn on 2d hardware acceleration blit.
+Turn on 2d hardware acceleration blend.
+Turn on 2d hardware acceleration scale.
+Turn on 2d hardware acceleration rotate.
+[06:36:29.544]libzlink_init in
+[06:36:29.548]libzlink_init out
+[06:36:29.548]libzlink_check_ready
+[06:36:29.548]libzlink_check_ready: is_socket_link = 0
+libzlink audio_main_loop: connecting server(zlink)
+[06:36:29.549]libzlink_request_state in
+[06:36:29.550]libzlink_request_state out
+libzlink video_main_loop: connecting server(zlink)
+libzlink AA_bypath_main_loop: connecting server(zlink)
+[06:36:29.551]libzlink: zlink_ready_cb
+[06:36:29.555]libzlink: zlink_ready_cb: no callback
+[06:36:29.555]libzlink control_main_loop: connecting server(zlink)
+open i2c fd:10 success!!!
+open i2c fd:11 success!!!
+#######--------------MPI_init---16---------------------
+IniParserInitload conf file /etc/cedarx.conf ok!
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0224 06:36:29.626937  1021 isp_version.h:39] <isp_version_info> [ISP]>>>>>>>>>>>>>>>>>>>> ISP VERSION INFO <<<<<<<<<<<<<<<<<<<
+IPCORE: ISP600
+branch: libisp-dev
+commit: 3c5cc7c79d0501024de5c73984b64105534cdc17
+date  : Fri Jul 25 15:52:07 2025 +0800
+author: <mayifei@allwinnertech.com>
+--------------------------------------------------------
+
+I0224 06:36:29.627358  1021 hwdisplay.c:84] <hw_display_init> 
+I0224 06:36:29.627506  1021 hwdisplay.c:1015] <hwd_init> (hwd_init 1015)
+I0224 06:36:29.627673  1021 hwdisplay.c:1069] <hwd_init> ret[0][2,0]ch[0]lyl[0] init: enable[0], screenwin[0,0, 0x0], zorder[0], alpha[mode:0, value:0]
+[GOCT-D-1011] cur_index=173 MAX_INDEX=172
+[GOCT-D-1011] patch done:lmp version=5cab hci_rev:68b1
+[GOC-D] LYMCB.flags:0x62
+[GOC-D] layer start
+[GOC-D] store local support feature:fffffffadbbf7b87
+[GOC-D] version:6,      LYMCB.BT_Version:1,     LYMCB.BT_Versions_Supported:31
+[GOC-D] GocBtScCmGetSecurityConfIndNullS securityMode:4
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-E] @@@@@@pchange->config = 24
+[GOC-D] HCI_WRITE_SECURE_CONNECTIONS_HOST_SUPPORT failed. Can't enter Security Mode 4 encryption mode
+[GOC-D] GocBtScLeUpdateLocalDbKeys init
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] GocBtScDbWrite
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] HCI Version: 008 HCI Revision: 026801 Local LMP Version: 008 Manuf Name: 000093 LMP Subversion: 023723
+[GOC-D] SPP_GET_INSTANCES_QID_CFM numberOfSppInstances:8
+[GOC-D] instance 0 queueid=23 handle=24
+[GOC-D] instance 1 queueid=25 handle=26
+[GOC-D] instance 2 queueid=27 handle=28
+[GOC-D] instance 3 queueid=29 handle=30
+[GOC-D] instance 4 queueid=31 handle=32
+[GOC-D] instance 5 queueid=33 handle=34
+[GOC-D] instance 6 queueid=35 handle=36
+[GOC-D] instance 7 queueid=37 handle=38
+[GOC-D] GOC_BT_SPP_GET_INSTANCES_QID_CFM
+[GOC-D] gatt register succeed gattid:131089
+[GOC-D] setting gatt connection param
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 12 00 09 00 05 35 03 19 10 02 09 02 00 09 01 03 09 02 01 09 00 5D 09 02 02 09 82 0C 09 02 03 09 01 00 09 02 04 28 01 09 02 05 09 00 01 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] csrBtSdRegisterServiceRecordCfmHanlder result:0x0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 06 19 11 0E 19 11 0F 09 00 04 35 10 35 06 19 01 00 09 00 17 35 06 19 00 17 09 01 04 09 00 0D 35 12 35 10 35 06 19 01 00 09 00 1B 35 06 19 00 17 09 01 04 09 00 09 35 08 35 06 19 11 0E 09 01 06 09 03 11 09 03 CF 09 00 05 35 03 19 10 02 09 01 02 25 04 47 42 54 53 09 01 00 25 08 41 56 52 43 50 20 43 54 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 0B 09 00 04 35 10 35 06 19 01 00 09 00 19 35 06 19 00 19 09 01 03 09 00 09 35 08 35 06 19 11 0D 09 01 03 09 03 11 09 00 00 09 00 05 35 03 19 10 02 09 01 02 25 04 47 42 54 53 09 01 00 25 13 41 75 64 69 6F 2F 56 69 64 65 6F 20 53 65 72 76 69 63 65 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] send sco err report
+[GOC-D] RTL8733BS
+[GOC-D] av activate succeed count:1
+[GOC-D] Selecting sink filters setup...
+[GOC-D] Installing filter index 0: 'csr_sbc_decoder'
+[GOC-D] Installing filter index 1: 'csr_sink_terminator'
+[GOC-D] Filter check: Index 0: csr_sbc_decoder : 
+[GOC-D] decoder 
+[GOC-D] pass-through 
+[GOC-D] 
+[GOC-D] Filter check: Index 1: csr_sink_terminator : 
+[GOC-D] pass-through 
+[GOC-D] 
+[GOC-D] Filter combinations seems to be good
+[GOC-D] COD set to Carkit
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 18 01 09 00 04 35 13 35 06 19 01 00 09 00 1F 35 09 19 00 07 09 00 08 09 00 0B 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] ####### default in gatt prim handler 0x802a,
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 33 09 00 04 35 11 35 03 19 01 00 35 05 19 00 03 08 09 35 03 19 00 08 09 00 05 35 03 19 10 02 09 00 09 35 08 35 06 19 11 34 09 01 03 09 02 00 09 FE FF 09 03 17 0A 00 37 FF FF 09 01 00 25 0C 4D 41 50 20 4D 4E 53 2D 6E 61 6D 65 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] sc house cleaning
+[GOC-D] RTL8733BS
+[GOC-D] GocBtScLeUpdateLocalDbKeys init
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] GocBtScDbWrite
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] handleSetSecurityModeCfm:4
+[GOC-D] send_init_succeed:1,0
+[GOC-D] send_bt_stat:1
+[GOC-D] Goc bluetooth version : GBTSDL4.SDG4.126039
+[GOC-D] send_ind: [MWGBTSDL4.SDG4.126039]
+[GOC-D] send_ind: [IS1]
+[GOC-D] BT_autoconnect_Init
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-E] strt hfp_connect_auto 
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] hfp_established_auto ,g_connect_times = 1,auto:1
+[GOC-D] hfp_established_delay,delay[1] get_connected_carplay_rfcomm_state:0
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] is_apple_device phone_addr:DCA4CA1967EC
+[GOC-D] read_device_info_by_addr addr:DCA4CA1967EC
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] addr1:DCA4CA1967EC
+[GOC-D] config_read key:info1 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOC-E] time_set_link_policy_start acl_connect_state:0
+[GOC-D] gap_set_link_policy visible:0 connectable:1
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOC-D] send_ind: [MMRTL8733BS]
+[GOC-D] send_ind: [DB4CA38FF995B6]
+[GOC-E] config_read key:passkey not found
+[GOC-D] send_ind: [MN0000]
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-E] send_hf_disconnected,addr null
+Mount state changed: 0 -> 1
+Re-monitored upgrade file
+[GOC-E] send_hf_disconnected,addr null
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-E] addr is null
+[GOC-E] hfp_get_hf_status addr is null
+[GOC-D] send_ind: [MG1]
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] total:2
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-E] cod:7a020c
+[GOC-D] send_ind: [MX1DCA4CA1967ECCar]
+[GOC-D] config_read key:addr0 value:38892C9B7EF8
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :38892C9B7EF8
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:FB 86 66 B6 2A F7 62 10 EB DB 9F 79 13 21 9C E1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-E] cod:7a020c
+[GOC-D] send_ind: [MX238892C9B7EF8iPhone]
+[GOC-D] config_write key:pairlisttotal value:2
+[GOC-D] config_write same key and value
+[GOC-D] send_ind: [PO2]
+[GOC-D] sppactive spp callback
+[GOC-D] GocBtSppAppStartActivate index:0
+[GOC-D] GocBtSppAppStartActivate queueId:23,phandle:24
+[GOC-D] register_uuid_android_auto
+[GOC-D] 4de17a00-52cb-11e6-bdf4-0800200c9a66
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-D] GocBtSppAppStartActivateExt index:1 queueId:25 handle:26 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] carplay_init
+[GOC-D] carplay_init carplay_vendor:1
+[GOC-D] zlink_register_android_auto_uuid
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-E] spp state 1:1
+[GOC-D] GocBtSppAppStartActivateExt index:2 queueId:27 handle:28 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 06 19 11 1E 19 12 03 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 0A 09 00 09 35 08 35 06 19 11 1E 09 01 07 09 01 00 25 0F 48 61 6E 64 73 2D 46 72 65 65 20 75 6E 69 74 09 03 11 09 00 17 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] zlink_carplay_init_thread : e5f7a68d-sda3-4305-984b-asdasd7a1001
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 01 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 01 09 00 05 35 03 19 10 02 09 00 09 35 08 35 06 19 11 01 09 01 02 09 01 00 25 00 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] handleSppActivateCfm serverChannel:01,queueId:17,uuid:00 00 11 01 00 00 10 00 80 00 00 80 5F 9B 34 FB 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 02 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] handleSppActivateCfm serverChannel:02,queueId:19,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-E] active_callback 
+libzbt_init
+
+[GOC-D] send_ind: [SR4de17a0052cb11e6bdf40800200c9a662]
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 03 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] handleSppActivateCfm serverChannel:03,queueId:1b,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 09 19 11 08 19 12 03 19 11 31 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 0B 09 00 09 35 08 35 06 19 11 08 09 01 02 09 01 00 25 07 48 65 61 64 73 65 74 09 03 02 28 01 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] HF Activated Successfully!!
+[GOC-D] hfp activated, write scan enable
+[GOC-D] hf deregister time cfm result:0xFFFF
+open_libzbt_so: open 'libzbt-main.so' ok
+libzbt_init: all interface open ok
+libzbt-main: libzbt_init
+
+libzbt-main: libzbt_init out
+
+libzbt_init out
+
+[GOC-D] zlink_carplay_init_thread libzbt_request_bt_enable_CB_init
+libzbt_request_bt_enable_CB_init
+libzbt-main: libzbt_request_bt_enable_CB_init
+libzbt_request_bt_enable_CB_init out
+[GOC-D] zlink_carplay_init_thread libzbt_rfcomm_data_recv_CB_init
+libzbt_rfcomm_data_recv_CB_init
+libzbt-main: libzbt_rfcomm_data_recv_CB_init
+libzbt_rfcomm_data_recv_CB_init out
+[GOC-D] libzbt_carlink_StartAdvertise_CB_init
+libzbt_carlink_StartAdvertise_CB_init
+libzbt-main: libzbt_carlink_StartAdvertise_CB_init
+libzbt-main: libzbt_carlink_StartAdvertise_CB_init out
+[GOC-D] libzbt_carlink_StopAdvertise_CB_init
+libzbt_carlink_StopAdvertise_CB_init
+libzbt-main: libzbt_carlink_StopAdvertise_CB_init
+libzbt-main: libzbt_carlink_StopAdvertise_CB_init out
+[GOC-D] libzbt_carlink_BleGattSend_CB_init
+libzbt_carlink_BleGattSend_CB_init
+libzbt-main: libzbt_carlink_BleGattSend_CB_init
+libzbt-main: libzbt_carlink_BleGattSend_CB_init out
+[GOC-D] libzbt_hicar_ble_start_CB_init
+libzbt_hicar_ble_start_CB_init
+libzbt-main: libzbt_request_hicar_ble_start_CB_init
+libzbt-main: libzbt_request_hicar_ble_start_CB_init out
+libzbt_hicar_ble_start_CB_init out
+libzbt_hicar_ble_stop_CB_init
+libzbt-main: libzbt_hicar_ble_stop_CB_init
+libzbt-main: libzbt_hicar_ble_stop_CB_init out
+libzbt_hicar_ble_stop_CB_init out
+[GOC-D] libzbt_hicar_service_register_CB_init
+libzbt_hicar_service_register_CB_init
+libzbt-main: libzbt_request_hicar_service_register_CB_init
+libzbt-main: libzbt_request_hicar_service_register_CB_init out
+libzbt_hicar_service_register_CB_init out
+[GOC-D] libzbt_hicar_service_handle_CB_init
+libzbt_hicar_service_handle_CB_init
+libzbt-main: libzbt_hicar_service_handle_CB_init
+libzbt-main: libzbt_hicar_service_handle_CB_init out
+libzbt_hicar_service_handle_CB_init out
+[GOC-D] libzbt_hicar_service_data_recv_CB_init
+libzbt_hicar_service_data_recv_CB_init
+libzbt-main: libzbt_hicar_service_data_recv_CB_init
+libzbt-main: libzbt_hicar_service_data_recv_CB_init out
+libzbt_hicar_service_data_recv_CB_init out
+[GOC-D] zlink_carplay_init_thread over!!!
+libzbt-main server2 create
+libzbt-main serveR2 wait client
+libzbt-main server create
+libzbt-main server wait client
+[GOC-D] spp_connect_last
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] spp_connect_last: DCA4:CA:1967EC
+[GOC-D] spp_connect_by_uuid DCA4CA1967EC
+[GOC-E]  sppAppInstData[0]->state = 1   sppAppInstData[0]->serverOrClient =0 
+[GOC-E]  sppAppInstData[1]->state = 1   sppAppInstData[1]->serverOrClient =0 
+[GOC-E]  sppAppInstData[2]->state = 1   sppAppInstData[2]->serverOrClient =0 
+[GOC-E]  sppAppInstData[3]->state = 0   sppAppInstData[3]->serverOrClient =1 
+[GOC-D] rfcomm connect...
+[GOC-D] dm_ev_connect_complete type:01,DCA4CA1967EC,status:0
+[GOC-E] acl_connect_state:1 lylink_connect_state:0 addr:DCA4CA1967EC
+[GOC-D] DM_SM_KEY_REQUEST_IND 1
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] GocBtScDmSmLinkKeyRequestIndIdleS readResult:1,linkkeyvalid:1
+[GOC-D] DCA4CA1967EC
+[GOC-D] GocBtCmScDmSspLinkKeyRequestRes linkkeyType:5
+[GOC-D] dm_ev_encryption_change
+[GOC-E] dm_sm_hci_enc_complete 0
+[GOC-D] GocBtScDmPrimHandler DM_SM_ENCRYPTION_CHANGE_IND
+createVoChn:1260
+I0224 06:36:32.412174  1021 hwdisplay.c:1269] <hwd_get_disp_type> Current the  disp_type:0x1  tv_mode:0x0
+W0224 06:36:32.432533  1021 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 06:36:32.432709  1021 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 06:36:32.432799  1021 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 06:36:32.432875  1021 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 06:36:32.432953  1021 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:0, zorder=0, cnt:2
+I0224 06:36:32.433065  1021 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[0]: screen_win[0,720, 720x720]
+create vo channel[1] success!
+startPreview:2425
+createVoChn:1260
+W0224 06:36:32.453852  1021 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 06:36:32.454018  1021 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 06:36:32.454107  1021 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 06:36:32.454185  1021 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 06:36:32.454264  1021 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:1, zorder=1, cnt:3
+I0224 06:36:32.454375  1021 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[1]: screen_win[0,0, 720x720]
+create vo channel[1] success!
+startPreview:2425
+[GOC-D] dm_ev_refresh_encryption_key_complete
+[GOC-D] dm_sm_hci_encryption_key_refresh_complete acl flags:0x4200
+[GOC-D] Send_DM_Refresh_Encryption_Key_Ind status:0
+[GOC-D] sc main CsrBtScIgnoreAnyS
+[GOC-D] sc main CsrBtScIgnoreAnyS
+[GOC-D] Successfully Connected with: DCA4:CA:1967EC
+[GOC-D] handleSppConnectInd DCA4CA1967EC result:0x0
+[GOC-D] send_spp_connect 3
+[GOC-E] channel = 4
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [DRDCA4CA1967EC]
+[GOC-D] send_ind: [SACar]
+[GOC-E] hex_uuid :00000000decafadedecadeafdecacafe
+[GOC-E] HFP is not connected delay auto connect devices!
+[GOC-D] hfp_connect DCA4CA1967EC
+[GOC-E] gap_stop_search error not searching
+[GOC-D] send_ind: [IV]
+[GOC-E] addr is differen!
+[GOC-D] ********** zlink_handle_rfcomm_connect_state is_connect:1, connection:3
+[GOC-D] ********* UUID :00 00 00 00 DE CA FA DE DE CA DE AF DE CA CA FE 
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+libzbt_phonelink_state
+libzbt-main: libzbt_phonelink_state
+libzbt-main: local_mac_address = '4CA38FF995B6'
+libzbt-main: libzbt_phonelink_state:
+phone_type: 0(carplay)
+libzbt-main: phone connected
+libzbt-main: bluetooth pair
+libzbt-main: libzbt_phonelink_state pid = [1001] socket_fd = -1
+libzbt-main: libzbt_phonelink_state: client_fd = -1 fail..
+stopPreview:2434
+[GOC-D] sm_af_access_success
+[GOC-D] hf sdc result handler
+[GOC-D] SND:AT+BRSF=375
+[GOC-D] HF[180225] REV:
++BRSF:3567
+
+[GOC-D] REV AT:0D 0A 2B 42 52 53 46 3A 33 35 36 37 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND=?
+[GOC-D] HF[180225] REV:
++CIND: ("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 28 22 73 65 72 76 69 63 65 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 73 65 74 75 70 22 2C 28 30 2D 33 29 29 2C 28 22 62 61 74 74 63 68 67 22 2C 28 30 2D 35 29 29 2C 28 22 73 69 67 6E 61 6C 22 2C 28 30 2D 35 29 29 2C 28 22 72 6F 61 6D 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 68 65 6C 64 22 2C 28 30 2D 32 29 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND?
+stopPreview:2434
+[GOC-D] HF[180225] REV:
++CIND: 1,0,0,2,4,0,0
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 31 2C 30 2C 30 2C 32 2C 34 2C 30 2C 30 0D 0A 
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CMER=3,0,0,1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CHLD=?
+[GOC-D] HF[180225] REV:
++CHLD: (0,1,1x,2,2x,3)
+
+[GOC-D] REV AT:0D 0A 2B 43 48 4C 44 3A 20 28 30 2C 31 2C 31 78 2C 32 2C 32 78 2C 33 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND=1,2
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND=?
+[GOC-D] HF[180225] REV:
++BIND:(1,2)
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 28 31 2C 32 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND?
+[GOC-D] HF[180225] REV:
++BIND:1,1
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 31 2C 31 0D 0A 
+[GOC-D] HF[180225] REV:
++BIND:2,1
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 32 2C 31 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SLC established to: Handsfree Gateway Remote HFP version supported: 0x107 
+[GOC-D] Remote indicators supported: ("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+[GOC-D] Actual indicator values: 1,0,0,2,4,0,0 
+[GOC-D] Call hold supported string: (0,1,1x,2,2x,3)
+[GOC-D] handleHfConnectInd DCA4CA1967EC result:0
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [IV]
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] write pairlist old total:2
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] update dev name is 0x20
+[GOC-D] join_int_arr find 0 -1
+[GOC-D] config_write key:pairlistindex value:1,0,
+[GOC-D] config_write same key and value
+[GOC-D] config_write key:pairlisttotal value:2
+[GOC-D] config_write same key and value
+[GOC-D] chld find 0
+[GOC-D] chld find 1
+[GOC-D] chld find 1x
+[GOC-D] chld find 2
+[GOC-D] chld find 2x
+[GOC-D] chld find 3
+[GOC-D] send_ind: [FA3567,63]
+[GOC-D] send_ind: [IBDCA4CA1967EC]
+[GOC-D] mapc_connect addr:DCA4CA1967EC
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [JHDCA4CA1967EC]
+[GOC-D] send_ind: [SACar]
+[GOC-D] send_ind: [MX0DCA4CA1967ECCar]
+[GOC-E] set_cmd_current_addr[dca4ca1967ec]
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] send_ind: [SC7A020C]
+[GOC-D] --|connecting a2dp..
+[GOC-D] a2dp_connect DCA4CA1967EC
+[GOC-D] Connecting a2dp 0 - please wait...
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-E] send  car play info 
+[GOC-D] register_uuid phone_addr:DCA4CA1967EC
+[GOC-D] read_device_info_by_addr addr:DCA4CA1967EC
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] addr1:DCA4CA1967EC
+[GOC-D] config_read key:info1 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] gap_read_service
+[GOC-E] ++++++++++++++++phone type: iphone+++++++++++++++++++
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] -->!!!link key:30 01 10 ec 17 03 36 ec 59 e4 af 35 6d b9 7c 4d
+[GOC-D] read_device_info_by_addr addr:DCA4CA1967EC
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] addr1:DCA4CA1967EC
+[GOC-D] config_read key:info1 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] spp_connect_by_uuid DCA4CA1967EC
+[GOC-D] send_spp_connect 3
+[GOC-E] channel = 4
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SACar]
+[GOC-E] hex_uuid :00000000decafadedecadeafdecacafe
+[GOC-E] addr is differen!
+[GOC-D] connect carplay rfcomm addr:DCA4CA1967EC
+[GOC-D] zlink_connect_rfcomm_by_cgmi
+[GOC-D] indicatorSupported:("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+[GOC-D] indicatorValue:1,0,0,2,4,0,0
+[GOC-D] type_ind:service,value_ind:1
+[GOC-D] type_ind:call,value_ind:0
+[GOC-D] type_ind:callsetup,value_ind:0
+[GOC-D] type_ind:battchg,value_ind:2
+[GOC-D] send_ind: [PS0002]
+[GOC-D] type_ind:signal,value_ind:4
+[GOC-D] send_ind: [PS0402]
+[GOC-D] type_ind:roam,value_ind:0
+[GOC-D] send_ind: [PS0402]
+[GOC-D] type_ind:callheld,value_ind:0
+[GOC-D] ring from phone
+[GOC-D] send_ind: [RE0]
+[GOC-D] config_read key:lastaddr value:DCA4CA1967EC
+[GOC-D] last addr is same
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-D] GocBtSdRestartServiceSearchFull
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-D] SND:AT+CLIP=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CCWA=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CMEE=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CNUM
+[GOC-D] HF[180225] REV:
++CNUM: ,"8618025430075",145,,4
+
+[GOC-D] REV AT:0D 0A 2B 43 4E 55 4D 3A 20 2C 22 38 36 31 38 30 32 35 34 33 30 30 37 35 22 2C 31 34 35 2C 2C 34 0D 0A 
+[GOC-D] hf slc establish
+[GOC-D] send_ind: [CN8618025430075]
+[GOC-D] Subscriber number information received:,"8618025430075",145,,4
+
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] GocBtHfXStateHfCopsReqHandler state:1,linktype:1,forceResendingFormat:0
+[GOC-D] SND:AT+COPS?
+[GOC-D] The CNUM command completed successfully
+[GOC-D] HF[180225] REV:
++COPS: 0,0,"    "
+
+[GOC-D] REV AT:0D 0A 2B 43 4F 50 53 3A 20 30 2C 30 2C 22 20 20 20 20 22 0D 0A 
+[GOC-D] Network operator name:0,0,"    "
+
+[GOC-D] send_ind: [OP    ]
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+NREC=0
+[GOC-D] COPS query operation completed successfully
+[GOC-E] prim->copsString is null
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND?
+[GOC-D] AT+NREC operation completed successfully
+[GOC-D] HF[180225] REV:
++CIND: 1,0,0,2,4,0,0
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 31 2C 30 2C 30 2C 32 2C 34 2C 30 2C 30 0D 0A 
+[GOC-D] handleCievInd addr:DCA4CA1967EC service=1
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC call=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC callsetup=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] handleCievInd addr:DCA4CA1967EC battchg=2
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC signal=4
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC roam=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:DCA4CA1967EC callheld=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+stopPreview:2434
+stopPreview:2434
+[GOC-D] GOC_BT_SD_READ_SERVICES_REQ
+[GOC-D] attrCount:13
+stopPreview:2434
+stopPreview:2434
+[GOC-D] --->uuid count:13
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-D] sm_af_access_success
+[GOC-D] Filter init:0 Index 0: csr_sbc_decoder
+[GOC-D] Filter init:0 Index 1: csr_sink_terminator
+[GOC-D] handleA2dpConnectCfm addr:DCA4CA1967EC result:0x8000
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SACar]
+[GOC-D] send_ind: [MH]
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] send_ind: [MU2]
+[GOC-D] --|connecting avrcp..
+[GOC-D] avrcp_connect DCA4CA1967EC
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-E] Entry: 0, Service name: MAP MAS-iOS, MASInstanceId: 0, supportedMessages: 0x0A
+[GOC-E] selecting Entry number 0 MAS instance to connect
+[GOC-D] sm_af_access_success
+[GOC-D] sm_af_access_success
+[GOC-D] rfc_af_local_disconnect_confirm
+[GOC-D] rfc_dlc_destroy
+[GOC-E] Could not connect, resultCode = 0x0043, resultSupplier = 0x000D
+[GOC-D] handleMapcConnectCfm addr:DCA4CA1967EC result:0x43
+[GOC-D] send_ind: [YE]
+[GOC-D] sm_af_access_success
+[GOC-D] sm_af_access_success
+[GOC-D] handleAvrcpConnectCfm addr:DCA4CA1967EC
+[GOC-D] Controller (not supported)
+[GOC-D]   Target (supported)
+[GOC-D]     Versions: 0106, features: 0x01D1, service: AVRCP Device, provider: (null)
+[GOC-D] config_read key:pairlistindex value:1,0,
+[GOC-D] config_read key:addr1 value:DCA4CA1967EC
+[GOC-D] config_read key:name1 value:Car
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SACar]
+[GOC-D] send_ind: [ML2]
+[GOC-D] GOC_BT_AVRCP_CT_NOTI_PLAYBACK_STATUS_IND (status: 0x00)
+[GOC-D] avrcp_get_music_info DCA4CA1967EC
+[GOC-D] send_ind: [FUFFFFFFFFFFFFFFFF]
+[GOC-D] *****************song info*************************
+[GOC-D] scope:254 uid:0000000000000000
+[GOC-D] coverart        :
+[GOC-D] musci info not contain cover art
+[GOC-D] send_ind: [FW]
+[GOC-D] same as last ignore
+[GOC-D] playing time    : 0 ms
+[GOC-D] genre           : 
+[GOC-D] total of media  : 0
+[GOC-D] number of media : 0
+[GOC-D] album           : 
+[GOC-D] artist          : 
+[GOC-D] name            : 
+[GOC-D] *****************song info over********************
+[GOC-D] send_ind: [MI]
+[GOC-D] *****************song info*************************
+[GOC-D] scope:254 uid:0000000000000000
+[GOC-D] coverart        :
+[GOC-D] musci info not contain cover art
+[GOC-D] send_ind: [FW]
+[GOC-D] same as last ignore
+[GOC-D] playing time    : 0 ms
+[GOC-D] genre           : 
+[GOC-D] total of media  : 0
+[GOC-D] number of media : 0
+[GOC-D] album           : 
+[GOC-D] artist          : 
+[GOC-D] name            : 
+[GOC-D] *****************song info over********************
+[GOC-D] send_ind: [MI]
+stopPreview:2434
+stopPreview:2434
+[PlaybackInterface] Initialized data structure
+[Theme] Theme manager initialized with LIGHT theme
+[UI_Common] Initialized
+[VideoLibrary] Initializing data structure...
+[VideoLibrary] Data structure initialized
+front file = /mnt/extsd/recorder/frontCamera/CarMV.mp4
+front file = /mnt/extsd/recorder/frontCamera/CarMV_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/v01InstructionXinbas_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_0-0-18.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_1-28-47.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-6-12.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-17.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-51.mp4
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Initialized tab 0 with 8 files
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-6-12.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-17.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-51.mp4
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Initialized tab 1 with 3 files
+urgant front file = /mnt/extsd/recorderUrgent/frontCamera/v01InstructionXinbas_front_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/1.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/4.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/5.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV_rear_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi&ai.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder1_1080p@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder2_1080@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01CenterControl.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionCar.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas_rear_urgent.mp4
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Initialized tab 2 with 14 files
+[VideoLibrary] UI created successfully
+[PhotoLibrary] Initializing data structure...
+[PhotoLibrary] Data structure initialized
+Scanning photo directory: /mnt/extsd/DVRpic/frontPic (tab 0)
+Found 7 photos in tab 0
+Scanning photo directory: /mnt/extsd/DVRpic/rearPic (tab 1)
+Found 8 photos in tab 1
+[PhotoLibrary] UI created successfully
+[PlaybackInterface] Interface initialized successfully
+stopPreview:2434
+stopPreview:2434
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[GOC-D] startup_mic_gain
+[GOC-D] SND:AT+VGM=07
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] Microphone gain operation completed successfully
+[GOC-D] SND:AT+VGS=07
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] Speaker gain operation completed successfully
+[GOC-D] handleA2dpSetConfigurationInd connection:0 addr:DCA4CA1967EC shandle:0x0
+[GOC-D] filter_sbc: set_config
+[GOC-D] sbc_store_config sampleRate:44100 minBitpool:2 maxBitpool:32
+[GOC-D] filter_sbc: subbands..............8
+[GOC-D] filter_sbc: blocks................16
+[GOC-D] filter_sbc: sample_freq...........44100
+[GOC-D] filter_sbc: chan_mode.............3 (J)
+[GOC-D] filter_sbc: alloc_method..........0 (L)
+[GOC-D] filter_sbc: bitPool...............0
+[GOC-D] filter_sbc: channels..............2
+[GOC-D] filter_sbc: ........................
+[GOC-D] filter_sbc: minBitpool............2
+[GOC-D] filter_sbc: maxBitpool............32
+[GOC-D] filter_sbc: framesize.............0
+[GOC-D] filter_sbc: frames_per_payload....59
+[GOC-D] filter_sbc: bytes_per_encoding....0
+[GOC-D] filter_sbc: remoteMinBitpool......2
+[GOC-D] filter_sbc: remoteMaxBitpool......32
+[GOC-D] handleA2dpOpenInd addr:DCA4CA1967EC
+[GOC-D] handleA2dpOpenInd connection:0 addr:DCA4CA1967EC shandle:0x0
+[GOC-D] GocBtAvDelayReportCfm result:0x8000
+[GOC-D] GocBtScDmSmAuthoriseIndIdleS
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :DCA4CA1967EC
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:30 01 10 EC 17 03 36 EC 59 E4 AF 35 6D B9 7C 4D 
+[GOC-D] remoteName      :Car
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] sm_af_access_success
+[GOC-D] L2caAutoConnectInd psm:0x19 addr:DCA4CA1967EC
+[GOC-D] handleA2dpStreamMtuSizeInd addr:DCA4CA1967EC
+Loading image: S:/mnt/extsd/DVRpic/frontPic/logo6_p.jpg
+Canvas image: w=1024, h=600, cf=5(5)
+canvas_display_image: success - scaled from 1024x600 to 960x540
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+HideBtnCont:26
+[GOC-D] pmalloc count:379 size:53016
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+Loading image: S:/mnt/extsd/DVRpic/frontPic/logo5_p.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/frontPic/logo6_p.jpg
+Canvas image: w=1024, h=600, cf=5(5)
+canvas_display_image: success - scaled from 1024x600 to 960x540
+Loading image: S:/mnt/extsd/DVRpic/frontPic/logo4_p.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/frontPic/logo5_p.jpg
+Canvas image: w=1024, h=600, cf=5(5)
+canvas_display_image: success - scaled from 1024x600 to 960x540
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+Loading image: S:/mnt/extsd/DVRpic/frontPic/logo1_p.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/frontPic/logo4_p.jpg
+Canvas image: w=1024, h=600, cf=5(5)
+canvas_display_image: success - scaled from 1024x600 to 960x540
+Loading image: S:/mnt/extsd/DVRpic/frontPic/Front_2026-2-24_0-9-6.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/frontPic/logo1_p.jpg
+Canvas image: w=1920, h=1080, cf=5(5)
+canvas_display_image: success - scaled from 1920x1080 to 960x540
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+Loading image: S:/mnt/extsd/DVRpic/frontPic/logo1_p.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/frontPic/Front_2026-2-24_0-9-6.jpg
+Canvas image: w=1024, h=600, cf=5(5)
+canvas_display_image: success - scaled from 1024x600 to 960x540
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+Loading image: S:/mnt/extsd/DVRpic/frontPic/Front_2026-2-24_0-9-6.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/frontPic/logo1_p.jpg
+Canvas image: w=1920, h=1080, cf=5(5)
+canvas_display_image: success - scaled from 1920x1080 to 960x540
+[PlaybackInterface] Back button clicked, cleaning up...
+[PlaybackInterface] Starting cleanup...
+[VideoLibrary] Starting cleanup...
+[VideoLibrary] Timers deleted
+[VideoLibrary] Event callbacks removed
+close video
+[VideoLibrary] Video file paths freed
+[VideoLibrary] Video screen deleted
+[VideoLibrary] Main container deleted
+[VideoLibrary] Cleanup completed
+[PhotoLibrary] Starting cleanup...
+[PhotoLibrary] Invalidating old image cache: S:/mnt/extsd/DVRpic/frontPic/Front_2026-2-24_0-9-6.jpg
+Invalidating current image cache: S:/mnt/extsd/DVRpic/frontPic/Front_2026-2-24_0-9-6.jpg
+[PhotoLibrary] Freed canvas buffer
+[PhotoLibrary] Initializing data structure...
+[PhotoLibrary] Data structure initialized
+[PhotoLibrary] Cleanup completed.
+Cleaning up storage library resources
+Storage library cleanup completed
+[PlaybackInterface] Cleanup completed
+createVoChn:1260
+I0224 06:36:48.320555  1021 hwdisplay.c:1269] <hwd_get_disp_type> Current the  disp_type:0x1  tv_mode:0x0
+W0224 06:36:48.340862  1021 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 06:36:48.341032  1021 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 06:36:48.341122  1021 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 06:36:48.341195  1021 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 06:36:48.341272  1021 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:0, zorder=0, cnt:2
+I0224 06:36:48.341446  1021 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[0]: screen_win[0,720, 720x720]
+create vo channel[1] success!
+startPreview:2425
+createVoChn:1260
+W0224 06:36:48.362123  1021 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 06:36:48.362358  1021 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 06:36:48.362459  1021 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 06:36:48.362540  1021 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 06:36:48.362622  1021 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:1, zorder=1, cnt:3
+I0224 06:36:48.362793  1021 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[1]: screen_win[0,0, 720x720]
+create vo channel[1] success!
+startPreview:2425
+stopPreview:2434
+stopPreview:2434
+stopPreview:2434
+stopPreview:2434
+stopPreview:2434
+stopPreview:2434
+[PlaybackInterface] Initialized data structure
+[VideoLibrary] Initializing data structure...
+[VideoLibrary] Data structure initialized
+front file = /mnt/extsd/recorder/frontCamera/CarMV.mp4
+front file = /mnt/extsd/recorder/frontCamera/CarMV_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/v01InstructionXinbas_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_0-0-18.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_1-28-47.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-6-12.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-17.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-51.mp4
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Initialized tab 0 with 8 files
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-6-12.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-17.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-51.mp4
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Initialized tab 1 with 3 files
+urgant front file = /mnt/extsd/recorderUrgent/frontCamera/v01InstructionXinbas_front_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/1.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/4.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/5.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV_rear_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi&ai.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder1_1080p@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder2_1080@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01CenterControl.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionCar.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas_rear_urgent.mp4
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Initialized tab 2 with 14 files
+[VideoLibrary] UI created successfully
+[PhotoLibrary] Initializing data structure...
+[PhotoLibrary] Data structure initialized
+Scanning photo directory: /mnt/extsd/DVRpic/frontPic (tab 0)
+Found 7 photos in tab 0
+Scanning photo directory: /mnt/extsd/DVRpic/rearPic (tab 1)
+Found 8 photos in tab 1
+[PhotoLibrary] UI created successfully
+[PlaybackInterface] Interface initialized successfully
+stopPreview:2434
+stopPreview:2434
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+Loading image: S:/mnt/extsd/DVRpic/rearPic/test4.jpg
+Canvas image: w=1560, h=720, cf=5(5)
+canvas_display_image: success - scaled from 1560x720 to 960x540
+HideBtnCont:26
+[PlaybackInterface] Back button clicked, cleaning up...
+[PlaybackInterface] Starting cleanup...
+[VideoLibrary] Starting cleanup...
+[VideoLibrary] Timers deleted
+[VideoLibrary] Event callbacks removed
+close video
+[VideoLibrary] Video file paths freed
+[VideoLibrary] Video screen deleted
+[VideoLibrary] Main container deleted
+[VideoLibrary] Cleanup completed
+[PhotoLibrary] Starting cleanup...
+[PhotoLibrary] Invalidating old image cache: S:/mnt/extsd/DVRpic/rearPic/test4.jpg
+Invalidating current image cache: S:/mnt/extsd/DVRpic/rearPic/test4.jpg
+[PhotoLibrary] Freed canvas buffer
+[PhotoLibrary] Initializing data structure...
+[PhotoLibrary] Data structure initialized
+[PhotoLibrary] Cleanup completed.
+Cleaning up storage library resources
+Storage library cleanup completed
+[PlaybackInterface] Cleanup completed
+createVoChn:1260
+I0224 06:36:53.742233  1021 hwdisplay.c:1269] <hwd_get_disp_type> Current the  disp_type:0x1  tv_mode:0x0
+W0224 06:36:53.762539  1021 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 06:36:53.762758  1021 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 06:36:53.762859  1021 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 06:36:53.762935  1021 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 06:36:53.763072  1021 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:0, zorder=0, cnt:2
+I0224 06:36:53.763198  1021 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[0]: screen_win[0,720, 720x720]
+create vo channel[1] success!
+startPreview:2425
+createVoChn:1260
+W0224 06:36:53.783847  1021 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 06:36:53.784013  1021 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 06:36:53.784104  1021 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 06:36:53.784178  1021 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 06:36:53.784310  1021 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:1, zorder=1, cnt:3
+I0224 06:36:53.784438  1021 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[1]: screen_win[0,0, 720x720]
+create vo channel[1] success!
+startPreview:2425
+stopPreview:2434
+stopPreview:2434
+stopPreview:2434
+stopPreview:2434
+[PlaybackInterface] Initialized data structure
+[VideoLibrary] Initializing data structure...
+[VideoLibrary] Data structure initialized
+front file = /mnt/extsd/recorder/frontCamera/CarMV.mp4
+front file = /mnt/extsd/recorder/frontCamera/CarMV_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/v01InstructionXinbas_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_0-0-18.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_1-28-47.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-6-12.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-17.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-51.mp4
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Initialized tab 0 with 8 files
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-6-12.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-17.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-51.mp4
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Initialized tab 1 with 3 files
+urgant front file = /mnt/extsd/recorderUrgent/frontCamera/v01InstructionXinbas_front_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/1.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/4.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/5.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV_rear_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi&ai.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder1_1080p@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder2_1080@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01CenterControl.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionCar.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas_rear_urgent.mp4
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Initialized tab 2 with 14 files
+[VideoLibrary] UI created successfully
+[PhotoLibrary] Initializing data structure...
+[PhotoLibrary] Data structure initialized
+Scanning photo directory: /mnt/extsd/DVRpic/frontPic (tab 0)
+Found 7 photos in tab 0
+Scanning photo directory: /mnt/extsd/DVRpic/rearPic (tab 1)
+Found 8 photos in tab 1
+[PhotoLibrary] UI created successfully
+[PlaybackInterface] Interface initialized successfully
+stopPreview:2434
+stopPreview:2434
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+Loading image: S:/mnt/extsd/DVRpic/rearPic/test3.jpg
+Canvas image: w=1560, h=720, cf=5(5)
+canvas_display_image: success - scaled from 1560x720 to 960x540
+HideBtnCont:26
+Loading image: S:/mnt/extsd/DVRpic/rearPic/test2.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/rearPic/test3.jpg
+Canvas image: w=1560, h=720, cf=5(5)
+canvas_display_image: success - scaled from 1560x720 to 960x540
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+CheckDiskInfoDeleteVideoFile:403
+Loading image: S:/mnt/extsd/DVRpic/rearPic/stalogo1_12.jpg
+[PhotoLibrary] Releasing S:/mnt/extsd/DVRpic/rearPic/test2.jpg
+Canvas image: w=1024, h=600, cf=5(5)
+canvas_display_image: success - scaled from 1024x600 to 960x540
+[VideoLibrary] Populated 8 items in tab 0
+[VideoLibrary] Populated 3 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[PlaybackInterface] Back button clicked, cleaning up...
+[PlaybackInterface] Starting cleanup...
+[VideoLibrary] Starting cleanup...
+[VideoLibrary] Timers deleted
+[VideoLibrary] Event callbacks removed
+close video
+[VideoLibrary] Video file paths freed
+[VideoLibrary] Video screen deleted
+[VideoLibrary] Main container deleted
+[VideoLibrary] Cleanup completed
+[PhotoLibrary] Starting cleanup...
+[PhotoLibrary] Invalidating old image cache: S:/mnt/extsd/DVRpic/rearPic/stalogo1_12.jpg
+[      49.288731]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 IEEE 802.11: associated
+[      49.299296]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 RADIUS: starting accounting session 9A31F92E98D46FDA
+[      49.299724]  (none) daemon.info hostapd: wlan0: STA 46:3f:c4:c7:bf:53 WPA: pairwise key handshake completed (RSN)
+Segmentation fault
+-------------exit err, -------------------
+starting pid 1071, tty '': '/etc/init.d/rcK'
+Unload mpp modules
+Stopping logging: [      52.424544]  (none) syslog.info syslogd exiting
+OK
+stop...
+Saving random seed... done.
+Stopping network: FAIL
+Stopping telnetd: FAIL
+The system is going down NOW!
+Sent SIGTERM to all processes
+Requesting system reboot

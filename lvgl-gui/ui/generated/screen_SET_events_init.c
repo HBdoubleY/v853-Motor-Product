@@ -699,10 +699,10 @@ void screen_SET_btn_otaUpdata_event_handler(lv_event_t *e){
 	switch (code)
 	{
 	case LV_EVENT_CLICKED:
-		if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO || g_sys_Data.linktype == LINK_TYPE_CARPLAY){
-			labelTimer_once(screen_SET_timer_popupLabel, "sys_txt_invalid");
-			return;
-		}
+		// if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO || g_sys_Data.linktype == LINK_TYPE_CARPLAY){
+		// 	labelTimer_once(screen_SET_timer_popupLabel, "sys_txt_invalid");
+		// 	return;
+		// }
 		if(screen_SET_timer_popupLabel && screen_SET_timer_popupLabel->timerStatus && screen_SET_timer_popupLabel->timer){
 			lv_timer_del(screen_SET_timer_popupLabel->timer);
 			screen_SET_timer_popupLabel->timer = NULL;
