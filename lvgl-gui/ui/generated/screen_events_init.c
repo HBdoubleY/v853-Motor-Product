@@ -139,39 +139,31 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 		// 	resetOrSetupTimer(screen_timer_popupLabel);
 		// 	break;
 		// }
-		if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO){
-			lv_label_set_text(guider_ui.screen_label_Popup, get_string_for_language(g_sys_Data.current_language,"sys_txt_invalid"));
-			lv_obj_clear_flag(guider_ui.screen_label_Popup, LV_OBJ_FLAG_HIDDEN);
-			// resetOrSetupTimer(screen_timer_popupLabel);
-			return;
-		}
+		// if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO){
+		// 	lv_label_set_text(guider_ui.screen_label_Popup, get_string_for_language(g_sys_Data.current_language,"sys_txt_invalid"));
+		// 	lv_obj_clear_flag(guider_ui.screen_label_Popup, LV_OBJ_FLAG_HIDDEN);
+		// 	// resetOrSetupTimer(screen_timer_popupLabel);
+		// 	return;
+		// }
 #ifdef ENABLE_CARPLAY
 		{
-			// 进入投屏界面
-			zlink_client_reset_video_prebuffer();
-			zlink_client_request_video_focus(1);
-			if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
+			/* 仅当 session 已启动且当前为 CarPlay 连接时才进入投屏界面，否则只进提示界面 */
+			if (zlink_client_is_session_started() && g_sys_Data.linktype == LINK_TYPE_CARPLAY) {
+				zlink_client_reset_video_prebuffer();
+				zlink_client_request_video_focus(1);
 				request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 0, NULL);
-			}
-			/* VO 使用物理坐标系(720x1440竖屏)，G2D已将H264旋转为竖屏帧，VO缩放到全屏 */
-			int disp_w = 720;
-			int disp_h = 1440;
-			carplay_display_create(0, 0, disp_w, disp_h, 1440, 720);
-			zlink_client_set_video_active(1);
-			zlink_client_request_video_focus(0);
-			if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
+				int disp_w = 720;
+				int disp_h = 1440;
+				carplay_display_create(0, 0, disp_w, disp_h, 1440, 720);
+				zlink_client_set_video_active(1);
+				zlink_client_request_video_focus(0);
 				request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 1, NULL);
 			}
-			// 进入投屏界面
-
-			// 进入提示界面
-			ui_load_scr_animation(&guider_ui, &guider_ui.screen_carPlay, guider_ui.screen_carPlay_del, &guider_ui.screen_del, setup_scr_screen_carPlay, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
-			break;
 		}
-#else
+#endif
 		ui_load_scr_animation(&guider_ui, &guider_ui.screen_carPlay, guider_ui.screen_carPlay_del, &guider_ui.screen_del, setup_scr_screen_carPlay, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
 		break;
-#endif
+
 	}
     default:
         break;
@@ -180,39 +172,38 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 
 static void screen_btn_androidauto_event_handler(lv_event_t *e){
 	lv_event_code_t code = lv_event_get_code(e);
-	lv_area_t coords;
-	lv_point_t point;	
+	// lv_area_t coords;
+	// lv_point_t point;	
 	switch (code)
 	{
 	case LV_EVENT_CLICKED:
-		lv_obj_get_coords(guider_ui.screen_btn_androidauto, &coords);
-		lv_indev_get_point(lv_indev_get_act(), &point);
-		if(point.x < coords.x1 || point.y < coords.y1 || point.x > coords.x2 || point.y > coords.y2){
-			return;
-		}
+		// lv_obj_get_coords(guider_ui.screen_btn_androidauto, &coords);
+		// lv_indev_get_point(lv_indev_get_act(), &point);
+		// if(point.x < coords.x1 || point.y < coords.y1 || point.x > coords.x2 || point.y > coords.y2){
+		// 	return;
+		// }
 		// if(g_sys_Data.lockScreenFlag){
 		// 	resetOrSetupTimer(screen_timer_popupLabel);
 		// 	break;
 		// }
-		if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
-			lv_label_set_text(guider_ui.screen_label_Popup, get_string_for_language(g_sys_Data.current_language,"sys_txt_invalid"));
-			lv_obj_clear_flag(guider_ui.screen_label_Popup, LV_OBJ_FLAG_HIDDEN);
-			// resetOrSetupTimer(screen_timer_popupLabel);
-			return;
-		}
+		// if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
+		// 	lv_label_set_text(guider_ui.screen_label_Popup, get_string_for_language(g_sys_Data.current_language,"sys_txt_invalid"));
+		// 	lv_obj_clear_flag(guider_ui.screen_label_Popup, LV_OBJ_FLAG_HIDDEN);
+		// 	// resetOrSetupTimer(screen_timer_popupLabel);
+		// 	return;
+		// }
 #ifdef ENABLE_CARPLAY
 		{
-			zlink_client_reset_video_prebuffer();
-			zlink_client_request_video_focus(1);
-			if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO){
+			/* 仅当 session 已启动且当前为 Android Auto 连接时才进入投屏界面，否则只进提示界面 */
+			if (zlink_client_is_session_started() && g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO) {
+				zlink_client_reset_video_prebuffer();
+				zlink_client_request_video_focus(1);
 				request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 0, NULL);
-			}
-			int disp_w = 720;
-			int disp_h = 1440;
-			carplay_display_create(0, 0, disp_w, disp_h, 1440, 720);
-			zlink_client_set_video_active(1);
-			zlink_client_request_video_focus(0);
-			if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO){
+				int disp_w = 720;
+				int disp_h = 1440;
+				carplay_display_create(0, 0, disp_w, disp_h, 1440, 720);
+				zlink_client_set_video_active(1);
+				zlink_client_request_video_focus(0);
 				request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 1, NULL);
 			}
 		}

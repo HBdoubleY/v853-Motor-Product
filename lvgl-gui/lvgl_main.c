@@ -188,7 +188,7 @@ static bool touch_pressed = false;
 static int last_x = -1, last_y = -1;
 
 // 定义触摸阈值（可根据实际体验调整）
-#define TOUCH_MOVE_THRESHOLD 6  // 移动阈值（像素）
+#define TOUCH_MOVE_THRESHOLD 7  // 移动阈值（像素）
 #define TOUCH_MOVE_THRESHOLD_SQ (TOUCH_MOVE_THRESHOLD * TOUCH_MOVE_THRESHOLD)
 
 void lv_touch_feedback_cb(lv_indev_drv_t * drv, uint8_t event){
@@ -273,28 +273,64 @@ int request_link_touchevent(LinkType type, bool isPressed, int x, int y)
 #endif
 
 #ifdef ENABLE_CARPLAY
+static void lvgl_refresh_main_link_labels(void)
+{
+    lv_obj_t *cur = lv_scr_act();
+    if (cur != guider_ui.screen)
+        return;
+    if (!lv_obj_is_valid(guider_ui.screen_btn_carplay_label_statu) ||
+        !lv_obj_is_valid(guider_ui.screen_btn_androidauto_label_statu))
+        return;
+
+    static int last_session = -1;
+    static int last_linktype = -1;
+    static language_t last_language = (language_t)-1;
+    int session_started = zlink_client_is_session_started();
+    int linktype = (int)g_sys_Data.linktype;
+    language_t lang = g_sys_Data.current_language;
+
+    if (last_session == session_started && last_linktype == linktype && last_language == lang)
+        return;
+    last_session = session_started;
+    last_linktype = linktype;
+    last_language = lang;
+
+    if (session_started && linktype == LINK_TYPE_CARPLAY)
+        lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
+            get_string_for_language(lang, "main_txt_Connect"));
+    else
+        lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
+            get_string_for_language(lang, "main_txt_nConnect"));
+
+    if (session_started && linktype == LINK_TYPE_ANDROIDAUTO)
+        lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
+            get_string_for_language(lang, "main_txt_Connect"));
+    else
+        lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
+            get_string_for_language(lang, "main_txt_nConnect"));
+}
+
 static void lvgl_handle_zlink_ui_requests(void)
 {
     int link_type = zlink_client_take_pending_home_request();
-    if (link_type == 0) {
-        return;
-    }
-
-    if (link_type == LINK_TYPE_CARPLAY) {
-        if (lv_scr_act() == guider_ui.screen_carPlay) {
-            request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 0, NULL);
-            ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del,
-                                  &guider_ui.screen_carPlay_del, setup_scr_screen,
-                                  LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
-        }
-    } else if (link_type == LINK_TYPE_ANDROIDAUTO) {
-        if (lv_scr_act() == guider_ui.screen_androidAuto) {
-            request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 0, NULL);
-            ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del,
-                                  &guider_ui.screen_androidAuto_del, setup_scr_screen,
-                                  LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+    if (link_type != 0) {
+        if (link_type == LINK_TYPE_CARPLAY) {
+            if (lv_scr_act() == guider_ui.screen_carPlay) {
+                request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 0, NULL);
+                ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del,
+                                      &guider_ui.screen_carPlay_del, setup_scr_screen,
+                                      LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
+            }
+        } else if (link_type == LINK_TYPE_ANDROIDAUTO) {
+            if (lv_scr_act() == guider_ui.screen_androidAuto) {
+                request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 0, NULL);
+                ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del,
+                                      &guider_ui.screen_androidAuto_del, setup_scr_screen,
+                                      LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
+            }
         }
     }
+    lvgl_refresh_main_link_labels();
 }
 #endif
 
@@ -370,7 +406,6 @@ int lvgl_main(int w, int h)
     MPI_init();
     AW_MPI_VDEC_SetVEFreq(MM_INVALID_CHN, 0);
 
-    
 #if 0
     InitMppCameraData(&g_sys_Data.vipp0_config);
     setConfigPara(&g_sys_Data.vipp0_config);

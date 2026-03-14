@@ -34,6 +34,7 @@ static struct {
 	int count;
 	int active;
 	int pending_home_link_type;
+	int session_started;	/* 1 when session_state == SESSION_STARTED */
 	pthread_mutex_t mutex;
 } g_video_state = {
 	.mutex = PTHREAD_MUTEX_INITIALIZER,
@@ -165,12 +166,31 @@ static int session_state_cb(enum LIBZLINK_SESSION_STATE session_state, enum PHON
 		if (link_type)
 			g_sys_Data.linktype = link_type;
 		pthread_mutex_lock(&g_video_state.mutex);
+		g_video_state.session_started = 1;
 		active = g_video_state.active;
 		pthread_mutex_unlock(&g_video_state.mutex);
 		if (active)
 			libzlink_video_focus(0);
 		else
 			libzlink_video_focus(1);
+	} else {
+		/* session ended or not started: clear session flag and linktype; if currently projecting, do same cleanup as video_focus_cb(1) */
+		int active;
+		int link_to_pending;
+
+		pthread_mutex_lock(&g_video_state.mutex);
+		g_video_state.session_started = 0;
+		active = g_video_state.active;
+		link_to_pending = g_sys_Data.linktype;
+		if (active) {
+			g_video_state.active = 0;
+			g_video_state.pending_home_link_type = link_to_pending;
+		}
+		pthread_mutex_unlock(&g_video_state.mutex);
+
+		g_sys_Data.linktype = 0;
+		if (active)
+			carplay_display_destroy();
 	}
 	return 0;
 }
@@ -272,6 +292,17 @@ int zlink_client_take_pending_home_request(void)
 	pthread_mutex_unlock(&g_video_state.mutex);
 
 	return link_type;
+}
+
+int zlink_client_is_session_started(void)
+{
+	int started;
+
+	pthread_mutex_lock(&g_video_state.mutex);
+	started = g_video_state.session_started;
+	pthread_mutex_unlock(&g_video_state.mutex);
+
+	return started ? 1 : 0;
 }
 
 void zlink_client_reset_video_prebuffer(void)

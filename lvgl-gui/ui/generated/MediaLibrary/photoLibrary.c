@@ -1076,7 +1076,7 @@ static void on_image_touch(lv_event_t *e) {
                 int dy = data.point.y - pl.last_y;
 
                 int distance_sq = dx*dx + dy*dy;
-                if (distance_sq > 100) {  // 10的平方 = 100
+                if (distance_sq > 49) {  // 7的平方 = 49
                     pl.pv.offset_x = pl.pv.offset_x - dy;
                     pl.pv.offset_y = pl.pv.offset_y + dx;
 

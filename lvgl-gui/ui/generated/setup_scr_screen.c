@@ -14,6 +14,9 @@
 #include "widgets_init.h"
 #include "custom.h"
 #include "common.h"
+#ifdef ENABLE_CARPLAY
+#include "zlink_client.h"
+#endif
 
 extern int get_BT_connect_state();
 
@@ -23,9 +26,21 @@ void mianScreenLanguageUpdata(language_t language){
 	lv_label_set_text(guider_ui.screen_btn_DVR_label, get_string_for_language(language, "main_txt_DVR"));
 	lv_label_set_text(guider_ui.screen_btn_set_label, get_string_for_language(language, "main_txt_sysSet"));
 	lv_label_set_text(guider_ui.screen_btn_androidauto_label, get_string_for_language(language,"main_txt_AndroidAuto"));
+#ifdef ENABLE_CARPLAY
+	lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
+		(zlink_client_is_session_started() && g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO)
+			? get_string_for_language(language, "main_txt_Connect")
+			: get_string_for_language(language, "main_txt_nConnect"));
+	lv_label_set_text(guider_ui.screen_btn_carplay_label, get_string_for_language(language,"main_txt_carplay"));
+	lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
+		(zlink_client_is_session_started() && g_sys_Data.linktype == LINK_TYPE_CARPLAY)
+			? get_string_for_language(language, "main_txt_Connect")
+			: get_string_for_language(language, "main_txt_nConnect"));
+#else
 	lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu, get_string_for_language(language,"main_txt_nConnect"));
 	lv_label_set_text(guider_ui.screen_btn_carplay_label, get_string_for_language(language,"main_txt_carplay"));
 	lv_label_set_text(guider_ui.screen_btn_carplay_label_statu, get_string_for_language(language,"main_txt_nConnect"));
+#endif
 	lv_label_set_text(guider_ui.screen_btn_confirm_label, get_string_for_language(language,"sys_txt_confirm"));
 	lv_label_set_text(guider_ui.screen_label_textChoose, get_string_for_language(language,"main_txt_SlecetLanguage"));
 }
@@ -320,12 +335,20 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_size(ui->screen_btn_androidauto, 360, 586);
 
 	//write codes screen_btn_AndoriAuto_label_statu
-	ui->screen_btn_androidauto_label_statu = lv_label_create(ui->screen_btn_androidauto);	
+	ui->screen_btn_androidauto_label_statu = lv_label_create(ui->screen_btn_androidauto);
+#ifdef ENABLE_CARPLAY
+	if (zlink_client_is_session_started() && g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO) {
+		lv_label_set_text(ui->screen_btn_androidauto_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_Connect"));
+	} else {
+		lv_label_set_text(ui->screen_btn_androidauto_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_nConnect"));
+	}
+#else
 	if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO){
 		lv_label_set_text(ui->screen_btn_androidauto_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_Connect"));
 	}else{
 		lv_label_set_text(ui->screen_btn_androidauto_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_nConnect"));
 	}
+#endif
 	lv_label_set_long_mode(ui->screen_btn_androidauto_label_statu, LV_LABEL_LONG_SCROLL_CIRCULAR);
 	lv_obj_align(ui->screen_btn_androidauto_label_statu, LV_ALIGN_CENTER, 0, 100);
 	lv_obj_set_width(ui->screen_btn_androidauto_label_statu, LV_PCT(100));
@@ -387,12 +410,20 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_size(ui->screen_btn_carplay, 360, 586);
 
 	//write codes sscreen_btn_carplay_label_statu
-	ui->screen_btn_carplay_label_statu = lv_label_create(ui->screen_btn_carplay);	
+	ui->screen_btn_carplay_label_statu = lv_label_create(ui->screen_btn_carplay);
+#ifdef ENABLE_CARPLAY
+	if (zlink_client_is_session_started() && g_sys_Data.linktype == LINK_TYPE_CARPLAY) {
+		lv_label_set_text(ui->screen_btn_carplay_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_Connect"));
+	} else {
+		lv_label_set_text(ui->screen_btn_carplay_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_nConnect"));
+	}
+#else
 	if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
 		lv_label_set_text(ui->screen_btn_carplay_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_Connect"));
 	}else{
 		lv_label_set_text(ui->screen_btn_carplay_label_statu, get_string_for_language(g_sys_Data.current_language,"main_txt_nConnect"));
 	}
+#endif
 	lv_label_set_long_mode(ui->screen_btn_carplay_label_statu, LV_LABEL_LONG_SCROLL_CIRCULAR);
 	lv_obj_align(ui->screen_btn_carplay_label_statu, LV_ALIGN_CENTER, 0, 100);
 	lv_obj_set_width(ui->screen_btn_carplay_label_statu, LV_PCT(100));
