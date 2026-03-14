@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+#include <stdbool.h>
+
 #ifdef ENABLE_CARPLAY
 
 /** Run zlink client loop (blocking). Call from a dedicated thread. Returns when init fails. */
@@ -25,6 +27,8 @@ int zlink_client_request_video_focus(int is_hu_focus_on);
 
 /* Fetch and clear a pending "return to home" UI request. Returns link type or 0. */
 int zlink_client_take_pending_home_request(void);
+
+void carplay_is_running2(void);
 
 #endif /* ENABLE_CARPLAY */
 

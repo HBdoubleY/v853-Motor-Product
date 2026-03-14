@@ -16,17 +16,17 @@ void screen_carPlay_btn_return_event_handler(lv_event_t *e){
 	switch (code)
 	{
 	case LV_EVENT_CLICKED:
-#ifdef ENABLE_CARPLAY
-		if (carplay_split_screen_enable) {
-			stopPreview(&g_sys_Data.vipp0_config);
-			stopPreview(&g_sys_Data.vipp8_config);
-		}
-		zlink_client_set_video_active(0);
-		zlink_client_request_video_focus(1);
-		if (g_sys_Data.linktype == LINK_TYPE_CARPLAY)
-			request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 0, NULL);
-		carplay_display_destroy();
-#endif
+// #ifdef ENABLE_CARPLAY
+// 		if (carplay_split_screen_enable) {
+// 			stopPreview(&g_sys_Data.vipp0_config);
+// 			stopPreview(&g_sys_Data.vipp8_config);
+// 		}
+// 		zlink_client_set_video_active(0);
+// 		zlink_client_request_video_focus(1);
+// 		if (g_sys_Data.linktype == LINK_TYPE_CARPLAY)
+// 			request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 0, NULL);
+// 		carplay_display_destroy();
+// #endif
 		ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del, &guider_ui.screen_carPlay_del, setup_scr_screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
 		break;
 	default:

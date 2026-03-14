@@ -188,7 +188,7 @@ static bool touch_pressed = false;
 static int last_x = -1, last_y = -1;
 
 // 定义触摸阈值（可根据实际体验调整）
-#define TOUCH_MOVE_THRESHOLD 10  // 移动阈值（像素）
+#define TOUCH_MOVE_THRESHOLD 6  // 移动阈值（像素）
 #define TOUCH_MOVE_THRESHOLD_SQ (TOUCH_MOVE_THRESHOLD * TOUCH_MOVE_THRESHOLD)
 
 void lv_touch_feedback_cb(lv_indev_drv_t * drv, uint8_t event){
@@ -242,7 +242,8 @@ void lv_touch_feedback_cb(lv_indev_drv_t * drv, uint8_t event){
     case LV_EVENT_RELEASED:
         /* 手指抬起 - 发送抬起事件 */
         if (touch_pressed) {
-            request_link_touchevent(type, false, point.x, point.y);
+            // request_link_touchevent(type, false, point.x, point.y);
+            request_link_touchevent(type, false, last_x, last_y);
             touch_pressed = false;
             printf("###### UP - screen touch point: x=%d, y=%d\n", point.x, point.y);
         }

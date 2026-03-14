@@ -155,6 +155,7 @@ static int video_data_cb(char *data, int len, struct VIDEO_SCREEN_INFO *info, vo
 
 static int session_state_cb(enum LIBZLINK_SESSION_STATE session_state, enum PHONE_TYPE phone_type, void *user_data)
 {
+	printf("\n\n\nsession_state_cb: session_state = %d, phone_type = %d\n\n\n", session_state, phone_type);
 	(void)user_data;
 	if (session_state == SESSION_WAIT_INIT) {
 		session_init();
@@ -276,6 +277,11 @@ int zlink_client_take_pending_home_request(void)
 void zlink_client_reset_video_prebuffer(void)
 {
 	prebuf_clear();
+}
+
+void carplay_is_running2(void)
+{
+	libzlink_request_state();
 }
 
 #endif /* ENABLE_CARPLAY */

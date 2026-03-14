@@ -118,17 +118,23 @@ static void screen_btn_set_event_handler (lv_event_t *e)
 static void screen_btn_carplay_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-	lv_area_t coords;
-	lv_point_t point;
+	// lv_area_t coords;
+	// lv_point_t point;
     switch (code) {
 	case LV_EVENT_CLICKED:
 	{
-		lv_obj_get_coords(guider_ui.screen_btn_carplay, &coords);
-		lv_indev_get_point(lv_indev_get_act(), &point);
-		if(point.x < coords.x1 || point.y < coords.y1 || point.x > coords.x2 || point.y > coords.y2){
-			return;
-		}
-		printf("-----LV_EVENT_RELEASED---\n");
+		// lv_obj_get_coords(guider_ui.screen_btn_carplay, &coords);
+		// lv_indev_get_point(lv_indev_get_act(), &point);
+		// if(point.x < coords.x1 || point.y < coords.y1 || point.x > coords.x2 || point.y > coords.y2){
+		// 	return;
+		// }
+		// printf("-----LV_EVENT_RELEASED---\n");
+
+// #ifdef ENABLE_CARPLAY
+
+// 		carplay_is_running2();
+// #endif
+
 		// if(g_sys_Data.lockScreenFlag){
 		// 	resetOrSetupTimer(screen_timer_popupLabel);
 		// 	break;
@@ -141,6 +147,7 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 		}
 #ifdef ENABLE_CARPLAY
 		{
+			// 进入投屏界面
 			zlink_client_reset_video_prebuffer();
 			zlink_client_request_video_focus(1);
 			if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
@@ -155,10 +162,16 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 			if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
 				request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 1, NULL);
 			}
+			// 进入投屏界面
+
+			// 进入提示界面
+			ui_load_scr_animation(&guider_ui, &guider_ui.screen_carPlay, guider_ui.screen_carPlay_del, &guider_ui.screen_del, setup_scr_screen_carPlay, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
+			break;
 		}
-#endif
+#else
 		ui_load_scr_animation(&guider_ui, &guider_ui.screen_carPlay, guider_ui.screen_carPlay_del, &guider_ui.screen_del, setup_scr_screen_carPlay, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
 		break;
+#endif
 	}
     default:
         break;
