@@ -12,6 +12,8 @@
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <time.h>
 
 #define LINK_TYPE_CARPLAY       2
 #define LINK_TYPE_ANDROIDAUTO   3
@@ -37,6 +39,16 @@ static struct {
 	int session_started;	/* 1 when session_state == SESSION_STARTED */
 	pthread_mutex_t mutex;
 } g_video_state = {
+	.mutex = PTHREAD_MUTEX_INITIALIZER,
+};
+
+#define ZLINK_VIDEO_DUMP_DIR  "/tmp/zlink/video"
+
+static struct {
+	int enabled;
+	FILE *fp;
+	pthread_mutex_t mutex;
+} g_video_dump = {
 	.mutex = PTHREAD_MUTEX_INITIALIZER,
 };
 
@@ -150,6 +162,14 @@ static int video_data_cb(char *data, int len, struct VIDEO_SCREEN_INFO *info, vo
 		pthread_mutex_unlock(&g_video_state.mutex);
 		if (active)
 			carplay_display_feed_h264(data, len);
+
+		pthread_mutex_lock(&g_video_dump.mutex);
+		if (g_video_dump.enabled && g_video_dump.fp) {
+			size_t n = fwrite(data, 1, (size_t)len, g_video_dump.fp);
+			(void)n;
+			fflush(g_video_dump.fp);
+		}
+		pthread_mutex_unlock(&g_video_dump.mutex);
 	}
 	return 0;
 }
@@ -303,6 +323,39 @@ int zlink_client_is_session_started(void)
 	pthread_mutex_unlock(&g_video_state.mutex);
 
 	return started ? 1 : 0;
+}
+
+void zlink_client_set_video_dump(int enable)
+{
+	pthread_mutex_lock(&g_video_dump.mutex);
+	if (enable) {
+		if (g_video_dump.fp) {
+			fclose(g_video_dump.fp);
+			g_video_dump.fp = NULL;
+		}
+		mkdir("/tmp/zlink", 0755);
+		mkdir(ZLINK_VIDEO_DUMP_DIR, 0755);
+		time_t t = time(NULL);
+		struct tm *tm = localtime(&t);
+		char path[256];
+		if (tm && snprintf(path, sizeof(path), ZLINK_VIDEO_DUMP_DIR "/dump_%04d%02d%02d_%02d%02d%02d.264",
+			tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday,
+			tm->tm_hour, tm->tm_min, tm->tm_sec) < (int)sizeof(path)) {
+			g_video_dump.fp = fopen(path, "wb");
+			if (g_video_dump.fp) {
+				g_video_dump.enabled = 1;
+				printf("[zlink_client] H264 dump enabled: %s\n", path);
+			}
+		}
+	} else {
+		g_video_dump.enabled = 0;
+		if (g_video_dump.fp) {
+			fclose(g_video_dump.fp);
+			g_video_dump.fp = NULL;
+			printf("[zlink_client] H264 dump disabled\n");
+		}
+	}
+	pthread_mutex_unlock(&g_video_dump.mutex);
 }
 
 void zlink_client_reset_video_prebuffer(void)

@@ -118,33 +118,9 @@ static void screen_btn_set_event_handler (lv_event_t *e)
 static void screen_btn_carplay_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-	// lv_area_t coords;
-	// lv_point_t point;
     switch (code) {
 	case LV_EVENT_CLICKED:
 	{
-		// lv_obj_get_coords(guider_ui.screen_btn_carplay, &coords);
-		// lv_indev_get_point(lv_indev_get_act(), &point);
-		// if(point.x < coords.x1 || point.y < coords.y1 || point.x > coords.x2 || point.y > coords.y2){
-		// 	return;
-		// }
-		// printf("-----LV_EVENT_RELEASED---\n");
-
-// #ifdef ENABLE_CARPLAY
-
-// 		carplay_is_running2();
-// #endif
-
-		// if(g_sys_Data.lockScreenFlag){
-		// 	resetOrSetupTimer(screen_timer_popupLabel);
-		// 	break;
-		// }
-		// if(g_sys_Data.linktype == LINK_TYPE_ANDROIDAUTO){
-		// 	lv_label_set_text(guider_ui.screen_label_Popup, get_string_for_language(g_sys_Data.current_language,"sys_txt_invalid"));
-		// 	lv_obj_clear_flag(guider_ui.screen_label_Popup, LV_OBJ_FLAG_HIDDEN);
-		// 	// resetOrSetupTimer(screen_timer_popupLabel);
-		// 	return;
-		// }
 #ifdef ENABLE_CARPLAY
 		{
 			/* 仅当 session 已启动且当前为 CarPlay 连接时才进入投屏界面，否则只进提示界面 */
@@ -158,6 +134,7 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 				zlink_client_set_video_active(1);
 				zlink_client_request_video_focus(0);
 				request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 1, NULL);
+				zlink_client_set_video_dump(1);
 			}
 		}
 #endif
@@ -171,27 +148,10 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 }
 
 static void screen_btn_androidauto_event_handler(lv_event_t *e){
-	lv_event_code_t code = lv_event_get_code(e);
-	// lv_area_t coords;
-	// lv_point_t point;	
+	lv_event_code_t code = lv_event_get_code(e);	
 	switch (code)
 	{
 	case LV_EVENT_CLICKED:
-		// lv_obj_get_coords(guider_ui.screen_btn_androidauto, &coords);
-		// lv_indev_get_point(lv_indev_get_act(), &point);
-		// if(point.x < coords.x1 || point.y < coords.y1 || point.x > coords.x2 || point.y > coords.y2){
-		// 	return;
-		// }
-		// if(g_sys_Data.lockScreenFlag){
-		// 	resetOrSetupTimer(screen_timer_popupLabel);
-		// 	break;
-		// }
-		// if(g_sys_Data.linktype == LINK_TYPE_CARPLAY){
-		// 	lv_label_set_text(guider_ui.screen_label_Popup, get_string_for_language(g_sys_Data.current_language,"sys_txt_invalid"));
-		// 	lv_obj_clear_flag(guider_ui.screen_label_Popup, LV_OBJ_FLAG_HIDDEN);
-		// 	// resetOrSetupTimer(screen_timer_popupLabel);
-		// 	return;
-		// }
 #ifdef ENABLE_CARPLAY
 		{
 			/* 仅当 session 已启动且当前为 Android Auto 连接时才进入投屏界面，否则只进提示界面 */
@@ -205,6 +165,7 @@ static void screen_btn_androidauto_event_handler(lv_event_t *e){
 				zlink_client_set_video_active(1);
 				zlink_client_request_video_focus(0);
 				request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 1, NULL);
+				zlink_client_set_video_dump(1);
 			}
 		}
 #endif

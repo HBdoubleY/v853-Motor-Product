@@ -31,6 +31,13 @@ int zlink_client_take_pending_home_request(void);
 /* Return 1 if session_state == SESSION_STARTED, 0 otherwise. */
 int zlink_client_is_session_started(void);
 
+/**
+ * Enable(1) or disable(0) dumping H264 from video_data_cb to /tmp/zlink/video/.
+ * When enabled, creates the directory if needed and opens a new file named
+ * dump_YYYYMMDD_HHMMSS.264. Call with 0 to stop and close the file.
+ */
+void zlink_client_set_video_dump(int enable);
+
 void carplay_is_running2(void);
 
 #endif /* ENABLE_CARPLAY */

@@ -714,7 +714,7 @@ void setup_scr_screen_SET(lv_ui *ui)
 
 	//Write codes screen_SET_label_btname1
 	ui->screen_SET_label_btname1 = lv_label_create(ui->screen_SET_cont_lanya);
-	// lv_label_set_text(ui->screen_SET_label_btname1, get_bt_name());
+	lv_label_set_text(ui->screen_SET_label_btname1, "RTL8733BS");
 	lv_label_set_long_mode(ui->screen_SET_label_btname1, LV_LABEL_LONG_SCROLL_CIRCULAR);
 	lv_obj_set_pos(ui->screen_SET_label_btname1, 700, 0);
 	lv_obj_set_size(ui->screen_SET_label_btname1, 400, 120);
