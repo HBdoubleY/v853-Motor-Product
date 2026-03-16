@@ -14,10 +14,7 @@
 #include "widgets_init.h"
 #include "custom.h"
 #include "lvgl_system.h"
-#if 0
-extern int get_BT_connect_state();
-extern char *get_phone_name();
-#endif
+#include "bt_serial.h"
 static const char* themeMode[] = {"sys_txt_day", "sys_txt_night", "sys_txt_auto"}; 
 const char* app_language[] = {"sys_txt_zh", "sys_txt_en", "sys_txt_zh_ft", "sys_txt_fr", "sys_txt_ge", 
                         "sys_txt_it", "sys_txt_jp", "sys_txt_por", "sys_txt_ru", "sys_txt_sp",
@@ -687,7 +684,18 @@ void setup_scr_screen_SET(lv_ui *ui)
  
 	//Write codes screen_SET_label_connect
 	ui->screen_SET_label_connect = lv_label_create(ui->screen_SET_cont_lanya);
-	lv_label_set_text(ui->screen_SET_label_connect, "on hyby test");
+	const char *bt_connect_text = NULL;
+	if (get_BT_connect_state()) {
+		const char *name = get_BT_connected_name();
+		if (name && name[0] != '\0') {
+			bt_connect_text = name;
+		} else {
+			bt_connect_text = get_string_for_language(g_sys_Data.current_language, "main_txt_nConnect");
+		}
+	} else {
+		bt_connect_text = get_string_for_language(g_sys_Data.current_language, "main_txt_nConnect");
+	}
+	lv_label_set_text(ui->screen_SET_label_connect, bt_connect_text);
 	lv_label_set_long_mode(ui->screen_SET_label_connect, LV_LABEL_LONG_SCROLL_CIRCULAR);
 	lv_obj_set_pos(ui->screen_SET_label_connect, 700, 120);
 	lv_obj_set_size(ui->screen_SET_label_connect, 400, 120);

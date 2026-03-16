@@ -8,6 +8,7 @@
 #include <sys/time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "lv_drv_conf.h"
 #include "lvgl_main.h"
 #include <pthread.h>
@@ -22,6 +23,7 @@
 #include "zlink_client.h"
 #endif
 #include "myTimer.h"
+#include "bt_serial.h"
 
 static pthread_t threadID;
 lv_ui guider_ui;
@@ -37,7 +39,6 @@ extern sys_data g_sys_Data;
 extern LABEL_TIMER *screen_DVR_timer_Label;
 
 extern void recorder_status_timer(lv_timer_t *timer);
-extern int get_BT_connect_state(void);
 
 #if 1
 
@@ -51,6 +52,8 @@ static bool androidauto_connected = false;
 static void bt_status_check_timer(lv_timer_t *timer) { 
     lv_obj_t* current_screen = lv_scr_act();
     static bool recorderFlag = false;
+    static int last_bt_connected = -1;
+    static char last_bt_label[64] = {0};
     g_sys_Data.frontCamera = tp2804_check_camera_connected(i2c0_fd);
     g_sys_Data.rearCamera = tp2804_check_camera_connected(i2c1_fd);
 
@@ -83,13 +86,45 @@ static void bt_status_check_timer(lv_timer_t *timer) {
     }
 
     /* 主界面 BT 图标：根据蓝牙连接状态显示/隐藏（仅读 get_BT_connect_state，不阻塞；主界面重建后也会同步） */
+    int bt_connected = get_BT_connect_state();
     if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_bt)) {
-        bool want_show = (get_BT_connect_state() != 0);
+        bool want_show = (bt_connected != 0);
         bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
         if (want_show && is_hidden) {
             lv_obj_clear_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
         } else if (!want_show && !is_hidden) {
             lv_obj_add_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+
+    /* 设置界面 BT 文本：根据蓝牙连接状态和设备名动态刷新（仅读 bt_serial 状态，不阻塞） */
+    if (current_screen == guider_ui.screen_SET &&
+        lv_obj_is_valid(guider_ui.screen_SET_label_connect)) {
+
+        const char *target_text = NULL;
+        if (bt_connected) {
+            const char *name = get_BT_connected_name();
+            if (name && name[0] != '\0') {
+                target_text = name;
+            } else {
+                target_text = get_string_for_language(g_sys_Data.current_language,
+                                                      "main_txt_nConnect");
+            }
+        } else {
+            target_text = get_string_for_language(g_sys_Data.current_language,
+                                                  "main_txt_nConnect");
+        }
+
+        if (!target_text) {
+            target_text = "";
+        }
+
+        if (bt_connected != last_bt_connected ||
+            strncmp(last_bt_label, target_text, sizeof(last_bt_label) - 1) != 0) {
+            lv_label_set_text(guider_ui.screen_SET_label_connect, target_text);
+            strncpy(last_bt_label, target_text, sizeof(last_bt_label) - 1);
+            last_bt_label[sizeof(last_bt_label) - 1] = '\0';
+            last_bt_connected = bt_connected;
         }
     }
 

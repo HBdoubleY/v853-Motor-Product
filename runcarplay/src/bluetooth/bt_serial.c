@@ -252,3 +252,7 @@ void on_bt_data(const char *line, void *arg) {
 int get_BT_connect_state(void) {
     return hfp_connected;
 }
+
+const char *get_BT_connected_name(void) {
+    return connected_device_name;
+}

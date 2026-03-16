@@ -50,6 +50,13 @@ void bt_serial_cleanup(void);
  */
 int get_BT_connect_state(void);
 
+/**
+ * 获取当前已连接设备的名称字符串。
+ * @return 已连接且已获取到名称时返回以'\0'结尾的常量指针；
+ *         未连接或尚未获取到名称时返回空字符串 ""。
+ */
+const char *get_BT_connected_name(void);
+
 /** 蓝牙数据回调（用户实现，在串口读线程中调用） */
 void on_bt_data(const char *line, void *arg);
 
