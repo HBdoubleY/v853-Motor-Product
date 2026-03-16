@@ -45,6 +45,9 @@ static void detected_TF_FreeMem_Timer(lv_timer_t *timer){
     CheckDiskInfoDeleteVideoFile();
 }
 
+static bool carplay_connected = false;
+static bool androidauto_connected = false;
+
 static void bt_status_check_timer(lv_timer_t *timer) { 
     lv_obj_t* current_screen = lv_scr_act();
     static bool recorderFlag = false;
@@ -90,7 +93,25 @@ static void bt_status_check_timer(lv_timer_t *timer) {
         }
     }
 
+    /* 主界面 carplay 图标：根据蓝牙连接状态显示/隐藏（仅读 carplay_connected，不阻塞；主界面重建后也会同步） */
+    if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_carPLay)) {
+        bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_carPLay, LV_OBJ_FLAG_HIDDEN);
+        if (carplay_connected && is_hidden) {
+            lv_obj_clear_flag(guider_ui.screen_img_carPLay, LV_OBJ_FLAG_HIDDEN);
+        } else if (!carplay_connected && !is_hidden) {
+            lv_obj_add_flag(guider_ui.screen_img_carPLay, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
 
+    /* 主界面 android auto 图标：根据蓝牙连接状态显示/隐藏（仅读 androidauto_connected，不阻塞；主界面重建后也会同步） */
+    if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_carPLay)) {
+        bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_androiAuto, LV_OBJ_FLAG_HIDDEN);
+        if (androidauto_connected && is_hidden) {
+            lv_obj_clear_flag(guider_ui.screen_img_androiAuto, LV_OBJ_FLAG_HIDDEN);
+        } else if (!androidauto_connected && !is_hidden) {
+            lv_obj_add_flag(guider_ui.screen_img_androiAuto, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
 
     if(!g_sys_Data.TFmounted){
         recorderFlag = true;
@@ -319,19 +340,25 @@ static void lvgl_refresh_main_link_labels(void)
     last_linktype = linktype;
     last_language = lang;
 
-    if (session_started && linktype == LINK_TYPE_CARPLAY)
+    if (session_started && linktype == LINK_TYPE_CARPLAY) {
         lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
             get_string_for_language(lang, "main_txt_Connect"));
-    else
+        carplay_connected = true;
+    } else {
         lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
             get_string_for_language(lang, "main_txt_nConnect"));
+        carplay_connected = false;
+    }
 
-    if (session_started && linktype == LINK_TYPE_ANDROIDAUTO)
+    if (session_started && linktype == LINK_TYPE_ANDROIDAUTO) {
         lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
             get_string_for_language(lang, "main_txt_Connect"));
-    else
+        androidauto_connected = true;
+    } else {
         lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
             get_string_for_language(lang, "main_txt_nConnect"));
+        androidauto_connected = false;
+    }
 }
 
 static void lvgl_handle_zlink_ui_requests(void)
