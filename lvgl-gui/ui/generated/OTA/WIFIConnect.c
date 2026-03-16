@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <pthread.h>
 
 /*============================================================================
  * 常量与宏定义
@@ -28,6 +29,11 @@
 
 /* WiFi UI全局实例 */
 wifi_t g_wifi_ui = {0};
+
+/* 主界面 WiFi 图标用：缓存连接状态，由后台线程更新，UI 仅读此变量（非阻塞） */
+static volatile bool s_wifi_connected_cached = false;
+static pthread_t s_wifi_poll_tid;
+static volatile bool s_wifi_poll_running = false;
 
 /*============================================================================
  * 私有函数声明
@@ -122,6 +128,8 @@ static bool close_wifi_connection(void) {
     /* 仅断开当前 wlan1 连接，不停止全局 wpa_supplicant 服务 */
     system("wpa_cli -i " WIFI_IFACE " disconnect >/dev/null 2>&1");
     system("wpa_cli -i " WIFI_IFACE " remove_network all >/dev/null 2>&1");
+
+    s_wifi_connected_cached = false;
 
     printf("[WiFi] WiFi connection on " WIFI_IFACE " closed\n");
     return true;
@@ -447,7 +455,8 @@ static void connect_sync(struct connect_arg *ca) {
                 *end-- = '\0';
             
             if (strstr(st, "COMPLETED")) { 
-                connected = 1; 
+                connected = 1;
+                s_wifi_connected_cached = true;
                 free(st); 
                 break; 
             }
@@ -1119,4 +1128,36 @@ void WIFIConnect_refresh_theme(void) {
     }
     
     printf("[WiFi] Theme refresh completed\n");
+}
+
+/*============================================================================
+ * 主界面 WiFi 图标：缓存状态与后台轮询（不阻塞 UI 线程）
+ *============================================================================*/
+
+#define WIFI_POLL_INTERVAL_SEC  3
+
+static void *wifi_poll_thread_fn(void *arg) {
+    (void)arg;
+    while (s_wifi_poll_running) {
+        s_wifi_connected_cached = wifi_query_status(NULL, 0);
+        for (int i = 0; i < WIFI_POLL_INTERVAL_SEC && s_wifi_poll_running; i++) {
+            sleep(1);
+        }
+    }
+    return NULL;
+}
+
+bool WIFIConnect_is_connected_cached(void) {
+    return s_wifi_connected_cached;
+}
+
+void WIFIConnect_start_status_poll(void) {
+    if (s_wifi_poll_running) {
+        return;
+    }
+    s_wifi_poll_running = true;
+    if (pthread_create(&s_wifi_poll_tid, NULL, wifi_poll_thread_fn, NULL) != 0) {
+        s_wifi_poll_running = false;
+        printf("[WiFi] Failed to start status poll thread\n");
+    }
 }

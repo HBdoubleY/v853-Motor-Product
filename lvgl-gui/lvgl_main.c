@@ -13,6 +13,7 @@
 #include <pthread.h>
 #include "ui/generated/gui_guider.h"
 #include "ui/generated/events_init.h"
+#include "ui/generated/OTA/WIFIConnect.h"
 #include "lvgl_system.h"
 #include "common.h"
 #include "storageDataApi.h"
@@ -63,6 +64,17 @@ static void bt_status_check_timer(lv_timer_t *timer) {
         recorderFlag = true;
         if(current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_TF)){
             g_sys_Data.TFmounted ? lv_obj_clear_flag(guider_ui.screen_img_TF, LV_OBJ_FLAG_HIDDEN) : lv_obj_add_flag(guider_ui.screen_img_TF, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+
+    /* 主界面 WiFi 图标：根据缓存状态显示/隐藏（仅读缓存，不阻塞；主界面重建后也会同步） */
+    if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_wifi)) {
+        bool want_show = WIFIConnect_is_connected_cached();
+        bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_wifi, LV_OBJ_FLAG_HIDDEN);
+        if (want_show && is_hidden) {
+            lv_obj_clear_flag(guider_ui.screen_img_wifi, LV_OBJ_FLAG_HIDDEN);
+        } else if (!want_show && !is_hidden) {
+            lv_obj_add_flag(guider_ui.screen_img_wifi, LV_OBJ_FLAG_HIDDEN);
         }
     }   
 
@@ -418,6 +430,7 @@ int lvgl_main(int w, int h)
  #endif   
     lv_timer_create(bt_status_check_timer, 500, NULL);
     lv_timer_create(detected_TF_FreeMem_Timer, 1000*30, NULL);
+    WIFIConnect_start_status_poll();  /* 后台轮询 WiFi 状态，主界面图标据此显示/隐藏 */
 //--------------------------------------------------------------
     /*Handle LitlevGL tasks (tickless mode)*/
     while(1) {

@@ -105,6 +105,18 @@ void WIFIConnect_refresh_list(void);
  */
 void WIFIConnect_refresh_theme(void);
 
+/**
+ * @brief 获取当前 WiFi 连接状态（缓存值，非阻塞，供主界面等使用）
+ * @return 已连接返回 true，否则返回 false
+ */
+bool WIFIConnect_is_connected_cached(void);
+
+/**
+ * @brief 启动后台 WiFi 状态轮询线程（在非 UI 线程中轮询，避免阻塞 LVGL）
+ * 应在应用启动时调用一次；重复调用会忽略。
+ */
+void WIFIConnect_start_status_poll(void);
+
 #ifdef __cplusplus
 }
 #endif
