@@ -206,8 +206,8 @@ void bt_serial_cleanup(void) {
     g_user_arg = NULL;
 }
 
-// 自定义回调处理收到的数据行
-static int hfp_connected = 0;
+/* HFP 连接状态：由 on_bt_data 在串口读线程中更新，主界面等仅读（非阻塞） */
+static volatile int hfp_connected = 0;
 static char connected_addr[13] = {0};
 
 void on_bt_data(const char *line, void *arg) {
@@ -233,4 +233,8 @@ void on_bt_data(const char *line, void *arg) {
         printf("Current connected device: %s\n", connected_addr);
     }
     // 其他协议解析...
+}
+
+int get_BT_connect_state(void) {
+    return hfp_connected;
 }

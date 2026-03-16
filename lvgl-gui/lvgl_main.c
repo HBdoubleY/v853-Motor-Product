@@ -37,6 +37,7 @@ extern sys_data g_sys_Data;
 extern LABEL_TIMER *screen_DVR_timer_Label;
 
 extern void recorder_status_timer(lv_timer_t *timer);
+extern int get_BT_connect_state(void);
 
 #if 1
 
@@ -76,7 +77,18 @@ static void bt_status_check_timer(lv_timer_t *timer) {
         } else if (!want_show && !is_hidden) {
             lv_obj_add_flag(guider_ui.screen_img_wifi, LV_OBJ_FLAG_HIDDEN);
         }
-    }   
+    }
+
+    /* 主界面 BT 图标：根据蓝牙连接状态显示/隐藏（仅读 get_BT_connect_state，不阻塞；主界面重建后也会同步） */
+    if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_bt)) {
+        bool want_show = (get_BT_connect_state() != 0);
+        bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
+        if (want_show && is_hidden) {
+            lv_obj_clear_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
+        } else if (!want_show && !is_hidden) {
+            lv_obj_add_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
 
 
 

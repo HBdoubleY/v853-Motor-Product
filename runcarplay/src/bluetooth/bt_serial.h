@@ -44,7 +44,13 @@ int bt_serial_send_raw(const char *data, int len);
  */
 void bt_serial_cleanup(void);
 
-// 蓝牙回调函数
+/**
+ * 获取当前 HFP 连接状态（由 on_bt_data 回调更新，供主界面等非阻塞读取）。
+ * @return 已连接返回 1，未连接返回 0
+ */
+int get_BT_connect_state(void);
+
+/** 蓝牙数据回调（用户实现，在串口读线程中调用） */
 void on_bt_data(const char *line, void *arg);
 
 #ifdef __cplusplus

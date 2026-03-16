@@ -176,10 +176,10 @@ TThreadRet MainThread(void* pvPara) {
 	LvglService(gsp.fb_width, gsp.fb_height);
 
 	// 初始化串口（例如 /dev/ttyS0，波特率460800）
-	// if (bt_serial_init("/dev/goc_serial", 460800, on_bt_data, NULL) != 0) {
-	// 	fprintf(stderr, "Failed to init serial\n");
-	// 	return 1;
-	// }
+	if (bt_serial_init("/dev/goc_serial", 460800, on_bt_data, NULL) != 0) {
+		fprintf(stderr, "Failed to init serial\n");
+		return 1;
+	}
 #ifdef ENABLE_CARPLAY
 	{
 		NewThread([](void*) -> TThreadRet {
