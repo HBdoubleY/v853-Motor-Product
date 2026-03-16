@@ -134,7 +134,7 @@ static void screen_btn_carplay_event_handler (lv_event_t *e)
 				zlink_client_set_video_active(1);
 				zlink_client_request_video_focus(0);
 				request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 1, NULL);
-				zlink_client_set_video_dump(1);
+				// zlink_client_set_video_dump(1);
 			}
 		}
 #endif
@@ -165,7 +165,7 @@ static void screen_btn_androidauto_event_handler(lv_event_t *e){
 				zlink_client_set_video_active(1);
 				zlink_client_request_video_focus(0);
 				request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 1, NULL);
-				zlink_client_set_video_dump(1);
+				// zlink_client_set_video_dump(1);
 			}
 		}
 #endif

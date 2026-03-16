@@ -371,7 +371,7 @@ static void lvgl_handle_zlink_ui_requests(void)
                 ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del,
                                       &guider_ui.screen_carPlay_del, setup_scr_screen,
                                       LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
-                zlink_client_set_video_dump(0);
+                // zlink_client_set_video_dump(0);
             }
         } else if (link_type == LINK_TYPE_ANDROIDAUTO) {
             if (lv_scr_act() == guider_ui.screen_androidAuto) {
@@ -379,7 +379,7 @@ static void lvgl_handle_zlink_ui_requests(void)
                 ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del,
                                       &guider_ui.screen_androidAuto_del, setup_scr_screen,
                                       LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
-                zlink_client_set_video_dump(0);
+                // zlink_client_set_video_dump(0);
             }
         }
     }
@@ -469,7 +469,7 @@ int lvgl_main(int w, int h)
     setConfigPara(&g_sys_Data.vipp8_config);
     createViChn(&g_sys_Data.vipp8_config, 8, 0);
  #endif   
-//    lv_timer_create(bt_status_check_timer, 500, NULL);
+    lv_timer_create(bt_status_check_timer, 500, NULL);
     lv_timer_create(detected_TF_FreeMem_Timer, 1000*30, NULL);
     WIFIConnect_start_status_poll();  /* 后台轮询 WiFi 状态，主界面图标据此显示/隐藏 */
 //--------------------------------------------------------------

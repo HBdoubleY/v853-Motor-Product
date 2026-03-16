@@ -264,6 +264,9 @@ static int g2d_rotate_frame(VIDEO_FRAME_INFO_S *src, VIDEO_FRAME_INFO_S *dst)
 	if (g_g2dfd <= 0)
 		return -1;
 
+	int src_w = src->VFrame.mWidth;
+	int src_h = src->VFrame.mHeight;
+
 	g2d_fmt_enh src_fmt, dst_fmt;
 	if (convert_PIXEL_FORMAT_E_to_g2d_fmt_enh(src->VFrame.mPixelFormat, &src_fmt) != SUCCESS)
 		return -1;
@@ -278,15 +281,27 @@ static int g2d_rotate_frame(VIDEO_FRAME_INFO_S *src, VIDEO_FRAME_INFO_S *dst)
 	blit.src_image_h.laddr[0] = src->VFrame.mPhyAddr[0];
 	blit.src_image_h.laddr[1] = src->VFrame.mPhyAddr[1];
 	blit.src_image_h.laddr[2] = src->VFrame.mPhyAddr[2];
-	blit.src_image_h.width = src->VFrame.mWidth;
-	blit.src_image_h.height = src->VFrame.mHeight;
+	blit.src_image_h.width = src_w;
+	blit.src_image_h.height = src_h;
 	blit.src_image_h.align[0] = 0;
 	blit.src_image_h.align[1] = 0;
 	blit.src_image_h.align[2] = 0;
-	blit.src_image_h.clip_rect.x = 0;
-	blit.src_image_h.clip_rect.y = 0;
-	blit.src_image_h.clip_rect.w = src->VFrame.mWidth;
-	blit.src_image_h.clip_rect.h = src->VFrame.mHeight;
+	int crop_x = 0;
+	int crop_y = 0;
+	int crop_w = src_w;
+	int crop_h = src_h;
+	/* Android Auto: phone may send 1920x1080 while session/logical size is 1440x720.
+	 * Center-crop to 1440x720 so rotated output fills the 720x1440 VO without black bars. */
+	if (src_w >= 1440 && src_h >= 720) {
+		crop_w = 1440;
+		crop_h = 720;
+		crop_x = (src_w - crop_w) / 2;
+		crop_y = (src_h - crop_h) / 2;
+	}
+	blit.src_image_h.clip_rect.x = crop_x;
+	blit.src_image_h.clip_rect.y = crop_y;
+	blit.src_image_h.clip_rect.w = crop_w;
+	blit.src_image_h.clip_rect.h = crop_h;
 	blit.src_image_h.gamut = G2D_BT709;
 	blit.src_image_h.bpremul = 0;
 	blit.src_image_h.mode = G2D_PIXEL_ALPHA;
@@ -462,8 +477,9 @@ static void *display_thread_fn(void *arg)
 
 		/* Allocate G2D destination buffers on first frame */
 		if (!g_ctx.g2d_dst_allocated) {
-			int dst_w = frame.VFrame.mHeight;
-			int dst_h = frame.VFrame.mWidth;
+			/* Use display rect size as G2D dst so rotated/cropped content fills VO. */
+			int dst_w = g_ctx.disp_width;
+			int dst_h = g_ctx.disp_height;
 			if (g2d_alloc_dst(dst_w, dst_h, frame.VFrame.mPixelFormat) != 0) {
 				AW_MPI_VO_SendFrame(g_ctx.vo_layer, g_ctx.vo_chn, &frame, 0);
 				AW_MPI_VDEC_ReleaseImage(g_ctx.vdec_chn, &frame);
