@@ -208,29 +208,43 @@ void bt_serial_cleanup(void) {
 
 /* HFP 连接状态：由 on_bt_data 在串口读线程中更新，主界面等仅读（非阻塞） */
 static volatile int hfp_connected = 0;
-static char connected_addr[13] = {0};
+static char connected_addr[64] = {0};
+static char connected_device_name[64] = {0};
 
 void on_bt_data(const char *line, void *arg) {
     if (strncmp(line, "IB", 2) == 0) {
         // HFP连接成功，line+2为12位蓝牙地址
-        printf("HFP connected = 1\n\n\n\n\n\n\n");
-        strncpy(connected_addr, line+2, 12);
-        connected_addr[12] = '\0';
+        printf("\n\n\n\n\n\n\nHFP connected = 1\n\n\n\n\n\n\n");
+        // strncpy(connected_addr, line+2, 12);
+        // connected_addr[12] = '\0';
         hfp_connected = 1;
         
-        printf("HFP connected to %s\n", connected_addr);
+        // printf("HFP connected to %s\n", connected_addr);
     }
     else if (strncmp(line, "IA", 2) == 0) {
         // HFP断开
         hfp_connected = 0;
-        connected_addr[0] = '\0';
+        // connected_addr[0] = '\0';
         printf("HFP disconnected\n");
     }
-    else if (strncmp(line, "JH", 2) == 0 || strncmp(line, "AD", 2) == 0) {
-        // 当前连接设备地址（部分版本用JH，部分用AD）
-        strncpy(connected_addr, line+2, 12);
-        connected_addr[12] = '\0';
-        printf("Current connected device: %s\n", connected_addr);
+    // else if (strncmp(line, "JH", 2) == 0 || strncmp(line, "AD", 2) == 0) {
+    //     // 当前连接设备地址（部分版本用JH，部分用AD）
+    //     strncpy(connected_addr, line+2, 12);
+    //     connected_addr[12] = '\0';
+    //     printf("Current connected device: %s\n", connected_addr);
+    // }
+    else if (strncmp(line, "SA", 2) == 0 ) {
+        // 当前连接设备名称（部分版本用JH，部分用AD）
+        memset(connected_device_name, 0, sizeof(connected_device_name));
+        strncpy(connected_device_name, line+2, strlen(line+2));
+        connected_device_name[strlen(line+2)] = '\0';
+        printf("\n\n\nCurrent connected device: %s\n\n\n\n", connected_device_name);
+    }
+    else if (strncmp(line, "LS", 2) == 0 ) {
+        // 当前连接设备名称（部分版本用JH，部分用AD）
+        // strncpy(connected_addr, line+2, 12);
+        // connected_addr[12] = '\0';
+        printf("\n\n\nBLE DATA: %s\n\n\n\n", line);
     }
     // 其他协议解析...
 }

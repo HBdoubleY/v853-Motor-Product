@@ -687,7 +687,7 @@ void setup_scr_screen_SET(lv_ui *ui)
  
 	//Write codes screen_SET_label_connect
 	ui->screen_SET_label_connect = lv_label_create(ui->screen_SET_cont_lanya);
-	lv_label_set_text(ui->screen_SET_label_connect, get_string_for_language(g_sys_Data.current_language,"main_txt_nConnect"));
+	lv_label_set_text(ui->screen_SET_label_connect, "on hyby test");
 	lv_label_set_long_mode(ui->screen_SET_label_connect, LV_LABEL_LONG_SCROLL_CIRCULAR);
 	lv_obj_set_pos(ui->screen_SET_label_connect, 700, 120);
 	lv_obj_set_size(ui->screen_SET_label_connect, 400, 120);
