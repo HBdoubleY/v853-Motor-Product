@@ -132,7 +132,7 @@ static void session_init(void)
 	session_data->width_margin = 0;
 	session_data->height_margin = 0;
 	session_data->fps = 30;
-	session_data->density = 120;
+	session_data->density = 230;
 	session_data->is_right_hand = 0;
 	session_data->is_night_mode = 0;
 	session_data->apple_wired = APPLE_WIRED_LINK_NONE;

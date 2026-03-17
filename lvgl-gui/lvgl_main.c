@@ -494,7 +494,7 @@ int lvgl_main(int w, int h)
     MPI_init();
     AW_MPI_VDEC_SetVEFreq(MM_INVALID_CHN, 0);
 
-#if 0
+#if 1
     InitMppCameraData(&g_sys_Data.vipp0_config);
     setConfigPara(&g_sys_Data.vipp0_config);
     createViChn(&g_sys_Data.vipp0_config, 0, 0);
