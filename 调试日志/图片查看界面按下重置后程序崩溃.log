@@ -1,0 +1,2370 @@
+﻿[10]HELLO! BOOT0 is starting!
+[13]BOOT0 commit : 7cbc2fc77e
+[98][pmu]: bus read error
+[100]set pll start
+[102]periph0 has been enabled
+[105]set pll end
+[107]board init ok
+[109]rtc[0] value = 0x80000002
+[112]DRAM use external ZQ!!
+[114]chip id check OK
+[116]POWER SETTING ERROR!
+[119]DRAM BOOT DRIVE INFO: V0.19
+[122]DRAM CLK = 792 MHz
+[124]DRAM Type = 3 (2:DDR2,3:DDR3)
+[127]DRAMC ZQ value: 0x7b7bfb
+[130]DRAM ODT value: 0x42.
+[134]DRAM SIZE =512 M
+[136]dram_tpr4:0x0
+[142]DRAM simple test OK.
+[145]rtc standby flag is 0x0, super standby flag is 0x0
+[150]dram size =512
+[153]audio:avcc calibration
+[157]spi sample_mode:1 sample_delay:1f
+[162]spinor id is: 68 40 19, read cmd: 6c
+[166]Succeed in reading toc file head.
+[169]The size of toc is b0000.
+[201]Entry_name        = optee
+[205]Entry_name        = u-boot
+[210]Entry_name        = dtb
+[213]Jump to second Boot.
+M/TC: OP-TEE version: 2c52b317-dirty (gcc version 5.3.1 20160412 (Linaro GCC 5.3-2016.05)) #3 Fri Aug 12 11:46:59 UTC 2022 arm
+
+
+U-Boot 2018.07 (Mar 07 2026 - 02:44:55 +0000) Allwinner Technology
+
+[00.396]CPU:   Allwinner Family
+[00.399]Model: sun8iw21
+[00.401]DRAM:  512 MiB
+[00.404]Relocation Offset is: 1cf41000
+[00.422]secure enable bit: 0
+E/TC:0   fdt_getprop_u32:343 prop trace_level not found
+[00.436]CPU=900 MHz,PLL6=600 Mhz,AHB=200 Mhz, APB1=24Mhz  MBus=300Mhz
+[00.442]gic: sec monitor mode
+sunxi flash map init
+SPI ALL:   ready
+[00.449]line:724 init_clocks
+[00.452]flash init start
+[00.455]workmode = 0,storage type = 3
+[00.460]spi sample_mode:1 sample_delay:1f
+[00.465]spi sunxi_slave->max_hz:100000000 
+SF: Detected BY25FQ256ES( ) with page size 256 Bytes, erase size 64 KiB, total 32 MiB
+[00.477]sunxi flash init ok
+[00.480]drv_disp_init
+[00.487]handle_num : 4 
+partno erro : can't find partition bootloader
+** Unable to read file lcd_compatible_index.txt **
+[00.501]disp_fat_load for lcd config failed
+[00.510]drv_disp_init finish
+[00.514]Loading Environment from SUNXI_FLASH... OK
+CACHE: Misaligned operation at range [5bf4a8b6, 5c0c20e6]
+root_partition is rootfs
+set root to /dev/mtdblock2
+[00.913]update part info
+[00.915]update bootcmd
+[00.918]change working_fdt 0x5bf00e70 to 0x5bee0e70
+disable nand error: FDT_ERR_NOTFOUND
+[00.934]## error: update_fdt_dram_para : FDT_ERR_NOTFOUND
+[00.941]update dts
+Hit any key to stop autoboot:  0 
+[01.012]no vendor_boot partition is found
+Android's image name: v853-sc1718v_nor
+ERROR: reserving fdt memory region failed (addr=47bc0000 size=40000)
+ERROR: reserving fdt memory region failed (addr=47bbe000 size=2000)
+ERROR: reserving fdt memory region failed (addr=47bbc000 size=2000)
+[01.093]Starting kernel ...
+
+mount: mounting none on /dev failed: Resource busy
+starting pid 867, tty '': '/bin/mount -t proc proc /proc 2>/dev/null || true'
+starting pid 868, tty '': '/bin/mount -t tmpfs tmpfs /run 2>/dev/null || true'
+starting pid 869, tty '': '/bin/mount -o remount,rw / 2>/dev/null || true'
+starting pid 870, tty '': '/bin/mkdir -p /dev/pts 2>/dev/null || true'
+starting pid 871, tty '': '/bin/mkdir -p /dev/shm 2>/dev/null || true'
+starting pid 872, tty '': '/bin/mount -a 2>/dev/null || true'
+starting pid 873, tty '': '/etc/init.d/rcS boot'
+------run rc.preboot file-----
+------run rc.final file-----
+Load mpp modules
+------  insmod sunxi_gpadc modules start --------
+Starting logging: /etc/init.d/S01logging: line 42: can't create /var/run/syslogd.pid: nonexistent directory
+/etc/init.d/S01logging: line 42: can't create /var/run/klogd.pid: nonexistent directory
+OK
+/etc/init.d/S01logging: line 42: /sbin/klogd: not found
+[       1.927908]  (none) syslog.info syslogd started: BusyBox v1.27.2
+mkdir: can't create directory '/dev/pts': File exists
+mkdir: can't create directory '/dev/shm': File exists
+Initializing random number generator... done.
+Starting network: Failed to connect to ubus
+/sbin/ifup: line 51: /sbin/wifi: not found
+FAIL
+ifconfig: SIOCSIFHWADDR: No such device
+Starting telnetd: udhcpc: SIOCGIFINDEX: No such device
+OK
+enable android usb
+starting pid 934, tty '': '/etc/init.d/rc.local'
+======run Kwx3D360App=======
+starting pid 935, tty '/dev/console': '-/bin/sh'
+
+
+BusyBox v1.27.2 () built-in shell (ash)
+
+------run profile file-----
+ _____  _              __     _
+|_   _||_| ___  _ _   |  |   |_| ___  _ _  _ _
+  | |   _ |   ||   |  |  |__ | ||   || | ||_'_|
+  | |  | || | || _ |  |_____||_||_|_||___||_,_|
+  |_|  |_||_|_||_|_|  Tina is Based on OpenWrt!
+ ----------------------------------------------
+ Tina Linux (Neptune, 5C1C9C53)
+ ----------------------------------------------
+root@(none):/# killall: runcarplay: no process killed
+VLAN: vlan_set_name_type: SET_VLAN_NAME_TYPE_CMD name_type=2 failed: No error information
+wlan0: interface state UNINITIALIZED->ENABLED
+wlan0: AP-ENABLED 
+udhcpd: started, v1.27.2
+udhcpd: max_leases=235 is too big, setting to 145
+udhcpd: can't open '': No such file or directory
+-------------run------------
+hyby upgrade version 2026/02/05 (inotify mode)
+SD Upgrade Monitor started, PID: 986
+==========================================
+SD Upgrade Monitor Started (inotify mode)
+Monitor PID: 986
+Process Name: XbsHyUpgrade
+==========================================
+Initial check: Upgrade file exists at startup
+[       6.223238]  (none) daemon.err mDNSResponder: mDNSResponder (Engineering Build) (Jan 26 2026 16:37:42) starting
+[       6.560382]  (none) daemon.err mDNSResponder:   9: Listening for incoming Unix Domain Socket client requests
+[       6.586236]  (none) daemon.err mDNSResponder: mDNS_AddDNSServer: Lock not held! mDNS_busy (0) mDNS_reentrancy (0)
+[       6.594064]  (none) daemon.err mDNSResponder: mDNSPlatformSourceAddrForDest: connect 1.1.1.1 failed errno 101 (Network unreachable)
+[       6.594616]  (none) daemon.err mDNSResponder: WARNING: mdnsd  as root !!!!!
+
+
+
+
+
+
+
+
+xaaaaaaaaaaaxx\n
+
+\n
+24000448 rtc:2026-02-24 00:04:48.
+[       7.262850]  (none) daemon.err mDNSResponder: mDNS_Execute: mDNSPlatformRawTime went backwards by 770 ticks; setting correction factor to 903440744
+[GOC-D] gocsdk main start,module:RTL8733BS
+[GOC-E] slave name is /dev/pts/0
+[GOC-D] link /dev/pts/0 to /dev/goc_serial succeed
+[GOC-E] open_ptms
+[GOC-E] sharemem_init
+[GOC-E] gocsdk main fail to sched_setscheduler
+[GOC-D] main_init arch
+[GOC-E] argc0 :/opt/work/app/carplay/gocsdk 
+[GOC-D] === 429 ===
+[z-link][00:04:49.386]
+---------zlink_start compile time:2026-01-26-16-40-32, running time:Tue Feb 24 00:04:49 2026
+
+[z-link][00:04:49.386]
+zlink commit id '99f5084096c8a3ed1e8223455197b5a60dae07e5*'
+
+[z-link][00:04:49.399]zlink session_state_send: session_state = 0, current_device = 0
+[z-link][00:04:49.406]zlink: Found 0 usbmuxd process
+[z-link][00:04:49.406]wait_session_init start
+[z-link][00:04:49.421]control_main_loop: waiting client
+[z-link][00:04:49.421]audio_main_loop: waiting client
+[z-link][00:04:49.422]AA_bypath_loop: waiting client
+[z-link][00:04:49.422]video_main_loop: waiting client
+[GOC-D] === 433 ===
+[GOC-D] === 435 ===
+[GOC-D] === 439 ===
+[GOC-D] === 443 ===
+[GOC-D] === 445 ===
+[GOC-D] === 456 ===
+[GOC-D] === 509 ===
+[GOC-E] main_init 
+[GOC-D] app cb count:1
+[GOC-D] ----->drvier_init<------
+[GOC-E] driver so not found
+[GOC-D] write_to_file /tmp/libGbtsDriver.so:402200
+[GOCT-D-983] ----------------goodocom driver soLoad ------------------
+[GOCT-D-983] version:Aug 15 2024 10:24:14
+[GOC-D] deamon:0,version:DL4.SD
+[GOC-D] wait start
+[GOC-D] gocsdk_main start date:Mar  7 2026
+[GOC-D] config_init
+[GOC-D] goc_socket_start
+[GOC-D] Created socket '/dev/socket/goc_serial' with mode '666'
+[GOC-D] api serial socket created
+[GOC-D] Created socket '/dev/socket/goc_spp' with mode '666'
+[GOC-D] socket_listener thread tid=1010
+[GOC-D] socket_listener thread tid=1009
+[GOC-D] --->spp socket created:5
+[GOC-D] gocmain_init arch
+[GOC-D] write_uuid_to_tmp or_key: 786e7573 
+[GOC-D] write_uuid_to_tmp data:141e2a1a 
+[GOC-D] write_uuid_to_tmp data:17080112 
+[GOC-D] write_uuid_to_tmp data:584e1801 
+[GOC-D] write_uuid_to_tmp data:58545553 
+[GOC-D] write_uuid_to_tmp uuid:141E2A1A17080112584E180158545553 
+[GOC-D] write_uuid_to_tmp-->/tmp/uuid:141E2A1A17080112584E180158545553
+[GOC-D] dingchuang goc_socket_start
+[GOC-D] Created socket '/dev/socket/bt_mic_socket' with mode '666'
+[GOC-D] DINGCHUANG control hfp socket created
+[GOCT-D-1008] set path:/opt/work/btgoc Aug 15 2024
+[GOCT-E-1008] set_enc_pwdtype:0x451
+[GOC-D] socket_listener server_fd=8 thread tid=1012
+[GOC-E] default setting init open /opt/work/btgoc/btDefSetting.json err:No such file or directory
+[GOC-E] init default seting err
+[GOC-D] default_setting_parse over
+[GOC-D] set_send_streaming_by_sbc
+[GOC-E] cannot open config file:/opt/work/btgoc/config.ini
+[GOC-D] send_bt_stat:2
+[GOC-D] Goc bluetooth version : GBTSDL4.SDG4.126039
+[GOC-D] command_reader thread tid=1013
+[GOC-D] send_ind: [MWGBTSDL4.SDG4.126039]
+[GOC-D] send_ind: [IS2]
+[GOC-E] bt_power**** 0 ******************
+[GOC-E] bt_power**** 1 ******************
+[GOC-D] transport h5
+[GOC-E] support hci
+[GOC-D] BASE_ADDRESS:0x7f646000
+[GOC-E] BCSP: Using COM port: /dev/ttyS2 and baud rate: 1500000,romBaud:115200
+[GOCT-D-1008] uart drvinit
+[GOCT-D-1008] test GocUartDrvOpen instInUse:0,baud:115200,dataBits:8,parity:2,stopBits:1,flowControl:0
+[GOCT-D-1008] CsrUartDrvOpen status instInUse:1,band:4098,instUseToken:1
+[GOCT-D-1008] uart drvinit is null
+[GOC-D] HciTransportCreate
+[GOC-E] GocAmIssueBcAmCmd 0x281a
+[GOC-D] SEC_MODE4_SSP
+[GOC-D] BtLeBrowserAppInit suc
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-D] CsrBtRsccAppInit
+[GOC-E] config_read key:localname not found
+[GOC-D] set local default name:RTL8733BS
+[GOC-E] config_read key:passkey not found
+[GOC-D] passkey:0000
+[GOC-E] watchdog not start
+[GOC-D] SEC_MODE4_SSP
+[GOC-D] pmalloc count:205 size:20024
+[GOC-D] hfp activate req
+[GOC-D] Activating AV profile for sink streaming...
+[GOCT-D-1018] bcsp start
+[GOCT-D-1018] goc AbcspInit module:820c,type:1105
+[GOCT-D-1018] GocAbcspStartTshyTimer:250000
+[GOCT-D-1018] xxx UARTDRIVER START /dev/ttyS2,reset:0 ,instBaud:115200,instResetBaud:115200,Aug 15 2024 10:24:17
+[GOCT-D-1018] mod tranport
+[GOCT-D-1018] open serial xxx
+[GOCT-D-1018] curBaud:115200 xxx
+[GOCT-D-1018] open /dev/ttyS2 115200 bps
+[GOCT-D-1018] uartDeviceConfigure speed:0x1002,instParity:0x2,instFlowControl:0x0,instStopBits:0x1
+[GOCT-D-1018] disable flow control
+[GOCT-D-1020] THREAD START
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOCT-D-1018] lemsgid_sync_resp
+[GOCT-D-1018] state_curious lemsgid_sync
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOCT-D-1018] state_curious lemsgid_sync
+[GOCT-D-1018] state_curious lemsgid_conf
+[GOC-D] le browser app registered
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] mapc instance[0] srmpon
+[GOC-D] mapc get instance ids cfm, count=1
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_REQ
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOC-D] CsrBtRsccAppHandler
+[GOC-D] gatt eventType:1b3
+[GOC-D] BT_RSCC_APP_REGISTER_CFM
+[GOCT-E-1018] state_curious lemsgid_tconf_timeout
+[GOCT-D-1018] state_curious lemsgid_conf_resp
+[GOCT-D-1018] -->hand over
+[GOCT-D-1018] h5 patch
+[GOC-D] on_bcsp_le_done
+[GOCT-E-1018] download_patch_rtl:820c
+[GOCT-E-1018] get pcm from ap
+[GOCT-D-1018] download for 8733bs
+[GOCT-D-1018] fw_len:55580 config_len:33
+[GOC-D] pre config:55 AB 23 87 1B 00 0C 00 10 02 80 92 04 50 C5 EA 19 E1 1B FD AF 5F 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-D-1018] uart_config:0xb6b23885 config:0xb6b2387c
+[GOCT-D-1018] protocol_h5:1
+[GOCT-D-1018] baudrate:0x8002=1500000
+[GOCT-D-1018] flow_control:0
+[GOCT-D-1018] parity_enabled:1
+[GOCT-D-1018] parity_even:1
+[GOCT-E-1018] not find pcm if setting
+[GOCT-D-1018] cur_index=-1 MAX_INDEX=0
+[GOCT-D-1018] is goc 725/6 :f
+[GOCT-E-1018] conig_file_name:/opt/work/btgoc/rtl8723ft_config
+[GOC-D] config:55 AB 23 87 1B 00 0C 00 10 02 80 00 00 50 C5 EA 19 E1 1B FD AF 5B 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-E-1018] file_name:/opt/work/btgoc/rtl8723ft_fw
+[GOCT-D-1018] cur_index=-5 MAX_INDEX=0
+[GOCT-D-1018] addr:189ead046daf
+[GOCT-E-1018] not goodocom dev:7
+[GOCT-E-1018] hex:189ead046daf
+[GOCT-D-1018] first check fail 1
+[GOCT-D-1018] Pwd_mcu_inter time:9
+[GOCT-D-1018] generate_addr
+[GOCT-D-1018] +++++++++++machineid++++++++++:0x451
+[GOCT-D-1018] cm 4:5
+[GOCT-D-1018] read first uuid
+[GOCT-D-1018] --->tmp id:
+[GOCT-D-1018] addr sn local address :02 0d 58 54 55 53 0d 00 
+[GOCT-D-1018] use efuse addr
+[GOCT-D-1018] rtl_set_config_addr
+[GOCT-D-1018] rtl_set_config_addr 1
+[GOCT-E-1018] rtl_set_config_addr error:cannot find btaddr config
+[GOCT-D-1018] rtl_set_config_addr over
+[GOC-D] gap_set_local_address
+[GOC-D] send_ind: [DB189EAD046DAF]
+[GOCT-D-1018] cur_index=-6 MAX_INDEX=0
+[GOCT-D-1022] start i 190918....
+[GOC-D] send_register eresault=1[e_registering]..
+[GOC-D] register err..
+[GOC-D] send_ind: [VS1]
+[GOCT-D-1022] set id :XinBS_ZKSW_V853_RTL8733BS_Linux
+[GOCT-D-1022] path:/opt/work/btgoc
+[GOCT-D-1022] auth start:0
+[GOCT-D-1022] +++++++++++machineid++++++++++:0x451
+[GOCT-D-1022] cm 4:5
+[GOCT-D-1022] read first uuid
+[GOCT-D-1018] cur_index=-2 MAX_INDEX=0
+Loaded 3 variables from JSON file: /opt/work/storage_data.txt
+storage data: backlight:80,
+     splitScreenDisp:0,
+,    language:0,
+    recorderTime:2
+,    recorderUrgentTime:1
+,    carTripSwitch:0
+#######--------------SetBackLight---241---------------------
+sh: cd: line 1: can't cd to /sys/kernel/debug/dispdbg
+[GOCT-E-1018] bcsp_timed_evt
+[GOCT-D-1018] new_txseq:3,_this->txmsg.txseq:4
+[GOCT-D-1018] lastTxseqTime:0
+cd /sys/kernel/debug/dispdbg; echo lcd0 > name; echo setbl > command; echo 51 > param; echo 1 > start
+CheckDiskInfoDeleteVideoFile:403
+[GOCT-D-1022] --->tmp id:141E2A1A17080112584E180158545553
+[GOCT-D-1022] ----------hardware------------:
+[GOCT-D-1022] cmb 4:5:1
+[GOCT-D-1022] rtl start..
+[GOCT-D-1022] rtladdr:[189ead046daf]
+[GOCT-D-1022] hardware id:189ead046daf
+[GOCT-D-1022] auth init over
+[GOCT-D-1022] auth get imei over
+[GOCT-D-1022] step 1
+[GOCT-D-1018] driver_change_baudrate_by_bandrate_parity
+[GOCT-D-1018] change ex bp open:/dev/ttyS2,band:1500000
+[GOCT-D-1018] parity even
+[GOCT-E-1018] change_baudrate ex to:1500000 over
+[GOCT-E-1022] goodocom device 20220429
+[GOCT-D-1022] +file_access_check
+[GOCT-D-1022] find auth data step 2
+[GOCT-D-1022] goodocom device
+[GOCT-E-1022] i strcmp err:/opt/work/btgoc/.goc_database,/opt/work/btgoc
+[GOCT-D-1022] exit read
+[GOC-D] send_register eresault=0[e_register_success]..
+[GOC-D] send_register g_bBtInitFlag= 0
+[GOC-D] send_ind: [VS0]
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOCT-D-1022] exit thread1
+[GOCT-D-1027] heart handle 4,time:3
+[GOCT-E-1018] bcsp_timed_evt
+[GOCT-D-1018] new_txseq:3,_this->txmsg.txseq:4
+[GOCT-D-1018] lastTxseqTime:1
+[GOCT-D-1018] prepare_patch eversion=02
+[GOCT-D-1018] i:1,chipID:0x3,number_of_total_patch:2
+[GOCT-D-1018] start_offset:30c0 patch_len:a815
+[GOCT-D-1018] config_len:33,fw_len:43029
+[GOC-D] snd config:55 AB 23 87 1B 00 0C 00 10 02 80 00 00 50 C5 EA 19 E1 1B FD AF 5B 01 A4 0B 8D 00 01 FA 8F 00 01 BF 
+[GOCT-D-1018] cur_index=0 MAX_INDEX=172
+[GOCT-D-1018] cur_index=1 MAX_INDEX=172
+[GOCT-D-1018] cur_index=2 MAX_INDEX=172
+[GOCT-D-1018] cur_index=3 MAX_INDEX=172
+[GOCT-D-1018] cur_index=4 MAX_INDEX=172
+[GOCT-D-1018] cur_index=5 MAX_INDEX=172
+[GOCT-D-1018] cur_index=6 MAX_INDEX=172
+[GOCT-D-1018] cur_index=7 MAX_INDEX=172
+[GOCT-D-1018] cur_index=8 MAX_INDEX=172
+[GOCT-D-1018] cur_index=9 MAX_INDEX=172
+[GOCT-D-1018] cur_index=10 MAX_INDEX=172
+[GOCT-D-1018] cur_index=11 MAX_INDEX=172
+[GOCT-D-1018] cur_index=12 MAX_INDEX=172
+[GOCT-D-1018] cur_index=13 MAX_INDEX=172
+[GOCT-D-1018] cur_index=14 MAX_INDEX=172
+[GOCT-D-1018] cur_index=15 MAX_INDEX=172
+[GOCT-D-1018] cur_index=16 MAX_INDEX=172
+[GOCT-D-1018] cur_index=17 MAX_INDEX=172
+[GOCT-D-1018] cur_index=18 MAX_INDEX=172
+[GOCT-D-1018] cur_index=19 MAX_INDEX=172
+[GOCT-D-1018] cur_index=20 MAX_INDEX=172
+[GOCT-D-1018] cur_index=21 MAX_INDEX=172
+[GOCT-D-1018] cur_index=22 MAX_INDEX=172
+[GOCT-D-1018] cur_index=23 MAX_INDEX=172
+[GOCT-D-1018] cur_index=24 MAX_INDEX=172
+[GOCT-D-1018] cur_index=25 MAX_INDEX=172
+[GOCT-D-1018] cur_index=26 MAX_INDEX=172
+[GOCT-D-1018] cur_index=27 MAX_INDEX=172
+[GOCT-D-1018] cur_index=28 MAX_INDEX=172
+[GOCT-D-1018] cur_index=29 MAX_INDEX=172
+[GOCT-D-1018] cur_index=30 MAX_INDEX=172
+[GOCT-D-1018] cur_index=31 MAX_INDEX=172
+[GOCT-D-1018] cur_index=32 MAX_INDEX=172
+[GOCT-D-1018] cur_index=33 MAX_INDEX=172
+[GOCT-D-1018] cur_index=34 MAX_INDEX=172
+[GOCT-D-1018] cur_index=35 MAX_INDEX=172
+[GOCT-D-1018] cur_index=36 MAX_INDEX=172
+[GOCT-D-1018] cur_index=37 MAX_INDEX=172
+[GOCT-D-1018] cur_index=38 MAX_INDEX=172
+[GOCT-D-1018] cur_index=39 MAX_INDEX=172
+[GOCT-D-1018] cur_index=40 MAX_INDEX=172
+[GOCT-D-1018] cur_index=41 MAX_INDEX=172
+[GOCT-D-1018] cur_index=42 MAX_INDEX=172
+[GOCT-D-1018] cur_index=43 MAX_INDEX=172
+[GOCT-D-1018] cur_index=44 MAX_INDEX=172
+[GOCT-D-1018] cur_index=45 MAX_INDEX=172
+[GOCT-D-1018] cur_index=46 MAX_INDEX=172
+[GOCT-D-1018] cur_index=47 MAX_INDEX=172
+[GOCT-D-1018] cur_index=48 MAX_INDEX=172
+[GOCT-D-1018] cur_index=49 MAX_INDEX=172
+[GOCT-D-1018] cur_index=50 MAX_INDEX=172
+[GOCT-D-1018] cur_index=51 MAX_INDEX=172
+[GOCT-D-1018] cur_index=52 MAX_INDEX=172
+[GOCT-D-1018] cur_index=53 MAX_INDEX=172
+[GOCT-D-1018] cur_index=54 MAX_INDEX=172
+[GOCT-D-1018] cur_index=55 MAX_INDEX=172
+[GOCT-D-1018] cur_index=56 MAX_INDEX=172
+[GOCT-D-1018] cur_index=57 MAX_INDEX=172
+[GOCT-D-1018] cur_index=58 MAX_INDEX=172
+[GOCT-D-1018] cur_index=59 MAX_INDEX=172
+[GOCT-D-1018] cur_index=60 MAX_INDEX=172
+[GOCT-D-1018] cur_index=61 MAX_INDEX=172
+[GOCT-D-1018] cur_index=62 MAX_INDEX=172
+[GOCT-D-1018] cur_index=63 MAX_INDEX=172
+[GOCT-D-1018] cur_index=64 MAX_INDEX=172
+[GOCT-D-1018] cur_index=65 MAX_INDEX=172
+[GOCT-D-1018] cur_index=66 MAX_INDEX=172
+[GOCT-D-1018] cur_index=67 MAX_INDEX=172
+[GOCT-D-1018] cur_index=68 MAX_INDEX=172
+[GOCT-D-1018] cur_index=69 MAX_INDEX=172
+[GOCT-D-1018] cur_index=70 MAX_INDEX=172
+[GOCT-D-1018] cur_index=71 MAX_INDEX=172
+[GOCT-D-1018] cur_index=72 MAX_INDEX=172
+[GOCT-D-1018] cur_index=73 MAX_INDEX=172
+[GOCT-D-1018] cur_index=74 MAX_INDEX=172
+[GOCT-D-1018] cur_index=75 MAX_INDEX=172
+[GOCT-D-1018] cur_index=76 MAX_INDEX=172
+[GOCT-D-1018] cur_index=77 MAX_INDEX=172
+[GOCT-D-1018] cur_index=78 MAX_INDEX=172
+[GOCT-D-1018] cur_index=79 MAX_INDEX=172
+[GOCT-D-1018] cur_index=80 MAX_INDEX=172
+[GOCT-D-1018] cur_index=81 MAX_INDEX=172
+[GOCT-D-1018] cur_index=82 MAX_INDEX=172
+[GOCT-D-1018] cur_index=83 MAX_INDEX=172
+[GOCT-D-1018] cur_index=84 MAX_INDEX=172
+[GOCT-D-1018] cur_index=85 MAX_INDEX=172
+[GOCT-D-1018] cur_index=86 MAX_INDEX=172
+[GOCT-D-1018] cur_index=87 MAX_INDEX=172
+[GOCT-D-1018] cur_index=88 MAX_INDEX=172
+[GOCT-D-1018] cur_index=89 MAX_INDEX=172
+[GOCT-D-1018] cur_index=90 MAX_INDEX=172
+[GOCT-D-1018] cur_index=91 MAX_INDEX=172
+[GOCT-D-1018] cur_index=92 MAX_INDEX=172
+[GOCT-D-1018] cur_index=93 MAX_INDEX=172
+[GOCT-D-1018] cur_index=94 MAX_INDEX=172
+[GOCT-D-1018] cur_index=95 MAX_INDEX=172
+[GOCT-D-1018] cur_index=96 MAX_INDEX=172
+[GOCT-D-1018] cur_index=97 MAX_INDEX=172
+[GOCT-D-1018] cur_index=98 MAX_INDEX=172
+[GOCT-D-1018] cur_index=99 MAX_INDEX=172
+[GOCT-D-1018] cur_index=100 MAX_INDEX=172
+[GOCT-D-1018] cur_index=101 MAX_INDEX=172
+[GOCT-D-1018] cur_index=102 MAX_INDEX=172
+[GOCT-D-1018] cur_index=103 MAX_INDEX=172
+[GOCT-D-1018] cur_index=104 MAX_INDEX=172
+[GOCT-D-1018] cur_index=105 MAX_INDEX=172
+[GOCT-D-1018] cur_index=106 MAX_INDEX=172
+[GOCT-D-1018] cur_index=107 MAX_INDEX=172
+[GOCT-D-1018] cur_index=108 MAX_INDEX=172
+[GOCT-D-1018] cur_index=109 MAX_INDEX=172
+[GOCT-D-1018] cur_index=110 MAX_INDEX=172
+[GOCT-D-1018] cur_index=111 MAX_INDEX=172
+[GOCT-D-1018] cur_index=112 MAX_INDEX=172
+[GOCT-D-1018] cur_index=113 MAX_INDEX=172
+[GOCT-D-1018] cur_index=114 MAX_INDEX=172
+[GOCT-D-1018] cur_index=115 MAX_INDEX=172
+[GOCT-D-1018] cur_index=116 MAX_INDEX=172
+[GOCT-D-1018] cur_index=117 MAX_INDEX=172
+[GOCT-D-1018] cur_index=118 MAX_INDEX=172
+[GOCT-D-1018] cur_index=119 MAX_INDEX=172
+[GOCT-D-1018] cur_index=120 MAX_INDEX=172
+[GOCT-D-1018] cur_index=121 MAX_INDEX=172
+[GOCT-D-1018] cur_index=122 MAX_INDEX=172
+[GOCT-D-1018] cur_index=123 MAX_INDEX=172
+[GOCT-D-1018] cur_index=124 MAX_INDEX=172
+[GOCT-D-1018] cur_index=125 MAX_INDEX=172
+[GOCT-D-1018] cur_index=126 MAX_INDEX=172
+[GOCT-D-1018] cur_index=127 MAX_INDEX=172
+[GOCT-D-1018] cur_index=128 MAX_INDEX=172
+[GOCT-D-1018] cur_index=129 MAX_INDEX=172
+[GOCT-D-1018] cur_index=130 MAX_INDEX=172
+[GOCT-D-1018] cur_index=131 MAX_INDEX=172
+[GOCT-D-1018] cur_index=132 MAX_INDEX=172
+[GOCT-D-1018] cur_index=133 MAX_INDEX=172
+[GOCT-D-1018] cur_index=134 MAX_INDEX=172
+[GOCT-D-1018] cur_index=135 MAX_INDEX=172
+[GOCT-D-1018] cur_index=136 MAX_INDEX=172
+[GOCT-D-1018] cur_index=137 MAX_INDEX=172
+[GOCT-D-1018] cur_index=138 MAX_INDEX=172
+[GOCT-D-1018] cur_index=139 MAX_INDEX=172
+[GOCT-D-1018] cur_index=140 MAX_INDEX=172
+[GOCT-D-1018] cur_index=141 MAX_INDEX=172
+[GOCT-D-1018] cur_index=142 MAX_INDEX=172
+[GOCT-D-1018] cur_index=143 MAX_INDEX=172
+[GOCT-D-1018] cur_index=144 MAX_INDEX=172
+[GOCT-D-1018] cur_index=145 MAX_INDEX=172
+[GOCT-D-1018] cur_index=146 MAX_INDEX=172
+[GOCT-D-1018] cur_index=147 MAX_INDEX=172
+[GOCT-D-1018] cur_index=148 MAX_INDEX=172
+[GOCT-D-1018] cur_index=149 MAX_INDEX=172
+[GOCT-D-1018] cur_index=150 MAX_INDEX=172
+[GOCT-D-1018] cur_index=151 MAX_INDEX=172
+[GOCT-D-1018] cur_index=152 MAX_INDEX=172
+[GOCT-D-1018] cur_index=153 MAX_INDEX=172
+[GOCT-D-1018] cur_index=154 MAX_INDEX=172
+[GOCT-D-1018] cur_index=155 MAX_INDEX=172
+[GOCT-D-1018] cur_index=156 MAX_INDEX=172
+[GOCT-D-1018] cur_index=157 MAX_INDEX=172
+[GOCT-D-1018] cur_index=158 MAX_INDEX=172
+[GOCT-D-1018] cur_index=159 MAX_INDEX=172
+[GOCT-D-1018] cur_index=160 MAX_INDEX=172
+[GOCT-D-1018] cur_index=161 MAX_INDEX=172
+[GOCT-D-1018] cur_index=162 MAX_INDEX=172
+[GOCT-D-1018] cur_index=163 MAX_INDEX=172
+[GOCT-D-1018] cur_index=164 MAX_INDEX=172
+[GOCT-D-1018] cur_index=165 MAX_INDEX=172
+[GOCT-D-1018] cur_index=166 MAX_INDEX=172
+[GOCT-D-1018] cur_index=167 MAX_INDEX=172
+[GOCT-D-1018] cur_index=168 MAX_INDEX=172
+[GOCT-D-1018] cur_index=169 MAX_INDEX=172
+[GOCT-D-1018] cur_index=170 MAX_INDEX=172
+[GOCT-D-1018] cur_index=171 MAX_INDEX=172
+[GOCT-D-1018] cur_index=172 MAX_INDEX=172
+[GOCT-D-1018] last index:ad
+[GOCT-D-1018] cur_index=173 MAX_INDEX=172
+[GOCT-D-1018] patch done:lmp version=5cab hci_rev:68b1
+[GOC-D] LYMCB.flags:0x62
+Monitoring upgrade file: /mnt/extsd/runcarplay
+Inotify monitor initialized successfully
+Waiting for upgrade file events...
+[GOC-D] layer start
+[GOC-D] store local support feature:fffffffadbbf7b87
+[GOC-D] version:6,      LYMCB.BT_Version:1,     LYMCB.BT_Versions_Supported:7
+[GOC-D] GocBtScCmGetSecurityConfIndNullS securityMode:4
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-E] @@@@@@pchange->config = 24
+[GOC-D] HCI_WRITE_SECURE_CONNECTIONS_HOST_SUPPORT failed. Can't enter Security Mode 4 encryption mode
+[GOC-D] GocBtScLeUpdateLocalDbKeys init
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] GocBtScDbWrite
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] send sco err report
+[GOC-D] HCI Version: 011 HCI Revision: 026801 Local LMP Version: 011 Manuf Name: 000093 LMP Subversion: 023723
+[GOC-D] SPP_GET_INSTANCES_QID_CFM numberOfSppInstances:8
+[GOC-D] instance 0 queueid=23 handle=24
+[GOC-D] instance 1 queueid=25 handle=26
+[GOC-D] instance 2 queueid=27 handle=28
+[GOC-D] instance 3 queueid=29 handle=30
+[GOC-D] instance 4 queueid=31 handle=32
+[GOC-D] instance 5 queueid=33 handle=34
+[GOC-D] instance 6 queueid=35 handle=36
+[GOC-D] instance 7 queueid=37 handle=38
+[GOC-D] GOC_BT_SPP_GET_INSTANCES_QID_CFM
+[GOC-D] gatt register succeed gattid:131089
+[GOC-D] setting gatt connection param
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 12 00 09 00 05 35 03 19 10 02 09 02 00 09 01 03 09 02 01 09 00 5D 09 02 02 09 82 0C 09 02 03 09 01 00 09 02 04 28 01 09 02 05 09 00 01 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] csrBtSdRegisterServiceRecordCfmHanlder result:0x0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 06 19 11 0E 19 11 0F 09 00 04 35 10 35 06 19 01 00 09 00 17 35 06 19 00 17 09 01 04 09 00 0D 35 12 35 10 35 06 19 01 00 09 00 1B 35 06 19 00 17 09 01 04 09 00 09 35 08 35 06 19 11 0E 09 01 06 09 03 11 09 03 CF 09 00 05 35 03 19 10 02 09 01 02 25 04 47 42 54 53 09 01 00 25 08 41 56 52 43 50 20 43 54 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 0B 09 00 04 35 10 35 06 19 01 00 09 00 19 35 06 19 00 19 09 01 03 09 00 09 35 08 35 06 19 11 0D 09 01 03 09 03 11 09 00 00 09 00 05 35 03 19 10 02 09 01 02 25 04 47 42 54 53 09 01 00 25 13 41 75 64 69 6F 2F 56 69 64 65 6F 20 53 65 72 76 69 63 65 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] av activate succeed count:1
+[GOC-D] Selecting sink filters setup...
+[GOC-D] Installing filter index 0: 'csr_sbc_decoder'
+[GOC-D] Installing filter index 1: 'csr_sink_terminator'
+[GOC-D] Filter check: Index 0: csr_sbc_decoder : 
+[GOC-D] decoder 
+[GOC-D] pass-through 
+[GOC-D] 
+[GOC-D] Filter check: Index 1: csr_sink_terminator : 
+[GOC-D] pass-through 
+[GOC-D] 
+[GOC-D] Filter combinations seems to be good
+[GOC-D] RTL8733BS
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 18 01 09 00 04 35 13 35 06 19 01 00 09 00 1F 35 09 19 00 07 09 00 08 09 00 0B 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] COD set to Carkit
+[GOC-D] ####### default in gatt prim handler 0x802a,
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 33 09 00 04 35 11 35 03 19 01 00 35 05 19 00 03 08 09 35 03 19 00 08 09 00 05 35 03 19 10 02 09 00 09 35 08 35 06 19 11 34 09 01 03 09 02 00 09 FE FF 09 03 17 0A 00 37 FF FF 09 01 00 25 0C 4D 41 50 20 4D 4E 53 2D 6E 61 6D 65 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+-------lvgl_main:427-----------------
+[00:04:52.547]libzlink_session_state_cb_init
+[GOC-D] sc house cleaning
+wh=720x1440, vwh=720x2880, bpp=32, rotated=1
+Turn on double buffering.
+Turn on 2d hardware acceleration.
+#################--------------sunxi :5------------
+Turn on 2d hardware acceleration fill.
+Turn on 2d hardware acceleration blit.
+Turn on 2d hardware acceleration blend.
+Turn on 2d hardware acceleration scale.
+Turn on 2d hardware acceleration rotate.
+[GOC-D] RTL8733BS
+[00:04:52.687]libzlink_video_data_cb_init
+[00:04:52.688]libzlink_main_audio_start_cb_init
+[00:04:52.688]libzlink_main_data_cb_init
+[00:04:52.688]libzlink_main_audio_stop_cb_init
+[00:04:52.688]libzlink_video_focus_request_cb_init
+[00:04:52.688]libzlink_audio_focus_request_cb_init
+[00:04:52.688]libzlink_request_p2p_start_cb_init
+[00:04:52.688]libzlink_request_wifi_info_cb_init
+[00:04:52.688]libzlink_mic_start_cb_init
+[00:04:52.688]libzlink_mic_stop_cb_init
+[00:04:52.690]libzlink_init in
+[00:04:52.694]libzlink_init out
+[00:04:52.695]libzlink_check_ready
+[00:04:52.695]libzlink_check_ready: is_socket_link = 0
+libzlink audio_main_loop: connecting server(zlink)
+[GOC-D] GocBtScLeUpdateLocalDbKeys init
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] GocBtScDbWrite
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :FFFFFFFFFFFFFF
+[GOC-D] linkkeyValid    :0
+[GOC-D] linkkeyLen      :0
+[GOC-D] linkey:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[GOC-D] remoteName      :
+[GOC-D] classOfDevice   :000000
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :0
+[GOC-D] linkkeyType     :0
+[GOC-D] ----------------------------------------------
+[z-link][00:04:52.704]audio_main_loop: got client connect
+libzlink video_main_loop: connecting server(zlink)
+libzlink video_main_loop: got the server
+
+libzlink AA_bypath_main_loop: connecting server(zlink)
+libzlink AA_bypath_main_loop: got the server
+
+[z-link][00:04:52.705]video_main_loop: got client connect
+[z-link][00:04:52.706]AA_bypath_loop: got client connect
+[00:04:52.701]libzlink: zlink_ready_cb
+[00:04:52.706]libzlink: zlink_ready_cb: no callback
+[00:04:52.706]libzlink control_main_loop: connecting server(zlink)
+[00:04:52.701]libzlink_request_state in
+libzlink audio_main_loop: got the server
+[00:04:52.707]libzlink control_main_loop: got the server
+[00:04:52.707]libzlink: zlink_ready_cb
+[00:04:52.707]libzlink: zlink_ready_cb: no callback
+[z-link][00:04:52.707]control_main_loop: got client connect
+[z-link][00:04:52.707]zlink session_state_send: session_state = 0, current_device = 0
+[00:04:52.708]libzlink_request_state out
+[z-link][00:04:52.709]zlink session_state_send: session_state = 0, current_device = 0
+libzlink zlink_state_handle: session_state = 0
+[00:04:52.714]libzlink: session_state_cb
+
+
+
+session_state_cb: session_state = 0, phone_type = 0
+
+
+[00:04:52.715]
+
+libzlink_init_session_2 in
+[00:04:52.715]libzlink_init_session_2: link mode 80, compile time 2026-01-26-16-27-34
+[00:04:52.716]libzlink_init_session_2: width = 1440
+[00:04:52.716]libzlink_init_session_2: height = 720
+[00:04:52.716]libzlink_init_session_2: fps = 30
+[00:04:52.716]libzlink_init_session_2: width_margin = 0
+[00:04:52.716]libzlink_init_session_2: height_margin = 0
+[00:04:52.716]libzlink_init_session_2: is_right_hand = 0
+[00:04:52.716]libzlink_init_session_2: is_night_mode = 0
+[00:04:52.716]libzlink_init_session_2: link_mode = 80
+[00:04:52.716]libzlink_init_session_2: density = 230
+[00:04:52.716]libzlink_init_session_2: cp_icon_path = /opt/work/app/carplay/icon/icon_104_104.png
+[GOC-D] handleSetSecurityModeCfm:4
+[GOC-D] send_init_succeed:1,0
+[GOC-D] send_bt_stat:1
+[GOC-D] Goc bluetooth version : GBTSDL4.SDG4.126039
+[GOC-D] send_ind: [MWGBTSDL4.SDG4.126039]
+[GOC-D] send_ind: [IS1]
+[00:04:53.048]libzlink_init_session_2: is_use_phone_audio = 0
+[GOC-D] BT_autoconnect_Init
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-E] strt hfp_connect_auto 
+[GOC-D] config_read key:lastaddr value:B440A440E7FF
+[GOC-D] hfp_established_auto ,g_connect_times = 1,auto:1
+[GOC-D] hfp_established_delay,delay[1] get_connected_carplay_rfcomm_state:0
+[GOC-D] config_read key:lastaddr value:B440A440E7FF
+[GOC-D] is_apple_device phone_addr:B440A440E7FF
+[00:04:53.049]libzlink_init_session_2: platform_id = zlink
+open i2c fd:15 success!!!
+[GOC-D] read_device_info_by_addr addr:B440A440E7FF
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] addr0:B440A440E7FF
+[GOC-D] config_read key:info0 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+open i2c fd:16 success!!!
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOC-E] time_set_link_policy_start acl_connect_state:0
+[GOC-D] gap_set_link_policy visible:0 connectable:1
+[GOC-D] gap_set_link_policy visible:1 connectable:1
+[GOC-D] send_ind: [MMRTL8733BS]
+[GOC-D] send_ind: [DB189EAD046DAF]
+[GOC-E] config_read key:passkey not found
+[GOC-D] send_ind: [MN0000]
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-E] send_hf_disconnected,addr null
+[GOC-E] send_hf_disconnected,addr null
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-E] addr is null
+[00:04:53.051]libzlink_init_session_2: vendor_name = zlink-test
+[GOC-E] hfp_get_hf_status addr is null
+[GOC-D] send_ind: [MG1]
+[00:04:53.054]libzlink_init_session_2: is_force_usb_host = 0
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] total:1
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :B440A440E7FF
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:D5 6B CC 1E C6 7F FB D2 D7 4C 4A FC 46 CA F5 D1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-E] cod:7a020c
+[GOC-D] send_ind: [MX1B440A440E7FFiPhone]
+[GOC-D] config_write key:pairlisttotal value:1
+[GOC-D] config_write same key and value
+[GOC-D] send_ind: [PO1]
+[GOC-D] sppactive spp callback
+[GOC-D] GocBtSppAppStartActivate index:0
+[GOC-D] GocBtSppAppStartActivate queueId:23,phandle:24
+[GOC-D] register_uuid_android_auto
+[GOC-D] 4de17a00-52cb-11e6-bdf4-0800200c9a66
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-D] GocBtSppAppStartActivateExt index:1 queueId:25 handle:26 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] carplay_init
+[GOC-D] carplay_init carplay_vendor:1
+[00:04:53.057]libzlink_init_session_2: mfi_bus_num = -1
+[GOC-D] zlink_register_android_auto_uuid
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-E] spp state 1:1
+[GOC-D] GocBtSppAppStartActivateExt index:2 queueId:27 handle:28 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 06 19 11 1E 19 12 03 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 0A 09 00 09 35 08 35 06 19 11 1E 09 01 07 09 01 00 25 0F 48 61 6E 64 73 2D 46 72 65 65 20 75 6E 69 74 09 03 11 09 00 17 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[00:04:53.057]libzlink_init_session_2: otg_bus_num = -1
+[00:04:53.389]libzlink_init_session_2: is_aa_developer_options = 0
+[00:04:53.389]libzlink_init_session_2: is_aa_bypath = 0
+[GOC-D] zlink_carplay_init_thread : e5f7a68d-sda3-4305-984b-asdasd7a1001
+#######--------------MPI_init---16---------------------
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 03 19 11 01 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 01 09 00 05 35 03 19 10 02 09 00 09 35 08 35 06 19 11 01 09 01 02 09 01 00 25 00 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] handleSppActivateCfm serverChannel:01,queueId:17,uuid:00 00 11 01 00 00 10 00 80 00 00 80 5F 9B 34 FB 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+libzbt_init
+
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 02 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] handleSppActivateCfm serverChannel:02,queueId:19,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+Mount state changed: 0 -> 1
+open_libzbt_so: open 'libzbt-main.so' ok
+libzbt_init: all interface open ok
+Re-monitored upgrade file
+libzbt-main: libzbt_init
+
+libzbt-main: libzbt_init out
+
+libzbt_init out
+
+[GOC-D] zlink_carplay_init_thread libzbt_request_bt_enable_CB_init
+libzbt_request_bt_enable_CB_init
+libzbt-main: libzbt_request_bt_enable_CB_init
+libzbt_request_bt_enable_CB_init out
+[GOC-D] zlink_carplay_init_thread libzbt_rfcomm_data_recv_CB_init
+libzbt_rfcomm_data_recv_CB_init
+libzbt-main: libzbt_rfcomm_data_recv_CB_init
+libzbt_rfcomm_data_recv_CB_init out
+[GOC-D] libzbt_carlink_StartAdvertise_CB_init
+libzbt_carlink_StartAdvertise_CB_init
+libzbt-main: libzbt_carlink_StartAdvertise_CB_init
+libzbt-main: libzbt_carlink_StartAdvertise_CB_init out
+[GOC-D] libzbt_carlink_StopAdvertise_CB_init
+libzbt_carlink_StopAdvertise_CB_init
+libzbt-main: libzbt_carlink_StopAdvertise_CB_init
+libzbt-main: libzbt_carlink_StopAdvertise_CB_init out
+[GOC-D] libzbt_carlink_BleGattSend_CB_init
+libzbt_carlink_BleGattSend_CB_init
+libzbt-main: libzbt_carlink_BleGattSend_CB_init
+libzbt-main: libzbt_carlink_BleGattSend_CB_init out
+[GOC-D] libzbt_hicar_ble_start_CB_init
+libzbt_hicar_ble_start_CB_init
+libzbt-main: libzbt_request_hicar_ble_start_CB_init
+libzbt-main: libzbt_request_hicar_ble_start_CB_init out
+libzbt_hicar_ble_start_CB_init out
+libzbt_hicar_ble_stop_CB_init
+libzbt-main: libzbt_hicar_ble_stop_CB_init
+libzbt-main: libzbt_hicar_ble_stop_CB_init out
+libzbt_hicar_ble_stop_CB_init out
+[GOC-D] libzbt_hicar_service_register_CB_init
+libzbt_hicar_service_register_CB_init
+libzbt-main: libzbt_request_hicar_service_register_CB_init
+libzbt-main: libzbt_request_hicar_service_register_CB_init out
+libzbt_hicar_service_register_CB_init out
+[GOC-D] libzbt_hicar_service_handle_CB_init
+libzbt_hicar_service_handle_CB_init
+libzbt-main: libzbt_hicar_service_handle_CB_init
+libzbt-main: libzbt_hicar_service_handle_CB_init out
+libzbt_hicar_service_handle_CB_init out
+[GOC-D] libzbt_hicar_service_data_recv_CB_init
+libzbt_hicar_service_data_recv_CB_init
+libzbt-main: libzbt_hicar_service_data_recv_CB_init
+libzbt-main: libzbt_hicar_service_data_recv_CB_init out
+libzbt_hicar_service_data_recv_CB_init out
+[GOC-D] zlink_carplay_init_thread over!!!
+[GOC-E] active_callback 
+[GOC-D] send_ind: [SR4de17a0052cb11e6bdf40800200c9a662]
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 03 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] handleSppActivateCfm serverChannel:03,queueId:1b,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 09 19 11 08 19 12 03 19 11 31 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 0B 09 00 09 35 08 35 06 19 11 08 09 01 02 09 01 00 25 07 48 65 61 64 73 65 74 09 03 02 28 01 09 00 05 35 03 19 10 02 
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+IniParserInit[00:04:53.416]libzlink_init_session_2: south_message_send ret = 0
+[00:04:53.742]libzlink_init_session out
+
+libzbt-main server2 create
+libzbt-main serveR2 wait client
+[z-link][00:04:53.469]width = 1440
+[z-link][00:04:53.743]height = 720
+[z-link][00:04:53.743]fps = 30
+[z-link][00:04:53.743]width_margin = 0
+[z-link][00:04:53.743]height_margin = 0
+[z-link][00:04:53.743]is_right_hand = 0
+[z-link][00:04:53.743]is_night_mode = 0
+[z-link][00:04:53.743]link_mode = 80
+[z-link][00:04:53.743]is_aa_developer_options = 0
+[z-link][00:04:53.743]is_aa_bypath = 0
+load conf file /etc/cedarx.conf ok!
+libzbt-main server create
+libzbt-main server wait client
+[GOC-D] HF Activated Successfully!!
+[GOC-D] hfp activated, write scan enable
+[GOC-D] hf deregister time cfm result:0xFFFF
+[GOC-D] gocBtCmWriteScanEnableCfmHandler result:0
+[z-link][00:04:53.751]CARPLAY_WIRELESS_MODE,[z-link][00:04:53.751]AA_WIRELESS_MODE,[z-link][00:04:53.751]
+[z-link][00:04:53.751]cp_icon_path = /opt/work/app/carplay/icon/icon_104_104.png
+[z-link][00:04:53.751]cp_platform_id = zlink
+[z-link][00:04:53.751]vendor_name = zlink-test
+[z-link][00:04:53.752]density = 230
+[z-link][00:04:53.752]is_use_phone_audio = 0
+[z-link][00:04:53.752]is_hud_info_on = 0
+[00:04:53.753]libzlink: zlink_version_cb
+[00:04:53.753]libzlink: zlink_version_cb: no callback
+libzlink zlink_state_handle: session_state = 0
+[00:04:53.753]libzlink: session_state_cb
+
+
+
+session_state_cb: session_state = 0, phone_type = 0
+
+
+[00:04:53.753]
+
+libzlink_init_session_2 in
+[00:04:53.753]libzlink_init_session_2: link mode 80, compile time 2026-01-26-16-27-34
+[00:04:53.753]libzlink_init_session_2: width = 1440
+[00:04:53.753]libzlink_init_session_2: height = 720
+[00:04:53.753]libzlink_init_session_2: fps = 30
+[00:04:53.753]libzlink_init_session_2: width_margin = 0
+[00:04:53.753]libzlink_init_session_2: height_margin = 0
+[00:04:53.753]libzlink_init_session_2: is_right_hand = 0
+[00:04:53.753]libzlink_init_session_2: is_night_mode = 0
+[00:04:53.754]libzlink_init_session_2: link_mode = 80
+[00:04:53.754]libzlink_init_session_2: density = 230
+[00:04:53.754]libzlink_init_session_2: cp_icon_path = /opt/work/app/carplay/icon/icon_104_104.png
+[00:04:53.754]libzlink_init_session_2: is_use_phone_audio = 0
+[00:04:53.754]libzlink_init_session_2: platform_id = zlink
+[00:04:53.754]libzlink_init_session_2: vendor_name = zlink-test
+[00:04:53.754]libzlink_init_session_2: is_force_usb_host = 0
+[00:04:53.755]libzlink_init_session_2: mfi_bus_num = -1
+[00:04:53.755]libzlink_init_session_2: otg_bus_num = -1
+[00:04:53.756]libzlink_init_session_2: is_aa_developer_options = 0
+[00:04:53.756]libzlink_init_session_2: is_aa_bypath = 0
+[z-link][00:04:53.757]width = 1440
+[z-link][00:04:53.758]height = 720
+[z-link][00:04:53.758]fps = 30
+[z-link][00:04:53.758]width_margin = 0
+[z-link][00:04:53.758]height_margin = 0
+[z-link][00:04:53.759]is_right_hand = 0
+[z-link][00:04:53.759]is_night_mode = 0
+[z-link][00:04:53.759]link_mode = 80
+[z-link][00:04:53.759]is_aa_developer_options = 0
+[z-link][00:04:53.759]is_aa_bypath = 0
+[z-link][00:04:54.091]CARPLAY_WIRELESS_MODE,[z-link][00:04:54.091]AA_WIRELESS_MODE,[z-link][00:04:54.091]
+[z-link][00:04:54.091]cp_icon_path = /opt/work/app/carplay/icon/icon_104_104.png
+[z-link][00:04:54.091]cp_platform_id = zlink
+[z-link][00:04:54.091]vendor_name = zlink-test
+[z-link][00:04:54.091]density = 230
+[z-link][00:04:54.091]is_use_phone_audio = 0
+[z-link][00:04:54.091]is_hud_info_on = 0
+[00:04:53.759]libzlink_init_session_2: south_message_send ret = 0
+[00:04:54.091]libzlink_init_session out
+
+[GOC-D] spp_connect_last
+[GOC-D] config_read key:lastaddr value:B440A440E7FF
+[GOC-D] spp_connect_last: B440:A4:40E7FF
+[GOC-D] spp_connect_by_uuid B440A440E7FF
+[GOC-E]  sppAppInstData[0]->state = 1   sppAppInstData[0]->serverOrClient =0 
+[GOC-E]  sppAppInstData[1]->state = 1   sppAppInstData[1]->serverOrClient =0 
+[GOC-E]  sppAppInstData[2]->state = 1   sppAppInstData[2]->serverOrClient =0 
+[GOC-E]  sppAppInstData[3]->state = 0   sppAppInstData[3]->serverOrClient =1 
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0224 00:04:53.760789  1029 isp_version.h:39] <isp_version_info> [ISP]>>>>>>>>>>>>>>>>>>>> ISP VERSION INFO <<<<<<<<<<<<<<<<<<<
+IPCORE: ISP600
+branch: libisp-dev
+commit: 3c5cc7c79d0501024de5c73984b64105534cdc17
+date  : Fri Jul 25 15:52:07 2025 +0800
+author: <mayifei@allwinnertech.com>
+--------------------------------------------------------
+
+I0224 00:04:54.092725  1029 hwdisplay.c:84] <hw_display_init> 
+I0224 00:04:54.092916  1029 hwdisplay.c:1015] <hwd_init> (hwd_init 1015)
+[GOC-D] rfcomm connect...
+[z-link][00:04:54.093]wait_session_init end
+I0224 00:04:54.094727  1029 hwdisplay.c:1069] <hwd_init> ret[0][2,0]ch[0]lyl[0] init: enable[0], screenwin[0,0, 0x0], zorder[0], alpha[mode:0, value:0]
+[z-link][00:04:54.100]zj_aa_init
+[z-link][00:04:54.101]zj_aa_init exit
+[z-link][00:04:54.102]zlink_data get link mode = 80
+[z-link][00:04:54.102]zlink: current link mode = 80
+[z-link][00:04:54.102]CARPLAY_WIRELESS_MODE,[z-link][00:04:54.102]AA_WIRELESS_MODE,[z-link][00:04:54.102]
+[z-link][00:04:54.102]zlink session_state_send: session_state = 2, current_device = 0
+libzlink zlink_state_handle: session_state = 2
+[00:04:54.103]libzlink: session_state_cb
+
+
+
+session_state_cb: session_state = 2, phone_type = 0
+
+
+[z-link][00:04:54.106]platform_init: platform_id = zlink
+[z-link][00:04:54.106]platform_init: vendor = zlink-test
+[z-link][00:04:54.108]carplay mode
+MFi_IC_check: /dev/i2c-0
+mfi: try I2C Address(0x11)
+[GOC-D] dm_ev_connect_complete type:01,B440A440E7FF,status:0
+[GOC-E] acl_connect_state:1 lylink_connect_state:0 addr:B440A440E7FF
+read_mfi_device_id fail...
+mfi: try I2C Address(0x10)
+read_mfi_device_id fail...
+MFi_IC_check: /dev/i2c-1
+mfi: try I2C Address(0x11)
+[GOC-D] DM_SM_KEY_REQUEST_IND 1
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :B440A440E7FF
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:D5 6B CC 1E C6 7F FB D2 D7 4C 4A FC 46 CA F5 D1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] GocBtScDmSmLinkKeyRequestIndIdleS readResult:1,linkkeyvalid:1
+[GOC-D] B440A440E7FF
+[GOC-D] GocBtCmScDmSspLinkKeyRequestRes linkkeyType:5
+read_mfi_device_id fail...
+mfi: try I2C Address(0x10)
+[GOC-D] dm_ev_encryption_change
+[GOC-E] dm_sm_hci_enc_complete 0
+[GOC-D] GocBtScDmPrimHandler DM_SM_ENCRYPTION_CHANGE_IND
+[GOC-D] dm_ev_refresh_encryption_key_complete
+[GOC-D] dm_sm_hci_encryption_key_refresh_complete acl flags:0x4200
+[GOC-D] Send_DM_Refresh_Encryption_Key_Ind status:0
+[GOC-D] sc main CsrBtScIgnoreAnyS
+[GOC-D] sc main CsrBtScIgnoreAnyS
+read_mfi_device_id fail...
+MFi_IC_check: /dev/i2c-2
+mfi: try I2C Address(0x11)
+[GOC-D] Successfully Connected with: B440:A4:40E7FF
+[GOC-D] handleSppConnectInd B440A440E7FF result:0x0
+[GOC-D] send_spp_connect 3
+[GOC-E] channel = 4
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [DRB440A440E7FF]
+[GOC-D] send_ind: [SAiPhone]
+[GOC-E] hex_uuid :00000000decafadedecadeafdecacafe
+[GOC-E] HFP is not connected delay auto connect devices!
+[GOC-D] hfp_connect B440A440E7FF
+
+
+
+Current connected device: iPhone
+
+
+
+[GOC-E] gap_stop_search error not searching
+[GOC-D] send_ind: [IV]
+[GOC-E] addr is differen!
+[GOC-D] ********** zlink_handle_rfcomm_connect_state is_connect:1, connection:3
+[GOC-D] ********* UUID :00 00 00 00 DE CA FA DE DE CA DE AF DE CA CA FE 
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+libzbt_phonelink_state
+libzbt-main: libzbt_phonelink_state
+libzbt-main: local_mac_address = '189EAD046DAF'
+libzbt-main: libzbt_phonelink_state:
+phone_type: 0(carplay)
+libzbt-main: phone connected
+libzbt-main: bluetooth pair
+libzbt-main: libzbt_phonelink_state pid = [1008] socket_fd = -1
+libzbt-main: libzbt_phonelink_state: client_fd = -1 fail..
+read_mfi_device_id fail...
+mfi: try I2C Address(0x10)
+read_mfi_device_id fail...
+MFi_IC_check: /dev/i2c-3
+mfi: try I2C Address(0x11)
+MFi_IC_check: Got the MFi v3 on /dev/i2c-3
+[z-link][00:04:55.168] north_control_mfi_state_send:send mfi state!!!
+[00:04:55.169]libzlink: sessiomfi_state_cbn_state_cb
+[00:04:55.169]libzlink: mfi_state_cb: no callback
+[z-link][00:04:55.219]MFi_CopyCertificate: length = 607
+[GOC-D] sm_af_access_success
+[z-link][00:04:55.288]MFi_Read_Certificate ok
+[GOC-D] hf sdc result handler
+[GOC-D] SND:AT+BRSF=375
+[GOC-D] HF[180225] REV:
++BRSF:3567
+
+[GOC-D] REV AT:0D 0A 2B 42 52 53 46 3A 33 35 36 37 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND=?
+[GOC-D] HF[180225] REV:
++CIND: ("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 28 22 73 65 72 76 69 63 65 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 73 65 74 75 70 22 2C 28 30 2D 33 29 29 2C 28 22 62 61 74 74 63 68 67 22 2C 28 30 2D 35 29 29 2C 28 22 73 69 67 6E 61 6C 22 2C 28 30 2D 35 29 29 2C 28 22 72 6F 61 6D 22 2C 28 30 2D 31 29 29 2C 28 22 63 61 6C 6C 68 65 6C 64 22 2C 28 30 2D 32 29 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND?
+[z-link][00:04:55.346]bt_monitor_start bt zbt monitor loop
+[z-link][00:04:55.349]zlink: ip_link_pthread_start
+[z-link][00:04:55.350]zlink: start the MOLD link advertiser(port:9797)
+libzbt-main got client, pid = [1008] client_fd = 16
+[z-link][00:04:55.358]zlink: zbt_main_loop connect server successful
+[z-link][00:04:55.359]zlink: zbt_main_loop zlink_data->bt_disable = 0
+[z-link][00:04:55.359]zlink: zbt_main_loop ZBT_CARPLAY
+[z-link][00:04:55.359]zlink: zbt_main_loop ZBT_ANDROID_AUTO
+[      14.625434]  (none) daemon.err mDNSResponder: mDNS_Register_internal: ERROR!! Tried to register AuthRecord 002C2A74 (none).local. (Addr) that's already in the list
+[      14.625763]  (none) daemon.err mDNSResponder: mDNS_Register_internal: ERROR!! Tried to register AuthRecord 002C2DF8 2.1.168.192.in-addr.arpa. (PTR) that's already in the list
+[      14.626007]  (none) daemon.err mDNSResponder: mDNS_Register_internal: ERROR!! Tried to register AuthRecord 002C4014 (none).local. (AAAA) that's already in the list
+[      14.626233]  (none) daemon.err mDNSResponder: mDNS_Register_internal: ERROR!! Tried to register AuthRecord 002C4398 E.A.D.6.4.0.E.F.F.F.D.A.E.9.A.1.0.0.0.0.0.0.0.0.0.0.0.0.0.8.E.F.ip6.arpa. (PTR) that's already in the list
+[z-link][00:04:55.365]zlink ip_link: mold_bonjour_start
+[z-link][00:04:55.365]zlink ip_link: bonjour_start
+[z-link][00:04:55.367]zlink: ip_link_wait_client
+[z-link][00:04:55.367]zlink: start the IP link advertiser(port:6767)
+[GOC-D] HF[180225] REV:
++CIND: 1,0,0,5,3,0,0
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 31 2C 30 2C 30 2C 35 2C 33 2C 30 2C 30 0D 0A 
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-E] handleCievInd unknown connection
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CMER=3,0,0,1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CHLD=?
+[GOC-D] HF[180225] REV:
++CHLD: (0,1,1x,2,2x,3)
+
+[GOC-D] REV AT:0D 0A 2B 43 48 4C 44 3A 20 28 30 2C 31 2C 31 78 2C 32 2C 32 78 2C 33 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND=1,2
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND=?
+[GOC-D] HF[180225] REV:
++BIND:(1,2)
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 28 31 2C 32 29 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+BIND?
+[GOC-D] HF[180225] REV:
++BIND:1,1
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 31 2C 31 0D 0A 
+[GOC-D] HF[180225] REV:
++BIND:2,1
+
+[GOC-D] REV AT:0D 0A 2B 42 49 4E 44 3A 32 2C 31 0D 0A 
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SLC established to: Handsfree Gateway Remote HFP version supported: 0x107 
+[GOC-D] Remote indicators supported: ("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+[GOC-D] Actual indicator values: 1,0,0,5,3,0,0 
+[GOC-D] Call hold supported string: (0,1,1x,2,2x,3)
+[GOC-D] handleHfConnectInd B440A440E7FF result:0
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] send_ind: [IV]
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] write pairlist old total:1
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] update dev name is 0x20
+[GOC-D] join_int_arr find 0 -1
+[GOC-D] config_write key:pairlistindex value:0,
+[GOC-D] config_write same key and value
+[GOC-D] config_write key:pairlisttotal value:1
+[GOC-D] config_write same key and value
+[GOC-D] chld find 0
+[GOC-D] chld find 1
+[GOC-D] chld find 1x
+[GOC-D] chld find 2
+[GOC-D] chld find 2x
+[GOC-D] chld find 3
+[GOC-D] send_ind: [FA3567,63]
+[GOC-D] send_ind: [IBB440A440E7FF]
+[GOC-D] mapc_connect addr:B440A440E7FF
+[GOC-E] config_read key:autoconnect not found
+[GOC-E] config_read key:autoanswer not found
+[GOC-D] send_ind: [MF10]
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [JHB440A440E7FF]
+[GOC-D] send_ind: [SAiPhone]
+[GOC-D] send_ind: [MX0B440A440E7FFiPhone]
+[GOC-E] set_cmd_current_addr[b440a440e7ff]
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :B440A440E7FF
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:D5 6B CC 1E C6 7F FB D2 D7 4C 4A FC 46 CA F5 D1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] send_ind: [SC7A020C]
+[GOC-D] --|connecting a2dp..
+[GOC-D] a2dp_connect B440A440E7FF
+
+
+
+
+
+
+
+HFP connected = 1
+
+
+
+
+
+
+[GOC-D] Connecting a2dp 0 - please wait...
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-E] send  car play info 
+[GOC-D] register_uuid phone_addr:B440A440E7FF
+[GOC-D] read_device_info_by_addr addr:B440A440E7FF
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] addr0:B440A440E7FF
+[GOC-D] config_read key:info0 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] gap_read_service
+[GOC-E] ++++++++++++++++phone type: iphone+++++++++++++++++++
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :B440A440E7FF
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:D5 6B CC 1E C6 7F FB D2 D7 4C 4A FC 46 CA F5 D1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] -->!!!link key:d5 6b cc 1e c6 7f fb d2 d7 4c 4a fc 46 ca f5 d1
+[GOC-D] read_device_info_by_addr addr:B440A440E7FF
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] addr0:B440A440E7FF
+[GOC-D] config_read key:info0 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] spp_connect_by_uuid B440A440E7FF
+[GOC-D] send_spp_connect 3
+[GOC-E] channel = 4
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SAiPhone]
+[GOC-E] hex_uuid :00000000decafadedecadeafdecacafe
+[GOC-E] addr is differen!
+[GOC-D] connect carplay rfcomm addr:B440A440E7FF
+[GOC-D] zlink_connect_rfcomm_by_cgmi
+[GOC-D] indicatorSupported:("service",(0-1)),("call",(0-1)),("callsetup",(0-3)),("battchg",(0-5)),("signal",(0-5)),("roam",(0-1)),("callheld",(0-2))
+[GOC-D] indicatorValue:1,0,0,5,3,0,0
+[GOC-D] type_ind:service,value_ind:1
+[GOC-D] type_ind:call,value_ind:0
+[GOC-D] type_ind:callsetup,value_ind:0
+[GOC-D] type_ind:battchg,value_ind:5
+[GOC-D] send_ind: [PS0005]
+[GOC-D] type_ind:signal,value_ind:3
+[GOC-D] send_ind: [PS0305]
+[GOC-D] type_ind:roam,value_ind:0
+[GOC-D] send_ind: [PS0305]
+[GOC-D] type_ind:callheld,value_ind:0
+[GOC-D] ring from phone
+[GOC-D] send_ind: [RE0]
+[GOC-D] config_read key:lastaddr value:B440A440E7FF
+[GOC-D] last addr is same
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-D] GocBtSdRestartServiceSearchFull
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-D] SND:AT+CLIP=1
+
+
+
+Current connected device: iPhone
+
+
+
+
+
+
+Current connected device: iPhone
+
+
+
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CCWA=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CMEE=1
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CNUM
+[GOC-D] HF[180225] REV:
++CNUM: ,"8618026986930",145,,4
+
+[GOC-D] REV AT:0D 0A 2B 43 4E 55 4D 3A 20 2C 22 38 36 31 38 30 32 36 39 38 36 39 33 30 22 2C 31 34 35 2C 2C 34 0D 0A 
+[GOC-D] hf slc establish
+[GOC-D] send_ind: [CN8618026986930]
+[GOC-D] Subscriber number information received:,"8618026986930",145,,4
+
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] GocBtHfXStateHfCopsReqHandler state:1,linktype:1,forceResendingFormat:0
+[GOC-D] SND:AT+COPS?
+[GOC-D] The CNUM command completed successfully
+[GOC-D] HF[180225] REV:
++COPS: 0,0,"    "
+
+[GOC-D] REV AT:0D 0A 2B 43 4F 50 53 3A 20 30 2C 30 2C 22 20 20 20 20 22 0D 0A 
+[GOC-D] Network operator name:0,0,"    "
+
+[GOC-D] send_ind: [OP    ]
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+NREC=0
+[GOC-D] COPS query operation completed successfully
+[GOC-E] prim->copsString is null
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] SND:AT+CIND?
+[GOC-D] AT+NREC operation completed successfully
+[GOC-D] HF[180225] REV:
++CIND: 1,0,0,5,3,0,0
+
+[GOC-D] REV AT:0D 0A 2B 43 49 4E 44 3A 20 31 2C 30 2C 30 2C 35 2C 33 2C 30 2C 30 0D 0A 
+[GOC-D] handleCievInd addr:B440A440E7FF service=1
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:B440A440E7FF call=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:B440A440E7FF callsetup=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:B440A440E7FF battchg=5
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:B440A440E7FF signal=3
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:B440A440E7FF roam=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] handleCievInd addr:B440A440E7FF callheld=0
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] ciev from cind
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[z-link][00:04:56.360]zbt_init_request_send
+libzbt-main: MESSAGE_ZBT_INIT_REQUEST
+[z-link][00:04:56.362]zlink: zbt BLE start
+libzbt-main: bt_enable_type = 0x3
+(carplay)
+(Android Auto)
+[GOC-E] #######receive zj disconnect BT state, is_bt_enable=1#####
+[GOC-E] ######## enable_type = 3#########
+[GOC-D] zlink_register_android_auto_uuid
+[GOC-D] sppactive
+[GOC-E] spp state 0:1
+[GOC-E] spp state 1:1
+[GOC-E] spp state 2:1
+[GOC-E] spp state 3:3
+[GOC-D] GocBtSppAppStartActivateExt index:4 queueId:31 handle:32 uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] read_device_info_by_addr addr:B440A440E7FF
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] addr0:B440A440E7FF
+[GOC-D] config_read key:info0 value:cgmi:"AppleInc."
+[GOC-D] read_device_info_by_addr device info:cgmi:"AppleInc."
+[GOC-D] ########## carplay rfcomm is already connected
+libzbt_phonelink_state
+libzbt-main: libzbt_phonelink_state
+libzbt-main: local_mac_address = '189EAD046DAF'
+libzbt-main: libzbt_phonelink_state:
+phone_type: 0(carplay)
+libzbt-main: phone connected
+libzbt-main: bluetooth pair
+libzbt-main: libzbt_phonelink_state pid = [1008] socket_fd = 16
+[z-link][00:04:56.365]zbt_BLE_init_request_send
+[z-link][00:04:56.366]zlink zbt: MESSAGE_ZBT_INIT_INFO
+[z-link][00:04:56.368]gukai ZBT device
+[z-link][00:04:56.368]zlink zbt: MESSAGE_ZBT_LINK_INFO2
+[z-link][00:04:56.369]zlink: zbt link info message->phone_type:0
+[z-link][00:04:56.369]zlink: zbt link info message->is_connect:1
+[z-link][00:04:56.369]zlink: zbt link info message->is_pair:1
+[z-link][00:04:56.369]zlink: zbt link info message->local_mac_address:189EAD046DAF
+[z-link][00:04:56.369]zlink: zbt link info message->local_bt_name:
+[z-link][00:04:56.369]zlink: zbt link info message->phone_bt_mac_addr:
+[z-link][00:04:56.369]zlink: zbt link info message->phone_bt_name:
+[00:04:56.372]libzlink: bt_link_info_cb
+[00:04:56.372]libzlink: bt_link_info_cb: no callback
+[z-link][00:04:56.371]zlink: zbt link info message->phone_type:BT_DEVICE_CARPLAY
+[z-link][00:04:56.372]zlink zbt: MESSAGE_ZBT_LINK_INFO
+[z-link][00:04:56.373]zlink: zbt link info message->phone_type:0
+[z-link][00:04:56.373]zlink: zbt link info message->is_connect:1
+[z-link][00:04:56.373]zlink: zbt link info message->is_pair:1
+[z-link][00:04:56.373]zlink: zbt link info message->local_mac_address:189EAD046DAF
+[z-link][00:04:56.373]zlink: zbt link info message->phone_type:BT_DEVICE_CARPLAY
+[z-link][00:04:56.373]zlink zbt: MESSAGE_ZBT_BLE_LINK_INFO
+[z-link][00:04:56.373]zlink: zbt BLE link info is_connect:0
+[z-link][00:04:56.373]zlink: zbt BLE link info local_mac_address:
+[z-link][00:04:56.373]zlink: zbt BLE link info phone_mac_address:
+[z-link][00:04:56.373]zlink: zbt BLE link info BLE phone disconnect
+[z-link][00:04:56.373]zlink zbt: MESSAGE_ZBT_HFP_LINK_INFO
+[z-link][00:04:56.374]zlink: zbt link info message->is_hfp_connect:0
+[z-link][00:04:56.375]north_control_bt_hfp_state_send, 0
+[00:04:56.377]libzlink: bt_hfp_state_cb
+[00:04:56.377]libzlink: bt_hfp_state_cb: no callback
+[z-link][00:04:56.377]zlink zbt: MESSAGE_ZBT_LINK_INFO
+[z-link][00:04:56.377]zlink: zbt link info message->phone_type:0
+[z-link][00:04:56.377]zlink: zbt link info message->is_connect:1
+[z-link][00:04:56.377]zlink: zbt link info message->is_pair:1
+[z-link][00:04:56.377]zlink: zbt link info message->local_mac_address:189EAD046DAF
+[z-link][00:04:56.378]zlink: zbt link info message->phone_type:BT_DEVICE_CARPLAY
+[z-link][00:04:56.378]zlink zbt: MESSAGE_ZBT_INIT_INFO
+[z-link][00:04:56.378]gukai ZBT device
+libzbt-main: MESSAGE_ZBT_BLE_INIT_REQUEST
+libzbt-main: libzbt_BLE_enable_cb unregistered
+[z-link][00:04:56.409]zlink zbt: MESSAGE_ZBT_INIT_INFO
+[z-link][00:04:56.410]gukai ZBT device
+[z-link][00:04:56.850]session_state_send CARPLAY_WIRELESS_MODE SESSION_STARTING
+[z-link][00:04:56.850]zlink session_state_send: session_state = 3, current_device = 5
+[z-link][00:04:56.850]wireless_wait_wifi
+libzlink zlink_state_handle: session_state = 3
+libzlink zlink_state_handle: phone_type = 5
+[00:04:56.851]libzlink: session_state_cb
+
+
+
+session_state_cb: session_state = 3, phone_type = 5
+
+
+[00:04:56.851]libzlink: request_wifi_info_cb
+[00:04:56.851]libzlink: request_wifi_info_cb in
+[00:04:56.852]libzlink_wifi_info2 in: wifi_name = carplay_037b, wifi_passwd = 88888888, ip_addr = 192.168.1.2, wifi_channel = 36, netcard_name = wlan0
+[00:04:56.854]libzlink_wifi_info2 out
+[00:04:56.854]libzlink: request_wifi_info_cb out
+[z-link][00:04:56.855]zlink: wifi_name = carplay_037b
+[z-link][00:04:56.855]zlink: wifi_passwd = 88888888
+[z-link][00:04:56.855]zlink: wifi_ip_address = 192.168.1.2
+[z-link][00:04:56.855]zlink: wifi_channel = 36
+[z-link][00:04:56.855]zlink: wifi_netcard_name = wlan0
+[z-link][00:04:56.855]zlink: error cmd_wifi_info_handle zlink_data->BLE_session_id = 0
+[GOC-D] GOC_BT_SD_READ_SERVICES_REQ
+[GOC-D] attrCount:14
+[GOC-D] --->uuid count:14
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-E] carplay_send_uuid
+[GOC-D] sm_af_access_success
+[GOC-D] Filter init:0 Index 0: csr_sbc_decoder
+[GOC-D] Filter init:0 Index 1: csr_sink_terminator
+[GOC-D] handleA2dpConnectCfm addr:B440A440E7FF result:0x8000
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SAiPhone]
+[GOC-D] send_ind: [MH]
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] send_ind: [MU2]
+[GOC-D] --|connecting avrcp..
+
+
+
+Current connected device: iPhone
+
+
+
+[GOC-D] avrcp_connect B440A440E7FF
+[GOC-D] GocBtUtilSdcSearchStart
+[GOC-E] Entry: 0, Service name: MAP MAS-iOS, MASInstanceId: 0, supportedMessages: 0x02
+[GOC-E] selecting Entry number 0 MAS instance to connect
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++11111
+[GOC-D] +++++++++++++++++++ CsrBtCmSdsRegisterReqHandler ++++++++++++++++++++
+[GOC-D] register hex:09 00 01 35 11 1C 4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 09 00 04 35 0C 35 03 19 01 00 35 05 19 00 03 08 05 09 01 00 25 0A 52 46 43 4F 4D 4D 2D 53 50 50 
+[GOC-D] AA uuid not insert into eir
+[GOC-D] GocBtUtilSdcSearchCancel state锛
+                                         [GOC-D] handleSppActivateCfm serverChannel:05,queueId:1f,uuid:4D E1 7A 00 52 CB 11 E6 BD F4 08 00 20 0C 9A 66 
+[GOC-D] startup_mic_gain
+[GOC-D] SND:AT+VGM=07
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] Microphone gain operation completed successfully
+[GOC-D] SND:AT+VGS=07
+[GOC-D] HF[180225] REV:
+OK
+
+[GOC-D] REV AT:0D 0A 4F 4B 0D 0A 
+[GOC-D] Speaker gain operation completed successfully
+[GOC-D] sm_af_access_success
+[GOC-D] sm_af_access_success
+[GOC-D] sm_af_access_success
+[GOC-E] Could not connect, resultCode = 0x0043, resultSupplier = 0x000D
+[GOC-D] handleMapcConnectCfm addr:B440A440E7FF result:0x43
+[GOC-D] send_ind: [YE]
+[z-link][00:04:57.852]Got the wifi info: 'carplay_037b' + '88888888'
+[GOC-D] sm_af_access_success
+[GOC-D] handleAvrcpConnectCfm addr:B440A440E7FF
+[GOC-D] Controller (not supported)
+[GOC-D]   Target (supported)
+[GOC-D]     Versions: 0106, features: 0x01D1, service: AVRCP Device, provider: (null)
+[GOC-D] config_read key:pairlistindex value:0,
+[GOC-D] config_read key:addr0 value:B440A440E7FF
+[GOC-D] config_read key:name0 value:iPhone
+[GOC-D] send_ind: [MG3]
+[GOC-D] send_ind: [SAiPhone]
+[GOC-D] send_ind: [ML2]
+
+
+
+Current connected device: iPhone
+
+
+
+[GOC-D] GOC_BT_AVRCP_CT_NOTI_PLAYBACK_STATUS_IND (status: 0x00)
+[GOC-D] avrcp_get_music_info B440A440E7FF
+[GOC-D] send_ind: [FUFFFFFFFFFFFFFFFF]
+[GOC-D] *****************song info*************************
+[GOC-D] scope:254 uid:0000000000000000
+[GOC-D] coverart        :
+[GOC-D] musci info not contain cover art
+[GOC-D] send_ind: [FW]
+[GOC-D] same as last ignore
+[GOC-D] playing time    : 0 ms
+[GOC-D] genre           : 
+[GOC-D] total of media  : 0
+[GOC-D] number of media : 0
+[GOC-D] album           : 
+[GOC-D] artist          : 
+[GOC-D] name            : 
+[GOC-D] *****************song info over********************
+[GOC-D] send_ind: [MI]
+[GOC-D] *****************song info*************************
+[GOC-D] scope:254 uid:0000000000000000
+[GOC-D] coverart        :
+[GOC-D] musci info not contain cover art
+[GOC-D] send_ind: [FW]
+[GOC-D] same as last ignore
+[GOC-D] playing time    : 0 ms
+[GOC-D] genre           : 
+[GOC-D] total of media  : 0
+[GOC-D] number of media : 0
+[GOC-D] album           : 
+[GOC-D] artist          : 
+[GOC-D] name            : 
+[GOC-D] *****************song info over********************
+[GOC-D] send_ind: [MI]
+[z-link][00:04:58.079]zlink: IP link already startd..
+2026-02-24 12:04:58.149284 AM [Screen] Registered screen e5f7a68d-7b0f-4305-984b-974f677a150b 1440 x 720, 30 FPS
+2026-02-24 12:04:58.174271 AM [HID] Registered HID "Touch Screen", 97285a78-1b7d-4c83-8de7-8494ca850947
+2026-02-24 12:04:58.180577 AM [HID] Registered HID "My Knob", 31ad981d-ef34-4ea1-ba90-7ba764695a4e
+2026-02-24 12:04:58.180813 AM [HID] Registered HID "Media Button", 663048a0-6528-41be-8b89-c16d61a705a4
+2026-02-24 12:04:58.180952 AM [HID] Registered HID "My Telephony", 1bec0315-8017-40e8-8257-3859fee39da7
+[z-link][00:04:58.181]wireless_carplay_loop: is_pair = 1
+iap2_loop start
+start_carplay_watch_dog wireless
+start_carplay_watch_dog----
+[z-link][00:04:58.188]zbt_rfcomm_data_send len=6
+CarPlayPortRecv start
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 6#####
+[GOC-D] ++Carplay send data : FF 55 02 00 EE 10 
+[GOC-D] --->spp_send_data:FF 55 02 00 EE 10 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 55 02 00 EE 10 
+[      17.491374]  (none) daemon.err mDNSResponder: mDNSResponder (Engineering Build) (Nov  2 2024 17:08:33) starting
+[      17.493247]  (none) daemon.err mDNSResponder: SetupOneInterface: 192.168.1.2 255.255.255.0 intfName:wlan0 intfIndex:2
+[      17.493895]  (none) daemon.err mDNSResponder: SetupOneInterface: FE80:0000:0000:0000:1A9E:ADFF:FE04:6DAE FFFF:FFFF:FFFF:FFFF:0000:0000:0000:0000 intfName:wlan0 intfIndex:2
+[      17.495004]  (none) daemon.err mDNSResponder: mDNS_AddDNSServer: Lock not held! mDNS_busy (0) mDNS_reentrancy (0)
+[      17.495404]  (none) daemon.err mDNSResponder: mDNSPlatformSourceAddrForDest: connect 1.1.1.1 failed errno 101 (Network unreachable)
+[GOC-D] --->sendipc:FF 55 02 00 EE 10 
+[GOC-D] the n:3.the data:,length:6
+[GOC-D] --Carplay rev dataFF 55 02 00 EE 10 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 6
+CarPlayPortRecv len = 6
+CarPlayPortRecv start
+iap2_main_loop: init packet done
+[z-link][00:04:58.251]zbt_rfcomm_data_send len=26
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 26#####
+[GOC-D] ++Carplay send data : FF 5A 00 1A 80 01 00 00 0C 01 01 10 00 7F FF 3F FF 10 01 0A 00 02 0B 02 01 07 
+[GOC-D] --->spp_send_data:FF 5A 00 1A 80 01 00 00 0C 01 01 10 00 7F FF 3F FF 10 01 0A 00 02 0B 02 01 07 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 1A 80 01 00 00 0C 01 01 10 00 7F FF 3F FF 10 01 0A 00 02 0B 02 01 07 
+[GOC-D] --->sendipc:FF 5A 00 1A C0 C2 01 00 0A 01 7F FF FF 7F FF 3F FF 10 01 0A 00 02 0B 02 01 9B 
+[GOC-D] the n:3.the data:,length:26
+[GOC-D] --Carplay rev dataFF 5A 00 1A C0 C2 01 00 0A 01 7F FF FF 7F FF 3F FF 10 01 0A 00 02 0B 02 01 9B 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 26
+CarPlayPortRecv len = 26
+CarPlayPortRecv start
+iap2_packet_recv packet_len=26
+[z-link][00:04:58.311]zbt_rfcomm_data_send len=9
+iap2_main_loop: SYN packet done
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 01 C2 00 9B 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 01 C2 00 9B 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 01 C2 00 9B 
+[GOC-D] --->sendipc:FF 5A 00 10 40 C3 01 0A 89 40 40 00 06 1D 00 5D 
+[GOC-D] the n:3.the data:,length:16
+[GOC-D] --Carplay rev dataFF 5A 00 10 40 C3 01 0A 89 40 40 00 06 1D 00 5D 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 16
+CarPlayPortRecv len = 16
+CarPlayPortRecv start
+iap2_packet_recv packet_len=16
+StartIdentification
+bt_mac_string = 189EAD046DAF
+bt mac: 0x18, 0x9e, 0xad, 0x4, 0x6d, 0xaf, 
+
+
+
+
+----------------TODO-need DisplayName-------zjinnova------------ !!!!
+
+
+[z-link][00:04:58.401]zbt_rfcomm_data_send len=423
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 423#####
+[GOC-D] ++Carplay send data : FF 5A 01 A7 40 02 C3 0A F0 40 40 01 9D 1D 01 00 0D 00 00 6C 69 62 7A 6C 69 6E 6B 00 00 0B 00 01 7A 6C 69 6E 6B 33 00 00 0D 00 02 7A 6A 69 6E 6E 6F 76 61 00 00 15 00 03 30 31 32 33 34 35 36 37 38 39 41 30 31 32 33 34 00 00 0A 00 04 31 2E 30 2E 30 00 00 0A 00 05 31 2E 30 2E 30 00 00 1C 00 06 43 01 EA 02 57 03 41 54 41 56 41 57 41 59 52 00 52 03 50 00 50 02 50 03 00 1C 00 07 43 00 57 02 4E 09 4E 0A 4E 0C 4E 0B 41 55 41 58 4E 0D 52 01 52 02 50 01 00 05 00 08 00 00 06 00 09 00 00 00 07 00 0C 7A 68 00 00 07 00 0D 7A 68 00 00 29 00 11 00 06 00 00 00 05 00 11 00 01 7A 6A 2D 62 6C 75 65 74 6F 6F 74 68 00 00 04 00 02 00 0A 00 03 18 9E AD 04 6D AF 00 34 00 14 00 06 00 00 00 02 00 1A 00 01 7A 6A 2D 56 65 68 69 63 6C 65 49 6E 66 6F 72 6D 61 74 69 6F 6E 00 00 05 00 02 00 00 0B 00 06 57 69 50 6C 61 79 00 00 29 00 16 00 06 00 00 00 04 00 1B 00 01 7A 6A 2D 4C 6F 63 61 74 69 6F 6E 49 6E 66 6F 72 6D 61 74 69 6F 6E 00 00 04 00 11 00 29 00 18 00 06 00 00 00 06 00 17 00 01 7A 6A 2D 57 69 72 65 6C 65 73 73 43 61 72 50 6C 61 79 00 00 04 00 02 00 04 00 04 00 49 00 1E 00 06 00 00 00 07 00 15 00 01 7A 6A 2D 52 6F 75 74 65 47 75 69 64 61 6E 63 65 00 00 06 00 02 01 00 00 06 00 03 01 00 00 06 00 04 01 00 00 06 00 05 01 00 00 06 00 06 00 01 00 06 00 07 01 00 00 06 00 08 00 00 E3 
+[GOC-D] --->spp_send_data:FF 5A 01 A7 40 02 C3 0A F0 40 40 01 9D 1D 01 00 0D 00 00 6C 69 62 7A 6C 69 6E 6B 00 00 0B 00 01 7A 6C 69 6E 6B 33 00 00 0D 00 02 7A 6A 69 6E 6E 6F 76 61 00 00 15 00 03 30 31 32 33 34 35 36 37 38 39 41 30 31 32 33 34 00 00 0A 00 04 31 2E 30 2E 30 00 00 0A 00 05 31 2E 30 2E 30 00 00 1C 00 06 43 01 EA 02 57 03 41 54 41 56 41 57 41 59 52 00 52 03 50 00 50 02 50 03 00 1C 00 07 43 00 57 02 4E 09 4E 0A 4E 0C 4E 0B 41 55 41 58 4E 0D 52 01 52 02 50 01 00 05 00 08 00 00 06 00 09 00 00 00 07 00 0C 7A 68 00 00 07 00 0D 7A 68 00 00 29 00 11 00 06 00 00 00 05 00 11 00 01 7A 6A 2D 62 6C 75 65 74 6F 6F 74 68 00 00 04 00 02 00 0A 00 03 18 9E AD 04 6D AF 00 34 00 14 00 06 00 00 00 02 00 1A 00 01 7A 6A 2D 56 65 68 69 63 6C 65 49 6E 66 6F 72 6D 61 74 69 6F 6E 00 00 05 00 02 00 00 0B 00 06 57 69 50 6C 61 79 00 00 29 00 16 00 06 00 00 00 04 00 1B 00 01 7A 6A 2D 4C 6F 63 61 74 69 6F 6E 49 6E 66 6F 72 6D 61 74 69 6F 6E 00 00 04 00 11 00 29 00 18 00 06 00 00 00 06 00 17 00 01 7A 6A 2D 57 69 72 65 6C 65 73 73 43 61 72 50 6C 61 79 00 00 04 00 02 00 04 00 04 00 49 00 1E 00 06 00 00 00 07 00 15 00 01 7A 6A 2D 52 6F 75 74 65 47 75 69 64 61 6E 63 65 00 00 06 00 02 01 00 00 06 00 03 01 00 00 06 00 04 01 00 00 06 00 05 01 00 00 06 00 06 00 01 00 06 00 07 01 00 00 06 00 08 00 00 E3 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 01 A7 40 02 C3 0A F0 40 40 01 9D 1D 01 00 0D 00 00 6C 69 62 7A 6C 69 6E 6B 00 00 0B 00 01 7A 6C 69 6E 6B 33 00 00 0D 00 02 7A 6A 69 6E 6E 6F 76 61 00 00 15 00 03 30 31 32 33 34 35 36 37 38 39 41 30 31 32 33 34 00 00 0A 00 04 31 2E 30 2E 30 00 00 0A 00 05 31 2E 30 2E 30 00 00 1C 00 06 43 01 EA 02 57 03 41 54 41 56 41 57 41 59 52 00 52 03 50 00 50 02 50 03 00 1C 00 07 43 00 57 02 4E 09 4E 0A 4E 0C 4E 0B 41 55 41 58 4E 0D 52 01 52 02 50 01 00 05 00 08 00 00 06 00 09 00 00 00 07 00 0C 7A 68 00 00 07 00 0D 7A 68 00 00 29 00 11 00 06 00 00 00 05 00 11 00 01 7A 6A 2D 62 6C 75 65 74 6F 6F 74 68 00 00 04 00 02 00 0A 00 03 18 9E AD 04 6D AF 00 34 00 14 00 06 00 00 00 02 00 1A 00 01 7A 6A 2D 56 65 68 69 63 6C 65 49 6E 66 6F 72 6D 61 74 69 6F 6E 00 00 05 00 02 00 00 0B 00 06 57 69 50 6C 61 79 00 00 29 00 16 00 06 00 00 00 04 00 1B 00 01 7A 6A 2D 4C 6F 63 61 74 69 6F 6E 49 6E 66 6F 72 6D 61 74 69 6F 6E 00 00 04 00 11 00 29 00 18 00 06 00 00 00 06 00 17 00 01 7A 6A 2D 57 69 72 65 6C 65 73 73 43 61 72 50 6C 61 79 00 00 04 00 02 00 04 00 04 00 49 00 1E 00 06 00 00 00 07 00 15 00 01 7A 6A 2D 52 6F 75 74 65 47 75 69 64 61 6E 63 65 00 00 06 00 02 01 00 00 06 00 03 01 00 00 06 00 04 01 00 00 06 00 05 01 00 00 06 00 06 00 01 00 06 00 07 01 00 00 06 00 08 00 00 E3 
+[GOC-D] --->sendipc:FF 5A 00 09 40 C3 02 00 99 
+[GOC-D] the n:3.the data:,length:9
+[GOC-D] --Carplay rev dataFF 5A 00 09 40 C3 02 00 99 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 9
+CarPlayPortRecv len = 9
+CarPlayPortRecv start
+iap2_packet_recv packet_len=9
+iphone ACK
+[GOC-D] --->sendipc:FF 5A 00 10 40 C4 02 0A 87 40 40 00 06 1D 02 5B 
+[GOC-D] the n:3.the data:,length:16
+[GOC-D] --Carplay rev dataFF 5A 00 10 40 C4 02 0A 87 40 40 00 06 1D 02 5B 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 16
+CarPlayPortRecv len = 16
+CarPlayPortRecv start
+iap2_packet_recv packet_len=16
+IdentificationAccepted
+[z-link][00:04:58.757]zbt_rfcomm_data_send len=9
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 02 C4 00 98 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 02 C4 00 98 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 02 C4 00 98 
+[GOC-D] --->sendipc:FF 5A 00 10 40 C5 02 0A 86 40 40 00 06 AA 00 D0 
+[GOC-D] the n:3.the data:,length:16
+[GOC-D] --Carplay rev dataFF 5A 00 10 40 C5 02 0A 86 40 40 00 06 AA 00 D0 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 16
+CarPlayPortRecv len = 16
+CarPlayPortRecv start
+iap2_packet_recv packet_len=16
+RequestAuthenticationCertificate
+Authentication_Process: Certificate_len = 607
+[z-link][00:04:58.793]zbt_rfcomm_data_send len=627
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 627#####
+[GOC-D] ++Carplay send data : FF 5A 02 73 40 03 C5 0A 20 40 40 02 69 AA 01 02 63 00 00 30 82 02 5B 06 09 2A 86 48 86 F7 0D 01 07 02 A0 82 02 4C 30 82 02 48 02 01 01 31 00 30 0B 06 09 2A 86 48 86 F7 0D 01 07 01 A0 82 02 2E 30 82 02 2A 30 82 01 D1 A0 03 02 01 02 02 10 22 95 1E 67 9C AB 51 04 F7 13 2B C3 17 D6 C5 D5 30 0A 06 08 2A 86 48 CE 3D 04 03 02 30 81 89 31 0B 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0A 13 0A 41 70 70 6C 65 20 49 6E 63 2E 31 26 30 24 06 03 55 04 0B 13 1D 41 70 70 6C 65 20 43 65 72 74 69 66 69 63 61 74 69 6F 6E 20 41 75 74 68 6F 72 69 74 79 31 3D 30 3B 06 03 55 04 03 13 34 41 70 70 6C 65 20 41 63 63 65 73 73 6F 72 69 65 73 20 43 65 72 74 69 66 69 63 61 74 69 6F 6E 20 41 75 74 68 6F 72 69 74 79 20 2D 20 30 30 30 30 30 30 30 32 30 1E 17 0D 32 30 31 32 30 39 30 32 32 30 33 37 5A 17 0D 34 39 31 32 33 31 32 33 35 39 35 39 5A 30 6D 31 0B 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0A 13 0A 41 70 70 6C 65 20 49 6E 63 2E 31 1A 30 18 06 03 55 04 0B 13 11 41 70 70 6C 65 20 41 63 63 65 73 73 6F 72 69 65 73 31 2D 30 2B 06 03 55 04 03 14 24 49 50 41 5F 32 32 39 35 31 45 36 37 39 43 41 42 35 31 30 34 46 37 31 33 32 42 43 33 31 37 44 36 43 35 44 35 30 59 30 13 06 07 2A 86 48 CE 3D 02 01 06 08 2A 86 48 CE 3D 03 01 07 03 42 00 04 FE 81 18 BD BE 4D 04 5A E7 AF D5 54 4A 8A 99 F3 0C 23 F6 00 E9 4A E7 97 B4 46 39 46 44 65 DF AD 6F 7D AE 52 4F 5A 6C 49 7E 76 8B 50 18 60 37 9E 5F 19 66 2A 0E 67 87 66 C6 31 17 5D 7C 3D D9 D9 A3 36 30 34 30 32 06 09 2A 86 48 86 F7 63 64 06 24 01 01 FF 04 22 04 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 30 0A 06 08 2A 86 48 CE 3D 04 03 02 03 47 00 30 44 02 20 1A 2B 3F 15 2F 04 E4 01 A2 17 81 0F A1 5B F6 C4 C6 77 8D CC 6C E1 E3 E4 31 04 31 6D 17 9B F7 90 02 20 07 B8 BA D4 AD BE 52 42 53 D9 97 A9 A4 5F C6 B2 39 36 49 A9 42 23 5C B4 99 B1 29 FD E4 B1 2F F2 A1 00 31 00 49 
+[GOC-D] --->spp_send_data:FF 5A 02 73 40 03 C5 0A 20 40 40 02 69 AA 01 02 63 00 00 30 82 02 5B 06 09 2A 86 48 86 F7 0D 01 07 02 A0 82 02 4C 30 82 02 48 02 01 01 31 00 30 0B 06 09 2A 86 48 86 F7 0D 01 07 01 A0 82 02 2E 30 82 02 2A 30 82 01 D1 A0 03 02 01 02 02 10 22 95 1E 67 9C AB 51 04 F7 13 2B C3 17 D6 C5 D5 30 0A 06 08 2A 86 48 CE 3D 04 03 02 30 81 89 31 0B 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0A 13 0A 41 70 70 6C 65 20 49 6E 63 2E 31 26 30 24 06 03 55 04 0B 13 1D 41 70 70 6C 65 20 43 65 72 74 69 66 69 63 61 74 69 6F 6E 20 41 75 74 68 6F 72 69 74 79 31 3D 30 3B 06 03 55 04 03 13 34 41 70 70 6C 65 20 41 63 63 65 73 73 6F 72 69 65 73 20 43 65 72 74 69 66 69 63 61 74 69 6F 6E 20 41 75 74 68 6F 72 69 74 79 20 2D 20 30 30 30 30 30 30 30 32 30 1E 17 0D 32 30 31 32 30 39 30 32 32 30 33 37 5A 17 0D 34 39 31 32 33 31 32 33 35 39 35 39 5A 30 6D 31 0B 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0A 13 0A 41 70 70 6C 65 20 49 6E 63 2E 31 1A 30 18 06 03 55 04 0B 13 11 41 70 70 6C 65 20 41 63 63 65 73 73 6F 72 69 65 73 31 2D 30 2B 06 03 55 04 03 14 24 49 50 41 5F 32 32 39 35 31 45 36 37 39 43 41 42 35 31 30 34 46 37 31 33 32 42 43 33 31 37 44 36 43 35 44 35 30 59 30 13 06 07 2A 86 48 CE 3D 02 01 06 08 2A 86 48 CE 3D 03 01 07 03 42 00 04 FE 81 18 BD BE 4D 04 5A E7 AF D5 54 4A 8A 99 F3 0C 23 F6 00 E9 4A E7 97 B4 46 39 46 44 65 DF AD 6F 7D AE 52 4F 5A 6C 49 7E 76 8B 50 18 60 37 9E 5F 19 66 2A 0E 67 87 66 C6 31 17 5D 7C 3D D9 D9 A3 36 30 34 30 32 06 09 2A 86 48 86 F7 63 64 06 24 01 01 FF 04 22 04 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 30 0A 06 08 2A 86 48 CE 3D 04 03 02 03 47 00 30 44 02 20 1A 2B 3F 15 2F 04 E4 01 A2 17 81 0F A1 5B F6 C4 C6 77 8D CC 6C E1 E3 E4 31 04 31 6D 17 9B F7 90 02 20 07 B8 BA D4 AD BE 52 42 53 D9 97 A9 A4 5F C6 B2 39 36 49 A9 42 23 5C B4 99 B1 29 FD E4 B1 2F F2 A1 00 31 00 49 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 02 73 40 03 C5 0A 20 40 40 02 69 AA 01 02 63 00 00 30 82 02 5B 06 09 2A 86 48 86 F7 0D 01 07 02 A0 82 02 4C 30 82 02 48 02 01 01 31 00 30 0B 06 09 2A 86 48 86 F7 0D 01 07 01 A0 82 02 2E 30 82 02 2A 30 82 01 D1 A0 03 02 01 02 02 10 22 95 1E 67 9C AB 51 04 F7 13 2B C3 17 D6 C5 D5 30 0A 06 08 2A 86 48 CE 3D 04 03 02 30 81 89 31 0B 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0A 13 0A 41 70 70 6C 65 20 49 6E 63 2E 31 26 30 24 06 03 55 04 0B 13 1D 41 70 70 6C 65 20 43 65 72 74 69 66 69 63 61 74 69 6F 6E 20 41 75 74 68 6F 72 69 74 79 31 3D 30 3B 06 03 55 04 03 13 34 41 70 70 6C 65 20 41 63 63 65 73 73 6F 72 69 65 73 20 43 65 72 74 69 66 69 63 61 74 69 6F 6E 20 41 75 74 68 6F 72 69 74 79 20 2D 20 30 30 30 30 30 30 30 32 30 1E 17 0D 32 30 31 32 30 39 30 32 32 30 33 37 5A 17 0D 34 39 31 32 33 31 32 33 35 39 35 39 5A 30 6D 31 0B 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0A 13 0A 41 70 70 6C 65 20 49 6E 63 2E 31 1A 30 18 06 03 55 04 0B 13 11 41 70 70 6C 65 20 41 63 63 65 73 73 6F 72 69 65 73 31 2D 30 2B 06 03 55 04 03 14 24 49 50 41 5F 32 32 39 35 31 45 36 37 39 43 41 42 35 31 30 34 46 37 31 33 32 42 43 33 31 37 44 36 43 35 44 35 30 59 30 13 06 07 2A 86 48 CE 3D 02 01 06 08 2A 86 48 CE 3D 03 01 07 03 42 00 04 FE 81 18 BD BE 4D 04 5A E7 AF D5 54 4A 8A 99 F3 0C 23 F6 00 E9 4A E7 97 B4 46 39 46 44 65 DF AD 6F 7D AE 52 4F 5A 6C 49 7E 76 8B 50 18 60 37 9E 5F 19 66 2A 0E 67 87 66 C6 31 17 5D 7C 3D D9 D9 A3 36 30 34 30 32 06 09 2A 86 48 86 F7 63 64 06 24 01 01 FF 04 22 04 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 30 0A 06 08 2A 86 48 CE 3D 04 03 02 03 47 00 30 44 02 20 1A 2B 3F 15 2F 04 E4 01 A2 17 81 0F A1 5B F6 C4 C6 77 8D CC 6C E1 E3 E4 31 04 31 6D 17 9B F7 90 02 20 07 B8 BA D4 AD BE 52 42 53 D9 97 A9 A4 5F C6 B2 39 36 49 A9 42 23 5C B4 99 B1 29 FD E4 B1 2F F2 A1 00 31 00 49 
+[GOC-D] handleA2dpSetConfigurationInd connection:0 addr:B440A440E7FF shandle:0x0
+[GOC-D] filter_sbc: set_config
+[GOC-D] sbc_store_config sampleRate:44100 minBitpool:2 maxBitpool:32
+[GOC-D] filter_sbc: subbands..............8
+[GOC-D] filter_sbc: blocks................16
+[GOC-D] filter_sbc: sample_freq...........44100
+[GOC-D] filter_sbc: chan_mode.............3 (J)
+[GOC-D] filter_sbc: alloc_method..........0 (L)
+[GOC-D] filter_sbc: bitPool...............0
+[GOC-D] filter_sbc: channels..............2
+[GOC-D] filter_sbc: ........................
+[GOC-D] filter_sbc: minBitpool............2
+[GOC-D] filter_sbc: maxBitpool............32
+[GOC-D] filter_sbc: framesize.............0
+[GOC-D] filter_sbc: frames_per_payload....59
+[GOC-D] filter_sbc: bytes_per_encoding....0
+[GOC-D] filter_sbc: remoteMinBitpool......2
+[GOC-D] filter_sbc: remoteMaxBitpool......32
+[GOC-D] handleA2dpOpenInd addr:B440A440E7FF
+[GOC-D] handleA2dpOpenInd connection:0 addr:B440A440E7FF shandle:0x0
+[GOC-D] GocBtAvDelayReportCfm result:0x8000
+[GOC-D] --->sendipc:FF 5A 00 09 40 C5 03 00 96 
+[GOC-D] the n:3.the data:,length:9
+[GOC-D] --Carplay rev dataFF 5A 00 09 40 C5 03 00 96 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 9
+CarPlayPortRecv len = 9
+CarPlayPortRecv start
+iap2_packet_recv packet_len=9
+iphone ACK
+[GOC-D] --->sendipc:FF 5A 00 34 40 C6 03 0A 60 40 40 00 2A AA 02 00 24 00 00 20 A1 1F 18 CD BB 45 69 22 E4 4A BD 8A F0 06 1B AD D9 8E 2A 75 27 69 9E 91 5A C2 FD 03 36 CE 3D E1 
+[GOC-D] the n:3.the data:,length:52
+[GOC-D] --Carplay rev dataFF 5A 00 34 40 C6 03 0A 60 40 40 00 2A AA 02 00 24 00 00 20 A1 1F 18 CD BB 45 69 22 E4 4A BD 8A F0 06 1B AD D9 8E 2A 75 27 69 9E 91 5A C2 FD 03 36 CE 3D E1 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 52
+CarPlayPortRecv len = 52
+CarPlayPortRecv start
+iap2_packet_recv packet_len=52
+RequestAuthenticationChallengeResponse
+[GOC-D] GocBtScDmSmAuthoriseIndIdleS
+[GOC-D] |--csrBtScDbFileCheckVersion--|
+[GOC-D] +++++++++++++++++>sc db<+++++++++++++++++++++
+[GOC-D] deviceAddr      :B440A440E7FF
+[GOC-D] linkkeyValid    :1
+[GOC-D] linkkeyLen      :16
+[GOC-D] linkey:D5 6B CC 1E C6 7F FB D2 D7 4C 4A FC 46 CA F5 D1 
+[GOC-D] remoteName      :iPhone
+[GOC-D] classOfDevice   :7a020c
+[GOC-D] knownServices11_00_31   :0
+[GOC-D] knownServices11_32_63   :0
+[GOC-D] knownServices12_00_31   :0
+[GOC-D] knownServices13_00_31   :0
+[GOC-D] authorised      :1
+[GOC-D] linkkeyType     :5
+[GOC-D] ----------------------------------------------
+[GOC-D] sm_af_access_success
+[GOC-D] L2caAutoConnectInd psm:0x19 addr:B440A440E7FF
+[GOC-D] handleA2dpStreamMtuSizeInd addr:B440A440E7FF
+[z-link][00:04:59.718]zbt_rfcomm_data_send len=84
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 84#####
+[GOC-D] ++Carplay send data : FF 5A 00 54 40 04 C6 0A 3F 40 40 00 4A AA 03 00 44 00 00 14 CF 81 AB 00 E7 00 04 9E AC 18 6C 43 84 0D BD 1F 5A 39 BA 47 B9 9D C3 AC 01 34 EA 20 48 7B 4C 02 07 9E 9D 45 23 40 36 F8 8B D4 39 99 64 1D 84 47 5D 6D C0 11 23 BB C3 6D 1A 7B DE ED 12 B6 48 76 
+[GOC-D] --->spp_send_data:FF 5A 00 54 40 04 C6 0A 3F 40 40 00 4A AA 03 00 44 00 00 14 CF 81 AB 00 E7 00 04 9E AC 18 6C 43 84 0D BD 1F 5A 39 BA 47 B9 9D C3 AC 01 34 EA 20 48 7B 4C 02 07 9E 9D 45 23 40 36 F8 8B D4 39 99 64 1D 84 47 5D 6D C0 11 23 BB C3 6D 1A 7B DE ED 12 B6 48 76 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 54 40 04 C6 0A 3F 40 40 00 4A AA 03 00 44 00 00 14 CF 81 AB 00 E7 00 04 9E AC 18 6C 43 84 0D BD 1F 5A 39 BA 47 B9 9D C3 AC 01 34 EA 20 48 7B 4C 02 07 9E 9D 45 23 40 36 F8 8B D4 39 99 64 1D 84 47 5D 6D C0 11 23 BB C3 6D 1A 7B DE ED 12 B6 48 76 
+[GOC-D] --->sendipc:FF 5A 00 09 40 C6 04 00 94 
+[GOC-D] the n:3.the data:,length:9
+[GOC-D] --Carplay rev dataFF 5A 00 09 40 C6 04 00 94 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 9
+CarPlayPortRecv len = 9
+CarPlayPortRecv start
+iap2_packet_recv packet_len=9
+iphone ACK
+[GOC-D] --->sendipc:FF 5A 00 10 40 C7 04 0A 82 40 40 00 06 AA 05 CB 
+[GOC-D] the n:3.the data:,length:16
+[GOC-D] --Carplay rev dataFF 5A 00 10 40 C7 04 0A 82 40 40 00 06 AA 05 CB 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 16
+CarPlayPortRecv len = 16
+CarPlayPortRecv start
+iap2_packet_recv packet_len=16
+Authentication_Process: AuthenticationSucceeded
+[z-link][00:04:59.784]zbt_rfcomm_data_send len=9
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 04 C7 00 93 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 04 C7 00 93 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 04 C7 00 93 
+2026-02-24 12:04:59.787334 AM [AirPlay] Name changed '' -> '(none)'
+[GOC-D] --->sendipc:FF 5A 00 39 40 C8 04 0A 58 40 40 00 2F 4E 0C 00 29 00 00 42 32 32 33 36 34 33 31 2D 44 46 31 44 2D 34 41 43 34 2D 39 31 31 37 2D 33 30 34 37 32 44 36 31 35 32 43 44 00 1D 
+[GOC-D] the n:3.the data:,length:57
+[GOC-D] --Carplay rev dataFF 5A 00 39 40 C8 04 0A 58 40 40 00 2F 4E 0C 00 29 00 00 42 32 32 33 36 34 33 31 2D 44 46 31 44 2D 34 41 43 34 2D 39 31 31 37 2D 33 30 34 37 32 44 36 31 35 32 43 44 00 1D 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 57
+CarPlayPortRecv len = 57
+CarPlayPortRecv start
+2026-02-24 12:04:59.817779 AM [AirPlay] Created AirPlay Pairing Identity: f4162f05-00f3-4d9f-a16d-3795910a5827
+2026-02-24 12:04:59.820896 AM [BonjourAdvertiser] Registering Bonjour _airplay._tcp. port 7000
+2026-02-24 12:04:59.821242 AM [AirPlay] Started advertising.
+2026-02-24 12:04:59.821355 AM [AirPlay] AirPlay servers started
+2026-02-24 12:04:59.821472 AM [CarPlayControl] CarPlayControlClientStart: 0
+iap2_packet_recv packet_len=57
+DEVICE_UUID_UPDATE
+B2236431-DF1D-4AC4-9117-30472D6152CD
+[z-link][00:04:59.824]zbt_rfcomm_data_send len=9
+2026-02-24 12:04:59.825755 AM [BonjourAdvertiser] Registered Bonjour (none)._airplay._tcp.local.
+2026-02-24 12:04:59.827530 AM [CarPlayControl] _CarPlayControlClientEnsureStarted: 0
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 04 C8 00 92 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 04 C8 00 92 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 04 C8 00 92 
+[GOC-D] --->sendipc:FF 5A 00 10 40 C9 04 0A 80 40 40 00 06 57 02 21 
+[GOC-D] the n:3.the data:,length:16
+[GOC-D] --Carplay rev dataFF 5A 00 10 40 C9 04 0A 80 40 40 00 06 57 02 21 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 16
+CarPlayPortRecv len = 16
+CarPlayPortRecv start
+iap2_packet_recv packet_len=16
+--------------RequestAccessoryWifiConfigurationInfomation
+wifi_name = carplay_037b, wifi_passwd = 88888888, wifi_channel = 36
+[z-link][00:04:59.897]zbt_rfcomm_data_send len=56
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 56#####
+[GOC-D] ++Carplay send data : FF 5A 00 38 40 05 C9 0A 57 40 40 00 2E 57 03 00 11 00 01 63 61 72 70 6C 61 79 5F 30 33 37 62 00 00 0D 00 02 38 38 38 38 38 38 38 38 00 00 05 00 03 02 00 05 00 04 24 99 
+[GOC-D] --->spp_send_data:FF 5A 00 38 40 05 C9 0A 57 40 40 00 2E 57 03 00 11 00 01 63 61 72 70 6C 61 79 5F 30 33 37 62 00 00 0D 00 02 38 38 38 38 38 38 38 38 00 00 05 00 03 02 00 05 00 04 24 99 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 38 40 05 C9 0A 57 40 40 00 2E 57 03 00 11 00 01 63 61 72 70 6C 61 79 5F 30 33 37 62 00 00 0D 00 02 38 38 38 38 38 38 38 38 00 00 05 00 03 02 00 05 00 04 24 99 
+[GOC-D] pmalloc count:386 size:53204
+[GOC-D] --->sendipc:FF 5A 00 09 40 C9 05 00 90 FF 5A 00 17 40 CA 05 0A 77 40 40 00 0D 4E 0A 00 07 00 00 7A 68 00 32 
+[GOC-D] the n:3.the data:,length:32
+[GOC-D] --Carplay rev dataFF 5A 00 09 40 C9 05 00 90 FF 5A 00 17 40 CA 05 0A 77 40 40 00 0D 4E 0A 00 07 00 00 7A 68 00 32 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 32
+CarPlayPortRecv len = 32
+CarPlayPortRecv start
+iap2_packet_recv packet_len=9
+iphone ACK
+iap2_packet_recv packet_len=23
+DEVICE_LANGUAGE_UPDATE
+zh
+[z-link][00:04:59.954]zbt_rfcomm_data_send len=9
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 05 CA 00 8F 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 05 CA 00 8F 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 05 CA 00 8F 
+[GOC-D] SPPIND 153 B/s len:27
+[GOC-D] --->sendipc:FF 5A 00 1B 40 CB 05 0A 72 40 40 00 11 4E 09 00 0B 00 00 69 50 68 6F 6E 65 00 AA 
+[GOC-D] the n:3.the data:,length:27
+[GOC-D] --Carplay rev dataFF 5A 00 1B 40 CB 05 0A 72 40 40 00 11 4E 09 00 0B 00 00 69 50 68 6F 6E 65 00 AA 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 27
+CarPlayPortRecv len = 27
+CarPlayPortRecv start
+iap2_packet_recv packet_len=27
+DEVICE_INFORMATION_UPDATE
+iPhone
+[z-link][00:05:00.010]zbt_rfcomm_data_send len=9
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 05 CB 00 8E 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 05 CB 00 8E 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 05 CB 00 8E 
+[GOC-D] --->sendipc:FF 5A 00 27 40 CC 05 0A 65 40 40 00 1D 4E 0B 00 0C 00 00 00 00 00 00 69 B9 F6 62 00 06 00 01 01 E0 00 05 00 02 00 95 
+[GOC-D] the n:3.the data:,length:39
+[GOC-D] --Carplay rev dataFF 5A 00 27 40 CC 05 0A 65 40 40 00 1D 4E 0B 00 0C 00 00 00 00 00 00 69 B9 F6 62 00 06 00 01 01 E0 00 05 00 02 00 95 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 39
+CarPlayPortRecv len = 39
+CarPlayPortRecv start
+iap2_packet_recv packet_len=39
+DeviceTimeUpdate
+now_time: 1773794914
+Wed Mar 18 00:48:34 2026
+
+TimeZoneOffsetMinutes: 480
+DaylightSavingsOffsetMinutes: 0
+
+
+---------north_control_phone_time_send----------- 1773794914, 480
+[z-link][00:05:00.096]zbt_rfcomm_data_send len=9
+[00:05:00.096]libzlink: phone_time_cb
+[00:05:00.096]libzlink: phone_time_cb: no callback
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 05 CC 00 8D 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 05 CC 00 8D 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 05 CC 00 8D 
+[GOC-D] --->sendipc:FF 5A 00 15 40 CD 05 0A 76 40 40 00 0B 4E 0D 00 05 00 00 01 14 
+[GOC-D] the n:3.the data:,length:21
+[GOC-D] --Carplay rev dataFF 5A 00 15 40 CD 05 0A 76 40 40 00 0B 4E 0D 00 05 00 00 01 14 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 21
+CarPlayPortRecv len = 21
+CarPlayPortRecv start
+iap2_packet_recv packet_len=21
+WirelessCarPlayUpdate
+[z-link][00:05:00.150]zbt_rfcomm_data_send len=9
+WirelessCarPlayUpdate : 1
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 9#####
+[GOC-D] ++Carplay send data : FF 5A 00 09 40 05 CD 00 8C 
+[GOC-D] --->spp_send_data:FF 5A 00 09 40 05 CD 00 8C 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 09 40 05 CD 00 8C 
+[GOC-D] --->sendipc:FF 5A 00 55 40 CE 05 0A 35 40 40 00 4B 43 00 00 26 00 00 00 05 00 00 01 00 1D 00 01 30 30 30 30 38 30 33 30 30 30 31 31 30 35 38 38 31 45 32 33 38 30 32 45 00 00 1F 00 01 00 05 00 00 01 00 16 00 01 62 34 3A 34 30 3A 61 34 3A 34 30 3A 65 37 3A 66 66 00 12 
+[GOC-D] the n:3.the data:,length:85
+[GOC-D] --Carplay rev dataFF 5A 00 55 40 CE 05 0A 35 40 40 00 4B 43 00 00 26 00 00 00 05 00 00 01 00 1D 00 01 30 30 30 30 38 30 33 30 30 30 31 31 30 35 38 38 31 45 32 33 38 30 32 45 00 00 1F 00 01 00 05 00 00 01 00 16 00 01 62 34 3A 34 30 3A 61 34 3A 34 30 3A 65 37 3A 66 66 00 12 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 85
+CarPlayPortRecv len = 85
+CarPlayPortRecv start
+iap2_packet_recv packet_len=85
+--------------carplay link
+port = 7000
+tools_wifi_mac_addr_handle wifi_netcard : wlan0
+[z-link][00:05:00.236]--------------------get_mac_socket
+zlink carlay link: netcard_name = wlan0
+zlink carlay link: mac_addr_string = 18:9e:ad:4:6d:ae
+zlink carlay link: wifi_name = carplay_037b
+zlink carlay link: wifi_passwd = 88888888
+zlink carlay link: wifi_channel = 36
+wireless_ipv6_addr_handle
+zlink carlay link: wlan0 ipv6 addr fe80::1a9e:adff:fe04:6dae
+sh: ip: not found
+[z-link][00:05:00.241]zbt_rfcomm_data_send len=165
+libzbt-main: MESSAGE_ZBT_RFCOMM_DATA
+[GOC-D] #######receive zj rfcomm data len = 165#####
+[GOC-D] ++Carplay send data : FF 5A 00 A5 40 06 CE 0A E4 40 40 00 9B 43 01 00 45 00 01 00 11 00 00 63 61 72 70 6C 61 79 5F 30 33 37 62 00 00 0D 00 01 38 38 38 38 38 38 38 38 00 00 05 00 02 24 00 1E 00 03 66 65 38 30 3A 3A 31 61 39 65 3A 61 64 66 66 3A 66 65 30 34 3A 36 64 61 65 00 00 08 00 02 00 00 1B 58 00 15 00 03 31 38 3A 39 65 3A 61 64 3A 34 3A 36 64 3A 61 65 00 00 29 00 04 66 34 31 36 32 66 30 35 2D 30 30 66 33 2D 34 64 39 66 2D 61 31 36 64 2D 33 37 39 35 39 31 30 61 35 38 32 37 00 00 0A 00 05 32 38 30 2E 33 00 3F 
+[GOC-D] --->spp_send_data:FF 5A 00 A5 40 06 CE 0A E4 40 40 00 9B 43 01 00 45 00 01 00 11 00 00 63 61 72 70 6C 61 79 5F 30 33 37 62 00 00 0D 00 01 38 38 38 38 38 38 38 38 00 00 05 00 02 24 00 1E 00 03 66 65 38 30 3A 3A 31 61 39 65 3A 61 64 66 66 3A 66 65 30 34 3A 36 64 61 65 00 00 08 00 02 00 00 1B 58 00 15 00 03 31 38 3A 39 65 3A 61 64 3A 34 3A 36 64 3A 61 65 00 00 29 00 04 66 34 31 36 32 66 30 35 2D 30 30 66 33 2D 34 64 39 66 2D 61 31 36 64 2D 33 37 39 35 39 31 30 61 35 38 32 37 00 00 0A 00 05 32 38 30 2E 33 00 3F 
+[GOC-D] instData->state 3,size:0 instData->framesize:1007
+[GOC-D] --->sendphone:FF 5A 00 A5 40 06 CE 0A E4 40 40 00 9B 43 01 00 45 00 01 00 11 00 00 63 61 72 70 6C 61 79 5F 30 33 37 62 00 00 0D 00 01 38 38 38 38 38 38 38 38 00 00 05 00 02 24 00 1E 00 03 66 65 38 30 3A 3A 31 61 39 65 3A 61 64 66 66 3A 66 65 30 34 3A 36 64 61 65 00 00 08 00 02 00 00 1B 58 00 15 00 03 31 38 3A 39 65 3A 61 64 3A 34 3A 36 64 3A 61 65 00 00 29 00 04 66 34 31 36 32 66 30 35 2D 30 30 66 33 2D 34 64 39 66 2D 61 31 36 64 2D 33 37 39 35 39 31 30 61 35 38 32 37 00 00 0A 00 05 32 38 30 2E 33 00 3F 
+[GOC-D] --->sendipc:FF 5A 00 09 40 CE 06 00 8A 
+[GOC-D] the n:3.the data:,length:9
+[GOC-D] --Carplay rev dataFF 5A 00 09 40 CE 06 00 8A 
+libzbt_rfcomm_data_send
+libzbt-main: libzbt_rfcomm_data_send data_len = 9
+CarPlayPortRecv len = 9
+CarPlayPortRecv start
+iap2_packet_recv packet_len=9
+iphone ACK
+createVoChn:1260
+I0224 00:05:05.149420  1029 hwdisplay.c:1269] <hwd_get_disp_type> Current the  disp_type:0x1  tv_mode:0x0
+W0224 00:05:05.169818  1029 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 00:05:05.169999  1029 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 00:05:05.170091  1029 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 00:05:05.170166  1029 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 00:05:05.170274  1029 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:0, zorder=0, cnt:2
+I0224 00:05:05.170409  1029 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[0]: screen_win[0,720, 720x720]
+create vo channel[1] success!
+startPreview:2425
+createVoChn:1260
+W0224 00:05:05.191154  1029 mpi_vo.c:611] <map_VO_INTF_TYPE_E_to_disp_output_type> be careful! unknown intf_type:0x0, return disp_output_type:0x0
+W0224 00:05:05.191315  1029 hwdisplay.c:1247] <hwd_is_support_tv_mode> Input disp_type:0 error!
+W0224 00:05:05.191475  1029 hwdisplay.c:1491] <hwd_switch_vo_device> Inout disp_type:0 error!
+E0224 00:05:05.191567  1029 mpi_vo.c:852] <AW_MPI_VO_SetPubAttr> fatal error! hwd switch_vo_device error! ret:-1
+I0224 00:05:05.191651  1029 hwdisplay.c:1142] <hwd_layer_request_hlay> hlay:1, zorder=1, cnt:3
+I0224 00:05:05.191771  1029 hwdisplay.c:404] <hwd_layer_set_rect> ch[0]lyl[1]: screen_win[0,0, 720x720]
+create vo channel[1] success!
+startPreview:2425
+[      24.903347]  (none) daemon.info hostapd: wlan0: STA 0a:af:18:a4:36:81 IEEE 802.11: associated
+[      24.923980]  (none) daemon.info hostapd: wlan0: STA 0a:af:18:a4:36:81 RADIUS: starting accounting session 2FEEC867A44C4A07
+[      24.924419]  (none) daemon.info hostapd: wlan0: STA 0a:af:18:a4:36:81 WPA: pairwise key handshake completed (RSN)
+[PlaybackInterface] Initialized data structure
+[Theme] Theme manager initialized with LIGHT theme
+[UI_Common] Initialized
+[VideoLibrary] Initializing data structure...
+[VideoLibrary] Data structure initialized
+front file = /mnt/extsd/recorder/frontCamera/CarMV.mp4
+front file = /mnt/extsd/recorder/frontCamera/CarMV_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/v01InstructionXinbas_front.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_0-0-18.mp4
+front file = /mnt/extsd/recorder/frontCamera/video2022-1-1_1-28-47.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-6-12.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-17.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-51.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-36-24.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-37-32.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-46-59.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-48-12.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-49-33.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_1-17-56.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-10-24.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-12-59.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-16-23.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-21-55.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-0-6.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-2-56.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-5-56.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-8-57.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-11-57.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-14-57.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-17-57.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-19-55.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-31-20.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-34-10.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_0-47-29.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_2-19-34.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_2-20-46.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_2-23-37.mp4
+front file = /mnt/extsd/recorder/frontCamera/Front2026-2-24_2-26-37.mp4
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Initialized tab 0 with 33 files
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-6-12.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-17.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-51.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-36-24.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-10-24.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-13-0.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-16-23.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-21-55.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-0-6.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-2-56.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-5-57.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-8-57.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-11-57.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-14-57.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-17-57.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-19-55.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-31-20.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-34-10.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_0-47-29.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_2-19-34.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_2-20-47.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_2-23-37.mp4
+rear file = /mnt/extsd/recorder/rearCamera/Rear2026-2-24_2-26-37.mp4
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Initialized tab 1 with 23 files
+urgant front file = /mnt/extsd/recorderUrgent/frontCamera/v01InstructionXinbas_front_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/1.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/4.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/5.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/CarMV_rear_urgent.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi&ai.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/danlu_vi.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder1_1080p@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/recorder2_1080@20.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01CenterControl.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionCar.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas.mp4
+urgant rear file = /mnt/extsd/recorderUrgent/rearCamera/v01InstructionXinbas_rear_urgent.mp4
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Initialized tab 2 with 14 files
+[VideoLibrary] UI created successfully
+[PhotoLibrary] Initializing data structure...
+[PhotoLibrary] Data structure initialized
+Scanning photo directory: /mnt/extsd/DVRpic/frontPic (tab 0)
+Found 6 photos in tab 0
+Scanning photo directory: /mnt/extsd/DVRpic/rearPic (tab 1)
+Found 8 photos in tab 1
+[PhotoLibrary] UI created successfully
+[PlaybackInterface] Interface initialized successfully
+stopPreview:2434
+stopPreview:2434
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+-----------zj carplay protocol: Accepted connection from iPhone
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+2026-02-24 12:05:06.973507 AM [AirPlay] Control pair-setup HK, type 0
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+2026-02-24 12:05:07.634289 AM [AirPlay] Control pair-setup HK, type 0
+2026-02-24 12:05:07.977684 AM [AirPlay] Control pair-setup HK, type 0
+2026-02-24 12:05:08.143531 AM [AirPlay] Control pair-verify 1
+2026-02-24 12:05:08.170744 AM [AirPlay] Control pair-verify 2
+2026-02-24 12:05:08.188147 AM [AirPlay] MFi
+
+
+=============================_MFiSAP_Exchange_ServerM1
+
+2026-02-24 12:05:08.443320 AM [AirPlay] Setup
+CFDictionaryGetCString TextToSourceVersion: 8701401
+[z-link][00:05:08.446]AirPlay session started
+[z-link][00:05:08.447]zlink session_state_send: session_state = 4, current_device = 5
+libzlink zlink_state_handle: session_state = 4
+libzlink zlink_state_handle: phone_type = 5
+[00:05:08.447]libzlink: session_state_cb
+
+
+
+session_state_cb: session_state = 4, phone_type = 5
+
+
+[00:05:08.448]libzlink_video_focus in, set hu_video_focus = 1
+[00:05:08.448]libzlink_video_focus out
+[z-link][00:05:08.448]Disconnect BT connect
+[z-link][00:05:08.449]cmd_focus_handle: is_hu_video_focus_on = 1
+[z-link][00:05:08.449]session_state = 4, current_device = 5 airplay_is_running= 0
+[z-link][00:05:08.449]----------------cp_video_focus: is_hu_on = 1
+-----------MESSAGE_DISABLE_BT
+[00:05:08.450]libzlink: request_disableBT_cb
+[00:05:08.450]libzlink: request_disableBT_cb: no callback
+[z-link][00:05:08.451]-------------Dont send disable BT to BT server!
+--------------TODO--------DebugCopyStackTrace
+2026-02-24 12:05:08.453381 AM ### [ASSERT] AirPlayReceiverSession.c:5403 "AirPlayReceiverSessionChangeModes", -6709/0xFFFFE5CB kStateErr 
+--------------TODO--------DebugCopyStackTrace
+2026-02-24 12:05:08.453600 AM ### [ASSERT] AirPlayReceiverSession.c:5483 "AirPlayReceiverSessionChangeResourceMode", -6709/0xFFFFE5CB kStateErr 
+[z-link][00:05:08.453]----------------cp_video_focus: is_cp_on  to HU 
+2026-02-24 12:05:08.458398 AM [HID] HID browser starting...
+2026-02-24 12:05:08.459555 AM [HID] HID device starting...
+2026-02-24 12:05:08.459796 AM [HID] HID device starting...
+2026-02-24 12:05:08.459949 AM [HID] HID device starting...
+2026-02-24 12:05:08.460121 AM [HID] HID device starting...
+2026-02-24 12:05:08.460261 AM [HID] HID browser started
+2026-02-24 12:05:08.460345 AM [HID] HID device started
+2026-02-24 12:05:08.460410 AM [HID] HID device started
+2026-02-24 12:05:08.460568 AM [HID] HID device started
+2026-02-24 12:05:08.460636 AM [HID] HID device started
+2026-02-24 12:05:08.460844 AM [AirPlay] HID started
+[z-link][00:05:08.485]
+
+-------------------kAirPlayKey_NightMode
+[z-link][00:05:08.487]
+
+-------------------kAirPlayProperty_OEMIconVisible
+[z-link][00:05:08.488]
+
+-------------------kAirPlayKey_RightHandDrive
+2026-02-24 12:05:08.531334 AM [AirPlay] Record
+2026-02-24 12:05:08.534772 AM [AirPlay] AirPlay session started: From=iPhone D=0xb440a440e7ff A=[fe80::c35:f6c7:87be:a9a%wlan0]:49540 T=Enet C=? L=0 ms Bonjour=0 ms Conn=0 ms Auth=0 ms Ann=0 ms Setup=0 ms Rec=3 ms: 0/0x0 noErr
+2026-02-24 12:05:08.615843 AM [AirPlay] Modes changed: screen accessory, mainAudio accessory, speech n/a (none), phone n/a, turns n/a
+[z-link][00:05:08.616]Modes changed: screen accessory, mainAudio accessory, speech n/a (none), phone n/a, turns n/a
+[00:05:08.617]libzlink: cp_mode_change_cb
+[00:05:08.617]libzlink: cp_mode_change_cb: no callback
+[z-link][00:05:08.638]Disable Bluetooth session control request
+[z-link][00:05:08.638]-------------Dont send disable BT to BT server!
+-----------MESSAGE_DISABLE_BT
+[00:05:08.639]libzlink: request_disableBT_cb
+[00:05:08.639]libzlink: request_disableBT_cb: no callback
+2026-02-24 12:05:08.859316 AM [AirPlay] Modes changed: screen controller, mainAudio accessory, speech n/a (none), phone n/a, turns n/a
+[z-link][00:05:08.859]Modes changed: screen controller, mainAudio accessory, speech n/a (none), phone n/a, turns n/a
+[00:05:08.860]libzlink: cp_mode_change_cb
+[00:05:08.860]libzlink: cp_mode_change_cb: no callback
+2026-02-24 12:05:08.866845 AM [AirPlay] Setup
+CFDictionaryGetCString TextToSourceVersion: 8701401
+2026-02-24 12:05:08.927593 AM [ScreenStream] Screen stream started
+[z-link][00:05:08.991]zlink session_state_send: session_state = 4, current_device = 5
+libzlink zlink_state_handle: session_state = 4
+libzlink zlink_state_handle: phone_type = 5
+[00:05:08.992]libzlink: session_state_cb
+
+
+
+session_state_cb: session_state = 4, phone_type = 5
+
+
+[00:05:08.992]libzlink_video_focus in, set hu_video_focus = 1
+[00:05:08.992]libzlink_video_focus out
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[z-link][00:05:09.038]cmd_focus_handle: is_hu_video_focus_on = 1
+[z-link][00:05:09.039]session_state = 4, current_device = 5 airplay_is_running= 0
+[z-link][00:05:09.039]----------------cp_video_focus: is_hu_on = 1
+[z-link][00:05:09.039]----------------cp_video_focus: is_cp_on  to HU 
+2026-02-24 12:05:09.067165 AM [AirPlay] Modes changed: screen accessory, mainAudio accessory, speech n/a (none), phone n/a, turns n/a
+[z-link][00:05:09.067]Modes changed: screen accessory, mainAudio accessory, speech n/a (none), phone n/a, turns n/a
+[00:05:09.068]libzlink: cp_mode_change_cb
+[00:05:09.068]libzlink: cp_mode_change_cb: no callback
+2026-02-24 12:05:09.078414 AM [ScreenStream] Screen stream stopped
+2026-02-24 12:05:09.081641 AM [AirPlay] Teardown 
+2026-02-24 12:05:09.086264 AM [AirPlay] err 0/0x0 noErr RCV UDP len 4. 0004 349d
+2026-02-24 12:05:09.089078 AM [AirPlay] err 0/0x0 noErr RCV UDP len 4. 0004 349d
+[GOC-D] pmalloc count:383 size:53156
+HideBtnCont:26
+[GOC-D] HF[180225] REV:
++CIEV: 5,4
+
+[GOC-D] REV AT:0D 0A 2B 43 49 45 56 3A 20 35 2C 34 0D 0A 
+[GOC-D] handleCievInd addr:B440A440E7FF signal=4
+[GOC-D] call_status:0,callsetup_status:0,callhold_status:0
+[GOC-D] call_status_time:0,callsetup_status_time:0,callheld_status_time:0
+[GOC-D] num1:,num2:,num3:
+[GOC-D] send_ind: [PS0405]
+Loading image: S:/mnt/extsd/DVRpic/rearPic/test2.jpg
+Canvas image: w=1560, h=720, cf=5(5)
+canvas_display_image: success - scaled from 1560x720 to 960x540
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[VideoLibrary] Populated 33 items in tab 0
+[VideoLibrary] Populated 23 items in tab 1
+[VideoLibrary] Populated 14 items in tab 2
+[z-link][00:05:15.128]north_head_recv: recv fail..
+[z-link][00:05:15.129]control_message_handle: north_head_recv fail(-1)
+[z-link][00:05:15.129]control_message_handle exit
+[z-link][00:05:15.129]control_main_loop: client disconnect, waiting client again
+[z-link][00:05:15.129]north_head_recv: recv fail..
+[z-link][00:05:15.130]AA_bypath_recv: north_head_recv fail(-1)
+[z-link][00:05:15.130]AA_bypath_recv exit
+[z-link][00:05:15.130]AA_bypath_loop: client disconnect
+[z-link][00:05:15.130]north_head_recv: recv fail..
+[z-link][00:05:15.130]video_message_recv: north_head_recv fail(-1)
+[z-link][00:05:15.130]video_message_recv exit
+[z-link][00:05:15.130]video_main_loop: client disconnect
+[z-link][00:05:15.131]north_head_recv: recv fail..
+[z-link][00:05:15.131]audio_message_recv: north_head_recv fail(-1)
+[z-link][00:05:15.131]audio_message_recv exit
+[z-link][00:05:15.131]audio_main_loop: client disconnect
+Segmentation fault
+-------------exit err, -------------------
+udhcpd: sending OFFER of 192.168.1.110
+udhcpd: sending OFFER of 192.168.1.110
+udhcpd: sending ACK to 192.168.1.110
+udhcpd: can't open '': No such file or directory
+[z-link][00:05:18.129]control_main_loop: waiting client
+[z-link][00:05:18.130]AA_bypath_loop: waiting client
+[z-link][00:05:18.131]video_main_loop: waiting client
+[z-link][00:05:18.131]audio_main_loop: waiting client
+starting pid 1152, tty '': '/etc/init.d/rcK'
+Unload mpp modules
+Stopping logging: [      37.434926]  (none) syslog.info syslogd exiting
+OK
+stop...
+Saving random seed... done.
+Stopping network: FAIL
+Stopping telnetd: FAIL
+The system is going down NOW!
+mDNSResponder: mDNSResponder (Engineering Build) (Nov  2 2024 17:08:33) stopping
+mDNSResponder: mDNS_FinalExit failed to send goodbye for: 01FE60F4 01   28 _airplay._tcp.local. PTR (none)._airplay._tcp.local.
+mDNSResponder: mDNS_FinalExit failed to send goodbye for: 01FE8184 01   26 _zj_mirror._tcp.local. PTR zj._zj_mirror._tcp.local.
+Sent SIGTERM to all processes
+Requesting system reboot

@@ -149,7 +149,8 @@ static void create_ui_components(lv_obj_t *parent) {
     // 创建查看模式顶部栏
     pl.pv.top_bar = lv_obj_create(pl.pv.cont);
     lv_obj_remove_style_all(pl.pv.top_bar);
-    lv_obj_set_size(pl.pv.top_bar, lv_pct(100), 50);
+    // lv_obj_set_size(pl.pv.top_bar, lv_pct(100), 50);
+    lv_obj_set_size(pl.pv.top_bar, lv_pct(100), 80);
     lv_obj_align(pl.pv.top_bar, LV_ALIGN_TOP_MID, 0, 0);
     lv_obj_set_style_bg_color(pl.pv.top_bar, TM_BG_SECONDARY, 0);
     lv_obj_set_style_bg_opa(pl.pv.top_bar, LV_OPA_50, 0);
@@ -1200,16 +1201,33 @@ static void rota_btn_event_handler(lv_event_t *e) {
 
 static void reset_btn_event_handler(lv_event_t *e) {
     LV_UNUSED(e);
-    // 初始化拖拽的偏移起始位置
-    pl.pv.offset_x = IMGORIGINX;
-    pl.pv.offset_y = IMGORIGINY;
-    // 重新加载图片
-    load_and_display_image(pl.pm.photo_paths[pl.pm.current_index]);
-    // 新图片移动到初始位置
-    canvas_move(pl.pv.img, IMGORIGINX, IMGORIGINY);
-    // 更新底部栏的标签
-    pl.pv.current_zoom_value = PERCENT100;  // 重置为100%    
-    update_zoom_label();
+    // 边界检查
+    if (!pl.pm.photo_paths || pl.pm.current_index < 0 || pl.pm.current_index >= pl.pm.photo_count) {
+        return;
+    }
+    if (!pl.pv.img) {
+        return;
+    }
+    int index = pl.pm.current_index;
+    // 先退出查看界面：与返回按钮相同的清理逻辑，释放 canvas 缓冲区和图片缓存并隐藏容器
+    if (pl.pv.img && pl.pv.current_canvas_buf) {
+        static uint8_t dummy_buf[4] = {0};
+        lv_canvas_set_buffer(pl.pv.img, dummy_buf, 1, 1, LV_IMG_CF_TRUE_COLOR_ALPHA);
+        lv_mem_free(pl.pv.current_canvas_buf);
+        pl.pv.current_canvas_buf = NULL;
+        pl.pv.current_buf_size = 0;
+    }
+    if (pl.old_img_path) {
+        lv_img_cache_invalidate_src(pl.old_img_path);
+        free((void *)pl.old_img_path);
+        pl.old_img_path = NULL;
+    }
+    pl.pv.has_photo_cache = 0;
+    if (pl.pv.cont) {
+        lv_obj_add_flag(pl.pv.cont, LV_OBJ_FLAG_HIDDEN);
+    }
+    // 再重新进入当前图片的查看界面，实现重置（初始位置、100% 缩放、重新加载）
+    show_photo_viewer(index);
 }
 
 /**
