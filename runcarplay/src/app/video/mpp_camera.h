@@ -227,6 +227,9 @@ typedef struct MPP_CAMERA_PARA_CONF{
     pthread_t mMsgQueueThreadId;
     message_queue_t mMsgQueue;
 
+    /* TP2804 I2C fd for front/rear camera (I2C_BUS0, I2C_BUS1), -1 when closed */
+    int mTp2804I2cFd0;
+    int mTp2804I2cFd1;
 
     // RECSTATE_E mCurrentState;
 }mpp_camera_para_conf;

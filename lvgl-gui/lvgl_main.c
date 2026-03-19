@@ -148,118 +148,118 @@ static void bt_status_check_timer(lv_timer_t *timer) {
         }
     }
 
-    if(!g_sys_Data.TFmounted){
-        recorderFlag = true;
-        if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
+//     if(!g_sys_Data.TFmounted){
+//         recorderFlag = true;
+//         if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
 
-            if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_btn_recorder)){
-                lv_obj_clear_state(guider_ui.screen_DVR_btn_recorder, LV_STATE_CHECKED);
+//             if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_btn_recorder)){
+//                 lv_obj_clear_state(guider_ui.screen_DVR_btn_recorder, LV_STATE_CHECKED);
 
-                labelTimer_once(screen_DVR_timer_Label, "dvr_txt_stopRecorder");
-            }
-            stopVideoRecording(&g_sys_Data.vipp0_config);
-            stopVideoRecording(&g_sys_Data.vipp8_config);
+//                 labelTimer_once(screen_DVR_timer_Label, "dvr_txt_stopRecorder");
+//             }
+//             stopVideoRecording(&g_sys_Data.vipp0_config);
+//             stopVideoRecording(&g_sys_Data.vipp8_config);
 
-            g_sys_Data.recorderMode = RECORDER_NONE;
-            if(DVRstaTimer != NULL){
-                lv_timer_del(DVRstaTimer);
-                DVRstaTimer = NULL;	
-            }
+//             g_sys_Data.recorderMode = RECORDER_NONE;
+//             if(DVRstaTimer != NULL){
+//                 lv_timer_del(DVRstaTimer);
+//                 DVRstaTimer = NULL;	
+//             }
 		
-            clearRecorderStatu();
-        } 
+//             clearRecorderStatu();
+//         } 
 
-    }else{
-        if(g_sys_Data.frontCamera || g_sys_Data.rearCamera) {
-            if(recorderFlag){
-                recorderFlag = false;
-                if(g_sys_Data.powerOnRecorder && g_sys_Data.recorderMode == RECORDER_NONE){
-                    g_sys_Data.recorderMode = RECORDER_NORMAL;
+//     }else{
+//         if(g_sys_Data.frontCamera || g_sys_Data.rearCamera) {
+//             if(recorderFlag){
+//                 recorderFlag = false;
+//                 if(g_sys_Data.powerOnRecorder && g_sys_Data.recorderMode == RECORDER_NONE){
+//                     g_sys_Data.recorderMode = RECORDER_NORMAL;
 
-                    if(lv_obj_is_valid(guider_ui.screen_DVR_btn_recorder)){
-                        lv_obj_add_state(guider_ui.screen_DVR_btn_recorder, LV_STATE_CHECKED);
+//                     if(lv_obj_is_valid(guider_ui.screen_DVR_btn_recorder)){
+//                         lv_obj_add_state(guider_ui.screen_DVR_btn_recorder, LV_STATE_CHECKED);
 
-                        labelTimer_once(screen_DVR_timer_Label, "dvr_txt_startRecorder");
-                        // resetOrSetupTimer(screen_DVR_timer_Label);
-                    }
+//                         labelTimer_once(screen_DVR_timer_Label, "dvr_txt_startRecorder");
+//                         // resetOrSetupTimer(screen_DVR_timer_Label);
+//                     }
 
-                    printf("start to recording!!!!!\n");
-                    CreateMsgQueueThread(&g_sys_Data.vipp0_config);	
-                    createAIChn(&g_sys_Data.vipp0_config, 0, 0);
-                    createAencChn(&g_sys_Data.vipp0_config);		
-                    createVencChn(&g_sys_Data.vipp0_config);
-                    createMuxChn(&g_sys_Data.vipp0_config);
-                    prepare(&g_sys_Data.vipp0_config);
-                    startVideoRecording(&g_sys_Data.vipp0_config);
+//                     printf("start to recording!!!!!\n");
+//                     CreateMsgQueueThread(&g_sys_Data.vipp0_config);	
+//                     createAIChn(&g_sys_Data.vipp0_config, 0, 0);
+//                     createAencChn(&g_sys_Data.vipp0_config);		
+//                     createVencChn(&g_sys_Data.vipp0_config);
+//                     createMuxChn(&g_sys_Data.vipp0_config);
+//                     prepare(&g_sys_Data.vipp0_config);
+//                     startVideoRecording(&g_sys_Data.vipp0_config);
 
-                    CreateMsgQueueThread(&g_sys_Data.vipp8_config);
-                    createAIChn(&g_sys_Data.vipp8_config, 0, 0);
-                    createAencChn(&g_sys_Data.vipp8_config);	
-                    createVencChn(&g_sys_Data.vipp8_config);
-                    createMuxChn(&g_sys_Data.vipp8_config);
-                    prepare(&g_sys_Data.vipp8_config);
-                    startVideoRecording(&g_sys_Data.vipp8_config);
+//                     CreateMsgQueueThread(&g_sys_Data.vipp8_config);
+//                     createAIChn(&g_sys_Data.vipp8_config, 0, 0);
+//                     createAencChn(&g_sys_Data.vipp8_config);	
+//                     createVencChn(&g_sys_Data.vipp8_config);
+//                     createMuxChn(&g_sys_Data.vipp8_config);
+//                     prepare(&g_sys_Data.vipp8_config);
+//                     startVideoRecording(&g_sys_Data.vipp8_config);
 
-                    dashSpeedMark(&g_sys_Data.vipp0_config, g_sys_Data.TimeMark);
-                    dashSpeedMark(&g_sys_Data.vipp8_config, g_sys_Data.TimeMark);
+//                     dashSpeedMark(&g_sys_Data.vipp0_config, g_sys_Data.TimeMark);
+//                     dashSpeedMark(&g_sys_Data.vipp8_config, g_sys_Data.TimeMark);
 
             
-                    SoundRecording(&g_sys_Data.vipp0_config, g_sys_Data.SoundRecorder);
-                    SoundRecording(&g_sys_Data.vipp8_config, g_sys_Data.SoundRecorder);
+//                     SoundRecording(&g_sys_Data.vipp0_config, g_sys_Data.SoundRecorder);
+//                     SoundRecording(&g_sys_Data.vipp8_config, g_sys_Data.SoundRecorder);
 
-                    if(DVRstaTimer == NULL) DVRstaTimer = lv_timer_create(recorder_status_timer, 1000, NULL);    
-                }
-            }       
-        }else{
-            recorderFlag = true;
-            if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
+//                     if(DVRstaTimer == NULL) DVRstaTimer = lv_timer_create(recorder_status_timer, 1000, NULL);    
+//                 }
+//             }       
+//         }else{
+//             recorderFlag = true;
+//             if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
 
-                if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_btn_recorder)){
-                    lv_obj_clear_state(guider_ui.screen_DVR_btn_recorder, LV_STATE_CHECKED);
+//                 if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_btn_recorder)){
+//                     lv_obj_clear_state(guider_ui.screen_DVR_btn_recorder, LV_STATE_CHECKED);
 
-                    labelTimer_once(screen_DVR_timer_Label, "dvr_txt_stopRecorder");
-                    // resetOrSetupTimer(screen_DVR_timer_Label);
-                }
-                stopVideoRecording(&g_sys_Data.vipp0_config);
-                stopVideoRecording(&g_sys_Data.vipp8_config);
-                g_sys_Data.recorderMode = RECORDER_NONE;
-                if(DVRstaTimer != NULL){
-                    lv_timer_del(DVRstaTimer);
-                    DVRstaTimer = NULL;	
-                }			
-                clearRecorderStatu();
-            }
-            if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_img_rec)){
-//                ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del, &guider_ui.screen_DVR_del, setup_scr_screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
-                stopPreview(&g_sys_Data.vipp0_config);
-                stopPreview(&g_sys_Data.vipp8_config);		
-                g_sys_Data.previewMode = PREVIEW_NONE; 
-            }             
-        }
-    }
+//                     labelTimer_once(screen_DVR_timer_Label, "dvr_txt_stopRecorder");
+//                     // resetOrSetupTimer(screen_DVR_timer_Label);
+//                 }
+//                 stopVideoRecording(&g_sys_Data.vipp0_config);
+//                 stopVideoRecording(&g_sys_Data.vipp8_config);
+//                 g_sys_Data.recorderMode = RECORDER_NONE;
+//                 if(DVRstaTimer != NULL){
+//                     lv_timer_del(DVRstaTimer);
+//                     DVRstaTimer = NULL;	
+//                 }			
+//                 clearRecorderStatu();
+//             }
+//             if(current_screen == guider_ui.screen_DVR && lv_obj_is_valid(guider_ui.screen_DVR_img_rec)){
+// //                ui_load_scr_animation(&guider_ui, &guider_ui.screen, guider_ui.screen_del, &guider_ui.screen_DVR_del, setup_scr_screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
+//                 stopPreview(&g_sys_Data.vipp0_config);
+//                 stopPreview(&g_sys_Data.vipp8_config);		
+//                 g_sys_Data.previewMode = PREVIEW_NONE; 
+//             }             
+//         }
+//     }
 
-    if(g_sys_Data.recorderMode == RECORDER_NONE){
-        if(g_sys_Data.frontCamera || g_sys_Data.rearCamera){
-            if(lv_obj_is_valid(guider_ui.screen_img_rec)){
-                if(lv_obj_has_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN)) lv_obj_clear_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN);
+//     if(g_sys_Data.recorderMode == RECORDER_NONE){
+//         if(g_sys_Data.frontCamera || g_sys_Data.rearCamera){
+//             if(lv_obj_is_valid(guider_ui.screen_img_rec)){
+//                 if(lv_obj_has_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN)) lv_obj_clear_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN);
 
-            }
-        }else{
-            if(lv_obj_is_valid(guider_ui.screen_img_rec)){
-                if(!lv_obj_has_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN)) lv_obj_add_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN);           
-            }
+//             }
+//         }else{
+//             if(lv_obj_is_valid(guider_ui.screen_img_rec)){
+//                 if(!lv_obj_has_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN)) lv_obj_add_flag(guider_ui.screen_img_rec, LV_OBJ_FLAG_HIDDEN);           
+//             }
 
-        }
-    }
+//         }
+//     }
 
-    //home 显示dvr录像状态
-    if(lv_obj_is_valid(guider_ui.screen_btn_DVR_label_status)){
-        if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
-            if(lv_obj_has_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN)) lv_obj_clear_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN);
-        }else{
-            if(!lv_obj_has_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN)) lv_obj_add_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN);
-        }
-    }
+//     //home 显示dvr录像状态
+//     if(lv_obj_is_valid(guider_ui.screen_btn_DVR_label_status)){
+//         if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
+//             if(lv_obj_has_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN)) lv_obj_clear_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN);
+//         }else{
+//             if(!lv_obj_has_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN)) lv_obj_add_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN);
+//         }
+//     }
 }
 #endif
 
@@ -494,7 +494,7 @@ int lvgl_main(int w, int h)
     MPI_init();
     AW_MPI_VDEC_SetVEFreq(MM_INVALID_CHN, 0);
 
-#if 1
+#if 0
     InitMppCameraData(&g_sys_Data.vipp0_config);
     setConfigPara(&g_sys_Data.vipp0_config);
     createViChn(&g_sys_Data.vipp0_config, 0, 0);

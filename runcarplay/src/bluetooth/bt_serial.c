@@ -240,11 +240,12 @@ void on_bt_data(const char *line, void *arg) {
         connected_device_name[strlen(line+2)] = '\0';
         printf("\n\n\nCurrent connected device: %s\n\n\n\n", connected_device_name);
     }
-    else if (strncmp(line, "LS", 2) == 0 ) {
-        // 当前连接设备名称（部分版本用JH，部分用AD）
+    // else if (strncmp(line, "LP", 2) == 0 && strncmp(line, "00EEBC", 6) == 0) {
+    else if (strncmp(line, "LP", 2) == 0) {
+    // 当前连接设备名称（部分版本用JH，部分用AD）
         // strncpy(connected_addr, line+2, 12);
         // connected_addr[12] = '\0';
-        printf("\n\n\nBLE DATA: %s\n\n\n\n", line);
+        printf("\n\n\n\n\n\n\nBLE DATA: %s\n\n\n\n", line);
     }
     // 其他协议解析...
 }

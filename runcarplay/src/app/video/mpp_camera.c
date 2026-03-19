@@ -912,6 +912,9 @@ ERRORTYPE InitMppCameraData(mpp_camera_para_conf *pContext){
     pContext->m_ai.mAiChn.mChnId = MM_INVALID_CHN;
     pContext->m_aenc.mAEncChn.mChnId = MM_INVALID_CHN;
 
+    pContext->mTp2804I2cFd0 = -1;
+    pContext->mTp2804I2cFd1 = -1;
+
     if (message_create(&pContext->mMsgQueue) < 0)
     {
         printf("message create fail!\n");
@@ -2544,7 +2547,10 @@ ERRORTYPE stop(mpp_camera_para_conf *pContext){
 #ifndef AUTO_GETDATA
     pContext->mExitFlag = 1;
     pthread_join(pContext->mCSIFrameThreadId, NULL);
-#endif   
+#endif
+    /* release TP2804 I2C before other teardown to avoid I2C shutdown timeout on reboot */
+    tp2804_i2c_deinit(&pContext->mTp2804I2cFd0);
+    tp2804_i2c_deinit(&pContext->mTp2804I2cFd1);
     AW_MPI_VO_StopChn(pContext->m_vo.mVoLayer, pContext->m_vo.mVoChn);
     AW_MPI_VI_DisableVirChn(pContext->m_vi.mViDev, pContext->m_vi.mViChn);
     AW_MPI_VO_DestroyChn(pContext->m_vo.mVoLayer, pContext->m_vo.mVoChn);
