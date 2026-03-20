@@ -1,0 +1,10 @@
+1.需要做一个弹窗(目前我的屏幕和胎压界面都是1440*720大小的)当点击screen_Tire_btn_fPair/screen_Tire_btn_bPair控件按钮会进入这个弹窗，然后会有一个输入框和键盘区(输入框和键盘区尽可能大，键盘区只需要数字和大写字母的按键)，用户通过输入后三位MAC地址来对前轮/后轮进行匹配。这个弹窗界面风格尽量简洁好用。
+2.将解析的胎压数值对应前后轮胎显示在胎压界面的screen_Tire_label_fPressure/screen_Tire_label_bPressure(胎压界面的数值单位会是bar和psi两种)，PressureUnitConversion这是胎压单位的切换接口。
+3.将解析的温度数值对应前后轮胎显示在胎压界面的screen_Tire_label_fTemp
+/screen_Tire_label_bTemp(胎压界面的数值单位会是bar和psi两种)。TempUnitConversion这是温度单位的切换接口。
+4.主界面的screen_btn_cartrip_label_fTyre_data/screen_btn_cartrip_label_bTyre_data要显示胎压和温度，格式是数字kpa数字℃(主界面的单位永远是kpa和℃)。这些数值都需要在BLE广播受的报文变化后实时地改变UI的显示数值。
+5.在没有配对或没有获取到对应的BLE广播时，全部显示--。
+6.在配对后将配对的信息存放在/opt/private目录下，下次上电时不需要用户配对就能自动去获取这个传感器的报文。
+7.用户可以重新配对，配对后会清空上次配对的信息。
+8.用户可以点击screen_Tire_btn_clearPair这个按钮来清除当前的配对信息。
+9.需要注意，BLE只监测用户输入配对的广播，使用观察者的方式来判断是否需要刷新UI，UI线程不能阻塞，lvgl的接口只能在lvgl线程内使用。将tire模块相关的功能代码写在runcarplay/src/tire这个目录下。注意内存管理，性能，代码规范，设计模式。

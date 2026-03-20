@@ -8,6 +8,10 @@
 #include <pthread.h>
 #include <errno.h>
 
+// 胎压 BLE 解析入口（LP 行解析）
+// 用相对路径，避免编译/IDE include 路径差异导致找不到头文件
+#include "../tire/tire_manager.h"
+
 /* 内部状态 */
 static int g_fd = -1;                     // 串口文件描述符
 static pthread_t g_thread;                 // 读取线程ID
@@ -160,6 +164,8 @@ int bt_serial_init(const char *dev, int baudrate, bt_data_callback cb, void *use
         return -1;
     }
 
+    bt_serial_send("LS1");
+
     return 0;
 }
 
@@ -242,9 +248,8 @@ void on_bt_data(const char *line, void *arg) {
     }
     // else if (strncmp(line, "LP", 2) == 0 && strncmp(line, "00EEBC", 6) == 0) {
     else if (strncmp(line, "LP", 2) == 0) {
-        if (strstr(line, "00EEBC") != NULL && strlen(line) >= 50) {
-            printf("\n\n\n\n\n\n\nBLE DATA: %s\n\n\n\n\n\n\n", line);
-        }
+        // BLE 胎压解析：只在 tire_manager 里处理，不直接刷 UI
+        tire_on_ble_line(line);
     }
     // 其他协议解析...
 }

@@ -46,6 +46,7 @@ CONFIG_CARPLAY ?= 1
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/carplay"
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/carplay_display"
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/bluetooth"
+CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/tire"
 CFLAGS += "-I$(LVGL_DIR)/../external/include"
 CFLAGS += "-I$(LVGL_DIR)/../external/include/libcedarc"
 CFLAGS += "-I$(LVGL_DIR)/../external/aw_pack_src/lib_aw/include/eyesee-mpp/system/public/include/vo"

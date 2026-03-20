@@ -217,10 +217,13 @@ float PressureUnitConversion(float pressureData){
     printf("#######--------------%s---%d---------------------\n",__func__,__LINE__);
 
     float result = 0;
-    if(!g_sys_Data.pressureUnit){//bar
-        result = pressureData/14.5;       
+    // 以当前 g_sys_Data.pressureUnit 为准：在转换前先表示“当前单位”
+    // pressureUnit == false 表示当前是 bar -> 需要转 psi（*14.5）
+    // pressureUnit == true  表示当前是 psi -> 需要转 bar（/14.5）
+    if(!g_sys_Data.pressureUnit){
+        result = pressureData * 14.5f;
     }else{
-        result = pressureData*14.5;
+        result = pressureData / 14.5f;
     }
     return result;
 }
@@ -229,10 +232,13 @@ float TempUnitConversion(int tempData){
     printf("#######--------------%s---%d---------------------\n",__func__,__LINE__);
 
     float result = 0;
-    if(!g_sys_Data.tempUnit){//°C
-        result = (tempData * 9/5) + 32;
-    }else{
-        result = (tempData - 32) * 5/9;
+    // 以当前 g_sys_Data.tempUnit 为准：在转换前先表示“当前单位”
+    // tempUnit == false 表示当前是 °C -> 需要转 °F
+    // tempUnit == true  表示当前是 °F -> 需要转 °C
+    if(!g_sys_Data.tempUnit){//°C -> °F
+        result = ((float)tempData * 9.0f / 5.0f) + 32.0f;
+    }else{ // °F -> °C
+        result = ((float)tempData - 32.0f) * 5.0f / 9.0f;
     }
     return result;
 }

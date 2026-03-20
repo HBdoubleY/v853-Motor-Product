@@ -24,6 +24,7 @@
 #endif
 #include "myTimer.h"
 #include "bt_serial.h"
+#include "tire_manager.h"
 
 static pthread_t threadID;
 lv_ui guider_ui;
@@ -260,6 +261,134 @@ static void bt_status_check_timer(lv_timer_t *timer) {
 //             if(!lv_obj_has_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN)) lv_obj_add_flag(guider_ui.screen_btn_DVR_label_status, LV_OBJ_FLAG_HIDDEN);
 //         }
 //     }
+}
+
+/*=============================
+ * 胎压 UI 刷新（LVGL线程）
+ *=============================*/
+void tire_ui_refresh_now(void) {
+    int f_kpa = 0, f_c = 0;
+    int b_kpa = 0, b_c = 0;
+    bool f_ok = tire_front_get_kpa_temp(&f_kpa, &f_c);
+    bool b_ok = tire_rear_get_kpa_temp(&b_kpa, &b_c);
+
+    // ===== 胎压界面（screen_Tire）=====
+    if (f_ok) {
+        // 根据当前单位写入 g_sys_Data（供切换单位按钮复用）
+        if (!g_sys_Data.pressureUnit) {
+            g_sys_Data.fPressure = (float)f_kpa / 100.0f; // Bar
+        } else {
+            g_sys_Data.fPressure = ((float)f_kpa / 100.0f) * 14.5f; // Psi
+        }
+
+        if (!g_sys_Data.tempUnit) {
+            g_sys_Data.fTemp = f_c; // °C
+        } else {
+            g_sys_Data.fTemp = (int)(((float)f_c * 9.0f / 5.0f) + 32.0f); // °F
+        }
+
+        char buf[32] = {0};
+        if (!g_sys_Data.pressureUnit) {
+            snprintf(buf, sizeof(buf), "%.1f Bar", g_sys_Data.fPressure);
+        } else {
+            snprintf(buf, sizeof(buf), "%.0f Psi", g_sys_Data.fPressure);
+        }
+        if (guider_ui.screen_Tire_label_fPressure) {
+            lv_label_set_text(guider_ui.screen_Tire_label_fPressure, buf);
+            lv_obj_invalidate(guider_ui.screen_Tire_label_fPressure);
+        }
+
+        if (!g_sys_Data.tempUnit) {
+            snprintf(buf, sizeof(buf), "%d ℃", g_sys_Data.fTemp);
+        } else {
+            snprintf(buf, sizeof(buf), "%d ℉", g_sys_Data.fTemp);
+        }
+        if (guider_ui.screen_Tire_label_fTemp) {
+            lv_label_set_text(guider_ui.screen_Tire_label_fTemp, buf);
+            lv_obj_invalidate(guider_ui.screen_Tire_label_fTemp);
+        }
+    } else {
+        if (guider_ui.screen_Tire_label_fPressure) {
+            lv_label_set_text(guider_ui.screen_Tire_label_fPressure, (!g_sys_Data.pressureUnit) ? "--Bar" : "--Psi");
+            lv_obj_invalidate(guider_ui.screen_Tire_label_fPressure);
+        }
+        if (guider_ui.screen_Tire_label_fTemp) {
+            lv_label_set_text(guider_ui.screen_Tire_label_fTemp, (!g_sys_Data.tempUnit) ? "--℃" : "--℉");
+            lv_obj_invalidate(guider_ui.screen_Tire_label_fTemp);
+        }
+    }
+
+    if (b_ok) {
+        if (!g_sys_Data.pressureUnit) {
+            g_sys_Data.bPressure = (float)b_kpa / 100.0f; // Bar
+        } else {
+            g_sys_Data.bPressure = ((float)b_kpa / 100.0f) * 14.5f; // Psi
+        }
+
+        if (!g_sys_Data.tempUnit) {
+            g_sys_Data.bTemp = b_c; // °C
+        } else {
+            g_sys_Data.bTemp = (int)(((float)b_c * 9.0f / 5.0f) + 32.0f); // °F
+        }
+
+        char buf[32] = {0};
+        if (!g_sys_Data.pressureUnit) {
+            snprintf(buf, sizeof(buf), "%.1f Bar", g_sys_Data.bPressure);
+        } else {
+            snprintf(buf, sizeof(buf), "%.0f Psi", g_sys_Data.bPressure);
+        }
+        if (guider_ui.screen_Tire_label_bPressure) {
+            lv_label_set_text(guider_ui.screen_Tire_label_bPressure, buf);
+            lv_obj_invalidate(guider_ui.screen_Tire_label_bPressure);
+        }
+
+        if (!g_sys_Data.tempUnit) {
+            snprintf(buf, sizeof(buf), "%d ℃", g_sys_Data.bTemp);
+        } else {
+            snprintf(buf, sizeof(buf), "%d ℉", g_sys_Data.bTemp);
+        }
+        if (guider_ui.screen_Tire_label_bTemp) {
+            lv_label_set_text(guider_ui.screen_Tire_label_bTemp, buf);
+            lv_obj_invalidate(guider_ui.screen_Tire_label_bTemp);
+        }
+    } else {
+        if (guider_ui.screen_Tire_label_bPressure) {
+            lv_label_set_text(guider_ui.screen_Tire_label_bPressure, (!g_sys_Data.pressureUnit) ? "--Bar" : "--Psi");
+            lv_obj_invalidate(guider_ui.screen_Tire_label_bPressure);
+        }
+        if (guider_ui.screen_Tire_label_bTemp) {
+            lv_label_set_text(guider_ui.screen_Tire_label_bTemp, (!g_sys_Data.tempUnit) ? "--℃" : "--℉");
+            lv_obj_invalidate(guider_ui.screen_Tire_label_bTemp);
+        }
+    }
+
+    // ===== 主界面（screen_btn_cartrip_label_*）=====
+    if (guider_ui.screen_btn_cartrip_label_fTyre_data) {
+        char buf[40] = {0};
+        if (f_ok) {
+            snprintf(buf, sizeof(buf), "%dkpa %d℃", f_kpa, f_c);
+        } else {
+            snprintf(buf, sizeof(buf), "---kpa --℃");
+        }
+        lv_label_set_text(guider_ui.screen_btn_cartrip_label_fTyre_data, buf);
+        lv_obj_invalidate(guider_ui.screen_btn_cartrip_label_fTyre_data);
+    }
+
+    if (guider_ui.screen_btn_cartrip_label_bTyre_data) {
+        char buf[40] = {0};
+        if (b_ok) {
+            snprintf(buf, sizeof(buf), "%dkpa %d℃", b_kpa, b_c);
+        } else {
+            snprintf(buf, sizeof(buf), "---kpa --℃");
+        }
+        lv_label_set_text(guider_ui.screen_btn_cartrip_label_bTyre_data, buf);
+        lv_obj_invalidate(guider_ui.screen_btn_cartrip_label_bTyre_data);
+    }
+}
+
+static void tire_ui_refresh_timer_cb(lv_timer_t *timer) {
+    (void)timer;
+    tire_ui_refresh_now();
 }
 #endif
 
@@ -507,8 +636,12 @@ int lvgl_main(int w, int h)
     createViChn(&g_sys_Data.vipp8_config, 8, 0);
  #endif   
     lv_timer_create(bt_status_check_timer, 500, NULL);
-    lv_timer_create(detected_TF_FreeMem_Timer, 1000*30, NULL);
-    WIFIConnect_start_status_poll();  /* 后台轮询 WiFi 状态，主界面图标据此显示/隐藏 */
+
+    // 胎压刷新：负责更新胎压界面 + 主界面胎压标签
+    lv_timer_create(tire_ui_refresh_timer_cb, 1000, NULL);
+    tire_ui_refresh_now();
+//    lv_timer_create(detected_TF_FreeMem_Timer, 1000*30, NULL);
+//    WIFIConnect_start_status_poll();  /* 后台轮询 WiFi 状态，主界面图标据此显示/隐藏 */
 //--------------------------------------------------------------
     /*Handle LitlevGL tasks (tickless mode)*/
     while(1) {
