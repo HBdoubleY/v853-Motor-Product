@@ -379,6 +379,7 @@ static void lvgl_refresh_main_link_labels(void)
         lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
             get_string_for_language(lang, "main_txt_Connect"));
         carplay_connected = true;
+        bt_serial_send("CD");
     } else {
         lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
             get_string_for_language(lang, "main_txt_nConnect"));
@@ -389,6 +390,7 @@ static void lvgl_refresh_main_link_labels(void)
         lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
             get_string_for_language(lang, "main_txt_Connect"));
         androidauto_connected = true;
+        bt_serial_send("CD");
     } else {
         lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
             get_string_for_language(lang, "main_txt_nConnect"));

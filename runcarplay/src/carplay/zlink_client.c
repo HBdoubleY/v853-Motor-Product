@@ -7,6 +7,8 @@
 #include "zlink_client.h"
 #include "carplay_display.h"
 #include "libzlink.h"
+#include "ComStruct.h"
+#include "Rtc2C.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -251,6 +253,49 @@ static int video_focus_cb(int is_hu_focus_on, void *user_data)
 	return 0;
 }
 
+/*
+ * libzlink: now_time_second = UTC Unix 秒；time_zone_minute = 相对 UTC 的偏移（分钟，东为正，如东八区为 +480）。
+ * 与手机本地显示对齐：local_epoch = UTC + offset，再用 gmtime_r 得到本地日历分量（与内核 rtc 惯例一致）。
+ */
+static int phone_time_cb(uint64_t now_time_second, int time_zone_minute, void *user_data)
+{
+	(void)user_data;
+
+	int64_t local_epoch = (int64_t)now_time_second + (int64_t)time_zone_minute * 60;
+	if (local_epoch < 0)
+		local_epoch = 0;
+
+	time_t tt = (time_t)local_epoch;
+	struct tm tm_buf;
+	if (gmtime_r(&tt, &tm_buf) == NULL) {
+		printf("phone_time_cb: gmtime_r failed (now=%llu tz_min=%d)\n",
+		       (unsigned long long)now_time_second, time_zone_minute);
+		return 0;
+	}
+
+	TTime t;
+	memset(&t, 0, sizeof(t));
+	t.nYear = (WORD)(tm_buf.tm_year + 1900);
+	t.nMonth = (BYTE)(tm_buf.tm_mon + 1);
+	t.nDay = (BYTE)tm_buf.tm_mday;
+	t.nHour = (BYTE)tm_buf.tm_hour;
+	t.nMinute = (BYTE)tm_buf.tm_min;
+	t.nSecond = (BYTE)tm_buf.tm_sec;
+	t.nWeek = (BYTE)tm_buf.tm_wday;
+
+	if (RtcSetTime2C(&t)) {
+		printf("phone_time_cb: RTC synced from phone %04u-%02u-%02u %02u:%02u:%02u (tz_off_min=%d)\n",
+		       (unsigned)t.nYear, (unsigned)t.nMonth, (unsigned)t.nDay,
+		       (unsigned)t.nHour, (unsigned)t.nMinute, (unsigned)t.nSecond,
+		       time_zone_minute);
+	} else {
+		printf("phone_time_cb: RtcSetTime2C failed (now=%llu tz_min=%d)\n",
+		       (unsigned long long)now_time_second, time_zone_minute);
+	}
+
+	return 0;
+}
+
 static void register_callbacks(void)
 {
 	libzlink_session_state_cb_init(session_state_cb);
@@ -264,6 +309,8 @@ static void register_callbacks(void)
 	libzlink_request_wifi_info_cb_init(request_wifi_info_cb);
 	libzlink_mic_start_cb_init(mic_start_cb);
 	libzlink_mic_stop_cb_init(mic_stop_cb);
+	printf("\n\n\nregister_callbacks: phone_time_cb\n\n\n");
+	libzlink_phone_time_init(phone_time_cb);
 }
 
 void zlink_client_run(void)

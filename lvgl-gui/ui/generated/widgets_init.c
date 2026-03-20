@@ -135,6 +135,7 @@ static lv_obj_t * screen_datetext_1_calendar;
 
 
 
+/* 主界面日期时间：读 RTC。互联时由 runcarplay zlink_client.c 的 phone_time_cb 根据手机时间 RtcSetTime2C 同步。 */
 void screen_digital_clock_1_timer(lv_timer_t *timer)
 {
     TTime time;

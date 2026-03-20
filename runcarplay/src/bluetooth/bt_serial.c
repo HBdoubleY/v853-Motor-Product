@@ -163,13 +163,13 @@ int bt_serial_init(const char *dev, int baudrate, bt_data_callback cb, void *use
     return 0;
 }
 
-/* 发送AT指令（自动加\r\n） */
+/* 发送AT指令（自动加\r\n ） */
 int bt_serial_send(const char *cmd) {
     if (g_fd < 0 || !cmd) return -1;
 
     // 构造完整指令
     char buf[512];
-    int len = snprintf(buf, sizeof(buf), "%s\r\n", cmd);
+    int len = snprintf(buf, sizeof(buf), "AT#%s\r\n", cmd);
     if (len >= (int)sizeof(buf)) {
         fprintf(stderr, "Command too long\n");
         return -1;
@@ -242,10 +242,9 @@ void on_bt_data(const char *line, void *arg) {
     }
     // else if (strncmp(line, "LP", 2) == 0 && strncmp(line, "00EEBC", 6) == 0) {
     else if (strncmp(line, "LP", 2) == 0) {
-    // 当前连接设备名称（部分版本用JH，部分用AD）
-        // strncpy(connected_addr, line+2, 12);
-        // connected_addr[12] = '\0';
-        printf("\n\n\n\n\n\n\nBLE DATA: %s\n\n\n\n", line);
+        if (strstr(line, "00EEBC") != NULL && strlen(line) >= 50) {
+            printf("\n\n\n\n\n\n\nBLE DATA: %s\n\n\n\n\n\n\n", line);
+        }
     }
     // 其他协议解析...
 }

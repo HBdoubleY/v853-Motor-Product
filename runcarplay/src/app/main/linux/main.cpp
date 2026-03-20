@@ -6,7 +6,7 @@ int main(int argc, char* argv[]) {
 	sig.init();
 
 
-	printf("\n\n\n\n\n\n\n\nxnnnnnnnnnnnnnnnnnxx\\n\n\n\\n\n");
+	printf("\n\n\n\n\n\n\n\nHHHHHHHHHHHHHHHHH\\n\n\n\\n\n");
 
 	MainThread(NULL);
 

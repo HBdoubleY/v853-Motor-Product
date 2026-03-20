@@ -108,6 +108,10 @@ static struct {
 	VIDEO_FRAME_INFO_S g2d_dst[3];
 	int g2d_dst_allocated;
 	int g2d_buf_idx;
+	/* Synchronize reuse of g2d_dst buffers with VO release callback. */
+	pthread_mutex_t g2d_use_mutex;
+	pthread_cond_t  g2d_use_cond;
+	int g2d_dst_in_use[3];
 	volatile int got_idr;
 } g_ctx;
 
@@ -305,6 +309,8 @@ static int g2d_rotate_frame(VIDEO_FRAME_INFO_S *src, VIDEO_FRAME_INFO_S *dst)
 	blit.src_image_h.gamut = G2D_BT709;
 	blit.src_image_h.bpremul = 0;
 	blit.src_image_h.mode = G2D_PIXEL_ALPHA;
+	/* Ensure opaque write: otherwise dst may be blended with previous frame content. */
+	blit.src_image_h.alpha = 255;
 	blit.src_image_h.fd = -1;
 	blit.src_image_h.use_phy_addr = 1;
 
@@ -324,6 +330,8 @@ static int g2d_rotate_frame(VIDEO_FRAME_INFO_S *src, VIDEO_FRAME_INFO_S *dst)
 	blit.dst_image_h.gamut = G2D_BT709;
 	blit.dst_image_h.bpremul = 0;
 	blit.dst_image_h.mode = G2D_PIXEL_ALPHA;
+	/* Ensure opaque write to fully cover VO buffer. */
+	blit.dst_image_h.alpha = 255;
 	blit.dst_image_h.fd = -1;
 	blit.dst_image_h.use_phy_addr = 1;
 
@@ -485,15 +493,39 @@ static void *display_thread_fn(void *arg)
 				AW_MPI_VDEC_ReleaseImage(g_ctx.vdec_chn, &frame);
 				continue;
 			}
+
+			/* Clear reuse flags after G2D dst allocation. */
+			pthread_mutex_lock(&g_ctx.g2d_use_mutex);
+			for (int i = 0; i < 3; i++)
+				g_ctx.g2d_dst_in_use[i] = 0;
+			pthread_mutex_unlock(&g_ctx.g2d_use_mutex);
 		}
 
 		int cur_buf = g_ctx.g2d_buf_idx;
+		/* Wait until VO releases the chosen G2D dst buffer. */
+		pthread_mutex_lock(&g_ctx.g2d_use_mutex);
+		while (g_ctx.running && g_ctx.g2d_dst_in_use[cur_buf]) {
+			pthread_cond_wait(&g_ctx.g2d_use_cond, &g_ctx.g2d_use_mutex);
+		}
+		if (!g_ctx.running) {
+			pthread_mutex_unlock(&g_ctx.g2d_use_mutex);
+			break;
+		}
+		g_ctx.g2d_dst_in_use[cur_buf] = 1;
+		pthread_mutex_unlock(&g_ctx.g2d_use_mutex);
+
 		VIDEO_FRAME_INFO_S *dst = &g_ctx.g2d_dst[cur_buf];
 		int g2d_ret = g2d_rotate_frame(&frame, dst);
 		if (g2d_ret == 0) {
 			AW_MPI_VO_SendFrame(g_ctx.vo_layer, g_ctx.vo_chn, dst, 0);
 			g_ctx.g2d_buf_idx = (cur_buf + 1) % 3;
 		} else {
+			/* We won't use dst; release it immediately. */
+			pthread_mutex_lock(&g_ctx.g2d_use_mutex);
+			g_ctx.g2d_dst_in_use[cur_buf] = 0;
+			pthread_cond_signal(&g_ctx.g2d_use_cond);
+			pthread_mutex_unlock(&g_ctx.g2d_use_mutex);
+
 			AW_MPI_VO_SendFrame(g_ctx.vo_layer, g_ctx.vo_chn, &frame, 0);
 		}
 		AW_MPI_VDEC_ReleaseImage(g_ctx.vdec_chn, &frame);
@@ -533,7 +565,27 @@ static void touch_apply_and_send(int screen_x, int screen_y, int is_touch_down)
 /* ---------- VO callback ---------- */
 static ERRORTYPE carplay_vo_callback(void *cookie, MPP_CHN_S *pChn, MPP_EVENT_TYPE event, void *pEventData)
 {
-	(void)cookie; (void)pChn; (void)event; (void)pEventData;
+	(void)cookie; (void)pChn;
+
+	if (event == MPP_EVENT_RELEASE_VIDEO_BUFFER) {
+		/* VO released a frame buffer. We use it to safely reuse our g2d_dst triple buffers. */
+		VIDEO_FRAME_INFO_S *released = (VIDEO_FRAME_INFO_S *)pEventData;
+		if (released) {
+			pthread_mutex_lock(&g_ctx.g2d_use_mutex);
+			for (int i = 0; i < 3; i++) {
+				VIDEO_FRAME_INFO_S *dst = &g_ctx.g2d_dst[i];
+				if (released == dst ||
+				    (released->VFrame.mPhyAddr[0] == dst->VFrame.mPhyAddr[0] &&
+				     released->VFrame.mPhyAddr[1] == dst->VFrame.mPhyAddr[1])) {
+					g_ctx.g2d_dst_in_use[i] = 0;
+					pthread_cond_signal(&g_ctx.g2d_use_cond);
+					break;
+				}
+			}
+			pthread_mutex_unlock(&g_ctx.g2d_use_mutex);
+		}
+	}
+
 	return SUCCESS;
 }
 
@@ -579,6 +631,10 @@ int carplay_display_create(int disp_x, int disp_y, int disp_width, int disp_heig
 	}
 
 	pthread_mutex_init(&g_ctx.rect_mutex, NULL);
+	pthread_mutex_init(&g_ctx.g2d_use_mutex, NULL);
+	pthread_cond_init(&g_ctx.g2d_use_cond, NULL);
+	for (int i = 0; i < 3; i++)
+		g_ctx.g2d_dst_in_use[i] = 0;
 
 	queue_init();
 	fq_init();
@@ -709,6 +765,14 @@ void carplay_display_destroy(void)
 	if (!g_ctx.running)
 		return;
 	g_ctx.running = 0;
+
+	/* Wake display thread if it's waiting for VO buffer release. */
+	pthread_mutex_lock(&g_ctx.g2d_use_mutex);
+	for (int i = 0; i < 3; i++)
+		g_ctx.g2d_dst_in_use[i] = 0;
+	pthread_cond_broadcast(&g_ctx.g2d_use_cond);
+	pthread_mutex_unlock(&g_ctx.g2d_use_mutex);
+
 	queue_fini();
 	fq_shutdown();
 	pthread_join(g_ctx.decode_tid, NULL);
@@ -744,6 +808,8 @@ void carplay_display_destroy(void)
 	g_ctx.stream_buf_vir = NULL;
 	g_ctx.session_width = g_ctx.session_height = 0;
 	pthread_mutex_destroy(&g_ctx.rect_mutex);
+	pthread_mutex_destroy(&g_ctx.g2d_use_mutex);
+	pthread_cond_destroy(&g_ctx.g2d_use_cond);
 }
 
 void carplay_touch_send(void)
