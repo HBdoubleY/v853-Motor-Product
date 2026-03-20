@@ -218,12 +218,14 @@ float PressureUnitConversion(float pressureData){
 
     float result = 0;
     // 以当前 g_sys_Data.pressureUnit 为准：在转换前先表示“当前单位”
-    // pressureUnit == false 表示当前是 bar -> 需要转 psi（*14.5）
-    // pressureUnit == true  表示当前是 psi -> 需要转 bar（/14.5）
+    // 1 bar = 14.5037738 psi
+    const float PSI_PER_BAR = 14.5037738f;
+    // pressureUnit == false 表示当前是 bar -> 需要转 psi（*PSI_PER_BAR）
+    // pressureUnit == true  表示当前是 psi -> 需要转 bar（/PSI_PER_BAR）
     if(!g_sys_Data.pressureUnit){
-        result = pressureData * 14.5f;
+        result = pressureData * PSI_PER_BAR;
     }else{
-        result = pressureData / 14.5f;
+        result = pressureData / PSI_PER_BAR;
     }
     return result;
 }

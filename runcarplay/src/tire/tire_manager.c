@@ -19,7 +19,13 @@ static const char *TIRE_BRAND_HEX = "444A54504D53";
 #define TIRE_PAIR_FRONT_FILE "/opt/private/tire_pair_front.txt"
 #define TIRE_PAIR_REAR_FILE  "/opt/private/tire_pair_rear.txt"
 
-// BLE 心跳超时：30s 认为数据失效
+// BLE 心跳超时：用于“超过一定时间没收到 BLE 就把 UI 置为 --”
+// 由于你的传感器是“值变化才上报”，所以默认先关闭该置无效逻辑：
+// - TIRE_BLE_TIMEOUT_ENABLE = 0：只要收到过一次有效数据就一直保留，直到清除配对/重启
+// - TIRE_BLE_TIMEOUT_ENABLE = 1：超过 TIRE_BLE_TIMEOUT_MS 没收到就返回 false，UI 显示 --
+#ifndef TIRE_BLE_TIMEOUT_ENABLE
+#define TIRE_BLE_TIMEOUT_ENABLE 0
+#endif
 #define TIRE_BLE_TIMEOUT_MS 30000u
 
 /*======================
@@ -257,7 +263,7 @@ void tire_on_ble_line(const char *line) {
         b[i] = v;
     }
 
-    printf("recive tire\n");
+    printf("recive tire = %s\n", line);
 
     // 按《BLE广播解析格式》数据含义：
     // Byte1: 保留/校验参与项
@@ -291,7 +297,13 @@ void tire_on_ble_line(const char *line) {
  *======================*/
 static int fresh_ok(uint64_t last_rx_ms, uint64_t ts_ms) {
     if (last_rx_ms == 0) return 0;
-    return (ts_ms - last_rx_ms) <= (uint64_t)TIRE_BLE_TIMEOUT_MS;
+    (void)ts_ms;
+#if TIRE_BLE_TIMEOUT_ENABLE
+    return (now_ms() - last_rx_ms) <= (uint64_t)TIRE_BLE_TIMEOUT_MS;
+#else
+    // 已经收到过一次有效数据：不因为“长时间没上报”而置为无效
+    return 1;
+#endif
 }
 
 bool tire_front_get_kpa_temp(int *pressure_kpa_out, int *temp_c_out) {
@@ -340,5 +352,29 @@ bool tire_rear_is_paired(void) {
     int paired = g_pair_rear;
     pthread_mutex_unlock(&g_lock);
     return paired != 0;
+}
+
+bool tire_rear_get_suffix6(char out_suffix6[7]) {
+    if (!out_suffix6) return false;
+    pthread_mutex_lock(&g_lock);
+    if (g_pair_rear == 0) {
+        pthread_mutex_unlock(&g_lock);
+        return false;
+    }
+    memcpy(out_suffix6, g_rear_suffix, 7);
+    pthread_mutex_unlock(&g_lock);
+    return true;
+}
+
+bool tire_front_get_suffix6(char out_suffix6[7]) {
+    if (!out_suffix6) return false;
+    pthread_mutex_lock(&g_lock);
+    if (g_pair_front == 0) {
+        pthread_mutex_unlock(&g_lock);
+        return false;
+    }
+    memcpy(out_suffix6, g_front_suffix, 7);
+    pthread_mutex_unlock(&g_lock);
+    return true;
 }
 

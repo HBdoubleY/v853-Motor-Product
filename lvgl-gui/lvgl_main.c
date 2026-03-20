@@ -272,13 +272,40 @@ void tire_ui_refresh_now(void) {
     bool f_ok = tire_front_get_kpa_temp(&f_kpa, &f_c);
     bool b_ok = tire_rear_get_kpa_temp(&b_kpa, &b_c);
 
+    // 1 bar = 14.5037738 psi
+    const float PSI_PER_BAR = 14.5037738f;
+
+    // rear 配对按钮 label：显示当前配对的 6位hex后3字节（断电后也会自动恢复）
+    if (guider_ui.screen_Tire_btn_bPair_label) {
+        char suffix6[7] = {0};
+        if (tire_rear_get_suffix6(suffix6)) {
+            lv_label_set_text(guider_ui.screen_Tire_btn_bPair_label, suffix6);
+        } else {
+            lv_label_set_text(guider_ui.screen_Tire_btn_bPair_label,
+                               get_string_for_language(g_sys_Data.current_language, "tire_txt_nPair"));
+        }
+        lv_obj_invalidate(guider_ui.screen_Tire_btn_bPair_label);
+    }
+
+    // front 配对按钮 label：显示当前配对的 6位hex后3字节（断电后也会自动恢复）
+    if (guider_ui.screen_Tire_btn_fPair_label) {
+        char suffix6[7] = {0};
+        if (tire_front_get_suffix6(suffix6)) {
+            lv_label_set_text(guider_ui.screen_Tire_btn_fPair_label, suffix6);
+        } else {
+            lv_label_set_text(guider_ui.screen_Tire_btn_fPair_label,
+                               get_string_for_language(g_sys_Data.current_language, "tire_txt_nPair"));
+        }
+        lv_obj_invalidate(guider_ui.screen_Tire_btn_fPair_label);
+    }
+
     // ===== 胎压界面（screen_Tire）=====
     if (f_ok) {
         // 根据当前单位写入 g_sys_Data（供切换单位按钮复用）
         if (!g_sys_Data.pressureUnit) {
             g_sys_Data.fPressure = (float)f_kpa / 100.0f; // Bar
         } else {
-            g_sys_Data.fPressure = ((float)f_kpa / 100.0f) * 14.5f; // Psi
+            g_sys_Data.fPressure = ((float)f_kpa / 100.0f) * PSI_PER_BAR; // Psi
         }
 
         if (!g_sys_Data.tempUnit) {
@@ -322,7 +349,7 @@ void tire_ui_refresh_now(void) {
         if (!g_sys_Data.pressureUnit) {
             g_sys_Data.bPressure = (float)b_kpa / 100.0f; // Bar
         } else {
-            g_sys_Data.bPressure = ((float)b_kpa / 100.0f) * 14.5f; // Psi
+            g_sys_Data.bPressure = ((float)b_kpa / 100.0f) * PSI_PER_BAR; // Psi
         }
 
         if (!g_sys_Data.tempUnit) {

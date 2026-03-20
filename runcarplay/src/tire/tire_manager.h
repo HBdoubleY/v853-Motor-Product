@@ -32,6 +32,18 @@ bool tire_front_is_paired(void);
 bool tire_rear_is_paired(void);
 
 /**
+ * 获取后轮当前配对的后3字节（6位hex字符，如 "00EEBC"）。
+ * @return true: 已配对且 out_suffix6 有效
+ */
+bool tire_rear_get_suffix6(char out_suffix6[7]);
+
+/**
+ * 获取前轮当前配对的后3字节（6位hex字符，如 "00EEBC"）。
+ * @return true: 已配对且 out_suffix6 有效
+ */
+bool tire_front_get_suffix6(char out_suffix6[7]);
+
+/**
  * 配对：suffix6_hex 需要是 6 位十六进制（例如 "00EEBC"），大小写不敏感。
  */
 void tire_pair_set_front_suffix(const char *suffix6_hex);

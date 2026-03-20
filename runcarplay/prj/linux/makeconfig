@@ -1,7 +1,7 @@
 PWD=$(shell pwd)
 
 # CarPlay/Android Auto: 1=enable, 0=disable
-CONFIG_CARPLAY ?= 1
+CONFIG_CARPLAY ?= 0
 
 #�����ļ�����
 BIN = runcarplay

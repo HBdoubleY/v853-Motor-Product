@@ -41,7 +41,7 @@ CFLAGS += "-I$(LVGL_DIR)/ui/generated/OTA/"
 CFLAGS += "-I$(LVGL_DIR)/../external/aw_pack_src/lib_aw/include/eyesee-mpp/middleware/media/LIBRARY/libcedarc/include"
 
 # CarPlay/Android Auto: 1=enable, 0=disable (should match runcarplay/prj/linux/makeconfig CONFIG_CARPLAY)
-CONFIG_CARPLAY ?= 1
+CONFIG_CARPLAY ?= 0
 
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/carplay"
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/carplay_display"
