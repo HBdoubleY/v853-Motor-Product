@@ -300,16 +300,16 @@ static void register_callbacks(void)
 {
 	libzlink_session_state_cb_init(session_state_cb);
 	libzlink_video_data_cb_init(video_data_cb);
-	libzlink_main_audio_start_cb_init(main_audio_start_cb);
-	libzlink_main_data_cb_init(main_audio_data_cb);
-	libzlink_main_audio_stop_cb_init(main_audio_stop_cb);
+//	libzlink_main_audio_start_cb_init(main_audio_start_cb);
+//	libzlink_main_data_cb_init(main_audio_data_cb);
+//	libzlink_main_audio_stop_cb_init(main_audio_stop_cb);
 	libzlink_video_focus_request_cb_init(video_focus_cb);
-	libzlink_audio_focus_request_cb_init(audio_focus_cb);
-	libzlink_request_p2p_start_cb_init(request_p2p_cb);
+//	libzlink_audio_focus_request_cb_init(audio_focus_cb);
+//	libzlink_request_p2p_start_cb_init(request_p2p_cb);
 	libzlink_request_wifi_info_cb_init(request_wifi_info_cb);
-	libzlink_mic_start_cb_init(mic_start_cb);
-	libzlink_mic_stop_cb_init(mic_stop_cb);
-	printf("\n\n\nregister_callbacks: phone_time_cb\n\n\n");
+//	libzlink_mic_start_cb_init(mic_start_cb);
+//	libzlink_mic_stop_cb_init(mic_stop_cb);
+	// printf("\n\n\nregister_callbacks: phone_time_cb\n\n\n");
 	libzlink_phone_time_init(phone_time_cb);
 }
 

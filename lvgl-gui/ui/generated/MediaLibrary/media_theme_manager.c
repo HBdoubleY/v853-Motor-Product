@@ -37,7 +37,8 @@ static const theme_colors_t g_theme_dark = {
     
     /* 文字颜色系列 */
     .text_primary   = 0xFFFFFF,   /* 白色 - 主要文字 */
-    .text_secondary = 0x888888,   /* 灰色 - 次要文字/描述 */
+    // .text_secondary = 0x888888,   /* 灰色 - 次要文字/描述 */
+    .text_secondary = 0x000000,   /* 黑色 - 次要文字/描述 */
     .text_disabled  = 0x666666,   /* 暗灰 - 禁用状态 */
     
     /* 强调色系列 - 蓝色系 */

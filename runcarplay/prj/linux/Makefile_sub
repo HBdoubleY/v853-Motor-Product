@@ -16,12 +16,13 @@ LD = $(COMPILE_PREX)ld
 
 AWCHIP = AW_V853
 
-# ����д��ʱ��Ŀ¼�����ڻᱨ���������Ҫ��obj/�½����ڶ���Ŀ¼һ����Ŀ¼
 SDKDEBUG_FLAGS = -O3
 MAKEDEPEND = $(CC) -MM -MT
 
 CFLAGS = $(SDKDEBUG_FLAGS) -Wall -W
 CPPFLAGS = $(SDKDEBUG_FLAGS) -Wall -W
+
+#  -O1 -g -fno-omit-frame-pointer \ -O3 -g0 
 
 CFLAGS :=   -Wall -O3 -g0 -pipe -fpermissive -Wno-unused-local-typedefs \
 	   	-march=armv7-a -mtune=cortex-a7 -mfpu=neon -mfloat-abi=hard -fno-caller-saves -Wno-unused-result -Wformat -Werror=format-security -fstack-protector -Wl,-z,now -Wl,-z,relro -ffunction-sections -fdata-sections   \
@@ -31,6 +32,8 @@ CFLAGS :=   -Wall -O3 -g0 -pipe -fpermissive -Wno-unused-local-typedefs \
 ifneq ($(CONFIG_CARPLAY),0)
 CFLAGS += -DENABLE_CARPLAY=1
 endif
+
+#  -O1 -g -fno-omit-frame-pointer \ -O3 -g0 
 
 CPPFLAGS := -Wall -O3 -g0 -pipe -fpermissive -Wno-unused-local-typedefs \
 	   	-march=armv7-a -mtune=cortex-a7 -mfpu=neon -mfloat-abi=hard -fno-caller-saves -Wno-unused-result -Wformat -Werror=format-security -fstack-protector -Wl,-z,now -Wl,-z,relro -ffunction-sections -fdata-sections   \
@@ -188,9 +191,9 @@ endif
 
 $(BIN) : $(COBJS) $(CPPOBJS) $(CARPLAY_OBJS)
 	$(CPP) -o $(BIN) $(COBJS) $(CPPOBJS) $(CARPLAY_OBJS) $(LIBS) $(LIBSA) $(LDFLAGS)
-	$(STRIP) $(BIN)  # ��ѡ�����������Ϣ��С���
+	$(STRIP) $(BIN)
 
-# ���������ļ�
+
 -include $(CDEF)
 -include $(CPPDEF)
 

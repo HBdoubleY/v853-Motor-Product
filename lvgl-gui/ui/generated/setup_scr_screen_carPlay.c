@@ -130,7 +130,7 @@ void setup_scr_screen_carPlay(lv_ui *ui)
 	lv_obj_add_style(ui->screen_carPlay_label4_prompt, &style_text_align_left_mian_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 
     char str[50];
-    // sprintf(str, "BLUETOOTH: %s", get_bt_name());
+    sprintf(str, "BLUETOOTH: %s", "RTL8733BS");
 	lv_label_set_text(ui->screen_carPlay_label5_prompt, str);
 	lv_label_set_long_mode(ui->screen_carPlay_label5_prompt, LV_LABEL_LONG_SCROLL_CIRCULAR);
 	lv_obj_set_pos(ui->screen_carPlay_label5_prompt, 50, 350);

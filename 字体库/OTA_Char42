@@ -1,0 +1,7 @@
+# OTA v853Font_OTA_42 — 对应 v853 工程内字号 42，用于 lv_font_conv / 字模工具选字
+# 下列每行：42 <该界面典型文案>（可按行单独制字模，或仅用底部 MERGED）
+42 OTA升级
+42 网络不可用
+# MERGED_UNIQUE (简中+英文文案去重合并，含数字与 GB/%% 等，多语言全量请用 i18n.h 自行合并)
+42 OTA升级 Upgrade网络不可用Ntwoknvilb0123456789%:-./
+GB

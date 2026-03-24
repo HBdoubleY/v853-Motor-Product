@@ -907,7 +907,7 @@ static void create_ask_dialog(lv_obj_t *parent) {
     
     /* 存储空间 - 确认按钮 */
     sf.yes_btn = lv_btn_create(sf.dialog_bg);
-    lv_obj_set_size(sf.yes_btn, 100, 40);
+    lv_obj_set_size(sf.yes_btn, 140, 80);
     lv_obj_align(sf.yes_btn, LV_ALIGN_BOTTOM_LEFT, 20, -20);
     lv_obj_set_style_bg_color(sf.yes_btn, TM_SUCCESS, 0);
     lv_obj_set_style_radius(sf.yes_btn, 8, 0);
@@ -920,11 +920,11 @@ static void create_ask_dialog(lv_obj_t *parent) {
     
     /* 存储空间 - 取消按钮 */
     sf.no_btn = lv_btn_create(sf.dialog_bg);
-    lv_obj_set_size(sf.no_btn, 100, 40);
+    lv_obj_set_size(sf.no_btn, 140, 80);
     lv_obj_align(sf.no_btn, LV_ALIGN_BOTTOM_RIGHT, -20, -20);
     lv_obj_set_style_bg_color(sf.no_btn, TM_ERROR, 0);
     lv_obj_set_style_radius(sf.no_btn, 8, 0);
-    lv_obj_add_event_cb(sf.no_btn, ask_dialog_no_event_cb, LV_EVENT_CLICKED, NULL);    
+    lv_obj_add_event_cb(sf.no_btn, ask_dialog_no_event_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_t *no_label = lv_label_create(sf.no_btn);
     lv_label_set_text(no_label, get_string_for_language(languageSetting, "No"));
     lv_obj_set_style_text_font(no_label, &v853Font_hyby_30, 0);
@@ -1139,7 +1139,7 @@ static void create_ui_components(lv_obj_t *parent) {
 
     /*==================== 存储空间界面 - 进度条 ====================*/
     sl.progress_bar = lv_bar_create(sl.container);
-    lv_obj_set_size(sl.progress_bar, 1000, 30);
+    lv_obj_set_size(sl.progress_bar, 1000, 50);
     lv_obj_align(sl.progress_bar, LV_ALIGN_TOP_MID, 0, 275);
     lv_obj_set_style_bg_color(sl.progress_bar, TM_PROGRESS_BG, LV_PART_MAIN);  /* 进度条背景 */
     lv_obj_set_style_bg_opa(sl.progress_bar, LV_OPA_COVER, LV_PART_MAIN);
@@ -1184,7 +1184,7 @@ static void create_ui_components(lv_obj_t *parent) {
     /*==================== 存储空间界面 - 格式化按钮 ====================*/
     sl.format_btn = lv_btn_create(sl.container);
     /* TODO: 字库就绪后改为更大尺寸，如 480x60 */
-    lv_obj_set_size(sl.format_btn, 400, 50);
+    lv_obj_set_size(sl.format_btn, 400, 80);
     lv_obj_set_style_bg_color(sl.format_btn, TM_BG_TERTIARY, 0);          /* 按钮背景 */
     lv_obj_set_style_bg_opa(sl.format_btn, LV_OPA_COVER, 0);
     lv_obj_set_style_border_color(sl.format_btn, TM_BORDER_PRIMARY, 0);   /* 按钮边框 */

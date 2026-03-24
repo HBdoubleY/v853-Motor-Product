@@ -838,7 +838,7 @@ static void create_ask_dialog(lv_obj_t *parent, int tab_index, int index) {
 
     /* 照片库 - 确认按钮 */
     lv_obj_t *yes_btn = lv_btn_create(dialog_bg);
-    lv_obj_set_size(yes_btn, 100, 40);
+    lv_obj_set_size(yes_btn, 140, 80);
     lv_obj_align(yes_btn, LV_ALIGN_BOTTOM_LEFT, 20, -20);
     lv_obj_set_style_bg_color(yes_btn, TM_SUCCESS, 0);                    /* 确认按钮背景(绿色) */
     lv_obj_set_style_radius(yes_btn, 8, 0);
@@ -851,7 +851,7 @@ static void create_ask_dialog(lv_obj_t *parent, int tab_index, int index) {
     
     /* 照片库 - 取消按钮 */
     lv_obj_t *no_btn = lv_btn_create(dialog_bg);
-    lv_obj_set_size(no_btn, 100, 40);
+    lv_obj_set_size(no_btn, 140, 80);
     lv_obj_align(no_btn, LV_ALIGN_BOTTOM_RIGHT, -20, -20);
     lv_obj_set_style_bg_color(no_btn, TM_ERROR, 0);                       /* 取消按钮背景(红色) */
     lv_obj_set_style_radius(no_btn, 8, 0);

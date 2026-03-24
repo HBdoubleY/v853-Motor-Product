@@ -25,6 +25,7 @@ PRJ_DIR := ./ui
 
 CFLAGS = -O3 -g0 -march=armv7-a -mtune=cortex-a7 -mfpu=neon -mfloat-abi=hard -ffunction-sections -fdata-sections -I$(LVGL_DIR)/ -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifiers -Wall -Wextra -Wno-unused-function -Wno-error=strict-prototypes -Wpointer-arith -fno-strict-aliasing -Wno-error=cpp -Wuninitialized -Wmaybe-uninitialized -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security -Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body -Wtype-limits -Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -Wno-unused-parameter -Wno-missing-field-initializers -Wuninitialized -Wmaybe-uninitialized -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wpointer-arith -Wno-cast-qual -Wmissing-prototypes -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wno-discarded-qualifiers -Wformat-security -Wno-ignored-qualifiers -Wno-sign-compare -Wunused-variable -Wunused-variable
 
+#  -O1 -g -fno-omit-frame-pointer \ -O3 -g0
 
 CFLAGS += "-I$(LVGL_DIR_NAME)/"
 CFLAGS += "-I$(LVGL_DIR)/ui/generated"
@@ -41,7 +42,7 @@ CFLAGS += "-I$(LVGL_DIR)/ui/generated/OTA/"
 CFLAGS += "-I$(LVGL_DIR)/../external/aw_pack_src/lib_aw/include/eyesee-mpp/middleware/media/LIBRARY/libcedarc/include"
 
 # CarPlay/Android Auto: 1=enable, 0=disable (should match runcarplay/prj/linux/makeconfig CONFIG_CARPLAY)
-CONFIG_CARPLAY ?= 0
+CONFIG_CARPLAY ?= 1
 
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/carplay"
 CFLAGS += "-I$(LVGL_DIR)/../runcarplay/src/carplay_display"
