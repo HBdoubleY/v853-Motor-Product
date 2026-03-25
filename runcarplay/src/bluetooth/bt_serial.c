@@ -95,6 +95,49 @@ static int configure_serial(int fd, int baudrate) {
     return 0;
 }
 
+/* 非阻塞 I/O：避免其它线程（如 LVGL）在 write 时长时间阻塞 */
+static int set_serial_nonblocking(int fd) {
+    int flags = fcntl(fd, F_GETFL, 0);
+    if (flags < 0) {
+        perror("fcntl F_GETFL");
+        return -1;
+    }
+    if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) != 0) {
+        perror("fcntl F_SETFL O_NONBLOCK");
+        return -1;
+    }
+    return 0;
+}
+
+/* 在持 g_write_mutex 下调用；处理 EINTR / EAGAIN，避免阻塞 UI 线程 */
+static ssize_t serial_write_retry(int fd, const char *data, size_t len) {
+    size_t off = 0;
+    int stall = 0;
+    const int max_stall = 200;
+
+    while (off < len && stall < max_stall) {
+        ssize_t w = write(fd, data + off, len - off);
+        if (w < 0) {
+            if (errno == EINTR)
+                continue;
+            if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                stall++;
+                usleep(500);
+                continue;
+            }
+            return -1;
+        }
+        if (w == 0) {
+            stall++;
+            usleep(500);
+            continue;
+        }
+        off += (size_t)w;
+        stall = 0;
+    }
+    return (off == len) ? (ssize_t)len : -1;
+}
+
 /* 读取线程函数 */
 static void *reader_thread(void *arg) {
     char buf[256];
@@ -120,12 +163,18 @@ static void *reader_thread(void *arg) {
         }
 
         ssize_t n = read(fd, buf, sizeof(buf));
-        if (n <= 0) {
-            if (n < 0 && errno != EINTR) {
-                perror("read");
+        if (n < 0) {
+            if (errno == EINTR)
+                continue;
+            if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                usleep(5000);
+                continue;
             }
+            perror("read");
             continue;
         }
+        if (n == 0)
+            continue;
 
         for (ssize_t i = 0; i < n; i++) {
             char ch = buf[i];
@@ -176,6 +225,10 @@ int bt_serial_init(const char *dev, int baudrate, bt_data_callback cb, void *use
         close(fd);
         return -1;
     }
+    if (set_serial_nonblocking(fd) < 0) {
+        close(fd);
+        return -1;
+    }
 
     pthread_mutex_lock(&g_state_mutex);
     g_fd = fd;
@@ -220,9 +273,9 @@ int bt_serial_send(const char *cmd) {
     }
 
     pthread_mutex_lock(&g_write_mutex);
-    int ret = write(fd, buf, len);
+    ssize_t ret = serial_write_retry(fd, buf, (size_t)len);
     pthread_mutex_unlock(&g_write_mutex);
-    return ret;
+    return (int)ret;
 }
 
 /* 发送原始数据 */
@@ -235,9 +288,9 @@ int bt_serial_send_raw(const char *data, int len) {
     if (fd < 0) return -1;
 
     pthread_mutex_lock(&g_write_mutex);
-    int ret = write(fd, data, len);
+    ssize_t ret = serial_write_retry(fd, data, (size_t)len);
     pthread_mutex_unlock(&g_write_mutex);
-    return ret;
+    return (int)ret;
 }
 
 /* 清理 */
