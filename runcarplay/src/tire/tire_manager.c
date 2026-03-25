@@ -169,7 +169,8 @@ void tire_pair_set_front_suffix(const char *suffix6_hex) {
     g_front_last_rx_ms = 0; // 等待下一次 BLE 广播刷新
     pthread_mutex_unlock(&g_lock);
 
-    write_suffix_to_file(TIRE_PAIR_FRONT_FILE, g_front_suffix);
+    // write_suffix_to_file(TIRE_PAIR_FRONT_FILE, g_front_suffix);
+    write_suffix_to_file(TIRE_PAIR_FRONT_FILE, tmp);
 }
 
 void tire_pair_set_rear_suffix(const char *suffix6_hex) {
@@ -182,7 +183,8 @@ void tire_pair_set_rear_suffix(const char *suffix6_hex) {
     g_rear_last_rx_ms = 0; // 等待下一次 BLE 广播刷新
     pthread_mutex_unlock(&g_lock);
 
-    write_suffix_to_file(TIRE_PAIR_REAR_FILE, g_rear_suffix);
+    // write_suffix_to_file(TIRE_PAIR_REAR_FILE, g_rear_suffix);
+    write_suffix_to_file(TIRE_PAIR_REAR_FILE, tmp);
 }
 
 void tire_pair_clear_all(void) {

@@ -55,25 +55,25 @@ static void bt_status_check_timer(lv_timer_t *timer) {
     static bool recorderFlag = false;
     static int last_bt_connected = -1;
     static char last_bt_label[64] = {0};
-    g_sys_Data.frontCamera = tp2804_check_camera_connected(i2c0_fd);
-    g_sys_Data.rearCamera = tp2804_check_camera_connected(i2c1_fd);
+    // g_sys_Data.frontCamera = tp2804_check_camera_connected(i2c0_fd);
+    // g_sys_Data.rearCamera = tp2804_check_camera_connected(i2c1_fd);
 
-    if(g_sys_Data.TFmounted != checkTFCardMountProc()){
-        g_sys_Data.TFmounted = checkTFCardMountProc();
-        if(g_sys_Data.TFmounted){
-            if(is_popup_visible_v8) close_popup_v8();
-            show_popup_simple_v8(get_string_for_language(g_sys_Data.current_language,"dvr_txt_mountTF"));
-        }else{
-            if(is_popup_visible_v8) close_popup_v8();
-            show_popup_simple_v8(get_string_for_language(g_sys_Data.current_language,"dvr_txt_moveTF"));
-        }
+    // if(g_sys_Data.TFmounted != checkTFCardMountProc()){
+    //     g_sys_Data.TFmounted = checkTFCardMountProc();
+    //     if(g_sys_Data.TFmounted){
+    //         if(is_popup_visible_v8) close_popup_v8();
+    //         show_popup_simple_v8(get_string_for_language(g_sys_Data.current_language,"dvr_txt_mountTF"));
+    //     }else{
+    //         if(is_popup_visible_v8) close_popup_v8();
+    //         show_popup_simple_v8(get_string_for_language(g_sys_Data.current_language,"dvr_txt_moveTF"));
+    //     }
         
 
-        recorderFlag = true;
-        if(current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_TF)){
-            g_sys_Data.TFmounted ? lv_obj_clear_flag(guider_ui.screen_img_TF, LV_OBJ_FLAG_HIDDEN) : lv_obj_add_flag(guider_ui.screen_img_TF, LV_OBJ_FLAG_HIDDEN);
-        }
-    }
+    //     recorderFlag = true;
+    //     if(current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_TF)){
+    //         g_sys_Data.TFmounted ? lv_obj_clear_flag(guider_ui.screen_img_TF, LV_OBJ_FLAG_HIDDEN) : lv_obj_add_flag(guider_ui.screen_img_TF, LV_OBJ_FLAG_HIDDEN);
+    //     }
+    // }
 
     /* 主界面 WiFi 图标：根据缓存状态显示/隐藏（仅读缓存，不阻塞；主界面重建后也会同步） */
     if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_wifi)) {
@@ -128,7 +128,7 @@ static void bt_status_check_timer(lv_timer_t *timer) {
             last_bt_connected = bt_connected;
         }
     }
-
+#ifdef ENABLE_CARPLAY
     /* 主界面 carplay 图标：根据蓝牙连接状态显示/隐藏（仅读 carplay_connected，不阻塞；主界面重建后也会同步） */
     if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_carPLay)) {
         bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_carPLay, LV_OBJ_FLAG_HIDDEN);
@@ -140,7 +140,7 @@ static void bt_status_check_timer(lv_timer_t *timer) {
     }
 
     /* 主界面 android auto 图标：根据蓝牙连接状态显示/隐藏（仅读 androidauto_connected，不阻塞；主界面重建后也会同步） */
-    if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_carPLay)) {
+    if (current_screen == guider_ui.screen && lv_obj_is_valid(guider_ui.screen_img_androiAuto)) {
         bool is_hidden = lv_obj_has_flag(guider_ui.screen_img_androiAuto, LV_OBJ_FLAG_HIDDEN);
         if (androidauto_connected && is_hidden) {
             lv_obj_clear_flag(guider_ui.screen_img_androiAuto, LV_OBJ_FLAG_HIDDEN);
@@ -148,7 +148,7 @@ static void bt_status_check_timer(lv_timer_t *timer) {
             lv_obj_add_flag(guider_ui.screen_img_androiAuto, LV_OBJ_FLAG_HIDDEN);
         }
     }
-
+#endif
 //     if(!g_sys_Data.TFmounted){
 //         recorderFlag = true;
 //         if(g_sys_Data.recorderMode == RECORDER_NORMAL || g_sys_Data.recorderMode == RECORDER_URGENT){
@@ -419,6 +419,7 @@ static void tire_ui_refresh_timer_cb(lv_timer_t *timer) {
 }
 #endif
 
+#ifdef ENABLE_CARPLAY
 // 添加静态变量跟踪触摸状态
 static bool touch_pressed = false;
 static int last_x = -1, last_y = -1;
@@ -489,6 +490,7 @@ void lv_touch_feedback_cb(lv_indev_drv_t * drv, uint8_t event){
         break;
     }
 }
+#endif
 
 #ifdef ENABLE_CARPLAY
 int request_link_touchevent(LinkType type, bool isPressed, int x, int y)
@@ -632,7 +634,9 @@ int lvgl_main(int w, int h)
     lv_indev_drv_init(&indev_drv);                /*Basic initialization*/
     indev_drv.type =LV_INDEV_TYPE_POINTER;        /*See below.*/
     indev_drv.read_cb = evdev_read;               /*See below.*/
+#ifdef ENABLE_CARPLAY
     indev_drv.feedback_cb = lv_touch_feedback_cb;
+#endif
     /*Register the driver in LVGL and save the created input device object*/
     lv_indev_t * evdev_indev = lv_indev_drv_register(&indev_drv);
 
@@ -644,8 +648,8 @@ int lvgl_main(int w, int h)
 //    lv_demo_keypad_encoder();
 //    lv_demo_stress();
 //------------------------------------------------
-    tp2804_i2c_init(&i2c0_fd, I2C_BUS0, TP2804_I2C_ADDR);
-    tp2804_i2c_init(&i2c1_fd, I2C_BUS1, TP2804_I2C_ADDR);
+    // tp2804_i2c_init(&i2c0_fd, I2C_BUS0, TP2804_I2C_ADDR);
+    // tp2804_i2c_init(&i2c1_fd, I2C_BUS1, TP2804_I2C_ADDR);
 
     setup_ui(&guider_ui);
     custom_init(&guider_ui);
@@ -678,8 +682,8 @@ int lvgl_main(int w, int h)
 #endif
         usleep(5000);
     }
-    tp2804_i2c_deinit(&i2c0_fd);
-    tp2804_i2c_deinit(&i2c1_fd);
+    // tp2804_i2c_deinit(&i2c0_fd);
+    // tp2804_i2c_deinit(&i2c1_fd);
 
     sunxifb_free((void**) &buf, "lv_examples");
     sunxifb_exit();

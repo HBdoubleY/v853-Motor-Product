@@ -125,32 +125,33 @@ static int link_type_from_phone_type(enum PHONE_TYPE phone_type)
 
 static void session_init(void)
 {
-	struct SESSION_DATA *session_data = (struct SESSION_DATA *)malloc(sizeof(struct SESSION_DATA));
-	if (!session_data)
-		return;
-	memset(session_data, 0, sizeof(struct SESSION_DATA));
-	session_data->width = 1440;		// （要和后面解码显示的 session 宽高一致）。
-	session_data->height = 720;
-	session_data->width_margin = 0;
-	session_data->height_margin = 0;
-	session_data->fps = 30;
-	session_data->density = 230;
-	session_data->is_right_hand = 0;
-	session_data->is_night_mode = 0;
-	session_data->apple_wired = APPLE_WIRED_LINK_NONE;
-	session_data->apple_wireless = CARPLAY_WIRELESS_MODE;
-	session_data->android_wired = ANDROID_WIRED_LINK_NONE;
-	session_data->android_wireless = AA_WIRELESS_MODE;
-	session_data->cp_icon_path = "/opt/work/app/carplay/icon/icon_104_104.png";
-	session_data->is_use_phone_audio = 0;
-	session_data->platform_id = "zlink";
-	session_data->vendor_name = "zlink-test";
-	session_data->is_force_usb_host = 0;
-	session_data->mfi_bus_num = -1;
-	session_data->otg_bus_num = -1;
+	/*
+	 * Keep SESSION_DATA alive for process lifetime.
+	 * Some libzlink versions may retain pointers asynchronously.
+	 */
+	static struct SESSION_DATA session_data;
+	memset(&session_data, 0, sizeof(session_data));
+	session_data.width = 1440;		// （要和后面解码显示的 session 宽高一致）。
+	session_data.height = 720;
+	session_data.width_margin = 0;
+	session_data.height_margin = 0;
+	session_data.fps = 30;
+	session_data.density = 230;
+	session_data.is_right_hand = 0;
+	session_data.is_night_mode = 0;
+	session_data.apple_wired = APPLE_WIRED_LINK_NONE;
+	session_data.apple_wireless = CARPLAY_WIRELESS_MODE;
+	session_data.android_wired = ANDROID_WIRED_LINK_NONE;
+	session_data.android_wireless = AA_WIRELESS_MODE;
+	session_data.cp_icon_path = "/opt/work/app/carplay/icon/icon_104_104.png";
+	session_data.is_use_phone_audio = 0;
+	session_data.platform_id = "zlink";
+	session_data.vendor_name = "zlink-test";
+	session_data.is_force_usb_host = 0;
+	session_data.mfi_bus_num = -1;
+	session_data.otg_bus_num = -1;
 
-	libzlink_init_session_2(session_data);
-	free(session_data);
+	libzlink_init_session_2(&session_data);
 }
 
 static int video_data_cb(char *data, int len, struct VIDEO_SCREEN_INFO *info, void *user_data)
@@ -222,6 +223,7 @@ static int request_wifi_info_cb(void *user_data)
 	(void)user_data;
 	/* Use default AP info; app can override via config. */
 	/* 与开发板 hostapd.conf/udhcpd.conf 一致：AP 为 192.168.1.2，channel 36 */
+	// libzlink_wifi_info2("carplay_037b", "88888888", "192.168.1.2", 36, "wlan0");
 	libzlink_wifi_info2("carplay_037b", "88888888", "192.168.1.2", 36, "wlan0");
 	return 0;
 }
@@ -321,7 +323,10 @@ void zlink_client_run(void)
 		return;
 	}
 	while (1) {
-		if (libzlink_check_ready(g_handle) == 0)
+		// if (libzlink_check_ready(g_handle) == 0)
+		// 	break;
+		// sleep(1);
+		if (libzlink_check_ready(g_handle))
 			break;
 		sleep(1);
 	}

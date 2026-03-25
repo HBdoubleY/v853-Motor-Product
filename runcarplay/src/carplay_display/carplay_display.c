@@ -147,6 +147,10 @@ static void queue_fini(void)
 	g_queue.shutdown = 1;
 	pthread_cond_broadcast(&g_queue.cond);
 	pthread_mutex_unlock(&g_queue.mutex);
+}
+
+static void queue_destroy(void)
+{
 	pthread_mutex_destroy(&g_queue.mutex);
 	pthread_cond_destroy(&g_queue.cond);
 }
@@ -599,6 +603,10 @@ int carplay_display_create(int disp_x, int disp_y, int disp_width, int disp_heig
 	VO_VIDEO_LAYER_ATTR_S layer_attr;
 	CLOCK_CHN_ATTR_S clock_attr;
 	MPP_CHN_S clock_chn, vo_chn;
+	int queue_inited = 0;
+	int fq_inited = 0;
+	int decode_thread_started = 0;
+	int display_thread_started = 0;
 
 	if (g_ctx.running)
 		return -1;
@@ -637,7 +645,9 @@ int carplay_display_create(int disp_x, int disp_y, int disp_width, int disp_heig
 		g_ctx.g2d_dst_in_use[i] = 0;
 
 	queue_init();
+	queue_inited = 1;
 	fq_init();
+	fq_inited = 1;
 
 	MPPCallbackInfo cb_empty = { 0 };
 
@@ -654,7 +664,10 @@ int carplay_display_create(int disp_x, int disp_y, int disp_width, int disp_heig
 			AW_MPI_SYS_MmzFree(g_ctx.stream_buf_phy, g_ctx.stream_buf_vir);
 		else
 			free(g_ctx.stream_buf_vir);
-		queue_fini();
+		if (fq_inited)
+			fq_destroy();
+		if (queue_inited)
+			queue_destroy();
 		return -1;
 	}
 	AW_MPI_VDEC_RegisterCallback(g_ctx.vdec_chn, &cb_empty);
@@ -703,18 +716,30 @@ int carplay_display_create(int disp_x, int disp_y, int disp_width, int disp_heig
 	g_ctx.running = 1;
 	if (pthread_create(&g_ctx.decode_tid, NULL, decode_thread_fn, NULL) != 0) {
 		g_ctx.running = 0;
+		queue_fini();
+		fq_shutdown();
 		goto err_cleanup;
 	}
+	decode_thread_started = 1;
 	if (pthread_create(&g_ctx.display_tid, NULL, display_thread_fn, NULL) != 0) {
 		g_ctx.running = 0;
 		queue_fini();
 		fq_shutdown();
-		pthread_join(g_ctx.decode_tid, NULL);
 		goto err_cleanup;
 	}
+	display_thread_started = 1;
 	return 0;
 
 err_cleanup:
+	if (decode_thread_started)
+		pthread_join(g_ctx.decode_tid, NULL);
+	if (display_thread_started)
+		pthread_join(g_ctx.display_tid, NULL);
+	if (fq_inited)
+		fq_destroy();
+	if (queue_inited)
+		queue_destroy();
+
 	AW_MPI_VO_StopChn(g_ctx.vo_layer, g_ctx.vo_chn);
 	AW_MPI_CLOCK_Stop(g_ctx.clock_chn);
 	AW_MPI_CLOCK_DestroyChn(g_ctx.clock_chn);
@@ -728,7 +753,6 @@ err_cleanup:
 		AW_MPI_SYS_MmzFree(g_ctx.stream_buf_phy, g_ctx.stream_buf_vir);
 	else
 		free(g_ctx.stream_buf_vir);
-	queue_fini();
 	return -1;
 }
 
@@ -777,6 +801,7 @@ void carplay_display_destroy(void)
 	fq_shutdown();
 	pthread_join(g_ctx.decode_tid, NULL);
 	pthread_join(g_ctx.display_tid, NULL);
+	queue_destroy();
 
 	/* Drain any remaining frames in frame_queue */
 	pthread_mutex_lock(&g_fq.mutex);

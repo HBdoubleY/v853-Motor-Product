@@ -19,6 +19,7 @@ static volatile int g_running = 0;          // 运行标志
 static bt_data_callback g_callback = NULL;  // 用户回调
 static void *g_user_arg = NULL;             // 用户参数
 static pthread_mutex_t g_write_mutex = PTHREAD_MUTEX_INITIALIZER; // 写锁
+static pthread_mutex_t g_state_mutex = PTHREAD_MUTEX_INITIALIZER; // 状态锁
 
 /* 波特率转换表 */
 typedef struct {
@@ -100,8 +101,25 @@ static void *reader_thread(void *arg) {
     char line[512];       // 行缓冲区
     int pos = 0;
 
-    while (g_running) {
-        ssize_t n = read(g_fd, buf, sizeof(buf));
+    (void)arg;
+    while (1) {
+        int running = 0;
+        int fd = -1;
+        bt_data_callback cb = NULL;
+        void *user_arg = NULL;
+
+        pthread_mutex_lock(&g_state_mutex);
+        running = g_running;
+        fd = g_fd;
+        cb = g_callback;
+        user_arg = g_user_arg;
+        pthread_mutex_unlock(&g_state_mutex);
+
+        if (!running || fd < 0) {
+            break;
+        }
+
+        ssize_t n = read(fd, buf, sizeof(buf));
         if (n <= 0) {
             if (n < 0 && errno != EINTR) {
                 perror("read");
@@ -118,8 +136,8 @@ static void *reader_thread(void *arg) {
                     // 去除末尾可能存在的 '\r'
                     if (pos > 0 && line[pos-1] == '\r')
                         line[pos-1] = '\0';
-                    if (g_callback) {
-                        g_callback(line, g_user_arg);
+                    if (cb) {
+                        cb(line, user_arg);
                     }
                 }
                 pos = 0;
@@ -140,27 +158,41 @@ static void *reader_thread(void *arg) {
 int bt_serial_init(const char *dev, int baudrate, bt_data_callback cb, void *user_arg) {
     if (!dev || !cb) return -1;
 
-    g_fd = open(dev, O_RDWR | O_NOCTTY);
-    if (g_fd < 0) {
+    pthread_mutex_lock(&g_state_mutex);
+    if (g_running || g_fd >= 0) {
+        pthread_mutex_unlock(&g_state_mutex);
+        fprintf(stderr, "bt_serial already initialized\n");
+        return -1;
+    }
+    pthread_mutex_unlock(&g_state_mutex);
+
+    int fd = open(dev, O_RDWR | O_NOCTTY);
+    if (fd < 0) {
         perror("open");
         return -1;
     }
 
-    if (configure_serial(g_fd, baudrate) < 0) {
-        close(g_fd);
-        g_fd = -1;
+    if (configure_serial(fd, baudrate) < 0) {
+        close(fd);
         return -1;
     }
 
+    pthread_mutex_lock(&g_state_mutex);
+    g_fd = fd;
     g_callback = cb;
     g_user_arg = user_arg;
     g_running = 1;
+    pthread_mutex_unlock(&g_state_mutex);
 
     if (pthread_create(&g_thread, NULL, reader_thread, NULL) != 0) {
         perror("pthread_create");
-        close(g_fd);
+        close(fd);
+        pthread_mutex_lock(&g_state_mutex);
         g_fd = -1;
         g_running = 0;
+        g_callback = NULL;
+        g_user_arg = NULL;
+        pthread_mutex_unlock(&g_state_mutex);
         return -1;
     }
 
@@ -171,7 +203,13 @@ int bt_serial_init(const char *dev, int baudrate, bt_data_callback cb, void *use
 
 /* 发送AT指令（自动加\r\n ） */
 int bt_serial_send(const char *cmd) {
-    if (g_fd < 0 || !cmd) return -1;
+    int fd = -1;
+    if (!cmd) return -1;
+
+    pthread_mutex_lock(&g_state_mutex);
+    fd = g_fd;
+    pthread_mutex_unlock(&g_state_mutex);
+    if (fd < 0) return -1;
 
     // 构造完整指令
     char buf[512];
@@ -182,38 +220,53 @@ int bt_serial_send(const char *cmd) {
     }
 
     pthread_mutex_lock(&g_write_mutex);
-    int ret = write(g_fd, buf, len);
+    int ret = write(fd, buf, len);
     pthread_mutex_unlock(&g_write_mutex);
     return ret;
 }
 
 /* 发送原始数据 */
 int bt_serial_send_raw(const char *data, int len) {
-    if (g_fd < 0 || !data || len <= 0) return -1;
+    int fd = -1;
+    if (!data || len <= 0) return -1;
+    pthread_mutex_lock(&g_state_mutex);
+    fd = g_fd;
+    pthread_mutex_unlock(&g_state_mutex);
+    if (fd < 0) return -1;
+
     pthread_mutex_lock(&g_write_mutex);
-    int ret = write(g_fd, data, len);
+    int ret = write(fd, data, len);
     pthread_mutex_unlock(&g_write_mutex);
     return ret;
 }
 
 /* 清理 */
 void bt_serial_cleanup(void) {
-    if (g_running) {
-        g_running = 0;
-        // 取消线程（read是取消点）
-        pthread_cancel(g_thread);
-        pthread_join(g_thread, NULL);
-    }
-    if (g_fd >= 0) {
-        close(g_fd);
-        g_fd = -1;
-    }
+    int was_running = 0;
+    int fd = -1;
+    pthread_t thread = 0;
+
+    pthread_mutex_lock(&g_state_mutex);
+    was_running = g_running;
+    fd = g_fd;
+    thread = g_thread;
+    g_running = 0;
+    g_fd = -1;
     g_callback = NULL;
     g_user_arg = NULL;
+    pthread_mutex_unlock(&g_state_mutex);
+
+    if (fd >= 0) {
+        close(fd);
+    }
+
+    if (was_running) {
+        pthread_join(thread, NULL);
+    }
 }
 
 /* HFP 连接状态：由 on_bt_data 在串口读线程中更新，主界面等仅读（非阻塞） */
-static volatile int hfp_connected = 0;
+static int hfp_connected = 0;
 static char connected_addr[64] = {0};
 static char connected_device_name[64] = {0};
 
@@ -223,13 +276,18 @@ void on_bt_data(const char *line, void *arg) {
         printf("\n\n\n\n\n\n\nHFP connected = 1\n\n\n\n\n\n\n");
         // strncpy(connected_addr, line+2, 12);
         // connected_addr[12] = '\0';
+        pthread_mutex_lock(&g_state_mutex);
         hfp_connected = 1;
+        pthread_mutex_unlock(&g_state_mutex);
         
         // printf("HFP connected to %s\n", connected_addr);
     }
     else if (strncmp(line, "IA", 2) == 0) {
         // HFP断开
+        pthread_mutex_lock(&g_state_mutex);
         hfp_connected = 0;
+        connected_device_name[0] = '\0';
+        pthread_mutex_unlock(&g_state_mutex);
         // connected_addr[0] = '\0';
         printf("HFP disconnected\n");
     }
@@ -241,9 +299,15 @@ void on_bt_data(const char *line, void *arg) {
     // }
     else if (strncmp(line, "SA", 2) == 0 ) {
         // 当前连接设备名称（部分版本用JH，部分用AD）
+        size_t max_len = sizeof(connected_device_name) - 1;
+        size_t src_len = strlen(line + 2);
+        size_t copy_len = (src_len < max_len) ? src_len : max_len;
+
+        pthread_mutex_lock(&g_state_mutex);
         memset(connected_device_name, 0, sizeof(connected_device_name));
-        strncpy(connected_device_name, line+2, strlen(line+2));
-        connected_device_name[strlen(line+2)] = '\0';
+        memcpy(connected_device_name, line + 2, copy_len);
+        connected_device_name[copy_len] = '\0';
+        pthread_mutex_unlock(&g_state_mutex);
         printf("\n\n\nCurrent connected device: %s\n\n\n\n", connected_device_name);
     }
     // else if (strncmp(line, "LP", 2) == 0 && strncmp(line, "00EEBC", 6) == 0) {
@@ -255,9 +319,18 @@ void on_bt_data(const char *line, void *arg) {
 }
 
 int get_BT_connect_state(void) {
-    return hfp_connected;
+    int connected = 0;
+    pthread_mutex_lock(&g_state_mutex);
+    connected = hfp_connected;
+    pthread_mutex_unlock(&g_state_mutex);
+    return connected;
 }
 
 const char *get_BT_connected_name(void) {
-    return connected_device_name;
+    static __thread char name_copy[64];
+    pthread_mutex_lock(&g_state_mutex);
+    memcpy(name_copy, connected_device_name, sizeof(name_copy));
+    name_copy[sizeof(name_copy) - 1] = '\0';
+    pthread_mutex_unlock(&g_state_mutex);
+    return name_copy;
 }
