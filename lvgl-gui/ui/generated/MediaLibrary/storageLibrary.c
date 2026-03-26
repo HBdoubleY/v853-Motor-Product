@@ -42,6 +42,7 @@ static void close_timer_callback(lv_timer_t *timer);
 // 内部函数声明（update_storage_display 带参版本在 .h 中声明，供 poll 调用）
 static int64_t get_tf_card_used_capacity_mb(const char *path);
 static int64_t get_tf_card_total_capacity_mb(const char *path);
+static void update_progress_bar_color_by_percentage(int percentage);
 static void show_format_sd_dialog(lv_obj_t *parent);
 static void close_format_dialog(void);
 static void create_ask_dialog(lv_obj_t *parent);
@@ -278,10 +279,17 @@ static int64_t get_tf_card_used_capacity_mb(const char *path)
     return used_mb;
 }
 
+static void update_progress_bar_color_by_percentage(int percentage)
+{
+    lv_color_t indicator_color = (percentage > 80) ? TM_ERROR : TM_SUCCESS;
+    lv_obj_set_style_bg_color(sl.progress_bar, indicator_color, LV_PART_INDICATOR);
+}
+
 /* 仅更新 UI；used_mb/total_mb 为 -1 或 total_mb<=0 表示未挂载，由主线程在 poll 到 MEDIA_RESULT_STORAGE_QUERY 后调用 */
 void update_storage_display(int64_t used_mb, int64_t total_mb) {
     if (total_mb <= 0 || used_mb < 0) {
         lv_bar_set_value(sl.progress_bar, 0, LV_ANIM_OFF);
+        update_progress_bar_color_by_percentage(0);
         lv_label_set_text(sl.percent_label, "--");
         lv_label_set_text_fmt(sl.details_label, "%s\n%s",
                             get_string_for_language(languageSetting, "SDCardNotFound"),
@@ -289,6 +297,7 @@ void update_storage_display(int64_t used_mb, int64_t total_mb) {
         return;
     }
     int percentage = (int)((used_mb * 100) / total_mb);
+    update_progress_bar_color_by_percentage(percentage);
     lv_bar_set_value(sl.progress_bar, percentage, LV_ANIM_ON);
     lv_label_set_text_fmt(sl.percent_label, "%d%%", percentage);
     int used_gb_int = (int)(used_mb / 1024);

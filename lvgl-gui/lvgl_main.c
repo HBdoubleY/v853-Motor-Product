@@ -41,6 +41,8 @@ extern LABEL_TIMER *screen_DVR_timer_Label;
 
 extern void recorder_status_timer(lv_timer_t *timer);
 
+void tire_ui_refresh_now(void);
+
 #if 1
 
 static void detected_TF_FreeMem_Timer(lv_timer_t *timer){
@@ -97,6 +99,8 @@ static void bt_status_check_timer(lv_timer_t *timer) {
             lv_obj_add_flag(guider_ui.screen_img_bt, LV_OBJ_FLAG_HIDDEN);
         }
     }
+
+    tire_ui_refresh_now();
 
     /* 设置界面 BT 文本：根据蓝牙连接状态和设备名动态刷新（仅读 bt_serial 状态，不阻塞） */
     if (current_screen == guider_ui.screen_SET &&
@@ -518,7 +522,7 @@ int request_link_touchevent(LinkType type, bool isPressed, int x, int y)
 static void lvgl_refresh_main_link_labels(void)
 {
     lv_obj_t *cur = lv_scr_act();
-    if (cur != guider_ui.screen)
+    if (!(cur == guider_ui.screen || cur == guider_ui.screen_carPlay || cur == guider_ui.screen_androidAuto))
         return;
     if (!lv_obj_is_valid(guider_ui.screen_btn_carplay_label_statu) ||
         !lv_obj_is_valid(guider_ui.screen_btn_androidauto_label_statu))
@@ -542,6 +546,23 @@ static void lvgl_refresh_main_link_labels(void)
             get_string_for_language(lang, "main_txt_Connect"));
         carplay_connected = true;
         bt_serial_send("CD");
+
+        {
+			/* 仅当 session 已启动且当前为 CarPlay 连接时才进入投屏界面，否则只进提示界面 */
+
+            zlink_client_reset_video_prebuffer();
+            zlink_client_request_video_focus(1);
+            request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 0, NULL);
+            int disp_w = 720;
+            int disp_h = 1440;
+            carplay_display_create(0, 0, disp_w, disp_h, 1440, 720);
+            zlink_client_set_video_active(1);
+            zlink_client_request_video_focus(0);
+            request_link_action(LINK_TYPE_CARPLAY, LINK_ACTION_VIDEO_CTRL, 1, NULL);
+            // zlink_client_set_video_dump(1);
+
+		}
+        ui_load_scr_animation(&guider_ui, &guider_ui.screen_carPlay, guider_ui.screen_carPlay_del, &guider_ui.screen_del, setup_scr_screen_carPlay, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
     } else {
         lv_label_set_text(guider_ui.screen_btn_carplay_label_statu,
             get_string_for_language(lang, "main_txt_nConnect"));
@@ -553,6 +574,22 @@ static void lvgl_refresh_main_link_labels(void)
             get_string_for_language(lang, "main_txt_Connect"));
         androidauto_connected = true;
         bt_serial_send("CD");
+
+		{
+			/* 仅当 session 已启动且当前为 Android Auto 连接时才进入投屏界面，否则只进提示界面 */
+
+            zlink_client_reset_video_prebuffer();
+            zlink_client_request_video_focus(1);
+            request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 0, NULL);
+            int disp_w = 720;
+            int disp_h = 1440;
+            carplay_display_create(0, 0, disp_w, disp_h, 1440, 720);
+            zlink_client_set_video_active(1);
+            zlink_client_request_video_focus(0);
+            request_link_action(LINK_TYPE_ANDROIDAUTO, LINK_ACTION_VIDEO_CTRL, 1, NULL);
+            // zlink_client_set_video_dump(1);
+		}
+        ui_load_scr_animation(&guider_ui, &guider_ui.screen_androidAuto, guider_ui.screen_androidAuto_del, &guider_ui.screen_del, setup_scr_screen_androidAuto, LV_SCR_LOAD_ANIM_NONE, 0, 0, true, true);
     } else {
         lv_label_set_text(guider_ui.screen_btn_androidauto_label_statu,
             get_string_for_language(lang, "main_txt_nConnect"));
@@ -673,7 +710,7 @@ int lvgl_main(int w, int h)
     lv_timer_create(bt_status_check_timer, 500, NULL);
 
     // 胎压刷新：负责更新胎压界面 + 主界面胎压标签
-    lv_timer_create(tire_ui_refresh_timer_cb, 1000, NULL);
+//    lv_timer_create(tire_ui_refresh_timer_cb, 500, NULL);
     tire_ui_refresh_now();
 //    lv_timer_create(detected_TF_FreeMem_Timer, 1000*30, NULL);
 //    WIFIConnect_start_status_poll();  /* 后台轮询 WiFi 状态，主界面图标据此显示/隐藏 */
