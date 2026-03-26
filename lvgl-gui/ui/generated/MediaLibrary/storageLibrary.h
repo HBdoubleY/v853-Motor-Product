@@ -16,22 +16,7 @@
 extern "C" {
 #endif
 
-/*====================================================================================
- * FAT32常量定义
- *====================================================================================*/
-
-#define BYTES_PER_SECTOR     512
-#define SECTORS_PER_CLUSTER  8
-#define RESERVED_SECTORS     32
-#define FAT_COUNT            2
-#define ROOT_DIR_CLUSTER     2
-#define FAT_ENTRY_SIZE       4
-#define FAT_END_OF_CHAIN     0x0FFFFFF8
-#define FAT_BAD_CLUSTER      0x0FFFFFF7
-#define FAT_FREE_CLUSTER     0x00000000
-#define BOOT_SIGNATURE_55AA  0xAA55
-#define TARGET_PROCESS       "SDUpgrade"
-#define SD_CARD_DEVICE       "/dev/mmcblk0"
+/* 容量/挂载见 tf_card.h；FAT32+MBR 格式化见 runcarplay tf_card_format.c */
 
 /*====================================================================================
  * 字体资源声明
@@ -85,56 +70,6 @@ typedef struct {
 
 /* 存储库全局实例（在storageLibrary.c中定义） */
 extern storageLibrary_ctx_t g_storage;
-
-/*====================================================================================
- * FAT32结构定义
- *====================================================================================*/
-
-#pragma pack(push, 1)
-typedef struct {
-    uint8_t  jump[3];
-    char     oem_name[8];
-    uint16_t bytes_per_sector;
-    uint8_t  sectors_per_cluster;
-    uint16_t reserved_sectors;
-    uint8_t  fat_count;
-    uint16_t root_entries;
-    uint16_t total_sectors_16;
-    uint8_t  media_type;
-    uint16_t sectors_per_fat_16;
-    uint16_t sectors_per_track;
-    uint16_t head_count;
-    uint32_t hidden_sectors;
-    uint32_t total_sectors_32;
-    
-    // FAT32 扩展部分
-    uint32_t sectors_per_fat_32;
-    uint16_t flags;
-    uint16_t version;
-    uint32_t root_cluster;
-    uint16_t fsinfo_sector;
-    uint16_t backup_boot_sector;
-    uint8_t  reserved[12];
-    uint8_t  drive_number;
-    uint8_t  reserved1;
-    uint8_t  boot_signature;
-    uint32_t volume_id;
-    char     volume_label[11];
-    char     fs_type[8];
-    uint8_t  boot_code[420];
-    uint16_t boot_signature_55aa;
-} Fat32BootSector;
-
-typedef struct {
-    uint32_t signature1;
-    uint8_t  reserved1[480];
-    uint32_t signature2;
-    uint32_t free_clusters;
-    uint32_t next_free_cluster;
-    uint8_t  reserved2[12];
-    uint32_t signature3;
-} FSInfoSector;
-#pragma pack(pop)
 
 // 入口函数
 void create_storage_select_ui(lv_obj_t *parent);

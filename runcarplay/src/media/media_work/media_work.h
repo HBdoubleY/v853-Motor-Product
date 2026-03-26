@@ -25,7 +25,9 @@ extern "C" {
 #define MEDIA_PHOTO_DIR_REAR          "/mnt/extsd/DVRpic/rearPic"
 #define MEDIA_MAX_FILES               100
 #define MEDIA_MAX_PATH_LEN            256
+/** 格式化目标：整盘（tf_card_format 写 MBR）；挂载媒体路径用 mmcblk0p1 */
 #define MEDIA_TF_DEVICE                "/dev/mmcblk0"
+#define MEDIA_TF_PARTITION             "/dev/mmcblk0p1"
 
 /** 停预览任务完成回调：在工作线程中执行，仅做 stopPreview 等阻塞调用，勿调 LVGL */
 typedef void (*media_work_stop_preview_fn)(void *userdata);

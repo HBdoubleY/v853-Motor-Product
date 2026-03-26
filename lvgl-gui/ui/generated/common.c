@@ -440,7 +440,8 @@ bool checkTFCardMountProc(void){
 //    printf("%s:%d\n",__func__,__LINE__);
 
     
-    if(access("/dev/mmcblk0", F_OK) == 0){
+    /* 插卡后必有 mmcblk0；MBR 布局下另有 mmcblk0p1（与 tf_card_format 一致） */
+    if (access("/dev/mmcblk0", F_OK) == 0 || access("/dev/mmcblk0p1", F_OK) == 0) {
         return true;
     }
 

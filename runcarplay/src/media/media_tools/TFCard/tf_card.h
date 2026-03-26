@@ -14,8 +14,19 @@ extern "C" {
 
 /** 默认 TF 卡挂载路径 */
 #define TF_CARD_MOUNT_PATH     "/mnt/extsd"
-/** 默认块设备 */
+/**
+ * 整盘设备节点，仅用于格式化（写入 MBR + 分区内 FAT32）。
+ * 挂载数据卷请使用 TF_CARD_PARTITION_DEV。
+ */
 #define TF_CARD_DEVICE         "/dev/mmcblk0"
+/** 第一个分区（FAT32），与 Windows 兼容的 MBR 布局下由此挂载 */
+#define TF_CARD_PARTITION_DEV  "/dev/mmcblk0p1"
+
+/*
+ * 板级约定：请确认外置 TF 在系统中的块设备索引。若机内 eMMC 与 TF 同为 mmcblk0，
+ * 则 mmcblk0p1 不能同时用于本挂载与启动脚本中的其它用途（例如某 MainThread 将 p1
+ * 挂到 config）；需按硬件划分独立分区设备节点。
+ */
 
 /**
  * @brief 检测 TF 卡是否已挂载（设备是否存在）

@@ -717,7 +717,7 @@ int the_tick_to_extern(void){
 }
 
 void* LvglMain(void *arg) {
-   
+
     lvgl_main(screanWidth, screanHeight);  //while(1)
 
     return NULL;

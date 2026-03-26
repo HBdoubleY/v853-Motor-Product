@@ -1,6 +1,6 @@
 /**
  * @file tf_card_format.c
- * @brief TF 卡 FAT32 格式化实现（自 storageLibrary 迁入，无 LVGL 依赖）
+ * @brief TF 卡 FAT32 格式化：MBR + 单主分区(0x0C)，分区内 FAT32，兼容 Windows
  */
 
 #include "tf_card.h"
@@ -17,6 +17,12 @@
 #include <ctype.h>
 #include <stdint.h>
 #include <stdbool.h>
+
+/* ========== 布局：DOS MBR + 分区从 LBA 2048 开始（1MiB 对齐）========== */
+#define PARTITION_START_LBA   2048u
+#define MBR_SIG_OFFSET        510
+#define MBR_PART_ENTRY0       446
+#define PART_TYPE_FAT32_LBA   0x0Cu
 
 /* ========== FAT32 常量 ========== */
 #define BYTES_PER_SECTOR     512
@@ -72,6 +78,14 @@ typedef struct {
     uint32_t signature3;
 } fsinfo_sector_t;
 #pragma pack(pop)
+
+static void put_u32_le(uint8_t *p, uint32_t v)
+{
+    p[0] = (uint8_t)(v & 0xFFu);
+    p[1] = (uint8_t)((v >> 8) & 0xFFu);
+    p[2] = (uint8_t)((v >> 16) & 0xFFu);
+    p[3] = (uint8_t)((v >> 24) & 0xFFu);
+}
 
 static uint64_t get_device_size(const char *device)
 {
@@ -138,7 +152,37 @@ static bool validate_volume_label(const char *label)
     return true;
 }
 
-static bool write_boot_sector(int fd, uint32_t total_sectors, const char *volume_label)
+/** LBA0：单主分区，类型 FAT32 LBA */
+static bool write_dos_mbr(int fd, uint32_t start_lba, uint32_t sector_count)
+{
+    uint8_t mbr[BYTES_PER_SECTOR];
+
+    memset(mbr, 0, sizeof(mbr));
+    /* 分区表项 0：CHS 填 FF 表示使用 LBA */
+    uint8_t *pe = mbr + MBR_PART_ENTRY0;
+    pe[0] = 0x00;
+    pe[1] = 0xFE;
+    pe[2] = 0xFF;
+    pe[3] = 0xFF;
+    pe[4] = PART_TYPE_FAT32_LBA;
+    pe[5] = 0xFE;
+    pe[6] = 0xFF;
+    pe[7] = 0xFF;
+    put_u32_le(pe + 8, start_lba);
+    put_u32_le(pe + 12, sector_count);
+    mbr[MBR_SIG_OFFSET] = 0x55;
+    mbr[MBR_SIG_OFFSET + 1] = 0xAA;
+
+    if (lseek(fd, 0, SEEK_SET) < 0)
+        return false;
+    if (write(fd, mbr, sizeof(mbr)) != (ssize_t)sizeof(mbr))
+        return false;
+    return true;
+}
+
+static bool write_boot_sector(int fd, off_t base_off, uint32_t partition_sectors,
+                              uint32_t hidden_sectors, uint32_t fat_sectors,
+                              const char *volume_label)
 {
     fat32_boot_sector_t boot;
     memset(&boot, 0, sizeof(boot));
@@ -153,8 +197,9 @@ static bool write_boot_sector(int fd, uint32_t total_sectors, const char *volume
     boot.media_type = 0xF8;
     boot.sectors_per_track = 63;
     boot.head_count = 255;
-    boot.total_sectors_32 = total_sectors;
-    boot.sectors_per_fat_32 = (uint32_t)calculate_fat_size(total_sectors);
+    boot.hidden_sectors = hidden_sectors;
+    boot.total_sectors_32 = partition_sectors;
+    boot.sectors_per_fat_32 = fat_sectors;
     boot.root_cluster = ROOT_DIR_CLUSTER;
     boot.fsinfo_sector = 1;
     boot.backup_boot_sector = 6;
@@ -167,27 +212,27 @@ static bool write_boot_sector(int fd, uint32_t total_sectors, const char *volume
         for (int i = (int)strlen(volume_label); i < 11; i++)
             boot.volume_label[i] = ' ';
     } else {
-        strcpy(boot.volume_label, "NO NAME    ");
+        memcpy(boot.volume_label, "NO NAME    ", 11);
     }
-    strcpy(boot.fs_type, "FAT32   ");
+    memcpy(boot.fs_type, "FAT32   ", 8);
     boot.boot_signature_55aa = BOOT_SIGNATURE_55AA;
 
-    if (lseek(fd, 0, SEEK_SET) < 0) return false;
+    if (lseek(fd, base_off, SEEK_SET) < 0) return false;
     if (write(fd, &boot, sizeof(boot)) != (ssize_t)sizeof(boot)) return false;
     return true;
 }
 
-static bool write_backup_boot_sector(int fd)
+static bool write_backup_boot_sector(int fd, off_t base_off)
 {
     fat32_boot_sector_t boot;
-    if (lseek(fd, 0, SEEK_SET) < 0) return false;
+    if (lseek(fd, base_off, SEEK_SET) < 0) return false;
     if (read(fd, &boot, sizeof(boot)) != (ssize_t)sizeof(boot)) return false;
-    if (lseek(fd, 6 * BYTES_PER_SECTOR, SEEK_SET) < 0) return false;
+    if (lseek(fd, base_off + 6 * BYTES_PER_SECTOR, SEEK_SET) < 0) return false;
     if (write(fd, &boot, sizeof(boot)) != (ssize_t)sizeof(boot)) return false;
     return true;
 }
 
-static bool write_fsinfo_sector(int fd, uint32_t total_clusters)
+static bool write_fsinfo_sector(int fd, off_t base_off, uint32_t total_clusters)
 {
     fsinfo_sector_t fsinfo;
     memset(&fsinfo, 0, sizeof(fsinfo));
@@ -196,12 +241,12 @@ static bool write_fsinfo_sector(int fd, uint32_t total_clusters)
     fsinfo.free_clusters = total_clusters - 1;
     fsinfo.next_free_cluster = ROOT_DIR_CLUSTER + 1;
     fsinfo.signature3 = 0xAA550000;
-    if (lseek(fd, BYTES_PER_SECTOR, SEEK_SET) < 0) return false;
+    if (lseek(fd, base_off + BYTES_PER_SECTOR, SEEK_SET) < 0) return false;
     if (write(fd, &fsinfo, sizeof(fsinfo)) != (ssize_t)sizeof(fsinfo)) return false;
     return true;
 }
 
-static bool initialize_fat_table(int fd, uint32_t fat_sectors, uint32_t total_clusters)
+static bool initialize_fat_table(int fd, off_t base_off, uint32_t fat_sectors, uint32_t total_clusters)
 {
     size_t fat_size = fat_sectors * BYTES_PER_SECTOR;
     uint8_t *fat_buffer = (uint8_t *)calloc(1, fat_size);
@@ -215,7 +260,7 @@ static bool initialize_fat_table(int fd, uint32_t fat_sectors, uint32_t total_cl
     for (uint32_t i = 3; i < limit; i++)
         fat[i] = FAT_FREE_CLUSTER;
 
-    off_t fat1_offset = RESERVED_SECTORS * BYTES_PER_SECTOR;
+    off_t fat1_offset = base_off + RESERVED_SECTORS * BYTES_PER_SECTOR;
     if (lseek(fd, fat1_offset, SEEK_SET) < 0) { free(fat_buffer); return false; }
     if (write(fd, fat_buffer, fat_size) != (ssize_t)fat_size) { free(fat_buffer); return false; }
     if (lseek(fd, fat1_offset + (off_t)fat_size, SEEK_SET) < 0) { free(fat_buffer); return false; }
@@ -224,11 +269,11 @@ static bool initialize_fat_table(int fd, uint32_t fat_sectors, uint32_t total_cl
     return true;
 }
 
-static bool initialize_root_directory(int fd, uint32_t fat_sectors)
+static bool initialize_root_directory(int fd, off_t base_off, uint32_t fat_sectors)
 {
     uint8_t zero_sector[BYTES_PER_SECTOR];
     memset(zero_sector, 0, sizeof(zero_sector));
-    off_t root_offset = (RESERVED_SECTORS + (FAT_COUNT * fat_sectors)) * (off_t)BYTES_PER_SECTOR;
+    off_t root_offset = base_off + (RESERVED_SECTORS + (FAT_COUNT * fat_sectors)) * (off_t)BYTES_PER_SECTOR;
     if (lseek(fd, root_offset, SEEK_SET) < 0) return false;
     for (int i = 0; i < SECTORS_PER_CLUSTER; i++) {
         if (write(fd, zero_sector, sizeof(zero_sector)) != (ssize_t)sizeof(zero_sector))
@@ -237,24 +282,43 @@ static bool initialize_root_directory(int fd, uint32_t fat_sectors)
     return true;
 }
 
-static bool do_quick_format(int fd, uint32_t total_sectors, uint32_t fat_sectors,
-                           uint32_t total_clusters, const char *volume_label)
+/** 在分区字节偏移处写入 FAT32 卷（不含 MBR） */
+static bool format_fat32_volume_at(int fd, off_t part_byte_off, uint32_t partition_sectors,
+                                   uint32_t hidden_lba, uint32_t fat_sectors,
+                                   uint32_t total_clusters, const char *volume_label)
 {
-    if (!write_boot_sector(fd, total_sectors, volume_label)) return false;
-    if (!write_backup_boot_sector(fd)) return false;
-    if (!write_fsinfo_sector(fd, total_clusters)) return false;
-    if (!initialize_fat_table(fd, fat_sectors, total_clusters)) return false;
-    if (!initialize_root_directory(fd, fat_sectors)) return false;
+    if (!write_boot_sector(fd, part_byte_off, partition_sectors, hidden_lba, fat_sectors, volume_label))
+        return false;
+    if (!write_backup_boot_sector(fd, part_byte_off)) return false;
+    if (!write_fsinfo_sector(fd, part_byte_off, total_clusters)) return false;
+    if (!initialize_fat_table(fd, part_byte_off, fat_sectors, total_clusters)) return false;
+    if (!initialize_root_directory(fd, part_byte_off, fat_sectors)) return false;
     return true;
 }
 
-static bool do_full_format(int fd, uint32_t total_sectors, uint32_t fat_sectors,
-                          uint32_t total_clusters, const char *volume_label)
+static bool do_quick_format_mbr(int fd, uint32_t disk_sectors, uint32_t partition_sectors,
+                                uint32_t fat_sectors, uint32_t total_clusters,
+                                const char *volume_label)
+{
+    off_t part_off = (off_t)PARTITION_START_LBA * BYTES_PER_SECTOR;
+    (void)disk_sectors;
+
+    if (!format_fat32_volume_at(fd, part_off, partition_sectors, PARTITION_START_LBA,
+                               fat_sectors, total_clusters, volume_label))
+        return false;
+    if (!write_dos_mbr(fd, PARTITION_START_LBA, partition_sectors))
+        return false;
+    return true;
+}
+
+static bool do_full_format_mbr(int fd, uint32_t disk_sectors, uint32_t partition_sectors,
+                               uint32_t fat_sectors, uint32_t total_clusters,
+                               const char *volume_label)
 {
     const size_t buf_size = 64 * 1024;
     uint8_t *zero_buf = (uint8_t *)calloc(1, buf_size);
     if (!zero_buf) return false;
-    uint64_t total_bytes = total_sectors * BYTES_PER_SECTOR;
+    uint64_t total_bytes = (uint64_t)disk_sectors * BYTES_PER_SECTOR;
     uint64_t written = 0;
     if (lseek(fd, 0, SEEK_SET) < 0) { free(zero_buf); return false; }
     while (written < total_bytes) {
@@ -264,8 +328,41 @@ static bool do_full_format(int fd, uint32_t total_sectors, uint32_t fat_sectors,
         written += (uint64_t)n;
     }
     free(zero_buf);
-    if (lseek(fd, 0, SEEK_SET) < 0) return false;
-    return do_quick_format(fd, total_sectors, fat_sectors, total_clusters, volume_label);
+
+    off_t part_off = (off_t)PARTITION_START_LBA * BYTES_PER_SECTOR;
+    if (!format_fat32_volume_at(fd, part_off, partition_sectors, PARTITION_START_LBA,
+                                fat_sectors, total_clusters, volume_label)) {
+        return false;
+    }
+    if (!write_dos_mbr(fd, PARTITION_START_LBA, partition_sectors))
+        return false;
+    return true;
+}
+
+static void reread_partition_table(const char *whole_disk)
+{
+    int rfd = open(whole_disk, O_RDWR | O_NONBLOCK);
+    if (rfd < 0) {
+        fprintf(stderr, "[TFCard] BLKRRPART open %s: %s\n", whole_disk, strerror(errno));
+        return;
+    }
+    if (ioctl(rfd, BLKRRPART, NULL) != 0)
+        fprintf(stderr, "[TFCard] BLKRRPART failed: %s (try blockdev --rereadpt)\n", strerror(errno));
+    close(rfd);
+
+    char cmd[256];
+    snprintf(cmd, sizeof(cmd), "blockdev --rereadpt %s 2>/dev/null", whole_disk);
+    (void)system(cmd);
+}
+
+static void mount_tf_partition(void)
+{
+    char cmd[160];
+    snprintf(cmd, sizeof(cmd), "mount %s %s", TF_CARD_PARTITION_DEV, TF_CARD_MOUNT_PATH);
+    if (system(cmd) == 0)
+        printf("[TFCard] Mounted %s on %s\n", TF_CARD_PARTITION_DEV, TF_CARD_MOUNT_PATH);
+    else
+        fprintf(stderr, "[TFCard] mount %s failed\n", TF_CARD_PARTITION_DEV);
 }
 
 int tf_card_format(const char *device, const char *volume_label, int quick)
@@ -279,8 +376,10 @@ int tf_card_format(const char *device, const char *volume_label, int quick)
         return -1;
     }
 
-    if (system("umount /mnt/extsd") == 0)
-        printf("[TFCard] Unmounted /mnt/extsd\n");
+    char umount_cmd[128];
+    snprintf(umount_cmd, sizeof(umount_cmd), "umount %s 2>/dev/null", TF_CARD_MOUNT_PATH);
+    if (system(umount_cmd) == 0)
+        printf("[TFCard] Unmounted %s\n", TF_CARD_MOUNT_PATH);
 
     int fd = open(device, O_RDWR | O_SYNC);
     if (fd < 0) {
@@ -295,31 +394,31 @@ int tf_card_format(const char *device, const char *volume_label, int quick)
         return -1;
     }
 
-    uint32_t total_sectors = (uint32_t)(device_size / BYTES_PER_SECTOR);
-    if (total_sectors < 65536) {
-        fprintf(stderr, "[TFCard] Device too small for FAT32\n");
+    uint32_t disk_sectors = (uint32_t)(device_size / BYTES_PER_SECTOR);
+    if (disk_sectors <= PARTITION_START_LBA + 65536u) {
+        fprintf(stderr, "[TFCard] Device too small for MBR layout + FAT32\n");
         close(fd);
         return -1;
     }
 
-    int fat_sectors_int = calculate_fat_size(total_sectors);
+    uint32_t partition_sectors = disk_sectors - PARTITION_START_LBA;
+    int fat_sectors_int = calculate_fat_size(partition_sectors);
     if (fat_sectors_int <= 0) {
         close(fd);
         return -1;
     }
     uint32_t fat_sectors = (uint32_t)fat_sectors_int;
-    uint32_t total_clusters = calculate_total_clusters(total_sectors, fat_sectors);
+    uint32_t total_clusters = calculate_total_clusters(partition_sectors, fat_sectors);
     if (total_clusters < 65525) {
-        fprintf(stderr, "[TFCard] Not enough clusters for FAT32\n");
+        fprintf(stderr, "[TFCard] Not enough clusters for FAT32 in partition\n");
         close(fd);
         return -1;
     }
 
-    bool ok;
-    if (quick)
-        ok = do_quick_format(fd, total_sectors, fat_sectors, total_clusters, volume_label);
-    else
-        ok = do_full_format(fd, total_sectors, fat_sectors, total_clusters, volume_label);
+    bool ok = quick ? do_quick_format_mbr(fd, disk_sectors, partition_sectors, fat_sectors,
+                                          total_clusters, volume_label)
+                    : do_full_format_mbr(fd, disk_sectors, partition_sectors, fat_sectors,
+                                        total_clusters, volume_label);
 
     if (!ok) {
         fprintf(stderr, "[TFCard] Format failed\n");
@@ -330,21 +429,23 @@ int tf_card_format(const char *device, const char *volume_label, int quick)
     if (fsync(fd) < 0)
         fprintf(stderr, "[TFCard] fsync warning: %s\n", strerror(errno));
 
-    /* 简单校验引导签名 */
+    off_t verify_off = (off_t)PARTITION_START_LBA * BYTES_PER_SECTOR;
     fat32_boot_sector_t boot;
-    if (lseek(fd, 0, SEEK_SET) < 0 || read(fd, &boot, sizeof(boot)) != (ssize_t)sizeof(boot)) {
+    if (lseek(fd, verify_off, SEEK_SET) < 0 || read(fd, &boot, sizeof(boot)) != (ssize_t)sizeof(boot)) {
         close(fd);
         return -1;
     }
     close(fd);
+
     if (boot.boot_signature_55aa != BOOT_SIGNATURE_55AA) {
         fprintf(stderr, "[TFCard] Boot signature verify failed\n");
         return -1;
     }
 
-    if (system("mount /dev/mmcblk0 /mnt/extsd") == 0)
-        printf("[TFCard] Mounted /mnt/extsd\n");
+    reread_partition_table(device);
+    usleep(200000);
+    mount_tf_partition();
 
-    printf("[TFCard] FAT32 format complete, label=%.11s\n", boot.volume_label);
+    printf("[TFCard] FAT32+MBR format complete, label=%.11s\n", boot.volume_label);
     return 0;
 }
